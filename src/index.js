@@ -511,7 +511,8 @@ function studioPage() {
 .bk-btn{display:inline-block;margin-top:16px;background:var(--acc);color:#fff;font-weight:700;font-size:13.5px;padding:10px 20px;border-radius:999px}
 /* presentation cover */
 .cover{aspect-ratio:1.5/1;border-radius:14px;background:linear-gradient(160deg,var(--forest),var(--acc));color:#eef1ec;padding:26px;display:flex;flex-direction:column;position:relative;overflow:hidden}
-.cv-top{display:flex;justify-content:space-between;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.72);font-weight:600}
+.cv-top{display:flex;justify-content:space-between;gap:12px;font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:rgba(255,255,255,.72);font-weight:600}
+.cv-top span{white-space:nowrap}
 .cv-kick{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--sage);font-weight:700;margin-top:26px}
 .cv-h{font-family:var(--serif);font-style:italic;font-size:clamp(26px,3.4vw,38px);line-height:1.1;margin-top:8px}
 .cv-stats{display:flex;gap:26px;margin-top:auto}
