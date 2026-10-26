@@ -63,7 +63,7 @@ a{color:inherit}
 .xt{font-size:.82em;opacity:.75;vertical-align:super;line-height:0}
 h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.1;margin:0;text-wrap:balance}
 .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
-.narrow{max-width:760px;margin-left:0;margin-right:auto}
+.narrow{max-width:760px}
 .nav{position:sticky;top:0;z-index:20;background:rgba(242,239,235,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 .nav .wrap{display:flex;align-items:center;gap:22px;height:62px}
 .brand{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--jade);text-decoration:none;line-height:1}
@@ -221,7 +221,7 @@ async function homePage() {
   <div class="btns"><a class="btn p" href="${BOOK}" target="_blank" rel="noopener">Talk with Emilie</a><a class="btn s" href="/studio">See yourself at Jade →</a></div>
 </div></section>
 
-<section class="band cream"><div class="wrap narrow">
+<section class="band cream"><div class="wrap">
   <div class="eyebrow">Why Jade exists</div>
   <h2 class="h-sec" style="margin-bottom:22px">Most brokerages are built for the brokerage. We built ours for the agent.</h2>
   <div class="prose">
@@ -499,7 +499,7 @@ ${ctaBand()}
 
 function culturePage() {
   const body = `
-<section class="band forest"><div class="wrap narrow">
+<section class="band forest"><div class="wrap">
   <div class="eyebrow">Culture</div>
   <h1 class="h-sec" style="font-style:italic;font-size:clamp(32px,5vw,52px)">A team that shows up for each other.</h1>
   <p class="lead">Jade is a boutique brokerage — small enough to know your name, serious enough to grow your business. Here’s what that feels like day to day.</p>
@@ -562,7 +562,7 @@ function faqPage() {
   ];
   const jsonld = [{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) }];
   const body = `
-<section class="band forest"><div class="wrap narrow">
+<section class="band forest"><div class="wrap">
   <div class="eyebrow">Questions agents ask</div>
   <h1 class="h-sec" style="font-style:italic;font-size:clamp(32px,5vw,52px)">Straight answers.</h1>
 </div></section>
@@ -590,7 +590,7 @@ async function blogIndex() {
     ? `<div class="posts">${posts.map(p => `<a class="pcard" href="/blog/${esc(p.slug)}"><div class="d">${esc(fmtDate(p.published_at))}</div><h3>${esc(p.title)}</h3>${p.excerpt ? `<p>${esc(p.excerpt)}</p>` : ''}</a>`).join('')}</div>`
     : `<p class="lead">New posts are on the way.</p>`;
   const body = `
-<section class="band forest"><div class="wrap narrow">
+<section class="band forest"><div class="wrap">
   <div class="eyebrow">The Jade blog</div>
   <h1 class="h-sec" style="font-style:italic;font-size:clamp(32px,5vw,52px)">For agents thinking about what's next.</h1>
   <p class="lead">Honest, useful reading on the business of being an agent in Colorado — and what to look for in a brokerage.</p>
