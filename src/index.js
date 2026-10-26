@@ -1,7 +1,7 @@
 // careers.jaderealestate.com — public recruiting site for Jade Real Estate (SSR Worker).
 // Fast, fully crawlable HTML for Google + AI. Blog posts come from Supabase
 // (careers_posts), managed later in the Jade app admin. Colors: Jade palette only.
-import { market as IMG_MARKET, team as IMG_TEAM, tote as IMG_TOTE } from './img.js';
+import { team as IMG_TEAM, tote as IMG_TOTE } from './img.js';
 
 const SITE = 'https://careers.jaderealestate.com';
 const BOOK = 'https://client.jaderealestate.com/book/emilie';
@@ -13,12 +13,12 @@ const MAIN = 'https://www.jaderealestate.com';
 const SB = 'https://fcgarmtbmdsgkcrvmwjv.supabase.co';
 const ANON = 'sb_publishable_k5AzjS458cQ5CRzgZP_jbg_zTe3tQyx';
 const OFFICE = '2570 Lawrence St Unit 104, Denver, CO 80205';
-const OG = SITE + '/img/market.jpg';
+const OG = SITE + '/img/team.jpg';
 
 const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 // External link: always a new tab with a clear visual exit cue.
 const ext = (url, label, cls) => `<a ${cls ? `class="${cls}" ` : ''}href="${url}" target="_blank" rel="noopener">${esc(label)} <span class="xt" aria-hidden="true">↗</span></a>`;
-const IMG = { 'market.jpg': IMG_MARKET, 'team.jpg': IMG_TEAM, 'tote.jpg': IMG_TOTE };
+const IMG = { 'team.jpg': IMG_TEAM, 'tote.jpg': IMG_TOTE };
 function b64bytes(b64){const bin=atob(b64);const n=bin.length;const u=new Uint8Array(n);for(let i=0;i<n;i++){u[i]=bin.charCodeAt(i);}return u;}
 function serveImg(name){const b=IMG[name];if(!b)return notFound();return new Response(b64bytes(b),{headers:{'content-type':'image/jpeg','cache-control':'public, max-age=31536000, immutable'}});}
 const NAV = [['/', 'Why Jade'], ['/technology', 'Technology'], ['/culture', 'Culture'], ['/studio', 'See yourself'], ['/calculator', 'Calculator'], ['/blog', 'Blog'], ['/faq', 'FAQ']];
@@ -109,8 +109,8 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.1;margin:0;text-
 .rows .r a{color:var(--jade);font-weight:600}
 .markets{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
 .chip{background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:13.5px;font-weight:600;color:var(--jade)}
-.pull{background:var(--jade);color:#eef1ec;text-align:center}
-.pull p{font-family:var(--serif);font-style:italic;font-size:clamp(23px,3.4vw,37px);line-height:1.24;max-width:22ch;margin:0 auto}
+.pull{background:var(--jade);color:#eef1ec}
+.pull p{font-family:var(--serif);font-style:italic;font-size:clamp(23px,3.4vw,37px);line-height:1.24;max-width:28ch;margin:0}
 .pull .by{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--sage);font-weight:600;margin-top:20px}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:34px;align-items:start}
 .feat{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:26px}
@@ -147,7 +147,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.1;margin:0;text-
 .faqs h3{font-family:var(--sans);font-size:17px;font-weight:700;color:var(--jade);margin:0}
 .faqs p{font-size:15px;color:var(--jade2);margin:10px 0 0}
 .faqs a{color:var(--jade);font-weight:600}
-.cta-band{text-align:center}.cta-band h2{font-size:clamp(28px,4.4vw,44px);font-style:italic}.cta-band p{color:#c9d2c6;max-width:50ch;margin:16px auto 0}
+.cta-band h2{font-size:clamp(28px,4.4vw,44px);font-style:italic}.cta-band p{color:#c9d2c6;max-width:50ch;margin:16px 0 0}
 .exits{font-size:12.5px;color:var(--jade2);margin-top:14px}.forest .exits,.jadebg .exits{color:#aab6a7}
 .foot{background:var(--ink);color:#aeb9b2;font-size:13px;padding:40px 0}
 .foot a{color:#d3dbd0;text-decoration:none}.foot .row{display:flex;gap:26px;flex-wrap:wrap;align-items:center}
@@ -220,10 +220,6 @@ async function homePage() {
   <p>Jade is an independent Colorado brokerage with its own agent app, marketing done for you, and a broker who actually picks up. No mandatory meetings. No production minimums. No prescribed path.</p>
   <div class="btns"><a class="btn p" href="${BOOK}" target="_blank" rel="noopener">Talk with Emilie</a><a class="btn s" href="/studio">See yourself at Jade →</a></div>
 </div></section>
-
-<section class="strip"><img src="/img/market.jpg" width="1500" height="1000" alt="Two Jade Real Estate agents at the Jade at the Market farmers-market booth in Denver, with a branded green canopy, a prize wheel, sunflowers, and canvas totes." fetchpriority="high">
-  <div class="cap"><div><b>Jade at the Market.</b>Saturday mornings, a green canopy, a prize wheel, and a pile of totes. We’d rather be out in the neighborhood than hiding behind a national logo.</div></div>
-</section>
 
 <section class="band cream"><div class="wrap narrow">
   <div class="eyebrow">Why Jade exists</div>
@@ -545,11 +541,11 @@ function studioPage() {
 .bk-name{font-family:var(--serif);font-style:italic;font-size:25px;color:var(--jade);margin-top:12px}
 .bk-meta{font-size:12.5px;color:var(--jade2);margin-top:3px}
 .bk-btn{display:inline-block;margin-top:16px;background:var(--acc);color:#fff;font-weight:700;font-size:13.5px;padding:10px 22px;border-radius:999px}
-.real{background:var(--forest);color:#eef1ec;border-radius:20px;padding:clamp(28px,4vw,46px);text-align:center;max-width:900px;margin:0 auto}
+.real{background:var(--forest);color:#eef1ec;border-radius:20px;padding:clamp(28px,4vw,46px);max-width:900px;margin:0 auto}
 .real h2{font-family:var(--serif);font-style:italic;font-size:clamp(25px,3.6vw,38px)}
-.real p{color:#c9d2c6;font-size:clamp(15px,1.5vw,17.5px);margin:16px auto 0;max-width:58ch;line-height:1.7}
-.st-cta{text-align:center}
-.st-cta .big2{font-family:var(--serif);font-style:italic;font-size:clamp(26px,3.8vw,40px);color:#fff;max-width:20ch;margin:14px auto 0}
+.real p{color:#c9d2c6;font-size:clamp(15px,1.5vw,17.5px);margin:16px 0 0;max-width:58ch;line-height:1.7}
+ 
+.st-cta .big2{font-family:var(--serif);font-style:italic;font-size:clamp(26px,3.8vw,40px);color:#fff;max-width:20ch;margin:14px 0 0}
 @media(max-width:860px){.shots,.feature,.book-row{grid-template-columns:1fr}.feature .cover,.book-row .bk{order:-1}.st-reset{align-self:stretch}}
 </style>`;
   const body = `${css}
@@ -573,8 +569,8 @@ function studioPage() {
 </div></section>
 
 <section class="band cream"><div class="wrap">
-  <div class="eyebrow center">Make it yours</div>
-  <h2 class="h-sec center" style="max-width:20ch;margin:8px auto 0;text-align:center">Type your name. Watch it turn Jade.</h2>
+  <div class="eyebrow">Make it yours</div>
+  <h2 class="h-sec" style="max-width:20ch;margin:8px 0 0">Type your name. Watch it turn Jade.</h2>
 
   <form class="st-bar" onsubmit="return false">
     <input type="text" id="f-name" class="st-bigname" placeholder="Your name" autocomplete="off" aria-label="Your name">
