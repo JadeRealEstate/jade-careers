@@ -306,29 +306,195 @@ ${ctaBand()}`;
 }
 
 function techPage() {
-  const body = `
-<section class="band forest"><div class="wrap narrow">
-  <div class="eyebrow">The technology</div>
-  <h1 class="h-sec" style="font-style:italic;font-size:clamp(32px,5vw,52px)">Technology that works like a teammate.</h1>
-  <p class="lead">Jade builds its own agent platform and includes it in your monthly fee, so the tools fit how real estate actually works here — and they keep getting better while you sleep.</p>
+  const css = `
+<style>
+.tx-hero{background:var(--forest);color:#eef1ec;padding:clamp(54px,7vw,96px) 0}
+.tx-hero h1{font-size:clamp(32px,5.2vw,54px);font-style:italic;max-width:17ch}
+.tx-hero p{color:#d3dbd0;font-size:clamp(16px,1.7vw,19px);margin-top:18px;max-width:62ch}
+.tx-tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:36px}
+.tx-tab{font-family:var(--sans);font-size:14.5px;font-weight:700;padding:12px 20px;border:1px solid var(--line);border-radius:999px;background:var(--paper);color:var(--jade2);cursor:pointer}
+.tx-tab.on{background:var(--jade);color:#fff;border-color:var(--jade)}
+.tx-panel{display:none}
+.tx-panel.on{display:block}
+.tx-split{display:grid;grid-template-columns:0.92fr 1.08fr;gap:clamp(28px,4vw,58px);align-items:start}
+.tx-l h2{font-family:var(--serif);font-style:italic;font-size:clamp(26px,3.4vw,38px);color:var(--jade);margin:10px 0 14px;line-height:1.12}
+.tx-l .intro{font-size:16px;color:var(--jade2);line-height:1.7;max-width:46ch}
+.tx-tools{margin-top:22px;border-top:1px solid var(--line)}
+.tx-tool{padding:15px 0;border-bottom:1px solid var(--line)}
+.tx-tool b{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--jade);display:block}
+.tx-tool span{font-size:14px;color:var(--jade2);display:block;margin-top:3px;line-height:1.55}
+.tx-arts{display:grid;gap:20px}
+.tx-art{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 16px 40px rgba(21,32,26,.07)}
+.tx-art .tag{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--jade2);font-weight:700;margin-bottom:12px}
+.tx-art .cap{font-size:12.5px;color:var(--jade2);margin-top:12px;line-height:1.5}
+.mbk{border:1px solid var(--line);border-radius:12px;overflow:hidden;text-align:center;padding-bottom:16px;max-width:290px}
+.mbk-top{height:52px;background:var(--jade)}
+.mbk-av{width:60px;height:60px;border-radius:50%;background:var(--jade2);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;margin:-30px auto 0;border:4px solid var(--paper)}
+.mbk-nm{font-family:var(--serif);font-style:italic;font-size:20px;color:var(--jade);margin-top:8px}
+.mbk-mt{font-size:12px;color:var(--jade2);margin-top:2px}
+.mbk-slots{display:flex;gap:6px;justify-content:center;margin:12px 0}
+.mbk-slots span{font-size:11px;border:1px solid var(--line);border-radius:999px;padding:5px 10px;color:var(--jade2)}
+.mbk-btn{display:inline-block;background:var(--jade);color:#fff;font-size:12.5px;font-weight:700;padding:8px 18px;border-radius:999px}
+.mhub{border:1px solid var(--line);border-radius:12px;padding:16px}
+.mhub-h{font-weight:700;font-size:14px;color:var(--ink);display:flex;justify-content:space-between;align-items:center}
+.mhub-h span{font-size:10px;letter-spacing:.08em;text-transform:uppercase;background:rgba(62,87,37,.14);color:var(--olive);padding:3px 8px;border-radius:999px;font-weight:700}
+.mhub-steps{display:flex;gap:6px;margin-top:16px}
+.mhub-steps .st{flex:1;font-size:10.5px;color:var(--jade2);text-align:center;padding-top:18px;position:relative}
+.mhub-steps .st::after{content:"";position:absolute;top:9px;left:calc(50% + 7px);right:calc(-50% + 7px);height:2px;background:var(--line)}
+.mhub-steps .st:last-child::after{display:none}
+.mhub-steps .st::before{content:"";position:absolute;top:3px;left:50%;transform:translateX(-50%);width:13px;height:13px;border-radius:50%;background:var(--line);z-index:1}
+.mhub-steps .st.done::before{background:var(--olive)}
+.mhub-steps .st.now::before{background:var(--jade);box-shadow:0 0 0 3px rgba(51,81,67,.22)}
+.mhub-steps .st.done,.mhub-steps .st.now{color:var(--jade);font-weight:600}
+.mpost{border:1px solid var(--line);border-radius:12px;overflow:hidden;max-width:260px}
+.mpost-img{aspect-ratio:4/3;background:linear-gradient(135deg,var(--jade),var(--forest));display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.55);font-size:10.5px;letter-spacing:.2em;font-weight:700}
+.mpost-band{background:var(--cream);padding:14px}
+.mpost-jl{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--jade)}
+.mpost-ag{display:flex;gap:10px;align-items:center;margin-top:10px}
+.mpost-ag .av{width:36px;height:36px;border-radius:50%;background:var(--jade);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+.mpost-ag .nm{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--ink)}
+.mpost-ag .sb{font-size:11px;color:var(--jade2)}
+.mcov{aspect-ratio:1.5/1;border-radius:12px;background:linear-gradient(160deg,var(--forest),var(--jade));color:#eef1ec;padding:20px;display:flex;flex-direction:column;max-width:330px}
+.mcov-top{display:flex;justify-content:space-between;gap:10px;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.72);font-weight:600}
+.mcov-top span{white-space:nowrap}
+.mcov-k{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--sage);font-weight:700;margin-top:18px}
+.mcov-h{font-family:var(--serif);font-style:italic;font-size:26px;line-height:1.08;margin-top:6px}
+.mcov-by{font-size:11px;color:rgba(255,255,255,.82);margin-top:auto;border-top:1px solid rgba(255,255,255,.2);padding-top:10px}
+.mlead{border:1px solid var(--line);border-radius:12px;padding:16px}
+.mlead-h{display:flex;align-items:center;gap:10px}
+.mlead-h .av{width:38px;height:38px;border-radius:50%;background:var(--jade2);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex:none}
+.mlead-h .nm{font-weight:700;font-size:14px;color:var(--ink)}
+.mlead-h .src{font-size:11.5px;color:var(--jade2)}
+.mlead-h .stg{margin-left:auto;font-size:10px;letter-spacing:.06em;text-transform:uppercase;background:var(--jade);color:#fff;padding:4px 9px;border-radius:999px;font-weight:700}
+.mlead-row{font-size:12.5px;color:var(--jade2);margin-top:12px;border-top:1px solid var(--line);padding-top:10px}
+.mlead-acts{display:flex;gap:6px;margin-top:10px}
+.mlead-acts span{font-size:11px;border:1px solid var(--line);border-radius:999px;padding:5px 12px;color:var(--jade)}
+.mlead-sync{font-size:11px;color:var(--olive);margin-top:10px;font-weight:600}
+.mpipe{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.mpipe .col{background:var(--cream);border:1px solid var(--line);border-radius:10px;padding:10px}
+.mpipe .ch{font-size:11px;font-weight:700;color:var(--jade2);display:flex;justify-content:space-between;margin-bottom:6px}
+.mpipe .ch b{color:var(--jade)}
+.mpipe .cc{height:22px;background:var(--paper);border:1px solid var(--line);border-radius:6px;margin-top:5px}
+@media(max-width:860px){.tx-split{grid-template-columns:1fr}.tx-arts{order:-1}}
+</style>`;
+  const body = `${css}
+<section class="tx-hero"><div class="wrap">
+  <div class="eyebrow" style="color:var(--sage)">The technology</div>
+  <h1>Technology that works like a teammate.</h1>
+  <p>Jade builds its own agent platform and includes it in your monthly fee. Here's what it does — grouped by what you're actually trying to get done. Pick a theme.</p>
 </div></section>
+
 <section class="band cream"><div class="wrap">
-  <div class="two">
-    <div class="feat"><h3>Client hubs</h3><p>Every buyer and seller gets a private hub — homes, tours, documents, timelines, and updates in one place. Clients stay informed without you re-typing everything.</p></div>
-    <div class="feat"><h3>Booking scheduler</h3><p>A personal booking page and QR code so clients and leads pick a time that lands on your calendar and in your CRM, tagged with where they came from.</p></div>
-    <div class="feat"><h3>Marketing studio</h3><p>Branded social posts, newsletters, listing presentations, landing pages, and a weekly content pack — in your voice, on brand, in minutes.</p></div>
-    <div class="feat"><h3>Listing presentations &amp; CMAs</h3><p>Build a sharp listing presentation and a comparative market analysis — with per-feature pricing adjustments — then export a clean PDF to send or present.</p></div>
-    <div class="feat"><h3>Forms &amp; lead capture</h3><p>Build any form, share a link or QR code, and watch responses flow straight into Follow Up Boss as new or updated contacts.</p></div>
-    <div class="feat"><h3>Follow Up Boss + HouseCanary</h3><p>A real CRM with follow-up workflows, plus property and market data — connected so your pipeline stays current without double entry.</p></div>
-    <div class="feat"><h3>A Jade AI assistant</h3><p>Trained on Jade’s process and Colorado rules — drafts, pricing thinking, and client content, with compliance and Fair Housing kept front of mind.</p></div>
-    <div class="feat"><h3>Built in-house, always improving</h3><p>Because we build it ourselves, the roadmap follows what Jade agents actually ask for — not a national vendor’s release calendar.</p></div>
+  <div class="tx-tabs">
+    <button type="button" class="tx-tab on" data-t="biz">Your business</button>
+    <button type="button" class="tx-tab" data-t="mkt">Your marketing</button>
+    <button type="button" class="tx-tab" data-t="leads">Working your leads</button>
   </div>
-  <div class="center" style="margin-top:40px"><a class="btn j" href="${DEMO}" target="_blank" rel="noopener">Take the self-guided tour <span class="xt" aria-hidden="true">↗</span></a> &nbsp; <a class="btn j" href="${CLIENT_DEMO}" target="_blank" rel="noopener" style="background:var(--jade2)">See the client experience <span class="xt" aria-hidden="true">↗</span></a>
-    <p class="exits">Both open in a new tab.</p>
+
+  <div class="tx-panel on" data-p="biz">
+    <div class="tx-split">
+      <div class="tx-l">
+        <div class="eyebrow">Your business</div>
+        <h2>Run the day-to-day without the busywork.</h2>
+        <p class="intro">The operating system for your business — so the admin runs itself and you stay in front of clients.</p>
+        <div class="tx-tools">
+          <div class="tx-tool"><b>Client hubs</b><span>A private hub for every buyer and seller: homes, documents, timeline, and live status.</span></div>
+          <div class="tx-tool"><b>Booking scheduler</b><span>A personal booking page and QR code; times land on your calendar and in your CRM.</span></div>
+          <div class="tx-tool"><b>Forms &amp; intake</b><span>Build any form, share a link or QR, and route responses into Follow Up Boss.</span></div>
+          <div class="tx-tool"><b>A Jade AI assistant</b><span>Drafts, pricing thinking, and client content — with Colorado rules and Fair Housing in mind.</span></div>
+        </div>
+      </div>
+      <div class="tx-arts">
+        <div class="tx-art"><div class="tag">Your booking page</div>
+          <div class="mbk"><div class="mbk-top"></div><div class="mbk-av">AJ</div><div class="mbk-nm">Avery Jordan</div><div class="mbk-mt">REALTOR® · Denver Metro</div>
+            <div class="mbk-slots"><span>Tue 9:00</span><span>Tue 2:30</span><span>Wed 11:00</span></div><div class="mbk-btn">Book with Avery</div></div>
+          <div class="cap">Clients pick a time; it lands on your calendar and in your CRM.</div>
+        </div>
+        <div class="tx-art"><div class="tag">A client's hub</div>
+          <div class="mhub"><div class="mhub-h">412 Lupine Ln <span>Under contract</span></div>
+            <div class="mhub-steps"><div class="st done">Offer</div><div class="st done">Inspection</div><div class="st now">Appraisal</div><div class="st">Closing</div></div></div>
+          <div class="cap">Buyers and sellers see live status — without you re-typing updates.</div>
+        </div>
+      </div>
+    </div>
   </div>
+
+  <div class="tx-panel" data-p="mkt">
+    <div class="tx-split">
+      <div class="tx-l">
+        <div class="eyebrow">Your marketing</div>
+        <h2>Look like the top agent in the room.</h2>
+        <p class="intro">You're not your own designer. The studio and our in-house team make your listings and brand look like you already won.</p>
+        <div class="tx-tools">
+          <div class="tx-tool"><b>Marketing studio</b><span>Branded social posts, newsletters, landing pages, and a weekly content pack — on brand, in minutes.</span></div>
+          <div class="tx-tool"><b>Listing presentations &amp; CMAs</b><span>Build a sharp presentation and market analysis with pricing adjustments; export a clean PDF.</span></div>
+          <div class="tx-tool"><b>Custom branding &amp; design</b><span>In-house design shapes your brand and market — not a forced house template.</span></div>
+          <div class="tx-tool"><b>Done for you</b><span>The posts go out and the listing looks sharp without you opening a design app at 11pm.</span></div>
+        </div>
+      </div>
+      <div class="tx-arts">
+        <div class="tx-art"><div class="tag">Just Listed · social</div>
+          <div class="mpost"><div class="mpost-img">412 LUPINE LN</div>
+            <div class="mpost-band"><div class="mpost-jl">Just Listed</div>
+              <div class="mpost-ag"><div class="av">AJ</div><div><div class="nm">Avery Jordan</div><div class="sb">REALTOR® · Jade Real Estate</div></div></div></div></div>
+          <div class="cap">A branded set for every listing — made in your voice by our team.</div>
+        </div>
+        <div class="tx-art"><div class="tag">Listing presentation · cover</div>
+          <div class="mcov"><div class="mcov-top"><span>Jade Real Estate</span><span>Issue Nº 01</span></div>
+            <div class="mcov-k">Seller Presentation</div><div class="mcov-h">Prepared for<br>the Riveras.</div>
+            <div class="mcov-by">Avery Jordan · REALTOR®</div></div>
+          <div class="cap">Export a clean PDF to present or send.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tx-panel" data-p="leads">
+    <div class="tx-split">
+      <div class="tx-l">
+        <div class="eyebrow">Working your leads</div>
+        <h2>Turn a lead into a closing.</h2>
+        <p class="intro">Capture, follow up, and close — with the leads, the CRM, and the data connected in one place, so nothing falls through.</p>
+        <div class="tx-tools">
+          <div class="tx-tool"><b>Follow Up Boss CRM</b><span>A real CRM with follow-up workflows, set up and ready on day one.</span></div>
+          <div class="tx-tool"><b>HouseCanary data</b><span>Property and market data wired in, so your numbers stay current without double entry.</span></div>
+          <div class="tx-tool"><b>Company leads</b><span>Digital and third-party lead opportunities for agents who want to work them.</span></div>
+          <div class="tx-tool"><b>Capture → close</b><span>QR forms and scans become contacts automatically; nothing slips through the cracks.</span></div>
+        </div>
+      </div>
+      <div class="tx-arts">
+        <div class="tx-art"><div class="tag">A new lead, captured</div>
+          <div class="mlead"><div class="mlead-h"><div class="av">SM</div><div><div class="nm">Sarah M.</div><div class="src">From your open-house QR form</div></div><span class="stg">New</span></div>
+            <div class="mlead-row">Looking in Wash Park · pre-approved · ~$650k</div>
+            <div class="mlead-acts"><span>Call</span><span>Text</span><span>Email</span></div>
+            <div class="mlead-sync">↳ synced to Follow Up Boss</div></div>
+          <div class="cap">Form responses and QR scans flow straight into your CRM.</div>
+        </div>
+        <div class="tx-art"><div class="tag">Your pipeline</div>
+          <div class="mpipe"><div class="col"><div class="ch">New <b>4</b></div><div class="cc"></div><div class="cc"></div></div>
+            <div class="col"><div class="ch">Nurturing <b>7</b></div><div class="cc"></div><div class="cc"></div></div>
+            <div class="col"><div class="ch">Under contract <b>2</b></div><div class="cc"></div></div></div>
+          <div class="cap">Follow Up Boss keeps every opportunity moving — with HouseCanary data behind it.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:44px;display:flex;gap:13px;flex-wrap:wrap"><a class="btn j" href="${DEMO}" target="_blank" rel="noopener">Take the self-guided tour <span class="xt" aria-hidden="true">↗</span></a><a class="btn j" href="${CLIENT_DEMO}" target="_blank" rel="noopener" style="background:var(--jade2)">See the client experience <span class="xt" aria-hidden="true">↗</span></a> <a class="btn j" href="/studio" style="background:var(--olive)">See yourself in it →</a></div>
 </div></section>
-${ctaBand()}`;
-  return layout({ title: 'The Technology — Jade Real Estate Careers', desc: "Jade Real Estate's in-house agent platform, included in your fee: client hubs, a booking scheduler, a marketing studio, listing presentations, forms, Follow Up Boss + HouseCanary, and a Jade AI assistant. Tour it.", path: '/technology', body });
+${ctaBand()}
+<script>
+(function(){
+  var tabs=document.querySelectorAll(".tx-tab");
+  var panels=document.querySelectorAll(".tx-panel");
+  function show(id){
+    for(var i=0;i<tabs.length;i++){tabs[i].classList.toggle("on",tabs[i].getAttribute("data-t")===id);}
+    for(var j=0;j<panels.length;j++){panels[j].classList.toggle("on",panels[j].getAttribute("data-p")===id);}
+  }
+  for(var i=0;i<tabs.length;i++){(function(b){b.addEventListener("click",function(){show(b.getAttribute("data-t"));});})(tabs[i]);}
+})();
+</script>`;
+  return layout({ title: 'The Technology — Jade Real Estate Careers', desc: "Jade Real Estate's in-house agent platform, included in your fee: client hubs, a booking scheduler, a marketing studio, listing presentations, forms, Follow Up Boss + HouseCanary, and a Jade AI assistant — grouped by your business, your marketing, and working your leads.", path: '/technology', body });
 }
 
 function culturePage() {
