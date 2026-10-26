@@ -16,7 +16,7 @@ const OG = SITE + '/img/market.jpg';
 const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 // External link: always a new tab with a clear visual exit cue.
 const ext = (url, label, cls) => `<a ${cls ? `class="${cls}" ` : ''}href="${url}" target="_blank" rel="noopener">${esc(label)} <span class="xt" aria-hidden="true">↗</span></a>`;
-const NAV = [['/', 'Why Jade'], ['/technology', 'Technology'], ['/culture', 'Culture'], ['/blog', 'Blog'], ['/faq', 'FAQ']];
+const NAV = [['/', 'Why Jade'], ['/technology', 'Technology'], ['/culture', 'Culture'], ['/studio', 'See yourself'], ['/blog', 'Blog'], ['/faq', 'FAQ']];
 const fmtDate = (s) => { try { return new Date(s).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }); } catch (e) { return ''; } };
 
 async function getPosts(limit) {
@@ -148,6 +148,11 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.1;margin:0;text-
 .foot a{color:#d3dbd0;text-decoration:none}.foot .row{display:flex;gap:26px;flex-wrap:wrap;align-items:center}
 .foot .disc{margin-top:18px;font-size:11.5px;color:#7f8c84;max-width:84ch}
 .center{text-align:center;max-width:66ch;margin-inline:auto}
+.mini-card{background:var(--jade);color:#fff;border-radius:18px;padding:28px;box-shadow:0 24px 54px rgba(0,0,0,.28);max-width:340px}
+.mini-logo{font-family:var(--serif);font-style:italic;font-size:26px;line-height:1}.mini-logo span{display:block;font-family:var(--sans);font-style:normal;font-size:8px;letter-spacing:.34em;font-weight:600;color:var(--sage);margin-top:3px}
+.mini-photo{width:62px;height:62px;border-radius:50%;background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;letter-spacing:.1em;color:#eef1ec;margin:22px 0 14px}
+.mini-name{font-family:var(--serif);font-style:italic;font-size:26px}
+.mini-meta{font-size:12.5px;color:#cdd6c9;letter-spacing:.04em;margin-top:4px}
 @media(max-width:860px){.ed,.two,.quotes,.inc,.rows .r{grid-template-columns:1fr}.ed .figure{order:-1}.nav .links{display:none}}
 </style>
 ${ld}
@@ -208,7 +213,7 @@ async function homePage() {
   <div class="eyebrow">Careers at Jade Real Estate</div>
   <h1>You built the business. We make it lighter to run.</h1>
   <p>Jade is an independent Colorado brokerage with its own agent app, marketing done for you, and a broker who actually picks up. No mandatory meetings. No production minimums. No prescribed path.</p>
-  <div class="btns"><a class="btn p" href="${BOOK}" target="_blank" rel="noopener">Talk with Emilie</a><a class="btn s" href="/technology">See the tools</a></div>
+  <div class="btns"><a class="btn p" href="${BOOK}" target="_blank" rel="noopener">Talk with Emilie</a><a class="btn s" href="/studio">See yourself at Jade →</a></div>
 </div></section>
 
 <section class="strip"><img src="/img/market.jpg" width="1500" height="1000" alt="Two Jade Real Estate agents at the Jade at the Market farmers-market booth in Denver, with a branded green canopy, a prize wheel, sunflowers, and canvas totes." fetchpriority="high">
@@ -238,6 +243,28 @@ async function homePage() {
 <section class="band pull"><div class="wrap">
   <p>“A flexible team you can actually count on, and a broker who wants to see you win.”</p>
   <div class="by">— what Jade agents say most</div>
+</div></section>
+
+<section class="band forest"><div class="wrap">
+  <div class="ed">
+    <div>
+      <div class="eyebrow">Picture it</div>
+      <div class="big light" style="margin-top:12px">See yourself as a Jade agent.</div>
+      <div class="prose" style="color:#d3dbd0">
+        <p style="color:#d3dbd0">Type your name and watch your business card, your <em>Just Listed</em> posts, your booking page, and your listing presentation turn Jade — in real time. Drop in your headshot if you like; it never leaves your browser. No sign-up, no catch.</p>
+      </div>
+      <div style="margin-top:24px"><a class="btn p" href="/studio">Open the studio →</a></div>
+    </div>
+    <figure class="figure" aria-hidden="true">
+      <div class="mini-card">
+        <div class="mini-logo">Jade<span>REAL ESTATE</span></div>
+        <div class="mini-photo">YOU</div>
+        <div class="mini-name">Your Name</div>
+        <div class="mini-meta">REALTOR® · Denver Metro</div>
+      </div>
+      <figcaption style="color:#aab6a7">A 30-second preview of your Jade brand.</figcaption>
+    </figure>
+  </div>
 </div></section>
 
 <section class="band cream"><div class="wrap">
@@ -422,6 +449,226 @@ function postPage(p) {
   return layout({ title: (p.seo_title || p.title) + ' — Jade Real Estate', desc: p.seo_description || p.excerpt || '', path: '/blog/' + p.slug, body, jsonld });
 }
 
+function studioPage() {
+  const opts = MARKETS.map(m => `<option value="${esc(m)}">${esc(m)}</option>`).join('');
+  const css = `
+<style>
+.st-hero{background:var(--forest);color:#eef1ec;padding:clamp(58px,8vw,104px) 0;position:relative;overflow:hidden}
+.st-hero .m1{position:absolute;right:-8%;top:-24%;width:min(50%,460px);aspect-ratio:1;background:linear-gradient(150deg,rgba(84,103,81,.42),rgba(62,87,37,.1));border-radius:44% 44% 44% 62%}
+.st-hero h1{font-size:clamp(34px,6vw,60px);font-style:italic;max-width:15ch;position:relative}
+.st-hero .k{position:relative}
+.st-hero p{color:#d3dbd0;font-size:clamp(16px,1.9vw,20px);margin-top:20px;max-width:56ch;position:relative}
+.st-wrap{display:grid;grid-template-columns:330px 1fr;gap:clamp(24px,3vw,38px);align-items:start}
+.st-panel{position:sticky;top:78px;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:0 14px 40px rgba(21,32,26,.06)}
+.st-panel .pl{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--jade2);margin:16px 0 7px}
+.st-panel .pl.first{margin-top:0}
+.st-panel input[type=text],.st-panel select{width:100%;font-family:var(--sans);font-size:15px;padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:var(--cream);color:var(--ink)}
+.st-panel input:focus,.st-panel select:focus{outline:2px solid var(--jade);outline-offset:1px}
+.st-seg{display:flex;gap:6px;flex-wrap:wrap}
+.st-seg button{flex:1;min-width:0;font-family:var(--sans);font-size:12.5px;font-weight:600;padding:9px 6px;border:1px solid var(--line);border-radius:999px;background:var(--cream);color:var(--jade2);cursor:pointer}
+.st-seg button.sel{background:var(--jade);color:#fff;border-color:var(--jade)}
+.st-photo-row{display:flex;align-items:center;gap:12px}
+.st-filebtn{display:inline-block;font-size:13px;font-weight:600;color:var(--jade);border:1px solid var(--line);border-radius:999px;padding:9px 15px;cursor:pointer;background:var(--cream)}
+.st-note{font-size:11.5px;color:var(--jade2);margin-top:9px;line-height:1.55}
+.st-reset{margin-top:20px;width:100%;background:transparent;border:1px solid var(--line);border-radius:999px;padding:11px;font-weight:600;color:var(--jade2);cursor:pointer}
+.st-stage{--acc:#335143}
+.st-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.pv{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:18px}
+.pv.wide{grid-column:1 / -1}
+.pv .tag{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--jade2);font-weight:700;margin-bottom:14px}
+.ph{background-size:cover;background-position:center;background-color:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-weight:700;letter-spacing:.06em;color:#fff}
+.ph.on .pv-init{display:none}
+.serif{font-family:var(--serif);font-style:italic}
+.st-stage[data-sty=modern] .serif{font-family:var(--sans);font-style:normal;font-weight:700;letter-spacing:-.01em}
+/* business card + flip */
+.bcard{perspective:1200px;cursor:pointer}
+.bc-in{position:relative;width:100%;aspect-ratio:1.75/1;transition:transform .6s;transform-style:preserve-3d}
+.bcard.flip .bc-in{transform:rotateY(180deg)}
+.bc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;padding:20px;color:#fff;background:var(--acc);display:flex;flex-direction:column}
+.bc-back{transform:rotateY(180deg);align-items:center;justify-content:center;text-align:center}
+.bc-logo{font-family:var(--serif);font-style:italic;font-size:20px;line-height:1}
+.bc-logo span{display:block;font-family:var(--sans);font-style:normal;font-size:7px;letter-spacing:.32em;font-weight:600;color:rgba(255,255,255,.7);margin-top:3px}
+.bc-photo{width:46px;height:46px;border-radius:50%;font-size:13px;position:absolute;top:18px;right:18px;border:2px solid rgba(255,255,255,.5)}
+.bc-name{font-family:var(--serif);font-style:italic;font-size:25px;margin-top:auto}
+.bc-meta{font-size:11.5px;color:rgba(255,255,255,.85);margin-top:3px;letter-spacing:.02em}
+.bc-mark{font-family:var(--serif);font-style:italic;font-size:46px}
+.bc-tag{font-size:12.5px;color:rgba(255,255,255,.9);max-width:24ch;margin-top:10px;line-height:1.5}
+/* social post */
+.post{border-radius:12px;overflow:hidden;border:1px solid var(--line);max-width:300px;margin:0 auto}
+.post-img{aspect-ratio:4/3;background:linear-gradient(135deg,var(--acc),var(--forest));display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.55);font-size:11px;letter-spacing:.24em;font-weight:700}
+.post-band{background:var(--cream);padding:16px 16px 18px}
+.jl{font-family:var(--serif);font-style:italic;font-size:26px;color:var(--jade)}
+.post-agent{display:flex;align-items:center;gap:11px;margin-top:12px}
+.post-photo{width:42px;height:42px;border-radius:50%;background-color:var(--jade);font-size:12px;color:#fff;flex:none}
+.post-agent .nm{font-family:var(--serif);font-style:italic;font-size:17px;color:var(--ink)}
+.post-sub{font-size:11.5px;color:var(--jade2);margin-top:1px}
+/* booking header */
+.bk{border:1px solid var(--line);border-radius:14px;overflow:hidden;text-align:center;padding-bottom:20px}
+.bk-top{height:66px;background:var(--acc)}
+.bk-photo{width:76px;height:76px;border-radius:50%;margin:-38px auto 0;border:4px solid var(--paper);background-color:var(--jade);font-size:18px;color:#fff}
+.bk-name{font-family:var(--serif);font-style:italic;font-size:24px;color:var(--jade);margin-top:12px}
+.bk-meta{font-size:12.5px;color:var(--jade2);margin-top:3px}
+.bk-btn{display:inline-block;margin-top:16px;background:var(--acc);color:#fff;font-weight:700;font-size:13.5px;padding:10px 20px;border-radius:999px}
+/* presentation cover */
+.cover{aspect-ratio:1.5/1;border-radius:14px;background:linear-gradient(160deg,var(--forest),var(--acc));color:#eef1ec;padding:26px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.cv-top{display:flex;justify-content:space-between;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.72);font-weight:600}
+.cv-kick{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--sage);font-weight:700;margin-top:26px}
+.cv-h{font-family:var(--serif);font-style:italic;font-size:clamp(26px,3.4vw,38px);line-height:1.1;margin-top:8px}
+.cv-stats{display:flex;gap:26px;margin-top:auto}
+.cv-stats div{display:flex;flex-direction:column}
+.cv-stats b{font-family:var(--serif);font-style:italic;font-size:22px}
+.cv-stats span{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-top:2px}
+.cv-by{font-size:12px;color:rgba(255,255,255,.82);margin-top:16px;border-top:1px solid rgba(255,255,255,.2);padding-top:12px}
+.st-cta{text-align:center;margin-top:4px}
+.st-cta .big{font-family:var(--serif);font-style:italic;font-size:clamp(26px,3.8vw,40px);color:#fff}
+@media(max-width:900px){.st-wrap{grid-template-columns:1fr}.st-panel{position:static}}
+@media(max-width:560px){.st-grid{grid-template-columns:1fr}}
+</style>`;
+  const body = `${css}
+<section class="st-hero"><div class="m1"></div><div class="wrap">
+  <div class="eyebrow k">The studio</div>
+  <h1>See yourself <em>in Jade green.</em></h1>
+  <p>Type your name. Watch your business card, your <em>Just Listed</em> posts, your booking page, and your listing presentation turn Jade — live, as you type. Add your headshot if you like; it stays on your device.</p>
+</div></section>
+
+<section class="band cream"><div class="wrap">
+  <div class="eyebrow">01 · Make it yours</div>
+  <h2 class="h-sec" style="margin-bottom:28px">Your name. Our brand. Right now.</h2>
+  <div class="st-wrap">
+    <form class="st-panel" onsubmit="return false">
+      <span class="pl first">Your name</span>
+      <input type="text" id="f-name" placeholder="e.g. Jordan Rivera" autocomplete="off">
+      <span class="pl">Title</span>
+      <input type="text" id="f-title" value="REALTOR®" autocomplete="off">
+      <span class="pl">Your market</span>
+      <select id="f-market">${opts}</select>
+      <span class="pl">Phone (optional)</span>
+      <input type="text" id="f-phone" placeholder="(720) 555-0134" autocomplete="off">
+      <span class="pl">Card tagline</span>
+      <input type="text" id="f-tag" value="Your name on the sign. Our team behind it." autocomplete="off">
+      <span class="pl">Style</span>
+      <div class="st-seg">
+        <button type="button" data-sty="editorial" class="sel">Editorial</button>
+        <button type="button" data-sty="modern">Modern</button>
+      </div>
+      <span class="pl">Jade accent</span>
+      <div class="st-seg">
+        <button type="button" data-acc="jade" class="sel">Jade</button>
+        <button type="button" data-acc="olive">Olive</button>
+        <button type="button" data-acc="forest">Forest</button>
+      </div>
+      <span class="pl">Headshot (optional)</span>
+      <div class="st-photo-row">
+        <label class="st-filebtn" for="f-photo">Add a photo</label>
+        <input type="file" id="f-photo" accept="image/*" style="display:none">
+      </div>
+      <p class="st-note">Your photo never leaves your browser — it is not uploaded anywhere.</p>
+      <button type="button" class="st-reset" id="st-reset">Reset</button>
+    </form>
+
+    <div class="st-stage" id="st-stage">
+      <div class="st-grid">
+        <div class="pv"><div class="tag">Business card · tap to flip</div>
+          <div class="bcard" id="flipcard"><div class="bc-in">
+            <div class="bc-face bc-front">
+              <div class="bc-logo">Jade<span>REAL ESTATE</span></div>
+              <div class="bc-photo ph"><span class="pv-init">JA</span></div>
+              <div class="bc-name pv-name">Your Name</div>
+              <div class="bc-meta"><span class="pv-title">REALTOR®</span> · <span class="pv-market">Denver Metro</span></div>
+              <div class="bc-meta pv-phone">(720) 555-0134</div>
+            </div>
+            <div class="bc-face bc-back">
+              <div class="bc-mark">J</div>
+              <div class="bc-tag pv-tag">Your name on the sign. Our team behind it.</div>
+            </div>
+          </div></div>
+        </div>
+
+        <div class="pv"><div class="tag">Just Listed · social post</div>
+          <div class="post">
+            <div class="post-img">YOUR LISTING</div>
+            <div class="post-band">
+              <div class="jl serif">Just Listed</div>
+              <div class="post-agent">
+                <div class="post-photo ph"><span class="pv-init">JA</span></div>
+                <div><div class="nm pv-name">Your Name</div><div class="post-sub"><span class="pv-title">REALTOR®</span> · Jade Real Estate</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pv"><div class="tag">Your booking page</div>
+          <div class="bk">
+            <div class="bk-top"></div>
+            <div class="bk-photo ph"><span class="pv-init">JA</span></div>
+            <div class="bk-name pv-name">Your Name</div>
+            <div class="bk-meta"><span class="pv-title">REALTOR®</span> · <span class="pv-market">Denver Metro</span></div>
+            <div class="bk-btn">Book with <span class="pv-first">you</span></div>
+          </div>
+        </div>
+
+        <div class="pv"><div class="tag">Listing presentation · cover</div>
+          <div class="cover">
+            <div class="cv-top"><span>Jade Real Estate</span><span>Issue Nº 01</span></div>
+            <div class="cv-kick">Seller Presentation</div>
+            <div class="cv-h">Prepared for<br>your seller.</div>
+            <div class="cv-stats"><div><b>Jade</b><span>Marketing</span></div><div><b class="pv-market">Denver Metro</b><span>Market</span></div></div>
+            <div class="cv-by">Prepared by <span class="serif pv-name">Your Name</span>, <span class="pv-title">REALTOR®</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section class="band pull st-cta"><div class="wrap">
+  <div class="eyebrow">02 · The possibility</div>
+  <p class="big" style="margin-top:14px">This could be you — green and ready to go on day one.</p>
+  <div style="margin-top:28px"><a class="btn p" href="${BOOK}" target="_blank" rel="noopener">Talk with Emilie</a></div>
+  <p class="exits" style="color:var(--sage)">Bring your questions — about the move, the tools, the numbers. Opens our scheduler in a new tab.</p>
+</div></section>
+<script>
+(function(){
+  var g=function(id){return document.getElementById(id);};
+  var stage=g("st-stage");
+  function initials(n){n=(n||"").trim();if(!n){return "JA";}var p=n.split(" ").filter(Boolean);var a=p[0]?p[0].charAt(0):"";var b=p.length>1?p[p.length-1].charAt(0):"";var r=(a+b).toUpperCase();return r||"JA";}
+  function firstName(n){n=(n||"").trim();if(!n){return "you";}return n.split(" ").filter(Boolean)[0]||"you";}
+  function setAll(sel,val){var e=document.querySelectorAll(sel);for(var i=0;i<e.length;i++){e[i].textContent=val;}}
+  function render(){
+    var name=g("f-name").value.trim();
+    setAll(".pv-name",name||"Your Name");
+    setAll(".pv-title",g("f-title").value.trim()||"REALTOR®");
+    setAll(".pv-market",g("f-market").value);
+    setAll(".pv-phone",g("f-phone").value.trim()||"(720) 555-0134");
+    setAll(".pv-tag",g("f-tag").value.trim()||"Your name on the sign. Our team behind it.");
+    setAll(".pv-init",initials(name));
+    setAll(".pv-first",firstName(name));
+  }
+  var ids=["f-name","f-title","f-market","f-phone","f-tag"];
+  for(var i=0;i<ids.length;i++){var el=g(ids[i]);el.addEventListener("input",render);el.addEventListener("change",render);}
+  g("f-photo").addEventListener("change",function(e){
+    var f=e.target.files&&e.target.files[0];if(!f){return;}
+    var r=new FileReader();
+    r.onload=function(){var u=r.result;var ph=document.querySelectorAll(".ph");for(var i=0;i<ph.length;i++){ph[i].style.backgroundImage="url("+u+")";ph[i].classList.add("on");}};
+    r.readAsDataURL(f);
+  });
+  var accMap={jade:"#335143",olive:"#3e5725",forest:"#1b2f25"};
+  function wire(attr,fn){var b=document.querySelectorAll("[data-"+attr+"]");for(var i=0;i<b.length;i++){(function(x){x.addEventListener("click",function(){for(var j=0;j<b.length;j++){b[j].classList.remove("sel");}x.classList.add("sel");fn(x.getAttribute("data-"+attr));});})(b[i]);}}
+  wire("acc",function(v){stage.style.setProperty("--acc",accMap[v]||"#335143");});
+  wire("sty",function(v){stage.setAttribute("data-sty",v);});
+  var fc=g("flipcard");if(fc){fc.addEventListener("click",function(){fc.classList.toggle("flip");});}
+  g("st-reset").addEventListener("click",function(){
+    g("f-name").value="";g("f-title").value="REALTOR®";g("f-market").selectedIndex=0;g("f-phone").value="";g("f-tag").value="Your name on the sign. Our team behind it.";
+    var ph=document.querySelectorAll(".ph");for(var i=0;i<ph.length;i++){ph[i].style.backgroundImage="";ph[i].classList.remove("on");}
+    render();
+  });
+  render();
+})();
+</script>`;
+  const jsonld = [{ '@context': 'https://schema.org', '@type': 'WebApplication', name: 'See Yourself at Jade — Agent Brand Studio', applicationCategory: 'BusinessApplication', operatingSystem: 'Web', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }, url: SITE + '/studio', description: 'An interactive studio that previews your name on a Jade Real Estate business card, Just Listed social post, booking page, and listing presentation.' }];
+  return layout({ title: 'See Yourself at Jade — Agent Brand Studio', desc: 'Type your name and instantly see yourself as a Jade Real Estate agent: a live Jade business card, Just Listed social post, booking page, and listing presentation. No sign-up — your headshot stays in your browser.', path: '/studio', body, jsonld });
+}
+
 function robots() {
   const lines = [
     'User-agent: *', 'Allow: /',
@@ -442,7 +689,7 @@ function robots() {
 
 async function sitemap() {
   const posts = await getPosts(200);
-  const base = ['/', '/technology', '/culture', '/blog', '/faq'];
+  const base = ['/', '/technology', '/culture', '/studio', '/blog', '/faq'];
   const today = new Date().toISOString().slice(0, 10);
   const rows = base.map(u => `  <url><loc>${SITE}${u === '/' ? '' : u}</loc><lastmod>${today}</lastmod><changefreq>weekly</changefreq><priority>${u === '/' ? '1.0' : '0.7'}</priority></url>`)
     .concat(posts.map(p => `  <url><loc>${SITE}/blog/${p.slug}</loc><lastmod>${(p.published_at || today).slice(0, 10)}</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>`));
@@ -486,6 +733,7 @@ Jade does not lead with a commission-split number, because a split is not take-h
 - Why Jade: ${SITE}/
 - Technology: ${SITE}/technology
 - Culture: ${SITE}/culture
+- See yourself at Jade (interactive brand studio): ${SITE}/studio
 - Blog: ${SITE}/blog
 - FAQ (includes the full $200 inclusions list): ${SITE}/faq
 - Take-home calculator: ${NET}
@@ -515,6 +763,7 @@ export default {
     if (p === '/technology') return html(techPage());
     if (p === '/culture') return html(culturePage());
     if (p === '/faq') return html(faqPage());
+    if (p === '/studio') return html(studioPage());
     if (p === '/blog') return html(await blogIndex());
     if (p.startsWith('/blog/')) { const slug = decodeURIComponent(p.slice(6)); const post = await getPost(slug); return post ? html(postPage(post)) : notFound(); }
     return notFound();
