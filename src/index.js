@@ -631,6 +631,7 @@ function marketingPage() {
       + '<div class="fc-face fc-back"><div class="fc-bt">' + c[1] + '</div><p>' + c[3] + '</p></div>'
       + '</div></div>';
   }).join('');
+  const leaf = '<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#3e5725" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21C12 14 13 7 20 3c0 8-3 15-8 17-4 0-8-3-8-8 0-5 4-7 8-7"/><path d="M12 21c0-5 2-9 6-12"/></svg>';
   const css = `
 <style>
 .mk-hero{background:var(--ink);color:#eef1ec;padding:clamp(58px,8vw,108px) 0;overflow:hidden}
@@ -641,7 +642,6 @@ function marketingPage() {
 .mk-hbtns{margin-top:30px;display:flex;gap:13px;flex-wrap:wrap}
 .mk-btn{display:inline-block;text-decoration:none;font-weight:700;font-size:14.5px;padding:12px 22px;border-radius:999px;background:var(--cream);color:var(--ink)}
 .mk-btn.ghost{background:transparent;color:#eef1ec;border:1px solid rgba(255,255,255,.26)}
-/* hero cover (info-dense, no empty space) */
 .mk-cover{background:linear-gradient(158deg,#243a2e,var(--jade));border-radius:16px;box-shadow:0 34px 70px rgba(0,0,0,.5);padding:clamp(22px,2.6vw,32px);color:#eef1ec;transform:rotate(-2deg)}
 .mk-cover .ct{display:flex;justify-content:space-between;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.72);font-weight:600;border-bottom:1px solid rgba(255,255,255,.2);padding-bottom:12px}
 .mk-cover h3{font-family:var(--serif);font-style:italic;font-size:clamp(22px,2.6vw,30px);margin:16px 0 4px}
@@ -650,7 +650,6 @@ function marketingPage() {
 .mk-toc div{background:#223527;display:flex;justify-content:space-between;padding:10px 14px;font-size:12.5px}
 .mk-toc div b{font-family:var(--serif);font-style:italic;color:#fff;font-weight:400}
 .mk-toc div span{color:rgba(255,255,255,.6)}
-/* flip cards */
 .fcs{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
 .fc{height:248px;perspective:1300px;cursor:pointer}
 .fc-in{position:relative;width:100%;height:100%;transition:transform .6s cubic-bezier(.2,.7,.2,1);transform-style:preserve-3d}
@@ -664,60 +663,69 @@ function marketingPage() {
 .fc-flip{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--sage);font-weight:700;margin-top:14px}
 .fc-bt{font-family:var(--serif);font-style:italic;font-size:20px;color:var(--jade)}
 .fc-back p{font-size:14px;color:var(--jade2);line-height:1.6;margin-top:10px}
-/* flipbook */
-.book{max-width:800px;margin:34px auto 0}
-.book-stage{position:relative;aspect-ratio:3/2;border-radius:16px;overflow:hidden;box-shadow:0 36px 74px rgba(21,32,26,.22);background:var(--paper)}
-.fb-page{position:absolute;inset:0;opacity:0;transform:rotateY(-7deg) scale(.985);transform-origin:left center;transition:opacity .5s ease,transform .5s ease;padding:clamp(24px,4vw,46px);display:flex;flex-direction:column;pointer-events:none;overflow:hidden}
-.fb-page.on{opacity:1;transform:none;pointer-events:auto;z-index:2}
-.fb-eye{font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:700}
-.fb-h{font-family:var(--serif);font-style:italic;line-height:1.08;margin-top:8px}
-.fb-dark{background:linear-gradient(158deg,var(--ink),var(--forest));color:#eef1ec}
-.fb-dark .fb-eye{color:var(--sage)}
-.fb-cream{background:var(--cream);color:var(--ink)}
-.fb-cream .fb-eye{color:var(--jade2)}
-.fb-paper{background:var(--paper);color:var(--ink)}
-.fb-paper .fb-eye{color:var(--jade2)}
-.fb-h.big{font-size:clamp(30px,4.4vw,52px)}
-.fb-h.mid{font-size:clamp(23px,3vw,34px);color:var(--jade)}
-.fb-lead{font-size:clamp(14px,1.5vw,16.5px);line-height:1.7;margin-top:14px;max-width:60ch}
-.fb-dark .fb-lead{color:#c9d2c6}.fb-cream .fb-lead,.fb-paper .fb-lead{color:var(--jade2)}
-.fb-cover-foot{margin-top:auto;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.6)}
-.fb-stats{display:flex;gap:30px;margin-top:20px}
-.fb-stats div b{font-family:var(--serif);font-style:italic;font-size:clamp(22px,3vw,30px);display:block;color:var(--jade)}
-.fb-dark .fb-stats div b{color:#fff}
-.fb-stats div i{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-style:normal;color:var(--jade2)}
-.fb-dark .fb-stats div i{color:rgba(255,255,255,.65)}
-.fb-steps{margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:9px 22px}
-.fb-step{display:flex;gap:11px;align-items:baseline;font-size:13.5px;color:var(--jade2)}
-.fb-step b{font-family:var(--serif);font-style:italic;color:var(--jade);font-size:16px;min-width:20px}
-.fb-grid{margin-top:16px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.fb-grid div{background:rgba(51,81,67,.07);border:1px solid var(--line);border-radius:10px;padding:12px 13px;font-size:12.5px;color:var(--jade)}
-.fb-grid div b{font-family:var(--serif);font-style:italic;display:block;font-size:15px;margin-bottom:2px}
-.fb-three{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
-.fb-mini{border-radius:9px;padding:13px;aspect-ratio:.82/1;display:flex;flex-direction:column;font-size:9px}
-.fb-mini .mk{letter-spacing:.14em;text-transform:uppercase;font-weight:700}
-.fb-mini .mh{margin-top:auto;line-height:1.05}
-.fb-mini.min{background:#fff;border:1px solid var(--line);color:var(--ink)}.fb-mini.min .mh{font-family:var(--sans);font-weight:700;font-size:15px}
-.fb-mini.warm{background:linear-gradient(160deg,#5c6b3f,var(--olive));color:#f4f1e9}.fb-mini.warm .mh{font-family:var(--serif);font-style:italic;font-size:17px}
-.fb-mini.ed{background:var(--ink);color:#eef1ec}.fb-mini.ed .mh{font-family:var(--serif);font-style:italic;font-size:17px}
-.fb-mini .ml{font-size:8px;letter-spacing:.1em;text-transform:uppercase;margin-top:6px;opacity:.75}
-.book-nav{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:20px}
-.book-nav button{font-family:var(--sans);font-size:13.5px;font-weight:700;color:var(--jade);background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:9px 18px;cursor:pointer}
-.book-nav button:disabled{opacity:.35;cursor:default}
-.fb-dots{display:flex;gap:7px}
-.fb-dot{width:9px;height:9px;border-radius:50%;background:var(--line);border:0;padding:0;cursor:pointer}
-.fb-dot.on{background:var(--jade)}
+/* magazine */
+.mz-wrap{margin-top:34px;max-width:1000px;margin-left:auto;margin-right:auto}
+.mz-head{background:var(--ink);color:#eef1ec;border-radius:14px 14px 0 0;padding:15px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.mz-head .ti{font-family:var(--serif);font-style:italic;font-size:17px}
+.mz-head .ti small{display:block;font-family:var(--sans);font-style:normal;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--sage);margin-top:3px;font-weight:600}
+.mz-toggle{display:flex;border:1px solid rgba(255,255,255,.22);border-radius:999px;overflow:hidden}
+.mz-toggle button{font-family:var(--sans);font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;padding:7px 14px;background:transparent;color:rgba(255,255,255,.65);border:0;cursor:pointer}
+.mz-toggle button.on{background:var(--cream);color:var(--ink)}
+.mz-book{background:#0e1712;padding:clamp(16px,2.4vw,30px);border-radius:0 0 14px 14px;box-shadow:0 40px 82px rgba(0,0,0,.4)}
+.mz-sheet{background:var(--cream);border-radius:4px;display:flex;min-height:clamp(440px,46vw,560px);box-shadow:0 12px 34px rgba(0,0,0,.34);overflow:hidden}
+.mz-sheet.one{max-width:580px;margin:0 auto}
+.mz-page{flex:1;padding:clamp(22px,2.7vw,40px);display:none;flex-direction:column;position:relative;min-width:0}
+.mz-page.show{display:flex}
+.mz-sheet.two .mz-page.show + .mz-page.show{border-left:1px solid rgba(21,32,26,.13)}
+.mz-cover{background:linear-gradient(162deg,var(--ink),var(--forest));color:#eef1ec}
+.mz-cover2{background:linear-gradient(162deg,var(--forest),var(--jade));color:#eef1ec}
+.mz-eye{font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--olive)}
+.mz-cover .mz-eye,.mz-cover2 .mz-eye{color:var(--sage)}
+.mz-h{font-family:var(--serif);font-style:italic;color:var(--jade);line-height:1.06;margin-top:8px;font-size:clamp(23px,2.7vw,32px)}
+.mz-deck{font-family:var(--serif);font-style:italic;font-size:14.5px;color:var(--jade2);margin-top:12px;line-height:1.42}
+.mz-body{margin-top:14px}
+.mz-body p{font-size:12.8px;line-height:1.62;color:var(--ink);margin:0 0 10px}
+.mz-body p.lead::first-letter{float:left;font-family:var(--serif);font-style:italic;font-size:3.3em;line-height:.74;padding:5px 9px 0 0;color:var(--jade)}
+.mz-sign{display:flex;align-items:center;gap:10px;margin-top:12px}
+.mz-sign .mo{width:34px;height:34px;border-radius:50%;background:var(--jade);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-style:italic;font-size:15px;flex:none}
+.mz-sign .nm{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--jade)}
+.mz-sign .nm small{display:block;font-family:var(--sans);font-style:normal;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--jade2);font-weight:600}
+.mz-toc{margin-top:auto;border-top:1px solid rgba(21,32,26,.13);padding-top:10px}
+.mz-toc div{display:flex;gap:12px;padding:5px 0;font-size:12.5px;color:var(--ink);align-items:baseline}
+.mz-toc div b{font-size:9px;color:var(--jade2);min-width:16px;font-weight:700;letter-spacing:.05em}
+.mz-toc div span{font-family:var(--serif);font-style:italic}
+.mz-cap{margin-top:16px;background:rgba(62,87,37,.08);border:1px solid rgba(21,32,26,.1);border-radius:8px;padding:12px 14px;display:flex;gap:12px;align-items:center}
+.mz-cap svg{flex:none}
+.mz-cap p{font-family:var(--serif);font-style:italic;font-size:11.5px;color:var(--jade2);margin:0;line-height:1.42}
+.mz-foot{margin-top:auto;padding-top:14px;display:flex;justify-content:space-between;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--jade2)}
+.mz-cover .mz-foot,.mz-cover2 .mz-foot{color:rgba(255,255,255,.55)}
+.mz-big{font-family:var(--serif);font-style:italic;font-size:clamp(44px,6vw,70px);color:#fff;line-height:.98;margin-top:auto}
+.mz-subt{font-family:var(--serif);font-style:italic;font-size:clamp(17px,2.2vw,24px);color:#eef1ec;margin-top:4px}
+.mz-steps{margin-top:12px}
+.mz-steps .s{display:flex;gap:12px;align-items:baseline;padding:8px 0;border-bottom:1px solid rgba(21,32,26,.09);font-size:13px;color:var(--ink)}
+.mz-steps .s b{font-family:var(--serif);font-style:italic;color:var(--jade);font-size:18px;min-width:22px}
+.mz-list{margin-top:10px}
+.mz-list div{padding:8px 0;border-bottom:1px solid rgba(21,32,26,.09);font-size:12.6px;color:var(--jade2);line-height:1.45}
+.mz-list div b{font-family:var(--serif);font-style:italic;color:var(--jade);font-size:15px;margin-right:7px}
+.mz-stats{display:flex;gap:22px;margin-top:14px;flex-wrap:wrap}
+.mz-stats div b{font-family:var(--serif);font-style:italic;color:var(--jade);font-size:21px;display:block}
+.mz-stats div i{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;font-style:normal;color:var(--jade2)}
+.mz-nav{display:flex;align-items:center;justify-content:center;gap:20px;margin-top:20px}
+.mz-nav button.arrow{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--paper);color:var(--jade);font-size:17px;cursor:pointer;line-height:1}
+.mz-nav button.arrow:disabled{opacity:.3;cursor:default}
+.mz-label{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--jade2);font-weight:700;min-width:160px;text-align:center}
 .mk-cta{background:var(--jade);color:#eef1ec}
 .mk-cta h2{font-family:var(--serif);font-style:italic;font-size:clamp(28px,4.2vw,44px);max-width:20ch}
 .mk-cta p{color:#cdd6c9;font-size:16px;margin-top:14px;max-width:52ch}
-@media(max-width:860px){.mk-hg{grid-template-columns:1fr}.fcs{grid-template-columns:1fr}.fc{height:210px}.fb-steps{grid-template-columns:1fr}.book-stage{aspect-ratio:3/4}}
+@media(max-width:860px){.mk-hg{grid-template-columns:1fr}.fcs{grid-template-columns:1fr}.fc{height:210px}}
+@media(max-width:760px){.mz-sheet.two{flex-direction:column}.mz-sheet.two .mz-page.show + .mz-page.show{border-left:0;border-top:1px solid rgba(21,32,26,.13)}}
 </style>`;
   const body = `${css}
 <section class="mk-hero"><div class="wrap mk-hg">
   <div>
     <div class="eyebrow">Marketing at Jade</div>
     <h1>Marketing, done for you — and built around you.</h1>
-    <p>An in-house team that makes your listings look sharp, your brand feel like <em>you</em>, and your follow-up actually happen. Flip through what we do — and page through how we do it.</p>
+    <p>An in-house team that makes your listings look sharp, your brand feel like <em>you</em>, and your follow-up actually happen. It should look good — and it should work for you.</p>
     <div class="mk-hbtns"><a class="mk-btn" href="#capabilities">See the capabilities</a><a class="mk-btn ghost" href="${BOOK}" target="_blank" rel="noopener">Talk with Emilie</a></div>
   </div>
   <div class="mk-cover">
@@ -725,10 +733,10 @@ function marketingPage() {
     <h3>The Jade Marketing Playbook</h3>
     <div class="sub">How we market your business</div>
     <div class="mk-toc">
-      <div><b>01 · The listing launch</b><span>p.03</span></div>
-      <div><b>02 · Your brand kit</b><span>p.04</span></div>
-      <div><b>03 · Three ways, one team</b><span>p.05</span></div>
-      <div><b>04 · The tools behind it</b><span>p.06</span></div>
+      <div><b>Why Jade</b><span>p.02</span></div>
+      <div><b>The name &amp; the stone</b><span>p.03</span></div>
+      <div><b>A listing launch</b><span>p.05</span></div>
+      <div><b>Three ways, one team</b><span>p.08</span></div>
     </div>
   </div>
 </div></section>
@@ -743,81 +751,145 @@ function marketingPage() {
 <section class="band paper"><div class="wrap">
   <div class="eyebrow">The playbook</div>
   <h2 class="h-sec">Page through how Jade markets.</h2>
-  <div class="book">
-    <div class="book-stage" id="fb">
-      <div class="fb-page fb-dark on">
-        <div class="fb-eye">Issue Nº 01</div>
-        <div class="fb-h big" style="margin-top:12px">The Jade<br>Marketing Playbook.</div>
-        <div class="fb-lead">How an independent Colorado brokerage markets its agents — done for you, built around you.</div>
-        <div class="fb-cover-foot">Jade Real Estate · Denver · Front Range &amp; mountains</div>
-      </div>
-      <div class="fb-page fb-cream">
-        <div class="fb-eye">The idea</div>
-        <div class="fb-h mid" style="margin-top:8px">Done for you. Built around you.</div>
-        <div class="fb-lead">Most brokerages hand you a template and a login. At Jade, a real in-house designer builds your marketing around your brand, your market, and your voice — and keeps building as your business grows. The marketing gets done; you stay in front of clients.</div>
-        <div class="fb-stats"><div><b>In-house</b><i>Not outsourced</i></div><div><b>Per agent</b><i>Not a template</i></div><div><b>Ongoing</b><i>Not one &amp; done</i></div></div>
-      </div>
-      <div class="fb-page fb-paper">
-        <div class="fb-eye">Chapter 01</div>
-        <div class="fb-h mid" style="margin-top:8px">A listing launch, start to finish.</div>
-        <div class="fb-lead">Every listing gets the same treatment — shaped to the property and the seller.</div>
-        <div class="fb-steps">
-          <div class="fb-step"><b>1</b><span>Brief &amp; brand the listing</span></div>
-          <div class="fb-step"><b>2</b><span>Magazine-style seller presentation</span></div>
-          <div class="fb-step"><b>3</b><span>Just Listed social set</span></div>
-          <div class="fb-step"><b>4</b><span>Signage &amp; open-house kit</span></div>
-          <div class="fb-step"><b>5</b><span>Paid &amp; organic social push</span></div>
-          <div class="fb-step"><b>6</b><span>Nurture the leads it brings in</span></div>
+  <div class="mz-wrap">
+    <div class="mz-head">
+      <div class="ti">Jade &middot; Nº 01<small>A brand, by design</small></div>
+      <div class="mz-toggle"><button type="button" id="mz-two" class="on">Two pages</button><button type="button" id="mz-one">One page</button></div>
+    </div>
+    <div class="mz-book">
+      <div class="mz-sheet two" id="mz-sheet">
+
+        <div class="mz-page mz-cover">
+          <div class="mz-eye">Jade Real Estate &middot; Denver</div>
+          <div class="mz-big">Jade</div>
+          <div class="mz-subt">A brand, by design.</div>
+          <div class="mz-foot"><span>Issue Nº 01</span><span>The marketing playbook</span></div>
         </div>
-      </div>
-      <div class="fb-page fb-cream">
-        <div class="fb-eye">Chapter 02</div>
-        <div class="fb-h mid" style="margin-top:8px">Your brand kit.</div>
-        <div class="fb-lead">The identity we build with you, and the pieces it lives on.</div>
-        <div class="fb-grid">
-          <div><b>Identity</b>Logo, color, type, voice</div>
-          <div><b>Print</b>Cards, signs, open-house</div>
-          <div><b>Social</b>Templates &amp; reels</div>
-          <div><b>Presentations</b>Listing &amp; CMA decks</div>
-          <div><b>Swag</b>Totes &amp; closing gifts</div>
-          <div><b>Email</b>Newsletter &amp; nurture</div>
+
+        <div class="mz-page">
+          <div class="mz-eye">From Emilie</div>
+          <div class="mz-h">Why Jade.</div>
+          <div class="mz-body">
+            <p class="lead">Good marketing does two things at once. It should look like something — considered, consistent, the kind of piece a client screenshots and keeps. And it should work: show up on time, say the right thing, and make your life easier instead of becoming a second job.</p>
+            <p>Most brokerages pick one. They hand you a polished template you can't change, or a pile of tools and a cheerful "good luck." We built Jade to do both — an in-house team that makes the work beautiful, and a system that keeps it practical.</p>
+            <p>This issue is a short look at how that works. And, since people always ask, where the name came from.</p>
+          </div>
+          <div class="mz-sign"><div class="mo">E</div><div class="nm">Emilie Smith<small>Marketing &amp; Recruiting</small></div></div>
+          <div class="mz-toc">
+            <div><b>03</b><span>The name &amp; the stone</span></div>
+            <div><b>04</b><span>Done for you, built around you</span></div>
+            <div><b>05</b><span>A listing launch, start to finish</span></div>
+            <div><b>06</b><span>Your brand kit</span></div>
+            <div><b>07</b><span>The tools behind it</span></div>
+            <div><b>08</b><span>Three ways, one team</span></div>
+          </div>
+          <div class="mz-foot"><span>Jade &middot; A brand, by design</span><span>02</span></div>
         </div>
-      </div>
-      <div class="fb-page fb-paper">
-        <div class="fb-eye">Chapter 03</div>
-        <div class="fb-h mid" style="margin-top:8px">Three ways, one team.</div>
-        <div class="fb-lead">The same listing cover, built for three different agents — because no two Jade brands look alike.</div>
-        <div class="fb-three">
-          <div class="fb-mini min"><div class="mk">Seller Presentation</div><div class="mh">412 Lupine Lane</div><div class="ml">Modern &amp; minimal</div></div>
-          <div class="fb-mini warm"><div class="mk">Seller Presentation</div><div class="mh">A home on Lupine Lane.</div><div class="ml">Warm &amp; local</div></div>
-          <div class="fb-mini ed"><div class="mk">Seller Presentation</div><div class="mh">Lupine Lane, Nº 01.</div><div class="ml">High-end editorial</div></div>
+
+        <div class="mz-page">
+          <div class="mz-eye">The name</div>
+          <div class="mz-h">Why we're called Jade.</div>
+          <div class="mz-deck">A stone chosen as carefully as a wordmark — for what it means, and for how it sounds.</div>
+          <div class="mz-body">
+            <p class="lead">Jade has meant something for a long time. Across cultures it's been a stone of harmony and steadiness — valued less for flash than for endurance, calm, and quiet worth. Green for growth; tough enough to last. For a brokerage that wants to be the steady hand in the biggest transaction of someone's life, it fit.</p>
+            <p>But there was a plainer reason, too. "Jade" is one syllable. It's easy to say, easy to spell, and — the test that actually matters — easy to give over the phone. When you're reading your email to a new lead from a parking lot, "jade real estate dot com" lands the first time. No spelling it twice.</p>
+            <p>That's the whole idea in a single word: something that looks and feels good, and also just works for you.</p>
+          </div>
+          <div class="mz-cap">${leaf}<p>Jade — tough, enduring, and prized for its depth of color, not its sparkle.</p></div>
+          <div class="mz-foot"><span>Jade &middot; A brand, by design</span><span>03</span></div>
         </div>
-      </div>
-      <div class="fb-page fb-dark">
-        <div class="fb-eye">Chapter 04</div>
-        <div class="fb-h mid" style="margin-top:8px;color:#fff">The tools behind it.</div>
-        <div class="fb-lead">The platform that makes it repeatable — all included in the flat $200/month.</div>
-        <div class="fb-stats" style="flex-wrap:wrap;gap:20px 30px">
-          <div><b>Studio</b><i>Marketing builder</i></div>
-          <div><b>OnlySocial</b><i>Scheduling</i></div>
-          <div><b>Follow Up Boss</b><i>CRM &amp; nurture</i></div>
-          <div><b>HouseCanary</b><i>Market data</i></div>
-          <div><b>Jade AI</b><i>Drafts &amp; content</i></div>
+
+        <div class="mz-page">
+          <div class="mz-eye">How we work</div>
+          <div class="mz-h">Done for you, built around you.</div>
+          <div class="mz-body">
+            <p class="lead">A real in-house designer builds your marketing around your brand, your market, and your voice — and keeps building as your business grows. The work gets done; you stay in front of clients.</p>
+            <p>No two Jade agents look alike, and that's on purpose. Some are sleek and modern, some warm and local, some high-end and editorial. We flex to you — you don't flex to a house template.</p>
+          </div>
+          <div class="mz-stats"><div><b>In-house</b><i>Not outsourced</i></div><div><b>Per agent</b><i>Not a template</i></div><div><b>Ongoing</b><i>Not one &amp; done</i></div></div>
+          <div class="mz-foot"><span>Jade &middot; A brand, by design</span><span>04</span></div>
         </div>
-        <div class="fb-cover-foot" style="color:var(--sage)">Build yours with Emilie →</div>
+
+        <div class="mz-page">
+          <div class="mz-eye">Chapter 01</div>
+          <div class="mz-h">A listing launch, start to finish.</div>
+          <div class="mz-deck">Every listing gets the same treatment — shaped to the property and the seller.</div>
+          <div class="mz-steps">
+            <div class="s"><b>1</b><span>Brief &amp; brand the listing</span></div>
+            <div class="s"><b>2</b><span>A magazine-style seller presentation</span></div>
+            <div class="s"><b>3</b><span>A branded Just Listed social set</span></div>
+            <div class="s"><b>4</b><span>Signage &amp; the open-house kit</span></div>
+            <div class="s"><b>5</b><span>A paid &amp; organic social push</span></div>
+            <div class="s"><b>6</b><span>Nurture the leads it brings in</span></div>
+          </div>
+          <div class="mz-foot"><span>Jade &middot; A brand, by design</span><span>05</span></div>
+        </div>
+
+        <div class="mz-page">
+          <div class="mz-eye">Chapter 02</div>
+          <div class="mz-h">Your brand kit.</div>
+          <div class="mz-deck">The identity we build with you, and the pieces it lives on.</div>
+          <div class="mz-list">
+            <div><b>Identity</b> logo, wordmark, color, type, and voice</div>
+            <div><b>Print</b> cards, yard signs, open-house collateral</div>
+            <div><b>Social</b> templates, Just Listed sets, reels</div>
+            <div><b>Presentations</b> listing &amp; CMA decks, print-ready</div>
+            <div><b>Swag</b> totes, closing gifts, the little things</div>
+            <div><b>Email</b> newsletters &amp; follow-up that goes out</div>
+          </div>
+          <div class="mz-foot"><span>Jade &middot; A brand, by design</span><span>06</span></div>
+        </div>
+
+        <div class="mz-page">
+          <div class="mz-eye">Chapter 03</div>
+          <div class="mz-h">The tools behind it.</div>
+          <div class="mz-deck">The platform that makes it repeatable — included in the flat $200/month.</div>
+          <div class="mz-list">
+            <div><b>The Studio</b> your marketing builder inside the Jade app</div>
+            <div><b>OnlySocial</b> scheduling &amp; publishing to your accounts</div>
+            <div><b>Follow Up Boss</b> the CRM that runs your nurture</div>
+            <div><b>HouseCanary</b> property &amp; market data, wired in</div>
+            <div><b>Jade AI</b> drafts and client content, Colorado-aware</div>
+          </div>
+          <div class="mz-foot"><span>Jade &middot; A brand, by design</span><span>07</span></div>
+        </div>
+
+        <div class="mz-page">
+          <div class="mz-eye">Chapter 04</div>
+          <div class="mz-h">Three ways, one team.</div>
+          <div class="mz-deck">The same listing cover, built for three different agents — because no two Jade brands look alike.</div>
+          <div class="mz-body">
+            <p><b style="font-family:var(--serif);font-style:italic;color:var(--jade)">Modern &amp; minimal.</b> Clean sans type, a lot of white space, one confident line: <em>412 Lupine Lane</em>. For the agent whose brand is restraint.</p>
+            <p><b style="font-family:var(--serif);font-style:italic;color:var(--jade)">Warm &amp; local.</b> Earthy greens and a serif that feels like a handwritten note: <em>A home on Lupine Lane.</em> For the neighborhood expert.</p>
+            <p><b style="font-family:var(--serif);font-style:italic;color:var(--jade)">High-end editorial.</b> Near-black, high contrast, issue numbers: <em>Lupine Lane, Nº 01.</em> For the luxury listing that should feel like a magazine.</p>
+          </div>
+          <div class="mz-foot"><span>Jade &middot; A brand, by design</span><span>08</span></div>
+        </div>
+
+        <div class="mz-page">
+          <div class="mz-eye">The economics</div>
+          <div class="mz-h">All part of $200 a month.</div>
+          <div class="mz-body">
+            <p class="lead">The marketing in this issue isn't an add-on or an à-la-carte menu. The in-house design, the templates, the tools, and the brand work are included in Jade's flat monthly fee — alongside the rest of the agent app.</p>
+            <p>The only things billed separately are standard agent costs: your MLS dues, your transaction-platform subscription, and physical printing.</p>
+          </div>
+          <div class="mz-stats"><div><b>$200/mo</b><i>Flat, includes the app</i></div><div><b>In-house</b><i>Design included</i></div></div>
+          <div class="mz-foot"><span>Jade &middot; A brand, by design</span><span>09</span></div>
+        </div>
+
+        <div class="mz-page mz-cover2">
+          <div class="mz-eye">The back cover</div>
+          <div class="mz-big" style="font-size:clamp(30px,4vw,46px)">Let's build<br>yours.</div>
+          <div class="mz-body" style="margin-top:14px"><p style="color:#dbe2d7">Bring your business and your taste. Emilie will walk you through how Jade would market you — specifically.</p></div>
+          <div class="mz-foot"><span>Jade Real Estate &middot; Denver</span><span>10</span></div>
+        </div>
+
       </div>
     </div>
-    <div class="book-nav">
-      <button type="button" id="fb-prev">&#8249; Prev</button>
-      <div class="fb-dots">
-        <button type="button" class="fb-dot on" aria-label="Page 1"></button>
-        <button type="button" class="fb-dot" aria-label="Page 2"></button>
-        <button type="button" class="fb-dot" aria-label="Page 3"></button>
-        <button type="button" class="fb-dot" aria-label="Page 4"></button>
-        <button type="button" class="fb-dot" aria-label="Page 5"></button>
-        <button type="button" class="fb-dot" aria-label="Page 6"></button>
-      </div>
-      <button type="button" id="fb-next">Next &#8250;</button>
+    <div class="mz-nav">
+      <button type="button" class="arrow" id="mz-prev" aria-label="Previous">&#8249;</button>
+      <div class="mz-label" id="mz-label">Page 1 of 10</div>
+      <button type="button" class="arrow" id="mz-next" aria-label="Next">&#8250;</button>
     </div>
   </div>
 </div></section>
@@ -833,30 +905,47 @@ function marketingPage() {
 (function(){
   var cards=document.querySelectorAll(".fc");
   for(var i=0;i<cards.length;i++){(function(c){c.addEventListener("click",function(){c.classList.toggle("flip");});})(cards[i]);}
-  var fb=document.getElementById("fb");
-  if(!fb){return;}
-  var pages=fb.querySelectorAll(".fb-page");
-  var dots=document.querySelectorAll(".fb-dot");
-  var prev=document.getElementById("fb-prev");
-  var next=document.getElementById("fb-next");
-  var idx=0;
-  function show(n){
-    if(n<0){n=0;}
-    if(n>pages.length-1){n=pages.length-1;}
-    idx=n;
-    for(var i=0;i<pages.length;i++){pages[i].className=pages[i].className.replace(" on","");if(i===idx){pages[i].className=pages[i].className+" on";}}
-    for(var j=0;j<dots.length;j++){dots[j].className=(j===idx)?"fb-dot on":"fb-dot";}
-    if(prev){prev.disabled=(idx===0);}
-    if(next){next.disabled=(idx===pages.length-1);}
+  var sheet=document.getElementById("mz-sheet");
+  if(!sheet){return;}
+  var pages=sheet.querySelectorAll(".mz-page");
+  var N=pages.length;
+  var mode=(window.innerWidth<760)?"one":"two";
+  var view=0;
+  function buildViews(){
+    var v=[];
+    if(mode==="one"){for(var i=0;i<N;i++){v.push([i]);}return v;}
+    v.push([0]);
+    var j=1;
+    for(;j<N-1;j+=2){v.push([j,j+1]);}
+    if(j===N-1){v.push([j]);}
+    return v;
   }
-  if(prev){prev.addEventListener("click",function(){show(idx-1);});}
-  if(next){next.addEventListener("click",function(){show(idx+1);});}
-  for(var k=0;k<dots.length;k++){(function(n){dots[n].addEventListener("click",function(){show(n);});})(k);}
-  show(0);
+  var views=buildViews();
+  function render(){
+    if(view<0){view=0;}
+    if(view>views.length-1){view=views.length-1;}
+    var cur=views[view];
+    for(var i=0;i<N;i++){pages[i].className=pages[i].className.replace(" show","");}
+    for(var k=0;k<cur.length;k++){pages[cur[k]].className=pages[cur[k]].className+" show";}
+    sheet.className="mz-sheet "+((cur.length===2)?"two":"one");
+    var lbl=document.getElementById("mz-label");
+    if(cur.length===2){lbl.textContent="Pages "+(cur[0]+1)+"–"+(cur[1]+1)+" of "+N;}
+    else{lbl.textContent="Page "+(cur[0]+1)+" of "+N;}
+    var pv=document.getElementById("mz-prev"),nx=document.getElementById("mz-next");
+    if(pv){pv.disabled=(view===0);}
+    if(nx){nx.disabled=(view===views.length-1);}
+  }
+  document.getElementById("mz-prev").addEventListener("click",function(){view=view-1;render();});
+  document.getElementById("mz-next").addEventListener("click",function(){view=view+1;render();});
+  var tTwo=document.getElementById("mz-two"),tOne=document.getElementById("mz-one");
+  function setMode(m){mode=m;views=buildViews();view=0;render();if(tTwo){tTwo.className=(m==="two")?"on":"";}if(tOne){tOne.className=(m==="one")?"on":"";}}
+  if(tTwo){tTwo.addEventListener("click",function(){setMode("two");});}
+  if(tOne){tOne.addEventListener("click",function(){setMode("one");});}
+  setMode(mode);
 })();
 </script>`;
   const jsonld = [{ '@context': 'https://schema.org', '@type': 'WebPage', name: 'Marketing at Jade Real Estate', url: SITE + '/marketing', description: "The marketing Jade Real Estate does for its agents: listing presentations, social content, print and signage, personal branding, email nurture, and community presence — in-house and built around each agent." }];
-  return layout({ title: 'Marketing — Jade Real Estate Careers', desc: "The marketing Jade builds for its agents, done for you and built around your brand: magazine-style listing presentations, social in your voice, branded print, personal branding, and nurture — all in-house.", path: '/marketing', body, jsonld });
+  return layout({ title: 'Marketing — Jade Real Estate Careers', desc: "The marketing Jade builds for its agents, done for you and built around your brand: magazine-style listing presentations, social in your voice, branded print, and a brand identity that's genuinely yours.", path: '/marketing', body, jsonld });
 }
 function calculatorPage() {
   const marketOpts = [['Denver Metro', 571000], ['Colorado Springs', 500000], ['Northern CO', 540000], ['Custom', 571000]]
