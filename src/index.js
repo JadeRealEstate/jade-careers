@@ -249,12 +249,12 @@ async function homePage() {
 <section class="band forest"><div class="wrap">
   <div class="ed">
     <div>
-      <div class="eyebrow">Picture it</div>
-      <div class="big light" style="margin-top:12px">See yourself as a Jade agent.</div>
+      <div class="eyebrow">Marketing, built around you</div>
+      <div class="big light" style="margin-top:12px">We build your brand around you.</div>
       <div class="prose" style="color:#d3dbd0">
-        <p style="color:#d3dbd0">Type your name and watch your business card, your <em>Just Listed</em> posts, your booking page, and your listing presentation turn Jade — in real time. Drop in your headshot if you like; it never leaves your browser. No sign-up, no catch.</p>
+        <p style="color:#d3dbd0">No two Jade agents look alike. See the range of personalized marketing our in-house team creates — magazine-style listing presentations, social in your voice, branded print, and a brand that’s genuinely yours.</p>
       </div>
-      <div style="margin-top:24px"><a class="btn p" href="/studio">Open the studio →</a></div>
+      <div style="margin-top:24px"><a class="btn p" href="/studio">See the range →</a></div>
     </div>
     <figure class="figure" aria-hidden="true">
       <div class="mini-card">
@@ -263,7 +263,7 @@ async function homePage() {
         <div class="mini-name">Your Name</div>
         <div class="mini-meta">REALTOR® · Denver Metro</div>
       </div>
-      <figcaption style="color:#aab6a7">A 30-second preview of your Jade brand.</figcaption>
+      <figcaption style="color:#aab6a7">A look at the range we build for agents.</figcaption>
     </figure>
   </div>
 </div></section>
@@ -617,266 +617,218 @@ function postPage(p) {
 }
 
 function studioPage() {
-  const opts = MARKETS.map(m => `<option value="${esc(m)}">${esc(m)}</option>`).join('');
   const css = `
 <style>
-.st-hero{background:var(--forest);color:#eef1ec;padding:clamp(58px,8vw,104px) 0;position:relative;overflow:hidden}
-.st-hero .m1{position:absolute;right:-8%;top:-24%;width:min(50%,460px);aspect-ratio:1;background:linear-gradient(150deg,rgba(84,103,81,.42),rgba(62,87,37,.1));border-radius:44% 44% 44% 62%}
-.st-hero h1{font-size:clamp(34px,6vw,60px);font-style:italic;max-width:15ch;position:relative}
-.st-hero .k{position:relative}
-.st-hero p{color:#d3dbd0;font-size:clamp(16px,1.9vw,20px);margin-top:20px;max-width:56ch;position:relative}
-.mani{max-width:780px}
-.mani .big{font-family:var(--serif);font-style:italic;font-size:clamp(27px,4vw,44px);color:var(--jade);line-height:1.12}
-.mani p{font-size:clamp(16px,1.6vw,18.5px);color:var(--jade2);margin-top:20px;line-height:1.7;max-width:64ch}
-.mani .row{display:flex;gap:30px;flex-wrap:wrap;margin-top:30px}
-.mani .row div{flex:1;min-width:150px}
-.mani .row b{font-family:var(--serif);font-style:italic;font-size:21px;color:var(--jade);display:block}
-.mani .row span{font-size:13.5px;color:var(--jade2);display:block;margin-top:5px;line-height:1.5}
-/* control bar */
-.st-bar{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:clamp(22px,3vw,34px);box-shadow:0 22px 54px rgba(21,32,26,.09);max-width:960px;margin:34px auto 0}
-.st-bigname{display:block;width:100%;font-family:var(--serif);font-style:italic;font-size:clamp(28px,5vw,46px);text-align:center;border:0;border-bottom:2px solid var(--line);background:transparent;color:var(--jade);padding:4px 0 12px}
-.st-bigname:focus{outline:none;border-bottom-color:var(--jade)}
-.st-bigname::placeholder{color:var(--sage)}
-.st-tools{display:flex;flex-wrap:wrap;gap:16px 20px;align-items:flex-end;justify-content:center;margin-top:22px}
-.ctrl{display:flex;flex-direction:column;gap:6px}
-.ctrl>span{font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--jade2)}
-.ctrl input,.ctrl select{font-family:var(--sans);font-size:13.5px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:var(--cream);color:var(--ink)}
-.ctrl input:focus,.ctrl select:focus{outline:2px solid var(--jade);outline-offset:1px}
-.ctrl.wide{flex:1;min-width:230px}.ctrl.wide input{width:100%}
-.st-seg{display:flex;gap:6px}
-.st-seg button{font-family:var(--sans);font-size:12.5px;font-weight:600;padding:9px 14px;border:1px solid var(--line);border-radius:999px;background:var(--cream);color:var(--jade2);cursor:pointer}
-.st-seg button.sel{background:var(--jade);color:#fff;border-color:var(--jade)}
-.st-dots{display:flex;gap:9px}
-.st-dots button{width:28px;height:28px;border-radius:50%;border:2px solid transparent;cursor:pointer;padding:0}
-.st-dots button.sel{border-color:var(--ink);box-shadow:0 0 0 2px #fff inset}
-.st-filebtn{display:inline-block;font-size:12.5px;font-weight:600;color:var(--jade);border:1px solid var(--line);border-radius:999px;padding:9px 14px;cursor:pointer;background:var(--cream)}
-.st-reset{background:transparent;border:1px solid var(--line);border-radius:999px;padding:9px 16px;font-weight:600;font-size:12.5px;color:var(--jade2);cursor:pointer;align-self:flex-end}
-.st-note{text-align:center;font-size:11.5px;color:var(--jade2);margin-top:18px;letter-spacing:.02em}
-/* showcase gallery */
-.st-stage{--acc:#335143;margin-top:46px}
-.shots{display:grid;grid-template-columns:1fr 1fr;gap:clamp(22px,3.4vw,40px);align-items:start}
-.shot .n{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--jade2);font-weight:700;margin-bottom:14px}
-.shot figcaption{font-size:13px;color:var(--jade2);margin-top:16px;line-height:1.62;max-width:42ch}
-.serif{font-family:var(--serif);font-style:italic}
-.st-stage[data-sty=modern] .serif{font-family:var(--sans);font-style:normal;font-weight:700;letter-spacing:-.01em}
-.ph{background-size:cover;background-position:center;background-color:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-weight:700;letter-spacing:.06em;color:#fff}
-.ph.on .pv-init{display:none}
-/* business card + flip */
-.bcard{perspective:1200px;cursor:pointer}
-.bc-in{position:relative;width:100%;aspect-ratio:1.72/1;transition:transform .7s;transform-style:preserve-3d}
-.bcard.flip .bc-in{transform:rotateY(180deg)}
-.bc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:16px;padding:24px;color:#fff;background:var(--acc);display:flex;flex-direction:column;box-shadow:0 26px 56px rgba(21,32,26,.22)}
-.bc-back{transform:rotateY(180deg);align-items:center;justify-content:center;text-align:center}
-.bc-logo{font-family:var(--serif);font-style:italic;font-size:22px;line-height:1}
-.bc-logo span{display:block;font-family:var(--sans);font-style:normal;font-size:7.5px;letter-spacing:.32em;font-weight:600;color:rgba(255,255,255,.72);margin-top:3px}
-.bc-photo{width:52px;height:52px;border-radius:50%;font-size:14px;position:absolute;top:22px;right:22px;border:2px solid rgba(255,255,255,.5)}
-.bc-name{font-family:var(--serif);font-style:italic;font-size:28px;margin-top:auto}
-.bc-meta{font-size:12px;color:rgba(255,255,255,.85);margin-top:4px;letter-spacing:.02em}
-.bc-mark{font-family:var(--serif);font-style:italic;font-size:52px}
-.bc-tag{font-size:13px;color:rgba(255,255,255,.9);max-width:24ch;margin-top:12px;line-height:1.5}
-/* phone-framed social */
-.phone{max-width:272px;margin:0 auto;border:9px solid #15201a;border-radius:34px;overflow:hidden;box-shadow:0 26px 58px rgba(21,32,26,.26);background:#15201a}
-.post{overflow:hidden;background:#fff}
-.post-img{aspect-ratio:4/5;background:linear-gradient(135deg,var(--acc),var(--forest));display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);font-size:11px;letter-spacing:.26em;font-weight:700}
-.post-band{background:var(--cream);padding:16px 16px 20px}
-.jl{font-family:var(--serif);font-style:italic;font-size:27px;color:var(--jade)}
-.post-agent{display:flex;align-items:center;gap:11px;margin-top:12px}
-.post-photo{width:42px;height:42px;border-radius:50%;background-color:var(--jade);font-size:12px;color:#fff;flex:none}
-.post-agent .nm{font-family:var(--serif);font-style:italic;font-size:17px;color:var(--ink)}
-.post-sub{font-size:11.5px;color:var(--jade2);margin-top:1px}
-/* feature: presentation */
-.feature{margin-top:clamp(26px,4vw,48px);display:grid;grid-template-columns:1.5fr 1fr;gap:clamp(26px,4vw,50px);align-items:center}
-.cover{aspect-ratio:1.5/1;border-radius:16px;background:linear-gradient(160deg,var(--forest),var(--acc));color:#eef1ec;padding:30px;display:flex;flex-direction:column;position:relative;overflow:hidden;box-shadow:0 30px 64px rgba(21,32,26,.26)}
-.cv-top{display:flex;justify-content:space-between;gap:12px;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.72);font-weight:600}
-.cv-top span{white-space:nowrap}
-.cv-kick{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--sage);font-weight:700;margin-top:28px}
-.cv-h{font-family:var(--serif);font-style:italic;font-size:clamp(28px,3.6vw,42px);line-height:1.08;margin-top:10px}
-.cv-stats{display:flex;gap:30px;margin-top:auto}
-.cv-stats div{display:flex;flex-direction:column}
-.cv-stats b{font-family:var(--serif);font-style:italic;font-size:22px}
-.cv-stats span{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-top:3px}
-.cv-by{font-size:12px;color:rgba(255,255,255,.82);margin-top:18px;border-top:1px solid rgba(255,255,255,.2);padding-top:13px}
-.feat-cap .n{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--jade2);font-weight:700}
-.feat-cap h3{font-family:var(--serif);font-style:italic;font-size:clamp(23px,2.8vw,30px);color:var(--jade);margin-top:10px}
-.feat-cap p{font-size:15px;color:var(--jade2);margin-top:12px;line-height:1.7}
-/* booking */
-.book-row{margin-top:clamp(26px,4vw,48px);display:grid;grid-template-columns:1fr 1.3fr;gap:clamp(26px,4vw,50px);align-items:center}
-.bk{border:1px solid var(--line);border-radius:16px;overflow:hidden;text-align:center;padding-bottom:22px;background:var(--paper);box-shadow:0 18px 44px rgba(21,32,26,.08)}
-.bk-top{height:72px;background:var(--acc)}
-.bk-photo{width:84px;height:84px;border-radius:50%;margin:-42px auto 0;border:4px solid var(--paper);background-color:var(--jade);font-size:20px;color:#fff}
-.bk-name{font-family:var(--serif);font-style:italic;font-size:25px;color:var(--jade);margin-top:12px}
-.bk-meta{font-size:12.5px;color:var(--jade2);margin-top:3px}
-.bk-btn{display:inline-block;margin-top:16px;background:var(--acc);color:#fff;font-weight:700;font-size:13.5px;padding:10px 22px;border-radius:999px}
-.real{background:var(--forest);color:#eef1ec;border-radius:20px;padding:clamp(28px,4vw,46px);max-width:900px;margin:0 auto}
-.real h2{font-family:var(--serif);font-style:italic;font-size:clamp(25px,3.6vw,38px)}
-.real p{color:#c9d2c6;font-size:clamp(15px,1.5vw,17.5px);margin:16px 0 0;max-width:58ch;line-height:1.7}
- 
-.st-cta .big2{font-family:var(--serif);font-style:italic;font-size:clamp(26px,3.8vw,40px);color:#fff;max-width:20ch;margin:14px 0 0}
-@media(max-width:860px){.shots,.feature,.book-row{grid-template-columns:1fr}.feature .cover,.book-row .bk{order:-1}.st-reset{align-self:stretch}}
+.sy-hero{background:var(--ink);color:#eef1ec;padding:clamp(60px,8vw,110px) 0;overflow:hidden}
+.sy-hg{display:grid;grid-template-columns:1.02fr 0.98fr;gap:clamp(28px,4vw,60px);align-items:center}
+.sy-hero .eyebrow{color:var(--sage)}
+.sy-hero h1{font-family:var(--serif);font-style:italic;font-size:clamp(38px,6.4vw,70px);line-height:1.04;margin:14px 0 0}
+.sy-hero p{color:#c3ccbf;font-size:clamp(16px,1.7vw,19.5px);line-height:1.7;margin-top:22px;max-width:46ch}
+.sy-hbtns{margin-top:30px;display:flex;gap:13px;flex-wrap:wrap}
+.sy-btn{display:inline-block;text-decoration:none;font-weight:700;font-size:14.5px;padding:12px 22px;border-radius:999px;background:var(--cream);color:var(--ink)}
+.sy-btn.ghost{background:transparent;color:#eef1ec;border:1px solid rgba(255,255,255,.26)}
+.sy-scatter{position:relative;height:clamp(360px,42vw,480px)}
+.pc{position:absolute;border-radius:12px;box-shadow:0 34px 70px rgba(0,0,0,.5);overflow:hidden}
+.pc-cover{width:52%;left:2%;top:4%;transform:rotate(-6deg);aspect-ratio:0.74/1}
+.pc-social{width:44%;right:4%;top:0;transform:rotate(5deg);aspect-ratio:4/5;z-index:3}
+.pc-card{width:50%;left:16%;bottom:2%;transform:rotate(-2deg);aspect-ratio:1.72/1;z-index:4}
+/* cover piece (editorial) */
+.cvp{width:100%;height:100%;background:linear-gradient(160deg,#243a2e,var(--jade));color:#eef1ec;padding:clamp(12px,1.6vw,20px);display:flex;flex-direction:column}
+.cvp .t{display:flex;justify-content:space-between;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.7);font-weight:600}
+.cvp .t span{white-space:nowrap}
+.cvp .k{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--sage);font-weight:700;margin-top:auto}
+.cvp .h{font-family:var(--serif);font-style:italic;font-size:clamp(18px,2.4vw,26px);line-height:1.05;margin-top:5px}
+.cvp .by{font-size:9px;color:rgba(255,255,255,.8);margin-top:10px;border-top:1px solid rgba(255,255,255,.22);padding-top:7px}
+/* social piece */
+.scp{width:100%;height:100%;background:#fff;display:flex;flex-direction:column}
+.scp .img{flex:1;background:linear-gradient(135deg,var(--olive),var(--forest));display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);font-size:9px;letter-spacing:.22em;font-weight:700}
+.scp .b{background:var(--cream);padding:clamp(10px,1.4vw,15px)}
+.scp .jl{font-family:var(--serif);font-style:italic;font-size:clamp(16px,2vw,22px);color:var(--jade)}
+.scp .nm{font-size:10px;color:var(--jade2);margin-top:5px;font-weight:600}
+/* card piece */
+.cdp{width:100%;height:100%;background:var(--cream);color:var(--ink);padding:clamp(14px,1.8vw,22px);display:flex;flex-direction:column}
+.cdp .lg{font-family:var(--serif);font-style:italic;font-size:clamp(15px,1.9vw,21px);color:var(--jade)}
+.cdp .lg span{display:block;font-family:var(--sans);font-style:normal;font-size:6.5px;letter-spacing:.3em;font-weight:600;color:var(--jade2);margin-top:2px}
+.cdp .nm{font-family:var(--serif);font-style:italic;font-size:clamp(16px,2.1vw,24px);color:var(--ink);margin-top:auto}
+.cdp .mt{font-size:9px;color:var(--jade2);margin-top:3px;letter-spacing:.03em}
+/* manifesto */
+.sy-man{max-width:860px}
+.sy-man .big{font-family:var(--serif);font-style:italic;font-size:clamp(27px,4vw,44px);color:var(--jade);line-height:1.12}
+.sy-man p{font-size:clamp(16px,1.6vw,18.5px);color:var(--jade2);line-height:1.75;margin-top:20px;max-width:66ch}
+/* chapters */
+.ch{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,70px);align-items:center;margin-top:clamp(48px,7vw,96px)}
+.ch:first-of-type{margin-top:8px}
+.ch.flip .ch-media{order:2}
+.ch-num{font-family:var(--serif);font-style:italic;font-size:19px;color:var(--sage)}
+.ch-l h3{font-family:var(--serif);font-style:italic;font-size:clamp(25px,3.3vw,37px);color:var(--jade);line-height:1.1;margin:10px 0 0}
+.ch-l p{font-size:16px;color:var(--jade2);line-height:1.72;margin-top:16px;max-width:48ch}
+.ch-l .list{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap}
+.ch-l .list span{font-size:12px;font-weight:600;color:var(--jade);background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:6px 13px}
+.ch-media{position:relative}
+.frame{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:clamp(16px,2vw,24px);box-shadow:0 30px 64px rgba(21,32,26,.12)}
+/* big presentation cover */
+.bigcov{aspect-ratio:1.46/1;border-radius:12px;background:linear-gradient(155deg,var(--forest),var(--jade));color:#eef1ec;padding:clamp(22px,3vw,34px);display:flex;flex-direction:column}
+.bigcov .t{display:flex;justify-content:space-between;gap:12px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.72);font-weight:600}
+.bigcov .t span{white-space:nowrap}
+.bigcov .stats{display:flex;gap:26px;margin-top:22px}
+.bigcov .stats div b{font-family:var(--serif);font-style:italic;font-size:22px;display:block}
+.bigcov .stats div i{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.66);font-style:normal}
+.bigcov .k{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--sage);font-weight:700;margin-top:auto}
+.bigcov .h{font-family:var(--serif);font-style:italic;font-size:clamp(26px,3.4vw,40px);line-height:1.06;margin-top:6px}
+.bigcov .by{font-size:11px;color:rgba(255,255,255,.82);margin-top:14px;border-top:1px solid rgba(255,255,255,.22);padding-top:11px}
+/* social cluster */
+.cluster{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ctile{border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+.ctile.tall{grid-row:span 2}
+.ctile .im{aspect-ratio:1/1;display:flex;align-items:flex-end;padding:12px;color:#fff;font-family:var(--serif);font-style:italic;font-size:18px}
+.ctile.a .im{background:linear-gradient(140deg,var(--jade),var(--forest))}
+.ctile.b .im{background:linear-gradient(140deg,var(--olive),#2c3f1b)}
+.ctile.c .im{background:linear-gradient(140deg,var(--jade2),var(--jade))}
+.ctile .cl{background:var(--cream);padding:10px 12px;font-size:10.5px;color:var(--jade2);font-weight:600}
+/* tote figure */
+.tote-fig img{width:100%;height:auto;border-radius:14px;display:block}
+.tote-cap{font-size:12.5px;color:var(--jade2);margin-top:12px}
+.card-over{position:absolute;right:-6px;bottom:-14px;width:46%;aspect-ratio:1.72/1;border-radius:10px;box-shadow:0 20px 44px rgba(21,32,26,.28);transform:rotate(-4deg)}
+/* brand board */
+.bboard{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center}
+.bb-mark{width:96px;height:96px;border-radius:50%;background:var(--jade);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-style:italic;font-size:40px}
+.bb-r .w{font-family:var(--serif);font-style:italic;font-size:26px;color:var(--jade)}
+.bb-sw{display:flex;gap:7px;margin-top:12px}
+.bb-sw i{width:26px;height:26px;border-radius:50%}
+.bb-type{margin-top:12px;font-size:12px;color:var(--jade2)}
+.bb-type b{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--ink);margin-right:8px}
+/* moods */
+.moods{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.4vw,28px);margin-top:34px}
+.mood .ml{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--jade2);font-weight:700;margin-bottom:12px}
+.mcard{aspect-ratio:0.78/1;border-radius:12px;padding:20px;display:flex;flex-direction:column;box-shadow:0 22px 48px rgba(21,32,26,.12)}
+.mcard .mk{font-size:9px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;margin-top:auto}
+.mcard .mh{line-height:1.05;margin-top:6px}
+.mcard .mby{font-size:10px;margin-top:12px;padding-top:9px}
+/* minimal */
+.m-min{background:var(--paper);color:var(--ink);border:1px solid var(--line)}
+.m-min .mk{color:var(--jade2)}
+.m-min .mh{font-family:var(--sans);font-weight:700;letter-spacing:-.02em;font-size:26px}
+.m-min .mby{color:var(--jade2);border-top:1px solid var(--line)}
+/* warm */
+.m-warm{background:linear-gradient(160deg,#5c6b3f,var(--olive));color:#f4f1e9}
+.m-warm .mk{color:#e2e6cf}
+.m-warm .mh{font-family:var(--serif);font-style:italic;font-size:30px}
+.m-warm .mby{color:rgba(255,255,255,.85);border-top:1px solid rgba(255,255,255,.25)}
+/* editorial */
+.m-ed{background:var(--ink);color:#eef1ec}
+.m-ed .mk{color:var(--sage)}
+.m-ed .mh{font-family:var(--serif);font-style:italic;font-size:30px}
+.m-ed .mby{color:rgba(255,255,255,.82);border-top:1px solid rgba(255,255,255,.22)}
+.sy-cta{background:var(--jade);color:#eef1ec}
+.sy-cta h2{font-family:var(--serif);font-style:italic;font-size:clamp(28px,4.2vw,44px);max-width:20ch}
+.sy-cta p{color:#cdd6c9;font-size:16px;margin-top:14px;max-width:52ch}
+@media(max-width:860px){.sy-hg,.ch,.bboard{grid-template-columns:1fr}.ch.flip .ch-media{order:0}.sy-scatter{height:340px;margin-top:10px}.moods{grid-template-columns:1fr}.cluster{grid-template-columns:1fr 1fr}}
 </style>`;
   const body = `${css}
-<section class="st-hero"><div class="m1"></div><div class="wrap">
-  <div class="eyebrow k">The studio</div>
-  <h1>See yourself <em>in Jade green.</em></h1>
-  <p>At Jade, your marketing is built around you — your brand, your market, your face on the sign. Type your name below and watch a taste of it come together, live.</p>
+<section class="sy-hero"><div class="wrap sy-hg">
+  <div class="sy-herotext">
+    <div class="eyebrow">Marketing, built around you</div>
+    <h1>No two Jade<br>agents look alike.</h1>
+    <p>Your brand isn't a template with your name dropped in. At Jade, an in-house team builds your marketing around <em>you</em> — your style, your market, your voice. Here's the range of what that can look like.</p>
+    <div class="sy-hbtns"><a class="sy-btn" href="#range">See the range</a><a class="sy-btn ghost" href="${BOOK}" target="_blank" rel="noopener">Talk with Emilie</a></div>
+  </div>
+  <div class="sy-scatter">
+    <div class="pc pc-cover"><div class="cvp"><div class="t"><span>Jade Real Estate</span><span>Nº 01</span></div><div class="k">Seller Presentation</div><div class="h">The house on<br>Silver Maple.</div><div class="by">Marisol Vega · REALTOR®</div></div></div>
+    <div class="pc pc-social"><div class="scp"><div class="img">JUST LISTED</div><div class="b"><div class="jl">Under the maples.</div><div class="nm">The Whitaker Group</div></div></div></div>
+    <div class="pc pc-card"><div class="cdp"><div class="lg">Jade<span>REAL ESTATE</span></div><div class="nm">Daniel Okafor</div><div class="mt">REALTOR® · Denver Metro</div></div></div>
+  </div>
 </div></section>
 
-<section class="band paper"><div class="wrap">
-  <div class="mani">
-    <div class="eyebrow">Marketing, personalized</div>
-    <div class="big" style="margin-top:14px">We don't hand you a template. We build your brand.</div>
-    <p>At a lot of brokerages, "marketing support" means a logo swap and a canned flyer. At Jade, an in-house designer builds your listing presentations, your social, and your brand around your business — your voice, your market, your name. It's one of the things we take most seriously, because your brand is how clients remember you.</p>
-    <div class="row">
-      <div><b>Done for you</b><span>A real person designs it — you're never your own designer at 11pm.</span></div>
-      <div><b>Built around you</b><span>Your brand, your market, your audience — not a forced house template.</span></div>
-      <div><b>Ready day one</b><span>Cards, signage, and your first listing kit, waiting before your first appointment.</span></div>
+<section class="band cream"><div class="wrap">
+  <div class="sy-man">
+    <div class="eyebrow">Why agents come to us</div>
+    <div class="big" style="margin-top:14px">We flex to your brand. You don't flex to ours.</div>
+    <p>A lot of agents choose Jade for exactly this: we don't force a house look. Some of our agents are sleek and modern, some are warm and local, some are high-end and editorial. Our in-house team builds around whoever you are — and keeps building as your business grows. The work below isn't a menu you pick from; it's a sense of the range.</p>
+  </div>
+</div></section>
+
+<section class="band paper" id="range"><div class="wrap">
+  <div class="eyebrow">What we make for you</div>
+
+  <div class="ch">
+    <div class="ch-media">
+      <div class="frame"><div class="bigcov"><div class="t"><span>Jade Real Estate</span><span>Issue Nº 01</span></div><div class="stats"><div><b>$3.45M</b><i>List price</i></div><div><b>1898</b><i>Year built</i></div><div><b>21</b><i>Days to offer</i></div></div><div class="k">Seller Presentation</div><div class="h">The house on<br>Silver Maple.</div><div class="by">Prepared for the Harlows · by Marisol Vega, Jade Real Estate</div></div></div>
+    </div>
+    <div class="ch-l">
+      <div class="ch-num">01</div>
+      <h3>A listing presentation that reads like a magazine.</h3>
+      <p>We build the presentation around the property and the seller — your comps, your pricing story, your market — and hand you a polished PDF to present or send. It walks in the door already looking like you won the listing.</p>
+      <div class="list"><span>Comps &amp; pricing</span><span>Property story</span><span>Print-ready PDF</span></div>
+    </div>
+  </div>
+
+  <div class="ch flip">
+    <div class="ch-media">
+      <div class="frame"><div class="cluster">
+        <div class="ctile a tall"><div class="im">Just Listed</div><div class="cl">1080 × 1350 · feed</div></div>
+        <div class="ctile b"><div class="im">Open House</div><div class="cl">Story</div></div>
+        <div class="ctile c"><div class="im">Market note</div><div class="cl">Reel cover</div></div>
+      </div></div>
+    </div>
+    <div class="ch-l">
+      <div class="ch-num">02</div>
+      <h3>Content that sounds like you — not a franchise feed.</h3>
+      <p>Just Listed sets, open-house announcements, market updates, reel covers — made in your voice and on your brand, scheduled and ready. You show up consistently without becoming a full-time content creator.</p>
+      <div class="list"><span>Just Listed sets</span><span>Stories &amp; reels</span><span>Newsletters</span></div>
+    </div>
+  </div>
+
+  <div class="ch">
+    <div class="ch-media">
+      <figure class="tote-fig" style="position:relative;margin:0">
+        <img src="/img/tote.jpg" width="720" height="1037" alt="A Jade Real Estate branded canvas tote with stickers — a real example of Jade's agent collateral." loading="lazy">
+        <div class="card-over"><div class="cdp" style="width:100%;height:100%;border-radius:10px"><div class="lg">Jade<span>REAL ESTATE</span></div><div class="nm">Priya Nandakumar</div><div class="mt">REALTOR®</div></div></div>
+      </figure>
+    </div>
+    <div class="ch-l">
+      <div class="ch-num">03</div>
+      <h3>The pieces people actually hold onto.</h3>
+      <p>Business cards, yard signs, open-house collateral, closing gifts — and yes, the tote. Branded, printed, and in your hands, designed to match the identity we build with you. The details are where a brand becomes real.</p>
+      <div class="list"><span>Cards &amp; signage</span><span>Open-house kit</span><span>Closing gifts</span></div>
+    </div>
+  </div>
+
+  <div class="ch flip">
+    <div class="ch-media">
+      <div class="frame"><div class="bboard">
+        <div class="bb-mark">M</div>
+        <div class="bb-r"><div class="w">Marisol Vega</div><div class="bb-sw"><i style="background:#15201a"></i><i style="background:#335143"></i><i style="background:#3e5725"></i><i style="background:#a6b6a4"></i><i style="background:#f2efeb;border:1px solid var(--line)"></i></div><div class="bb-type"><b>Aa</b>DM Serif Display · Montserrat</div></div>
+      </div></div>
+    </div>
+    <div class="ch-l">
+      <div class="ch-num">04</div>
+      <h3>A brand that's genuinely yours.</h3>
+      <p>Wordmark, color, type, and voice — shaped around who you are and who you serve. Minimal or warm, local or luxury; we build the identity, you own it. It's the thread that ties every piece above together.</p>
+      <div class="list"><span>Logo &amp; wordmark</span><span>Color &amp; type</span><span>Voice</span></div>
     </div>
   </div>
 </div></section>
 
 <section class="band cream"><div class="wrap">
-  <div class="eyebrow">Make it yours</div>
-  <h2 class="h-sec" style="max-width:20ch;margin:8px 0 0">Type your name. Watch it turn Jade.</h2>
-
-  <form class="st-bar" onsubmit="return false">
-    <input type="text" id="f-name" class="st-bigname" placeholder="Your name" autocomplete="off" aria-label="Your name">
-    <div class="st-tools">
-      <label class="ctrl"><span>Title</span><input type="text" id="f-title" value="REALTOR®" autocomplete="off"></label>
-      <label class="ctrl"><span>Your market</span><select id="f-market">${opts}</select></label>
-      <label class="ctrl"><span>Phone</span><input type="text" id="f-phone" placeholder="(720) 555-0134" autocomplete="off"></label>
-      <label class="ctrl wide"><span>Card tagline</span><input type="text" id="f-tag" value="Your name on the sign. Our team behind it." autocomplete="off"></label>
-      <div class="ctrl"><span>Style</span><div class="st-seg"><button type="button" data-sty="editorial" class="sel">Editorial</button><button type="button" data-sty="modern">Modern</button></div></div>
-      <div class="ctrl"><span>Accent</span><div class="st-dots"><button type="button" data-acc="jade" class="sel" style="background:#335143" aria-label="Jade"></button><button type="button" data-acc="olive" style="background:#3e5725" aria-label="Olive"></button><button type="button" data-acc="forest" style="background:#1b2f25" aria-label="Forest"></button></div></div>
-      <div class="ctrl"><span>Headshot</span><label class="st-filebtn" for="f-photo">Add a photo</label><input type="file" id="f-photo" accept="image/*" style="display:none"></div>
-      <button type="button" class="st-reset" id="st-reset">Reset</button>
-    </div>
-    <p class="st-note">Everything updates live · your photo stays on your device — nothing is uploaded.</p>
-  </form>
-
-  <div class="st-stage" id="st-stage">
-    <div class="shots">
-      <figure class="shot">
-        <div class="n">Nº 01 · Your card</div>
-        <div class="bcard" id="flipcard"><div class="bc-in">
-          <div class="bc-face bc-front">
-            <div class="bc-logo">Jade<span>REAL ESTATE</span></div>
-            <div class="bc-photo ph"><span class="pv-init">JA</span></div>
-            <div class="bc-name pv-name">Your Name</div>
-            <div class="bc-meta"><span class="pv-title">REALTOR®</span> · <span class="pv-market">Denver Metro</span></div>
-            <div class="bc-meta pv-phone">(720) 555-0134</div>
-          </div>
-          <div class="bc-face bc-back">
-            <div class="bc-mark">J</div>
-            <div class="bc-tag pv-tag">Your name on the sign. Our team behind it.</div>
-          </div>
-        </div></div>
-        <figcaption>Designed and printed for you — in your hand your first week. A real card, not a template with your name dropped in. (Tap to flip.)</figcaption>
-      </figure>
-
-      <figure class="shot">
-        <div class="n">Nº 02 · Your social</div>
-        <div class="phone"><div class="post">
-          <div class="post-img">YOUR LISTING</div>
-          <div class="post-band">
-            <div class="jl serif">Just Listed</div>
-            <div class="post-agent">
-              <div class="post-photo ph"><span class="pv-init">JA</span></div>
-              <div><div class="nm pv-name">Your Name</div><div class="post-sub"><span class="pv-title">REALTOR®</span> · Jade Real Estate</div></div>
-            </div>
-          </div>
-        </div></div>
-        <figcaption>Every listing gets a branded Just Listed set, made in your voice. You post it; our team built it.</figcaption>
-      </figure>
-    </div>
-
-    <div class="feature">
-      <div class="cover">
-        <div class="cv-top"><span>Jade Real Estate</span><span>Issue Nº 01</span></div>
-        <div class="cv-kick">Seller Presentation</div>
-        <div class="cv-h">Prepared for<br>your seller.</div>
-        <div class="cv-stats"><div><b>Jade</b><span>Marketing</span></div><div><b class="pv-market">Denver Metro</b><span>Market</span></div></div>
-        <div class="cv-by">Prepared by <span class="serif pv-name">Your Name</span>, <span class="pv-title">REALTOR®</span></div>
-      </div>
-      <div class="feat-cap">
-        <div class="n">Nº 03 · Your seller presentation</div>
-        <h3>A listing presentation that looks like a design studio spent a week on it.</h3>
-        <p>Our team makes it yours — your comps, your market, your name on the cover. You walk into the listing appointment with something that already looks like you won.</p>
-      </div>
-    </div>
-
-    <div class="book-row">
-      <div class="bk">
-        <div class="bk-top"></div>
-        <div class="bk-photo ph"><span class="pv-init">JA</span></div>
-        <div class="bk-name pv-name">Your Name</div>
-        <div class="bk-meta"><span class="pv-title">REALTOR®</span> · <span class="pv-market">Denver Metro</span></div>
-        <div class="bk-btn">Book with <span class="pv-first">you</span></div>
-      </div>
-      <div class="feat-cap">
-        <div class="n">Nº 04 · Your booking page</div>
-        <h3>Your own booking page and QR code.</h3>
-        <p>Clients and leads pick a time that lands on your calendar and in your CRM — tagged with where they came from. Part of the Jade agent app, included.</p>
-      </div>
-    </div>
+  <div class="eyebrow">The same piece, three ways</div>
+  <div class="sy-man" style="max-width:62ch"><div class="big" style="font-size:clamp(23px,3.2vw,34px);margin-top:10px">Flexibility you can see.</div><p style="margin-top:14px">One listing cover, built for three different agents. Same team behind it — three completely different brands.</p></div>
+  <div class="moods">
+    <div class="mood"><div class="ml">Modern &amp; minimal</div><div class="mcard m-min"><div class="mk">Seller Presentation</div><div class="mh">412 Lupine Lane</div><div class="mby">Marisol Vega · REALTOR®</div></div></div>
+    <div class="mood"><div class="ml">Warm &amp; local</div><div class="mcard m-warm"><div class="mk">Seller Presentation</div><div class="mh">A home on<br>Lupine Lane.</div><div class="mby">The Whitaker Group</div></div></div>
+    <div class="mood"><div class="ml">High-end editorial</div><div class="mcard m-ed"><div class="mk">Seller Presentation</div><div class="mh">Lupine Lane,<br>Nº 01.</div><div class="mby">Daniel Okafor · Jade Real Estate</div></div></div>
   </div>
 </div></section>
 
-<section class="band paper"><div class="wrap">
-  <div class="real">
-    <div class="eyebrow" style="color:var(--sage)">Why this matters</div>
-    <h2 style="margin-top:12px">The preview is automatic. The real thing is personal.</h2>
-    <p>What you just played with was generated in your browser in a few seconds. The marketing you'd actually get at Jade is designed by a real person on our team — built around your real listings, your real headshot, and the way you actually talk. That's the part we take seriously.</p>
-    <div style="margin-top:26px"><a class="btn p" href="${BOOK}" target="_blank" rel="noopener">See what we'd build for you</a></div>
-  </div>
-</div></section>
-
-<section class="band pull st-cta"><div class="wrap">
-  <div class="eyebrow">The possibility</div>
-  <p class="big2">This could be you — green and ready to go on day one.</p>
-  <p class="exits" style="color:var(--sage)">Bring your questions — the move, the tools, the numbers. Opens our scheduler in a new tab.</p>
-</div></section>
-<script>
-(function(){
-  var g=function(id){return document.getElementById(id);};
-  var stage=g("st-stage");
-  function initials(n){n=(n||"").trim();if(!n){return "JA";}var p=n.split(" ").filter(Boolean);var a=p[0]?p[0].charAt(0):"";var b=p.length>1?p[p.length-1].charAt(0):"";var r=(a+b).toUpperCase();return r||"JA";}
-  function firstName(n){n=(n||"").trim();if(!n){return "you";}return n.split(" ").filter(Boolean)[0]||"you";}
-  function setAll(sel,val){var e=document.querySelectorAll(sel);for(var i=0;i<e.length;i++){e[i].textContent=val;}}
-  function render(){
-    var name=g("f-name").value.trim();
-    setAll(".pv-name",name||"Your Name");
-    setAll(".pv-title",g("f-title").value.trim()||"REALTOR®");
-    setAll(".pv-market",g("f-market").value);
-    setAll(".pv-phone",g("f-phone").value.trim()||"(720) 555-0134");
-    setAll(".pv-tag",g("f-tag").value.trim()||"Your name on the sign. Our team behind it.");
-    setAll(".pv-init",initials(name));
-    setAll(".pv-first",firstName(name));
-  }
-  var ids=["f-name","f-title","f-market","f-phone","f-tag"];
-  for(var i=0;i<ids.length;i++){var el=g(ids[i]);el.addEventListener("input",render);el.addEventListener("change",render);}
-  g("f-photo").addEventListener("change",function(e){
-    var f=e.target.files&&e.target.files[0];if(!f){return;}
-    var r=new FileReader();
-    r.onload=function(){var u=r.result;var ph=document.querySelectorAll(".ph");for(var i=0;i<ph.length;i++){ph[i].style.backgroundImage="url("+u+")";ph[i].classList.add("on");}};
-    r.readAsDataURL(f);
-  });
-  var accMap={jade:"#335143",olive:"#3e5725",forest:"#1b2f25"};
-  function wire(attr,fn){var b=document.querySelectorAll("[data-"+attr+"]");for(var i=0;i<b.length;i++){(function(x){x.addEventListener("click",function(){for(var j=0;j<b.length;j++){b[j].classList.remove("sel");}x.classList.add("sel");fn(x.getAttribute("data-"+attr));});})(b[i]);}}
-  wire("acc",function(v){stage.style.setProperty("--acc",accMap[v]||"#335143");});
-  wire("sty",function(v){stage.setAttribute("data-sty",v);});
-  var fc=g("flipcard");if(fc){fc.addEventListener("click",function(){fc.classList.toggle("flip");});}
-  g("st-reset").addEventListener("click",function(){
-    g("f-name").value="";g("f-title").value="REALTOR®";g("f-market").selectedIndex=0;g("f-phone").value="";g("f-tag").value="Your name on the sign. Our team behind it.";
-    var ph=document.querySelectorAll(".ph");for(var i=0;i<ph.length;i++){ph[i].style.backgroundImage="";ph[i].classList.remove("on");}
-    render();
-  });
-  render();
-})();
-</script>`;
-  const jsonld = [{ '@context': 'https://schema.org', '@type': 'WebApplication', name: 'See Yourself at Jade — Agent Brand Studio', applicationCategory: 'BusinessApplication', operatingSystem: 'Web', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }, url: SITE + '/studio', description: 'An interactive studio that previews your name on a Jade Real Estate business card, Just Listed social post, booking page, and listing presentation.' }];
-  return layout({ title: 'See Yourself at Jade — Agent Brand Studio', desc: 'Type your name and instantly see yourself as a Jade Real Estate agent: a live Jade business card, Just Listed social post, booking page, and listing presentation. Jade personalizes your marketing — this is a taste.', path: '/studio', body, jsonld });
+<section class="band sy-cta"><div class="wrap">
+  <div class="eyebrow">Your brand, next</div>
+  <h2>Let's build the version of this that's yours.</h2>
+  <p>Bring your business and your taste — Emilie will walk you through how Jade would build your marketing around you.</p>
+  <div style="margin-top:26px"><a class="btn p" href="${BOOK}" target="_blank" rel="noopener">Talk with Emilie</a></div>
+  <p class="exits" style="color:var(--sage)">Opens our scheduler in a new tab.</p>
+</div></section>`;
+  const jsonld = [{ '@context': 'https://schema.org', '@type': 'WebPage', name: 'See Yourself at Jade — Personalized Agent Marketing', url: SITE + '/studio', description: "The range of personalized marketing Jade Real Estate builds for its agents: listing presentations, social content, print and signage, and brand identity — built around each agent, not a template." }];
+  return layout({ title: 'See Yourself at Jade — Personalized Agent Marketing', desc: "Jade builds your marketing around you, not a template. See the range: magazine-style listing presentations, social content in your voice, branded print, and a brand identity that's genuinely yours.", path: '/studio', body, jsonld });
 }
-
 function calculatorPage() {
   const marketOpts = [['Denver Metro', 571000], ['Colorado Springs', 500000], ['Northern CO', 540000], ['Custom', 571000]]
     .map(function (m) { return '<option value="' + m[1] + '">' + esc(m[0]) + '</option>'; }).join('');
