@@ -63,7 +63,7 @@ a{color:inherit}
 .xt{font-size:.82em;opacity:.75;vertical-align:super;line-height:0}
 h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.1;margin:0;text-wrap:balance}
 .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
-.narrow{max-width:760px}
+.narrow{max-width:760px;margin-left:0;margin-right:auto}
 .nav{position:sticky;top:0;z-index:20;background:rgba(242,239,235,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 .nav .wrap{display:flex;align-items:center;gap:22px;height:62px}
 .brand{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--jade);text-decoration:none;line-height:1}
