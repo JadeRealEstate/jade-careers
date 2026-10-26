@@ -2,7 +2,6 @@
 // Fast, fully crawlable HTML for Google + AI. Blog posts come from Supabase
 // (careers_posts), managed later in the Jade app admin. Colors: Jade palette only.
 import { team as IMG_TEAM, tote as IMG_TOTE } from './img.js';
-import { lookbook as LOOKBOOK_B64 } from './lookbook.js';
 
 const SITE = 'https://careers.jaderealestate.com';
 const BOOK = 'https://client.jaderealestate.com/book/emilie';
@@ -617,18 +616,257 @@ function postPage(p) {
   return layout({ title: (p.seo_title || p.title) + ' — Jade Real Estate', desc: p.seo_description || p.excerpt || '', path: '/blog/' + p.slug, body, jsonld });
 }
 
-function b64utf8(b){ return new TextDecoder().decode(Uint8Array.from(atob(b), function(c){ return c.charCodeAt(0); })); }
-let _mkCache;
 function marketingPage() {
-  if (!_mkCache) {
-    _mkCache = layout({
-      title: 'Marketing \u2014 Jade Real Estate Careers',
-      desc: "The marketing studio behind every Jade agent: an interactive lookbook of the listing proposals, neighborhood magazines, launch kits and print pieces Jade builds with you \u2014 on your brand, not ours. Restyle them yourself, and see why Jade pairs editorial design with real one-on-one support.",
-      path: '/marketing',
-      body: b64utf8(LOOKBOOK_B64)
+  function LEAF(c, s) { return '<svg width="' + s + '" height="' + s + '" viewBox="0 0 24 24" fill="none" stroke="' + c + '" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21C12 14 13 7 20 3c0 8-3 15-8 17-4 0-8-3-8-8 0-5 4-7 8-7"/><path d="M12 21c0-5 2-9 6-12"/></svg>'; }
+  function TOCROW(n, t) { return '<div class="row"><span class="n">' + n + '</span><span class="t">' + t + '</span></div>'; }
+  function FOLIO(l, num, light) { return '<div class="jlb-folio' + (light ? ' light' : '') + '"><span>' + l + '</span><span>' + num + '</span></div>'; }
+  function LI(b, s) { return '<div class="it"><b>' + b + '</b><span>' + s + '</span></div>'; }
+  function CELL(b, s) { return '<div class="c"><b>' + b + '</b><span>' + s + '</span></div>'; }
+  function PERSON(n, r, s) { return '<div class="pp"><b>' + n + '</b><em>' + r + '</em><span>' + s + '</span></div>'; }
+  const PAGES = [
+    // [class, innerHTML]
+    ['jlb-page jlb-cover', 'hard',
+      '<div class="jlb-cv">'
+      + '<div class="jlb-cv-k">The Agent’s Lookbook</div>'
+      + '<div class="jlb-cv-leaf">' + LEAF('#a6b6a4', 54) + '</div>'
+      + '<div class="jlb-cv-word">Jade</div>'
+      + '<div class="jlb-cv-sub">An independent Denver brokerage,<br>in a few pages you can flip through.</div>'
+      + '<div class="jlb-cv-foot"><span>Issue 01</span><span>Denver, Colorado</span></div>'
+      + '</div>'],
+    ['jlb-page', 'soft',
+      '<div class="jlb-k">Before you flip</div>'
+      + '<h2 class="jlb-h">A quick hello.</h2>'
+      + '<p class="jlb-p">This is Jade in a dozen pages — who we are, what you get, and how we actually work with the people who hang their license here.</p>'
+      + '<p class="jlb-p">Read it like a magazine, not a brochure. And when something lands, don’t fill out a form — come have a coffee with us. The best part of Jade is the part you can’t put on a page.</p>'
+      + '<div class="jlb-toc">'
+      + TOCROW('01','Why we’re called Jade') + TOCROW('02','Built for the agent')
+      + TOCROW('03','The app, included') + TOCROW('04','Marketing, done for you')
+      + TOCROW('05','What it costs') + TOCROW('06','People, not portals')
+      + TOCROW('07','Off the clock') + TOCROW('08','Who you’d be working with')
+      + '</div>'
+      + FOLIO('Jade · The Agent’s Lookbook','02')],
+    ['jlb-page', 'soft',
+      '<div class="jlb-k">01 · The name</div>'
+      + '<h2 class="jlb-h">Why we’re called <i>Jade</i>.</h2>'
+      + '<p class="jlb-p">Jade is a stone people have trusted for a very long time — a byword for clarity, steadiness and quiet value. That’s the feeling we want your business to carry: composed, considered, built to last.</p>'
+      + '<p class="jlb-p">But we picked it for a plainer reason too. One syllable. Easy to spell, easy to say, hard to mangle. When you’re reading your email to a seller across an open-house kitchen — <b>yourname@jaderealestate.com</b> — it lands the first time.</p>'
+      + '<div class="jlb-pull">Beautiful should also be practical. That’s the whole idea.</div>'
+      + FOLIO('Why we’re called Jade','03')],
+    ['jlb-page jlb-dark', 'soft',
+      '<div class="jlb-k light">02 · Independent</div>'
+      + '<h2 class="jlb-h light">Built for the agent, <i>not the brokerage.</i></h2>'
+      + '<p class="jlb-p light">Jade is independent and owner-operated, right here in Colorado. Decisions get made down the hall by people who know this market — not handed down from a franchise playbook written in another state.</p>'
+      + '<p class="jlb-p light">No mandatory meetings. No production minimums. We stay small on purpose: boutique enough to know your name and what you’re working toward, serious enough to grow your business alongside ours.</p>'
+      + '<div class="jlb-sig light">Will Lawrence — Owner &amp; Managing Broker</div>'
+      + FOLIO('Built for the agent','04', true)],
+    ['jlb-page', 'soft',
+      '<div class="jlb-k">03 · The tools</div>'
+      + '<h2 class="jlb-h">The app, <i>built in-house and included.</i></h2>'
+      + '<p class="jlb-p">One login that actually does the work, wired into Follow Up Boss and HouseCanary so your pipeline stays current without double entry.</p>'
+      + '<div class="jlb-list">'
+      + LI('Client hubs','A private portal for every buyer and seller.')
+      + LI('Booking scheduler','Your own QR-coded calendar, synced to your CRM.')
+      + LI('Presentations &amp; CMAs','Pricing adjustments and polished PDF export.')
+      + LI('Forms &amp; lead capture','QR codes in, straight to Follow Up Boss.')
+      + LI('Jade AI assistant','Colorado-rules and Fair-Housing aware.')
+      + '</div>'
+      + FOLIO('The app, included','05')],
+    ['jlb-page', 'soft',
+      '<div class="jlb-k">04 · Marketing</div>'
+      + '<h2 class="jlb-h">Marketing, <i>done for you.</i></h2>'
+      + '<p class="jlb-p">You’re not your own designer. An in-house team and the marketing studio make your listings and your brand look like you already won — without you opening a design app at 11pm.</p>'
+      + '<div class="jlb-grid2">'
+      + CELL('Personal branding','A real identity shaped around you — logo, color, type, voice. Not a house template.')
+      + CELL('Listings','Presentations, social sets and print pieces, on your brand, launch day ready.')
+      + CELL('Social &amp; email','Posts, newsletters and nurture that go out without the manual work.')
+      + CELL('Print &amp; signage','Cards, yard signs, open-house kits and closing gifts, in your hands day one.')
+      + '</div>'
+      + FOLIO('Marketing, done for you','06')],
+    ['jlb-page jlb-dark', 'soft',
+      '<div class="jlb-k light">05 · The money</div>'
+      + '<h2 class="jlb-h light">Simple, and <i>honest about it.</i></h2>'
+      + '<div class="jlb-big">$200<span>/mo</span></div>'
+      + '<p class="jlb-p light">A flat monthly fee that includes the full agent app. No surprise line items.</p>'
+      + '<p class="jlb-p light">We don’t lead with a commission split, because a split isn’t take-home. Run your real numbers through our calculator and compare it to where you are now — it’s usually the honest surprise of the conversation.</p>'
+      + '<a class="jlb-cta" href="/calculator">Open the take-home calculator →</a>'
+      + FOLIO('What it costs','07', true)],
+    ['jlb-page', 'soft',
+      '<div class="jlb-k">06 · Support</div>'
+      + '<h2 class="jlb-h">People, <i>not portals.</i></h2>'
+      + '<p class="jlb-p">The part that actually makes us better is the human part. Person to person is how real estate gets done, and it’s how we’d rather work with you.</p>'
+      + '<div class="jlb-list">'
+      + LI('We love a one-on-one','Sit down with the broker whenever you want to — goals, a live deal, a second opinion.')
+      + LI('We put on classes','Workshops and marketing days, taught by people who enjoy teaching them.')
+      + LI('We answer the questions','A broker who actually picks up, and fast answers when a deal gets complicated.')
+      + '</div>'
+      + FOLIO('People, not portals','08')],
+    ['jlb-page', 'soft',
+      '<div class="jlb-k">07 · Culture</div>'
+      + '<h2 class="jlb-h">Off the clock, <i>too.</i></h2>'
+      + '<p class="jlb-p">Some of it is work — classes, marketing days, a booth at the farmers market. Some of it is just a team night out: a brewery, a shuffleboard table, people who are glad to see each other.</p>'
+      + '<p class="jlb-p">Either way the thread is the same. At Jade you’re known, not processed — and the people around you are genuinely rooting for your deals to close.</p>'
+      + '<div class="jlb-pull">“Jade at the Market” isn’t a campaign. It’s a Saturday we actually like.</div>'
+      + FOLIO('Off the clock','09')],
+    ['jlb-page', 'soft',
+      '<div class="jlb-k">08 · The people</div>'
+      + '<h2 class="jlb-h">Who you’d be <i>working with.</i></h2>'
+      + '<div class="jlb-people">'
+      + PERSON('Will Lawrence','Owner &amp; Managing Broker','Runs the brokerage and has your back on every deal.')
+      + PERSON('Kelvin Caiati','Co-owner','Also runs Versatile Lending, our in-house mortgage partner.')
+      + PERSON('Emilie Smith','Marketing &amp; Recruiting','The one who’ll get you set up and your brand looking sharp.')
+      + '</div>'
+      + FOLIO('Who you’d be working with','10')],
+    ['jlb-page jlb-dark jlb-last', 'soft',
+      '<div class="jlb-k light">Come say hi</div>'
+      + '<h2 class="jlb-h light">Let’s talk it <i>through.</i></h2>'
+      + '<p class="jlb-p light">No pitch, no pressure — just a conversation about your business and whether Jade fits how you want to work.</p>'
+      + '<a class="jlb-cta solid" href="' + BOOK + '" target="_blank" rel="noopener">Grab a time with Emilie →</a>'
+      + '<div class="jlb-contact">emilie@jaderealestate.com</div>'
+      + FOLIO('Jade Real Estate · Denver','11', true)],
+    ['jlb-page jlb-back', 'hard',
+      '<div class="jlb-cv">'
+      + '<div class="jlb-cv-leaf">' + LEAF('#a6b6a4', 40) + '</div>'
+      + '<div class="jlb-cv-mark">Jade</div>'
+      + '<div class="jlb-cv-sub">Independent. Colorado. Built for the agent.</div>'
+      + '<div class="jlb-cv-fine">Jade Real Estate (KCWL Holdings LLC). Equal Housing Opportunity.</div>'
+      + '</div>'],
+  ];
+  const pagesHTML = PAGES.map(function (p) {
+    return '<div class="' + p[0] + '" data-density="' + p[1] + '">' + p[2] + '</div>';
+  }).join('');
+
+  const css = `
+<style>
+.jlb-sec{background:var(--cream);padding:clamp(34px,5vw,56px) 0 clamp(48px,7vw,86px)}
+.jlb-intro{text-align:center;max-width:640px;margin:0 auto clamp(26px,4vw,44px)}
+.jlb-intro .eyebrow{justify-content:center}
+.jlb-intro h1{font-family:var(--serif);font-style:italic;font-size:clamp(30px,5vw,50px);color:var(--jade);line-height:1.08;margin:12px 0 0}
+.jlb-intro p{color:var(--jade2);font-size:clamp(15px,1.7vw,18px);margin:16px auto 0;max-width:52ch;line-height:1.6}
+.jlb-shell{display:flex;flex-direction:column;align-items:center}
+.jlb-book-wrap{width:100%;max-width:1120px;display:flex;justify-content:center;touch-action:pan-y}
+#jlb-book{margin:0 auto}
+#jlb-book .jlb-page{background:#f6f3ef;color:var(--ink);padding:clamp(26px,3.4vw,42px);display:flex;flex-direction:column;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(21,32,26,.06)}
+#jlb-book .jlb-page.--left{box-shadow:inset -22px 0 38px -30px rgba(21,32,26,.5),inset 0 0 0 1px rgba(21,32,26,.06)}
+#jlb-book .jlb-page.--right{box-shadow:inset 22px 0 38px -30px rgba(21,32,26,.5),inset 0 0 0 1px rgba(21,32,26,.06)}
+.jlb-dark{background:var(--forest)!important;color:#eef1ec!important}
+.jlb-k{font-family:var(--sans);font-size:11px;letter-spacing:.26em;text-transform:uppercase;font-weight:600;color:var(--jade2)}
+.jlb-k.light{color:var(--sage)}
+.jlb-h{font-family:var(--serif);font-weight:400;font-size:clamp(23px,2.4vw,32px);line-height:1.1;color:var(--jade);margin:12px 0 0;text-wrap:balance}
+.jlb-h.light{color:#fff}
+.jlb-h i{font-style:italic;color:var(--olive)}
+.jlb-h.light i{color:var(--sage)}
+.jlb-p{font-size:clamp(13px,1.15vw,15px);line-height:1.62;color:#3b4a40;margin:14px 0 0;max-width:42ch}
+.jlb-p.light{color:#cdd6ca}
+.jlb-p b{color:var(--jade);font-weight:600}.jlb-p.light b{color:#fff}
+.jlb-pull{font-family:var(--serif);font-style:italic;font-size:clamp(17px,1.9vw,22px);line-height:1.3;color:var(--jade);border-top:1px solid rgba(21,32,26,.14);border-bottom:1px solid rgba(21,32,26,.14);padding:16px 0;margin:22px 0 0}
+.jlb-toc{margin-top:22px}
+.jlb-toc .row{display:flex;gap:14px;align-items:baseline;padding:9px 0;border-bottom:1px solid rgba(21,32,26,.1)}
+.jlb-toc .n{font-family:var(--serif);font-style:italic;color:var(--olive);font-size:15px;width:26px;flex:none}
+.jlb-toc .t{font-family:var(--serif);font-size:16px;color:var(--jade)}
+.jlb-list{margin-top:18px}
+.jlb-list .it{padding:11px 0;border-top:1px solid rgba(21,32,26,.12)}
+.jlb-dark .jlb-list .it{border-color:rgba(255,255,255,.16)}
+.jlb-list .it b{font-family:var(--serif);font-weight:400;font-size:16px;color:var(--jade);display:block}
+.jlb-dark .jlb-list .it b{color:#fff}
+.jlb-list .it span{font-size:12.5px;color:#55655a;line-height:1.5}
+.jlb-dark .jlb-list .it span{color:#c0cabd}
+.jlb-grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px 18px;margin-top:20px}
+.jlb-grid2 .c b{font-family:var(--serif);font-weight:400;font-size:15.5px;color:var(--jade);display:block}
+.jlb-grid2 .c span{font-size:12px;color:#55655a;line-height:1.5;display:block;margin-top:3px}
+.jlb-big{font-family:var(--serif);font-size:clamp(52px,8vw,78px);color:#fff;line-height:1;margin:20px 0 0}
+.jlb-big span{font-size:.32em;color:var(--sage);font-style:italic;margin-left:6px}
+.jlb-sig,.jlb-contact{margin-top:auto}
+.jlb-sig{font-family:var(--serif);font-style:italic;font-size:16px;color:var(--jade)}
+.jlb-sig.light{color:#fff}
+.jlb-contact{font-family:var(--sans);font-weight:600;letter-spacing:.04em;color:var(--sage);font-size:13.5px;padding-top:14px}
+.jlb-people .pp{padding:12px 0;border-top:1px solid rgba(21,32,26,.12)}
+.jlb-people .pp b{font-family:var(--serif);font-weight:400;font-size:18px;color:var(--jade);display:block}
+.jlb-people .pp em{font-style:normal;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--olive);font-weight:600}
+.jlb-people .pp span{display:block;font-size:12.5px;color:#55655a;margin-top:4px;line-height:1.5}
+.jlb-cta{display:inline-block;margin-top:22px;font-family:var(--sans);font-weight:700;font-size:13px;letter-spacing:.02em;color:var(--jade);text-decoration:none;border-bottom:2px solid var(--sage);padding-bottom:3px}
+.jlb-dark .jlb-cta{color:#fff;border-color:var(--sage)}
+.jlb-cta.solid{background:var(--sage);color:var(--forest);border:0;border-radius:999px;padding:12px 22px}
+.jlb-folio{margin-top:auto;display:flex;justify-content:space-between;align-items:center;padding-top:16px;font-family:var(--sans);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--jade2)}
+.jlb-folio.light{color:var(--sage)}
+.jlb-cover,.jlb-back{background:var(--forest)!important;color:#eef1ec!important;justify-content:center;align-items:center;text-align:center}
+.jlb-cv{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;flex:1}
+.jlb-cv-k{font-family:var(--sans);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--sage);font-weight:600}
+.jlb-cv-leaf{margin:18px 0}
+.jlb-cv-word{font-family:var(--serif);font-style:italic;font-size:clamp(58px,9vw,96px);line-height:.9;color:#fff}
+.jlb-cv-mark{font-family:var(--serif);font-style:italic;font-size:clamp(40px,7vw,64px);color:#fff;margin-top:6px}
+.jlb-cv-sub{font-family:var(--serif);font-style:italic;font-size:clamp(15px,1.7vw,19px);color:#cdd6ca;margin-top:20px;line-height:1.4}
+.jlb-cv-foot{display:flex;gap:30px;margin-top:30px;font-family:var(--sans);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--sage)}
+.jlb-cv-fine{font-size:10px;color:#8fa08c;margin-top:26px;letter-spacing:.02em;max-width:30ch;line-height:1.5}
+.jlb-ctrls{display:flex;align-items:center;gap:22px;margin-top:26px}
+.jlb-nav{width:52px;height:52px;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--jade);font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,color .2s}
+.jlb-nav:hover{background:var(--jade);color:#fff;border-color:var(--jade)}
+.jlb-nav:disabled{opacity:.32;cursor:default;background:var(--paper);color:var(--jade);border-color:var(--line)}
+.jlb-count{font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--jade2);min-width:120px;text-align:center}
+.jlb-hint{margin-top:14px;font-size:12.5px;color:var(--jade2)}
+@media(max-width:560px){.jlb-grid2{grid-template-columns:1fr}}
+</style>`;
+
+  const body = `${css}
+<section class="jlb-sec"><div class="wrap jlb-shell">
+  <div class="jlb-intro">
+    <div class="eyebrow">The Jade Lookbook</div>
+    <h1>Everything Jade, in one place you can flip through.</h1>
+    <p>Not a listing we made for someone else &mdash; this one is about us. Turn the pages, then come talk it through.</p>
+  </div>
+  <div class="jlb-book-wrap"><div id="jlb-book">${pagesHTML}</div></div>
+  <div class="jlb-ctrls">
+    <button class="jlb-nav" id="jlb-prev" aria-label="Previous page">&#8249;</button>
+    <div class="jlb-count" id="jlb-count">Cover</div>
+    <button class="jlb-nav" id="jlb-next" aria-label="Next page">&#8250;</button>
+  </div>
+  <div class="jlb-hint">Drag a corner, or use the arrows.</div>
+</div></section>
+<script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
+<script>
+(function(){
+  function boot(){
+    if(!(window.St && window.St.PageFlip)){ return setTimeout(boot,60); }
+    var el=document.getElementById('jlb-book');
+    if(!el) return;
+    var pages=el.querySelectorAll('.jlb-page');
+    var total=pages.length;
+    var pf=new window.St.PageFlip(el,{
+      width:540,height:710,size:'stretch',
+      minWidth:300,maxWidth:560,minHeight:420,maxHeight:740,
+      maxShadowOpacity:0.5,showCover:true,usePortrait:true,
+      mobileScrollSupport:true,drawShadow:true,flippingTime:700
     });
+    pf.loadFromHTML(pages);
+    var prev=document.getElementById('jlb-prev');
+    var next=document.getElementById('jlb-next');
+    var cnt=document.getElementById('jlb-count');
+    function label(i){
+      if(i<=0) return 'Cover';
+      if(i>=total-1) return 'Back';
+      return 'Page '+i+' of '+(total-2);
+    }
+    function sync(){
+      var i=pf.getCurrentPageIndex();
+      cnt.textContent=label(i);
+      prev.disabled=(i<=0);
+      next.disabled=(i>=total-1);
+    }
+    pf.on('flip',sync);
+    pf.on('changeState',sync);
+    prev.addEventListener('click',function(){ pf.flipPrev(); });
+    next.addEventListener('click',function(){ pf.flipNext(); });
+    setTimeout(sync,120);
   }
-  return _mkCache;
+  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded',boot); } else { boot(); }
+})();
+</script>`;
+
+  return layout({
+    title: 'The Jade Lookbook — Jade Real Estate Careers',
+    desc: "Flip through Jade Real Estate: why we're called Jade, the in-house agent app included in your $200/month, marketing done for you, honest numbers, and the one-on-one, person-to-person support behind an independent Denver brokerage built for the agent.",
+    path: '/marketing',
+    body: body
+  });
 }
 
 function calculatorPage() {
