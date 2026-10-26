@@ -1,0 +1,9 @@
+{
+  "name": "jade-careers",
+  "version": "0.1.0",
+  "private": true,
+  "description": "careers.jaderealestate.com — public recruiting site for Jade Real Estate. SSR from the Worker; blog + testimonials come from Supabase (managed in the Jade app admin).",
+  "scripts": {
+    "build": "echo 'ssr worker — nothing to build'"
+  }
+}
