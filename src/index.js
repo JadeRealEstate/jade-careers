@@ -617,7 +617,6 @@ function postPage(p) {
 }
 
 function marketingPage() {
-  function LEAF(c, s) { return '<svg width="' + s + '" height="' + s + '" viewBox="0 0 24 24" fill="none" stroke="' + c + '" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21C12 14 13 7 20 3c0 8-3 15-8 17-4 0-8-3-8-8 0-5 4-7 8-7"/><path d="M12 21c0-5 2-9 6-12"/></svg>'; }
   function TOCROW(n, t) { return '<div class="row"><span class="n">' + n + '</span><span class="t">' + t + '</span></div>'; }
   function FOLIO(l, num, light) { return '<div class="jlb-folio' + (light ? ' light' : '') + '"><span>' + l + '</span><span>' + num + '</span></div>'; }
   function LI(b, s) { return '<div class="it"><b>' + b + '</b><span>' + s + '</span></div>'; }
@@ -628,7 +627,6 @@ function marketingPage() {
     ['jlb-page jlb-cover', 'hard',
       '<div class="jlb-cv">'
       + '<div class="jlb-cv-k">The Agent’s Lookbook</div>'
-      + '<div class="jlb-cv-leaf">' + LEAF('#a6b6a4', 54) + '</div>'
       + '<div class="jlb-cv-word">Jade</div>'
       + '<div class="jlb-cv-sub">An independent Denver brokerage,<br>in a few pages you can flip through.</div>'
       + '<div class="jlb-cv-foot"><span>Issue 01</span><span>Denver, Colorado</span></div>'
@@ -636,8 +634,7 @@ function marketingPage() {
     ['jlb-page', 'soft',
       '<div class="jlb-k">Before you flip</div>'
       + '<h2 class="jlb-h">A quick hello.</h2>'
-      + '<p class="jlb-p">This is Jade in a dozen pages — who we are, what you get, and how we actually work with the people who hang their license here.</p>'
-      + '<p class="jlb-p">Read it like a magazine, not a brochure. And when something lands, don’t fill out a form — come have a coffee with us. The best part of Jade is the part you can’t put on a page.</p>'
+      + '<p class="jlb-p">Jade end to end — who we are, what you get, and how we work with the people who hang their license here. Read it like a magazine, and when something lands, come have a coffee.</p>'
       + '<div class="jlb-toc">'
       + TOCROW('01','Why we’re called Jade') + TOCROW('02','Built for the agent')
       + TOCROW('03','The app, included') + TOCROW('04','Marketing, done for you')
@@ -725,7 +722,6 @@ function marketingPage() {
       + FOLIO('Jade Real Estate · Denver','11', true)],
     ['jlb-page jlb-back', 'hard',
       '<div class="jlb-cv">'
-      + '<div class="jlb-cv-leaf">' + LEAF('#a6b6a4', 40) + '</div>'
       + '<div class="jlb-cv-mark">Jade</div>'
       + '<div class="jlb-cv-sub">Independent. Colorado. Built for the agent.</div>'
       + '<div class="jlb-cv-fine">Jade Real Estate (KCWL Holdings LLC). Equal Housing Opportunity.</div>'
@@ -740,7 +736,7 @@ function marketingPage() {
 .jlb-sec{background:var(--cream);padding:clamp(34px,5vw,56px) 0 clamp(48px,7vw,86px)}
 .jlb-intro{text-align:center;max-width:640px;margin:0 auto clamp(26px,4vw,44px)}
 .jlb-intro .eyebrow{justify-content:center}
-.jlb-intro h1{font-family:var(--serif);font-style:italic;font-size:clamp(30px,5vw,50px);color:var(--jade);line-height:1.08;margin:12px 0 0}
+.jlb-intro h2{font-family:var(--serif);font-style:italic;font-size:clamp(28px,4.4vw,44px);color:var(--jade);line-height:1.08;margin:12px 0 0;font-weight:400}
 .jlb-intro p{color:var(--jade2);font-size:clamp(15px,1.7vw,18px);margin:16px auto 0;max-width:52ch;line-height:1.6}
 .jlb-shell{display:flex;flex-direction:column;align-items:center}
 .jlb-book-wrap{width:100%;max-width:1120px;display:flex;justify-content:center;touch-action:pan-y}
@@ -759,10 +755,10 @@ function marketingPage() {
 .jlb-p.light{color:#cdd6ca}
 .jlb-p b{color:var(--jade);font-weight:600}.jlb-p.light b{color:#fff}
 .jlb-pull{font-family:var(--serif);font-style:italic;font-size:clamp(17px,1.9vw,22px);line-height:1.3;color:var(--jade);border-top:1px solid rgba(21,32,26,.14);border-bottom:1px solid rgba(21,32,26,.14);padding:16px 0;margin:22px 0 0}
-.jlb-toc{margin-top:22px}
-.jlb-toc .row{display:flex;gap:14px;align-items:baseline;padding:9px 0;border-bottom:1px solid rgba(21,32,26,.1)}
-.jlb-toc .n{font-family:var(--serif);font-style:italic;color:var(--olive);font-size:15px;width:26px;flex:none}
-.jlb-toc .t{font-family:var(--serif);font-size:16px;color:var(--jade)}
+.jlb-toc{margin-top:16px}
+.jlb-toc .row{display:flex;gap:12px;align-items:baseline;padding:6px 0;border-bottom:1px solid rgba(21,32,26,.1)}
+.jlb-toc .n{font-family:var(--serif);font-style:italic;color:var(--olive);font-size:14px;width:24px;flex:none}
+.jlb-toc .t{font-family:var(--serif);font-size:15px;color:var(--jade);line-height:1.2}
 .jlb-list{margin-top:18px}
 .jlb-list .it{padding:11px 0;border-top:1px solid rgba(21,32,26,.12)}
 .jlb-dark .jlb-list .it{border-color:rgba(255,255,255,.16)}
@@ -790,8 +786,7 @@ function marketingPage() {
 .jlb-folio.light{color:var(--sage)}
 .jlb-cover,.jlb-back{background:var(--forest)!important;color:#eef1ec!important;justify-content:center;align-items:center;text-align:center}
 .jlb-cv{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;flex:1}
-.jlb-cv-k{font-family:var(--sans);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--sage);font-weight:600}
-.jlb-cv-leaf{margin:18px 0}
+.jlb-cv-k{font-family:var(--sans);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--sage);font-weight:600;margin-bottom:22px}
 .jlb-cv-word{font-family:var(--serif);font-style:italic;font-size:clamp(58px,9vw,96px);line-height:.9;color:#fff}
 .jlb-cv-mark{font-family:var(--serif);font-style:italic;font-size:clamp(40px,7vw,64px);color:#fff;margin-top:6px}
 .jlb-cv-sub{font-family:var(--serif);font-style:italic;font-size:clamp(15px,1.7vw,19px);color:#cdd6ca;margin-top:20px;line-height:1.4}
@@ -807,11 +802,57 @@ function marketingPage() {
 </style>`;
 
   const body = `${css}
-<section class="jlb-sec"><div class="wrap jlb-shell">
+<section class="hero"><div class="m1"></div><div class="wrap">
+  <div class="eyebrow">Marketing</div>
+  <h1>Marketing that looks like you &mdash; and actually works.</h1>
+  <p>This is the part most agents light up about: real, done-for-you marketing built around <i>your</i> brand, and a team that genuinely loves this work. Here's what we can do for you.</p>
+  <div class="btns"><a class="btn p" href="${BOOK}" target="_blank" rel="noopener">Talk with Emilie</a><a class="btn s" href="#jlb">Flip the lookbook &#8595;</a></div>
+</div></section>
+
+<section class="band cream"><div class="wrap">
+  <div class="eyebrow">What we can do for you</div>
+  <h2 class="h-sec">Done for you, start to finish.</h2>
+  <p class="lead">You stay in front of clients; we make sure everything with your name on it looks like you already won. No design apps at 11pm, no blank canvas.</p>
+  <div class="rows">
+    <div class="r"><div class="lbl"><small>Brand</small>An identity that's actually yours</div><p>Logo, color, type and voice, shaped around who you are and who you serve &mdash; a real brand, not a house template with your headshot dropped in.</p></div>
+    <div class="r"><div class="lbl"><small>Listings</small>Launched like they matter</div><p>Presentations, Just-Listed sets, print and signage &mdash; on brand and out the door day one, so every listing reads like a feature, not a flyer.</p></div>
+    <div class="r"><div class="lbl"><small>Social &amp; content</small>In your voice, handled</div><p>Posts, reels, newsletters and a steady content pack, made for you and scheduled &mdash; so you show up consistently without living in your phone.</p></div>
+    <div class="r"><div class="lbl"><small>Presence</small>Out where your clients are</div><p>Jade at the Market, events and neighborhood campaigns &mdash; real local presence people remember, not just another feed to post into.</p></div>
+  </div>
+</div></section>
+
+<section class="band paper"><div class="wrap">
+  <div class="ed">
+    <div>
+      <div class="eyebrow">The flexibility</div>
+      <div class="big">Your brand, <span style="color:var(--olive)">your way.</span></div>
+      <div class="prose">
+        <p>Some agents hand us the whole thing &mdash; brand, listings, social, print &mdash; and never think about it again. Others want a hand on the wheel, down to the last caption. Both are right.</p>
+        <p>We build around how you actually want to show up, and we flex as you grow. You're never squeezed into a house look, and never left alone with a blank page either.</p>
+      </div>
+    </div>
+    <div><div class="markets" style="margin-top:4px">
+      <span class="chip">Hands-off or hands-on</span><span class="chip">Your logo &amp; colors</span><span class="chip">Your voice</span><span class="chip">On your timeline</span><span class="chip">No house template</span><span class="chip">Grows with you</span>
+    </div></div>
+  </div>
+</div></section>
+
+<section class="band forest"><div class="wrap narrow">
+  <div class="eyebrow">A note from Emilie</div>
+  <h2 class="h-sec" style="color:#fff;margin-top:10px">What sets you apart is the whole point.</h2>
+  <div style="margin-top:20px">
+    <p style="color:#d6ded2;font-size:clamp(16px,1.9vw,19px);line-height:1.75;max-width:60ch">I've spent five years doing this &mdash; building agent brands and running the social &mdash; and the one constant is that it never holds still. So I treat social as a tool, not a vanity project, and I watch how the platforms change so you don't have to.</p>
+    <p style="color:#d6ded2;font-size:clamp(16px,1.9vw,19px);line-height:1.75;max-width:60ch;margin-top:16px">I've also watched AI reshape this business up close, which is exactly why I know what it can't replace: a real person, marketed well. My job is to put that front and center &mdash; to make the brand behind your name as sharp as you are, and keep it there as everything keeps moving.</p>
+  </div>
+  <div style="margin-top:24px;font-family:var(--serif);font-style:italic;font-size:21px;color:#fff">Emilie Smith</div>
+  <div style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--sage);font-weight:600;margin-top:5px">Marketing &amp; Recruiting &middot; Jade Real Estate</div>
+</div></section>
+
+<section class="jlb-sec" id="jlb"><div class="wrap jlb-shell">
   <div class="jlb-intro">
     <div class="eyebrow">The Jade Lookbook</div>
-    <h1>Everything Jade, in one place you can flip through.</h1>
-    <p>Not a listing we made for someone else &mdash; this one is about us. Turn the pages, then come talk it through.</p>
+    <h2>And here's the whole picture.</h2>
+    <p>Flip through Jade end to end &mdash; the name, the tools, the money, the people. Then let's talk it through.</p>
   </div>
   <div class="jlb-book-wrap"><div id="jlb-book">${pagesHTML}</div></div>
   <div class="jlb-ctrls">
