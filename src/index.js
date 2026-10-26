@@ -21,7 +21,7 @@ const ext = (url, label, cls) => `<a ${cls ? `class="${cls}" ` : ''}href="${url}
 const IMG = { 'team.jpg': IMG_TEAM, 'tote.jpg': IMG_TOTE };
 function b64bytes(b64){const bin=atob(b64);const n=bin.length;const u=new Uint8Array(n);for(let i=0;i<n;i++){u[i]=bin.charCodeAt(i);}return u;}
 function serveImg(name){const b=IMG[name];if(!b)return notFound();return new Response(b64bytes(b),{headers:{'content-type':'image/jpeg','cache-control':'public, max-age=31536000, immutable'}});}
-const NAV = [['/', 'Why Jade'], ['/technology', 'Technology'], ['/culture', 'Culture'], ['/studio', 'See yourself'], ['/calculator', 'Calculator'], ['/blog', 'Blog'], ['/faq', 'FAQ']];
+const NAV = [['/', 'Why Jade'], ['/technology', 'Technology'], ['/culture', 'Culture'], ['/marketing', 'Marketing'], ['/calculator', 'Calculator'], ['/blog', 'Blog'], ['/faq', 'FAQ']];
 const fmtDate = (s) => { try { return new Date(s).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }); } catch (e) { return ''; } };
 
 async function getPosts(limit) {
@@ -171,7 +171,7 @@ ${body}
 <footer class="foot"><div class="wrap">
   <div class="row">
     <a class="brand" style="color:#eef1ec" href="/">Jade<small>REAL ESTATE</small></a>
-    <a href="/">Why Jade</a><a href="/technology">Technology</a><a href="/culture">Culture</a><a href="/studio">See yourself</a><a href="/calculator">Calculator</a><a href="/compare">Compare</a><a href="/blog">Blog</a><a href="/faq">FAQ</a>
+    <a href="/">Why Jade</a><a href="/technology">Technology</a><a href="/culture">Culture</a><a href="/marketing">Marketing</a><a href="/calculator">Calculator</a><a href="/compare">Compare</a><a href="/blog">Blog</a><a href="/faq">FAQ</a>
     <a href="${BOOK}" target="_blank" rel="noopener" style="margin-left:auto;font-weight:700;color:#fff">Book a conversation →</a>
   </div>
   <p class="disc">Jade Real Estate · ${OFFICE} · Emilie Smith, emilie@jaderealestate.com · <a href="${MAIN}" target="_blank" rel="noopener">jaderealestate.com</a></p>
@@ -218,7 +218,7 @@ async function homePage() {
   <div class="eyebrow">Careers at Jade Real Estate</div>
   <h1>You built the business. We make it lighter to run.</h1>
   <p>Jade is an independent Colorado brokerage with its own agent app, marketing done for you, and a broker who actually picks up. No mandatory meetings. No production minimums. No prescribed path.</p>
-  <div class="btns"><a class="btn p" href="${BOOK}" target="_blank" rel="noopener">Talk with Emilie</a><a class="btn s" href="/studio">See yourself at Jade →</a></div>
+  <div class="btns"><a class="btn p" href="${BOOK}" target="_blank" rel="noopener">Talk with Emilie</a><a class="btn s" href="/marketing">See our marketing →</a></div>
 </div></section>
 
 <section class="band cream"><div class="wrap">
@@ -254,7 +254,7 @@ async function homePage() {
       <div class="prose" style="color:#d3dbd0">
         <p style="color:#d3dbd0">No two Jade agents look alike. See the range of personalized marketing our in-house team creates — magazine-style listing presentations, social in your voice, branded print, and a brand that’s genuinely yours.</p>
       </div>
-      <div style="margin-top:24px"><a class="btn p" href="/studio">See the range →</a></div>
+      <div style="margin-top:24px"><a class="btn p" href="/marketing">See our marketing →</a></div>
     </div>
     <figure class="figure" aria-hidden="true">
       <div class="mini-card">
@@ -480,7 +480,7 @@ function techPage() {
     </div>
   </div>
 
-  <div style="margin-top:44px;display:flex;gap:13px;flex-wrap:wrap"><a class="btn j" href="${DEMO}" target="_blank" rel="noopener">Take the self-guided tour <span class="xt" aria-hidden="true">↗</span></a><a class="btn j" href="${CLIENT_DEMO}" target="_blank" rel="noopener" style="background:var(--jade2)">See the client experience <span class="xt" aria-hidden="true">↗</span></a> <a class="btn j" href="/studio" style="background:var(--olive)">See yourself in it →</a></div>
+  <div style="margin-top:44px;display:flex;gap:13px;flex-wrap:wrap"><a class="btn j" href="${DEMO}" target="_blank" rel="noopener">Take the self-guided tour <span class="xt" aria-hidden="true">↗</span></a><a class="btn j" href="${CLIENT_DEMO}" target="_blank" rel="noopener" style="background:var(--jade2)">See the client experience <span class="xt" aria-hidden="true">↗</span></a> <a class="btn j" href="/marketing" style="background:var(--olive)">See the marketing →</a></div>
 </div></section>
 ${ctaBand()}
 <script>
@@ -616,218 +616,247 @@ function postPage(p) {
   return layout({ title: (p.seo_title || p.title) + ' — Jade Real Estate', desc: p.seo_description || p.excerpt || '', path: '/blog/' + p.slug, body, jsonld });
 }
 
-function studioPage() {
+function marketingPage() {
+  const CARDS = [
+    ['01', 'Listing presentations', 'Magazine-grade, built per property.', 'Built around the property and the seller — your comps, your pricing story, your market — and delivered as a print-ready PDF that looks like a design studio spent a week on it.'],
+    ['02', 'Social &amp; content', 'In your voice, scheduled and ready.', 'Just Listed sets, open-house posts, reels, and market notes — made on your brand and scheduled through OnlySocial. You connect your accounts; our team makes the content.'],
+    ['03', 'Print &amp; signage', 'The pieces people hold onto.', 'Business cards, yard signs, open-house kits, closing gifts, and branded swag — designed to match your identity and in your hands day one.'],
+    ['04', 'Personal branding', 'A brand that is genuinely yours.', 'Logo and wordmark, color, type, and voice — a real identity shaped around who you are and who you serve, not a forced house template.'],
+    ['05', 'Email &amp; nurture', 'Your database, warmed up.', 'Newsletters and follow-up campaigns wired into Follow Up Boss, so your past clients and leads hear from you without the manual work.'],
+    ['06', 'Community &amp; events', 'Out where your clients are.', 'Jade at the Market, sponsorships, and neighborhood campaigns — real local presence, not just another feed to post to.'],
+  ];
+  const cards = CARDS.map(function (c) {
+    return '<div class="fc"><div class="fc-in">'
+      + '<div class="fc-face fc-front"><div class="fc-n">' + c[0] + '</div><div class="fc-t">' + c[1] + '</div><div class="fc-s">' + c[2] + '</div><div class="fc-flip">Flip &#8635;</div></div>'
+      + '<div class="fc-face fc-back"><div class="fc-bt">' + c[1] + '</div><p>' + c[3] + '</p></div>'
+      + '</div></div>';
+  }).join('');
   const css = `
 <style>
-.sy-hero{background:var(--ink);color:#eef1ec;padding:clamp(60px,8vw,110px) 0;overflow:hidden}
-.sy-hg{display:grid;grid-template-columns:1.02fr 0.98fr;gap:clamp(28px,4vw,60px);align-items:center}
-.sy-hero .eyebrow{color:var(--sage)}
-.sy-hero h1{font-family:var(--serif);font-style:italic;font-size:clamp(38px,6.4vw,70px);line-height:1.04;margin:14px 0 0}
-.sy-hero p{color:#c3ccbf;font-size:clamp(16px,1.7vw,19.5px);line-height:1.7;margin-top:22px;max-width:46ch}
-.sy-hbtns{margin-top:30px;display:flex;gap:13px;flex-wrap:wrap}
-.sy-btn{display:inline-block;text-decoration:none;font-weight:700;font-size:14.5px;padding:12px 22px;border-radius:999px;background:var(--cream);color:var(--ink)}
-.sy-btn.ghost{background:transparent;color:#eef1ec;border:1px solid rgba(255,255,255,.26)}
-.sy-scatter{position:relative;height:clamp(360px,42vw,480px)}
-.pc{position:absolute;border-radius:12px;box-shadow:0 34px 70px rgba(0,0,0,.5);overflow:hidden}
-.pc-cover{width:52%;left:2%;top:4%;transform:rotate(-6deg);aspect-ratio:0.74/1}
-.pc-social{width:44%;right:4%;top:0;transform:rotate(5deg);aspect-ratio:4/5;z-index:3}
-.pc-card{width:50%;left:16%;bottom:2%;transform:rotate(-2deg);aspect-ratio:1.72/1;z-index:4}
-/* cover piece (editorial) */
-.cvp{width:100%;height:100%;background:linear-gradient(160deg,#243a2e,var(--jade));color:#eef1ec;padding:clamp(12px,1.6vw,20px);display:flex;flex-direction:column}
-.cvp .t{display:flex;justify-content:space-between;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.7);font-weight:600}
-.cvp .t span{white-space:nowrap}
-.cvp .k{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--sage);font-weight:700;margin-top:auto}
-.cvp .h{font-family:var(--serif);font-style:italic;font-size:clamp(18px,2.4vw,26px);line-height:1.05;margin-top:5px}
-.cvp .by{font-size:9px;color:rgba(255,255,255,.8);margin-top:10px;border-top:1px solid rgba(255,255,255,.22);padding-top:7px}
-/* social piece */
-.scp{width:100%;height:100%;background:#fff;display:flex;flex-direction:column}
-.scp .img{flex:1;background:linear-gradient(135deg,var(--olive),var(--forest));display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);font-size:9px;letter-spacing:.22em;font-weight:700}
-.scp .b{background:var(--cream);padding:clamp(10px,1.4vw,15px)}
-.scp .jl{font-family:var(--serif);font-style:italic;font-size:clamp(16px,2vw,22px);color:var(--jade)}
-.scp .nm{font-size:10px;color:var(--jade2);margin-top:5px;font-weight:600}
-/* card piece */
-.cdp{width:100%;height:100%;background:var(--cream);color:var(--ink);padding:clamp(14px,1.8vw,22px);display:flex;flex-direction:column}
-.cdp .lg{font-family:var(--serif);font-style:italic;font-size:clamp(15px,1.9vw,21px);color:var(--jade)}
-.cdp .lg span{display:block;font-family:var(--sans);font-style:normal;font-size:6.5px;letter-spacing:.3em;font-weight:600;color:var(--jade2);margin-top:2px}
-.cdp .nm{font-family:var(--serif);font-style:italic;font-size:clamp(16px,2.1vw,24px);color:var(--ink);margin-top:auto}
-.cdp .mt{font-size:9px;color:var(--jade2);margin-top:3px;letter-spacing:.03em}
-/* manifesto */
-.sy-man{max-width:860px}
-.sy-man .big{font-family:var(--serif);font-style:italic;font-size:clamp(27px,4vw,44px);color:var(--jade);line-height:1.12}
-.sy-man p{font-size:clamp(16px,1.6vw,18.5px);color:var(--jade2);line-height:1.75;margin-top:20px;max-width:66ch}
-/* chapters */
-.ch{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,70px);align-items:center;margin-top:clamp(48px,7vw,96px)}
-.ch:first-of-type{margin-top:8px}
-.ch.flip .ch-media{order:2}
-.ch-num{font-family:var(--serif);font-style:italic;font-size:19px;color:var(--sage)}
-.ch-l h3{font-family:var(--serif);font-style:italic;font-size:clamp(25px,3.3vw,37px);color:var(--jade);line-height:1.1;margin:10px 0 0}
-.ch-l p{font-size:16px;color:var(--jade2);line-height:1.72;margin-top:16px;max-width:48ch}
-.ch-l .list{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap}
-.ch-l .list span{font-size:12px;font-weight:600;color:var(--jade);background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:6px 13px}
-.ch-media{position:relative}
-.frame{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:clamp(16px,2vw,24px);box-shadow:0 30px 64px rgba(21,32,26,.12)}
-/* big presentation cover */
-.bigcov{aspect-ratio:1.46/1;border-radius:12px;background:linear-gradient(155deg,var(--forest),var(--jade));color:#eef1ec;padding:clamp(22px,3vw,34px);display:flex;flex-direction:column}
-.bigcov .t{display:flex;justify-content:space-between;gap:12px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.72);font-weight:600}
-.bigcov .t span{white-space:nowrap}
-.bigcov .stats{display:flex;gap:26px;margin-top:22px}
-.bigcov .stats div b{font-family:var(--serif);font-style:italic;font-size:22px;display:block}
-.bigcov .stats div i{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.66);font-style:normal}
-.bigcov .k{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--sage);font-weight:700;margin-top:auto}
-.bigcov .h{font-family:var(--serif);font-style:italic;font-size:clamp(26px,3.4vw,40px);line-height:1.06;margin-top:6px}
-.bigcov .by{font-size:11px;color:rgba(255,255,255,.82);margin-top:14px;border-top:1px solid rgba(255,255,255,.22);padding-top:11px}
-/* social cluster */
-.cluster{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.ctile{border-radius:12px;overflow:hidden;border:1px solid var(--line)}
-.ctile.tall{grid-row:span 2}
-.ctile .im{aspect-ratio:1/1;display:flex;align-items:flex-end;padding:12px;color:#fff;font-family:var(--serif);font-style:italic;font-size:18px}
-.ctile.a .im{background:linear-gradient(140deg,var(--jade),var(--forest))}
-.ctile.b .im{background:linear-gradient(140deg,var(--olive),#2c3f1b)}
-.ctile.c .im{background:linear-gradient(140deg,var(--jade2),var(--jade))}
-.ctile .cl{background:var(--cream);padding:10px 12px;font-size:10.5px;color:var(--jade2);font-weight:600}
-/* tote figure */
-.tote-fig img{width:100%;height:auto;border-radius:14px;display:block}
-.tote-cap{font-size:12.5px;color:var(--jade2);margin-top:12px}
-.card-over{position:absolute;right:-6px;bottom:-14px;width:46%;aspect-ratio:1.72/1;border-radius:10px;box-shadow:0 20px 44px rgba(21,32,26,.28);transform:rotate(-4deg)}
-/* brand board */
-.bboard{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center}
-.bb-mark{width:96px;height:96px;border-radius:50%;background:var(--jade);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-style:italic;font-size:40px}
-.bb-r .w{font-family:var(--serif);font-style:italic;font-size:26px;color:var(--jade)}
-.bb-sw{display:flex;gap:7px;margin-top:12px}
-.bb-sw i{width:26px;height:26px;border-radius:50%}
-.bb-type{margin-top:12px;font-size:12px;color:var(--jade2)}
-.bb-type b{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--ink);margin-right:8px}
-/* moods */
-.moods{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.4vw,28px);margin-top:34px}
-.mood .ml{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--jade2);font-weight:700;margin-bottom:12px}
-.mcard{aspect-ratio:0.78/1;border-radius:12px;padding:20px;display:flex;flex-direction:column;box-shadow:0 22px 48px rgba(21,32,26,.12)}
-.mcard .mk{font-size:9px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;margin-top:auto}
-.mcard .mh{line-height:1.05;margin-top:6px}
-.mcard .mby{font-size:10px;margin-top:12px;padding-top:9px}
-/* minimal */
-.m-min{background:var(--paper);color:var(--ink);border:1px solid var(--line)}
-.m-min .mk{color:var(--jade2)}
-.m-min .mh{font-family:var(--sans);font-weight:700;letter-spacing:-.02em;font-size:26px}
-.m-min .mby{color:var(--jade2);border-top:1px solid var(--line)}
-/* warm */
-.m-warm{background:linear-gradient(160deg,#5c6b3f,var(--olive));color:#f4f1e9}
-.m-warm .mk{color:#e2e6cf}
-.m-warm .mh{font-family:var(--serif);font-style:italic;font-size:30px}
-.m-warm .mby{color:rgba(255,255,255,.85);border-top:1px solid rgba(255,255,255,.25)}
-/* editorial */
-.m-ed{background:var(--ink);color:#eef1ec}
-.m-ed .mk{color:var(--sage)}
-.m-ed .mh{font-family:var(--serif);font-style:italic;font-size:30px}
-.m-ed .mby{color:rgba(255,255,255,.82);border-top:1px solid rgba(255,255,255,.22)}
-.sy-cta{background:var(--jade);color:#eef1ec}
-.sy-cta h2{font-family:var(--serif);font-style:italic;font-size:clamp(28px,4.2vw,44px);max-width:20ch}
-.sy-cta p{color:#cdd6c9;font-size:16px;margin-top:14px;max-width:52ch}
-@media(max-width:860px){.sy-hg,.ch,.bboard{grid-template-columns:1fr}.ch.flip .ch-media{order:0}.sy-scatter{height:340px;margin-top:10px}.moods{grid-template-columns:1fr}.cluster{grid-template-columns:1fr 1fr}}
+.mk-hero{background:var(--ink);color:#eef1ec;padding:clamp(58px,8vw,108px) 0;overflow:hidden}
+.mk-hg{display:grid;grid-template-columns:1.05fr 0.95fr;gap:clamp(28px,4vw,56px);align-items:center}
+.mk-hero .eyebrow{color:var(--sage)}
+.mk-hero h1{font-family:var(--serif);font-style:italic;font-size:clamp(38px,6.2vw,66px);line-height:1.05;margin:14px 0 0}
+.mk-hero p{color:#c3ccbf;font-size:clamp(16px,1.7vw,19.5px);line-height:1.7;margin-top:22px;max-width:48ch}
+.mk-hbtns{margin-top:30px;display:flex;gap:13px;flex-wrap:wrap}
+.mk-btn{display:inline-block;text-decoration:none;font-weight:700;font-size:14.5px;padding:12px 22px;border-radius:999px;background:var(--cream);color:var(--ink)}
+.mk-btn.ghost{background:transparent;color:#eef1ec;border:1px solid rgba(255,255,255,.26)}
+/* hero cover (info-dense, no empty space) */
+.mk-cover{background:linear-gradient(158deg,#243a2e,var(--jade));border-radius:16px;box-shadow:0 34px 70px rgba(0,0,0,.5);padding:clamp(22px,2.6vw,32px);color:#eef1ec;transform:rotate(-2deg)}
+.mk-cover .ct{display:flex;justify-content:space-between;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.72);font-weight:600;border-bottom:1px solid rgba(255,255,255,.2);padding-bottom:12px}
+.mk-cover h3{font-family:var(--serif);font-style:italic;font-size:clamp(22px,2.6vw,30px);margin:16px 0 4px}
+.mk-cover .sub{font-size:12.5px;color:var(--sage);letter-spacing:.04em}
+.mk-toc{margin-top:16px;display:grid;gap:1px;background:rgba(255,255,255,.14);border-radius:10px;overflow:hidden}
+.mk-toc div{background:#223527;display:flex;justify-content:space-between;padding:10px 14px;font-size:12.5px}
+.mk-toc div b{font-family:var(--serif);font-style:italic;color:#fff;font-weight:400}
+.mk-toc div span{color:rgba(255,255,255,.6)}
+/* flip cards */
+.fcs{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
+.fc{height:248px;perspective:1300px;cursor:pointer}
+.fc-in{position:relative;width:100%;height:100%;transition:transform .6s cubic-bezier(.2,.7,.2,1);transform-style:preserve-3d}
+.fc.flip .fc-in{transform:rotateY(180deg)}
+.fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:16px;padding:24px;display:flex;flex-direction:column;box-shadow:0 16px 40px rgba(21,32,26,.1)}
+.fc-front{background:var(--jade);color:#eef1ec}
+.fc-back{background:var(--cream);color:var(--ink);transform:rotateY(180deg);border:1px solid var(--line)}
+.fc-n{font-family:var(--serif);font-style:italic;font-size:26px;color:var(--sage)}
+.fc-t{font-family:var(--serif);font-style:italic;font-size:23px;margin-top:auto}
+.fc-s{font-size:13px;color:#cdd6c9;margin-top:7px;line-height:1.5}
+.fc-flip{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--sage);font-weight:700;margin-top:14px}
+.fc-bt{font-family:var(--serif);font-style:italic;font-size:20px;color:var(--jade)}
+.fc-back p{font-size:14px;color:var(--jade2);line-height:1.6;margin-top:10px}
+/* flipbook */
+.book{max-width:800px;margin:34px auto 0}
+.book-stage{position:relative;aspect-ratio:3/2;border-radius:16px;overflow:hidden;box-shadow:0 36px 74px rgba(21,32,26,.22);background:var(--paper)}
+.fb-page{position:absolute;inset:0;opacity:0;transform:rotateY(-7deg) scale(.985);transform-origin:left center;transition:opacity .5s ease,transform .5s ease;padding:clamp(24px,4vw,46px);display:flex;flex-direction:column;pointer-events:none;overflow:hidden}
+.fb-page.on{opacity:1;transform:none;pointer-events:auto;z-index:2}
+.fb-eye{font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:700}
+.fb-h{font-family:var(--serif);font-style:italic;line-height:1.08;margin-top:8px}
+.fb-dark{background:linear-gradient(158deg,var(--ink),var(--forest));color:#eef1ec}
+.fb-dark .fb-eye{color:var(--sage)}
+.fb-cream{background:var(--cream);color:var(--ink)}
+.fb-cream .fb-eye{color:var(--jade2)}
+.fb-paper{background:var(--paper);color:var(--ink)}
+.fb-paper .fb-eye{color:var(--jade2)}
+.fb-h.big{font-size:clamp(30px,4.4vw,52px)}
+.fb-h.mid{font-size:clamp(23px,3vw,34px);color:var(--jade)}
+.fb-lead{font-size:clamp(14px,1.5vw,16.5px);line-height:1.7;margin-top:14px;max-width:60ch}
+.fb-dark .fb-lead{color:#c9d2c6}.fb-cream .fb-lead,.fb-paper .fb-lead{color:var(--jade2)}
+.fb-cover-foot{margin-top:auto;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+.fb-stats{display:flex;gap:30px;margin-top:20px}
+.fb-stats div b{font-family:var(--serif);font-style:italic;font-size:clamp(22px,3vw,30px);display:block;color:var(--jade)}
+.fb-dark .fb-stats div b{color:#fff}
+.fb-stats div i{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-style:normal;color:var(--jade2)}
+.fb-dark .fb-stats div i{color:rgba(255,255,255,.65)}
+.fb-steps{margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:9px 22px}
+.fb-step{display:flex;gap:11px;align-items:baseline;font-size:13.5px;color:var(--jade2)}
+.fb-step b{font-family:var(--serif);font-style:italic;color:var(--jade);font-size:16px;min-width:20px}
+.fb-grid{margin-top:16px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.fb-grid div{background:rgba(51,81,67,.07);border:1px solid var(--line);border-radius:10px;padding:12px 13px;font-size:12.5px;color:var(--jade)}
+.fb-grid div b{font-family:var(--serif);font-style:italic;display:block;font-size:15px;margin-bottom:2px}
+.fb-three{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+.fb-mini{border-radius:9px;padding:13px;aspect-ratio:.82/1;display:flex;flex-direction:column;font-size:9px}
+.fb-mini .mk{letter-spacing:.14em;text-transform:uppercase;font-weight:700}
+.fb-mini .mh{margin-top:auto;line-height:1.05}
+.fb-mini.min{background:#fff;border:1px solid var(--line);color:var(--ink)}.fb-mini.min .mh{font-family:var(--sans);font-weight:700;font-size:15px}
+.fb-mini.warm{background:linear-gradient(160deg,#5c6b3f,var(--olive));color:#f4f1e9}.fb-mini.warm .mh{font-family:var(--serif);font-style:italic;font-size:17px}
+.fb-mini.ed{background:var(--ink);color:#eef1ec}.fb-mini.ed .mh{font-family:var(--serif);font-style:italic;font-size:17px}
+.fb-mini .ml{font-size:8px;letter-spacing:.1em;text-transform:uppercase;margin-top:6px;opacity:.75}
+.book-nav{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:20px}
+.book-nav button{font-family:var(--sans);font-size:13.5px;font-weight:700;color:var(--jade);background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:9px 18px;cursor:pointer}
+.book-nav button:disabled{opacity:.35;cursor:default}
+.fb-dots{display:flex;gap:7px}
+.fb-dot{width:9px;height:9px;border-radius:50%;background:var(--line);border:0;padding:0;cursor:pointer}
+.fb-dot.on{background:var(--jade)}
+.mk-cta{background:var(--jade);color:#eef1ec}
+.mk-cta h2{font-family:var(--serif);font-style:italic;font-size:clamp(28px,4.2vw,44px);max-width:20ch}
+.mk-cta p{color:#cdd6c9;font-size:16px;margin-top:14px;max-width:52ch}
+@media(max-width:860px){.mk-hg{grid-template-columns:1fr}.fcs{grid-template-columns:1fr}.fc{height:210px}.fb-steps{grid-template-columns:1fr}.book-stage{aspect-ratio:3/4}}
 </style>`;
   const body = `${css}
-<section class="sy-hero"><div class="wrap sy-hg">
-  <div class="sy-herotext">
-    <div class="eyebrow">Marketing, built around you</div>
-    <h1>No two Jade<br>agents look alike.</h1>
-    <p>Your brand isn't a template with your name dropped in. At Jade, an in-house team builds your marketing around <em>you</em> — your style, your market, your voice. Here's the range of what that can look like.</p>
-    <div class="sy-hbtns"><a class="sy-btn" href="#range">See the range</a><a class="sy-btn ghost" href="${BOOK}" target="_blank" rel="noopener">Talk with Emilie</a></div>
+<section class="mk-hero"><div class="wrap mk-hg">
+  <div>
+    <div class="eyebrow">Marketing at Jade</div>
+    <h1>Marketing, done for you — and built around you.</h1>
+    <p>An in-house team that makes your listings look sharp, your brand feel like <em>you</em>, and your follow-up actually happen. Flip through what we do — and page through how we do it.</p>
+    <div class="mk-hbtns"><a class="mk-btn" href="#capabilities">See the capabilities</a><a class="mk-btn ghost" href="${BOOK}" target="_blank" rel="noopener">Talk with Emilie</a></div>
   </div>
-  <div class="sy-scatter">
-    <div class="pc pc-cover"><div class="cvp"><div class="t"><span>Jade Real Estate</span><span>Nº 01</span></div><div class="k">Seller Presentation</div><div class="h">The house on<br>Silver Maple.</div><div class="by">Marisol Vega · REALTOR®</div></div></div>
-    <div class="pc pc-social"><div class="scp"><div class="img">JUST LISTED</div><div class="b"><div class="jl">Under the maples.</div><div class="nm">The Whitaker Group</div></div></div></div>
-    <div class="pc pc-card"><div class="cdp"><div class="lg">Jade<span>REAL ESTATE</span></div><div class="nm">Daniel Okafor</div><div class="mt">REALTOR® · Denver Metro</div></div></div>
-  </div>
-</div></section>
-
-<section class="band cream"><div class="wrap">
-  <div class="sy-man">
-    <div class="eyebrow">Why agents come to us</div>
-    <div class="big" style="margin-top:14px">We flex to your brand. You don't flex to ours.</div>
-    <p>A lot of agents choose Jade for exactly this: we don't force a house look. Some of our agents are sleek and modern, some are warm and local, some are high-end and editorial. Our in-house team builds around whoever you are — and keeps building as your business grows. The work below isn't a menu you pick from; it's a sense of the range.</p>
-  </div>
-</div></section>
-
-<section class="band paper" id="range"><div class="wrap">
-  <div class="eyebrow">What we make for you</div>
-
-  <div class="ch">
-    <div class="ch-media">
-      <div class="frame"><div class="bigcov"><div class="t"><span>Jade Real Estate</span><span>Issue Nº 01</span></div><div class="stats"><div><b>$3.45M</b><i>List price</i></div><div><b>1898</b><i>Year built</i></div><div><b>21</b><i>Days to offer</i></div></div><div class="k">Seller Presentation</div><div class="h">The house on<br>Silver Maple.</div><div class="by">Prepared for the Harlows · by Marisol Vega, Jade Real Estate</div></div></div>
-    </div>
-    <div class="ch-l">
-      <div class="ch-num">01</div>
-      <h3>A listing presentation that reads like a magazine.</h3>
-      <p>We build the presentation around the property and the seller — your comps, your pricing story, your market — and hand you a polished PDF to present or send. It walks in the door already looking like you won the listing.</p>
-      <div class="list"><span>Comps &amp; pricing</span><span>Property story</span><span>Print-ready PDF</span></div>
-    </div>
-  </div>
-
-  <div class="ch flip">
-    <div class="ch-media">
-      <div class="frame"><div class="cluster">
-        <div class="ctile a tall"><div class="im">Just Listed</div><div class="cl">1080 × 1350 · feed</div></div>
-        <div class="ctile b"><div class="im">Open House</div><div class="cl">Story</div></div>
-        <div class="ctile c"><div class="im">Market note</div><div class="cl">Reel cover</div></div>
-      </div></div>
-    </div>
-    <div class="ch-l">
-      <div class="ch-num">02</div>
-      <h3>Content that sounds like you — not a franchise feed.</h3>
-      <p>Just Listed sets, open-house announcements, market updates, reel covers — made in your voice and on your brand, scheduled and ready. You show up consistently without becoming a full-time content creator.</p>
-      <div class="list"><span>Just Listed sets</span><span>Stories &amp; reels</span><span>Newsletters</span></div>
-    </div>
-  </div>
-
-  <div class="ch">
-    <div class="ch-media">
-      <figure class="tote-fig" style="position:relative;margin:0">
-        <img src="/img/tote.jpg" width="720" height="1037" alt="A Jade Real Estate branded canvas tote with stickers — a real example of Jade's agent collateral." loading="lazy">
-        <div class="card-over"><div class="cdp" style="width:100%;height:100%;border-radius:10px"><div class="lg">Jade<span>REAL ESTATE</span></div><div class="nm">Priya Nandakumar</div><div class="mt">REALTOR®</div></div></div>
-      </figure>
-    </div>
-    <div class="ch-l">
-      <div class="ch-num">03</div>
-      <h3>The pieces people actually hold onto.</h3>
-      <p>Business cards, yard signs, open-house collateral, closing gifts — and yes, the tote. Branded, printed, and in your hands, designed to match the identity we build with you. The details are where a brand becomes real.</p>
-      <div class="list"><span>Cards &amp; signage</span><span>Open-house kit</span><span>Closing gifts</span></div>
-    </div>
-  </div>
-
-  <div class="ch flip">
-    <div class="ch-media">
-      <div class="frame"><div class="bboard">
-        <div class="bb-mark">M</div>
-        <div class="bb-r"><div class="w">Marisol Vega</div><div class="bb-sw"><i style="background:#15201a"></i><i style="background:#335143"></i><i style="background:#3e5725"></i><i style="background:#a6b6a4"></i><i style="background:#f2efeb;border:1px solid var(--line)"></i></div><div class="bb-type"><b>Aa</b>DM Serif Display · Montserrat</div></div>
-      </div></div>
-    </div>
-    <div class="ch-l">
-      <div class="ch-num">04</div>
-      <h3>A brand that's genuinely yours.</h3>
-      <p>Wordmark, color, type, and voice — shaped around who you are and who you serve. Minimal or warm, local or luxury; we build the identity, you own it. It's the thread that ties every piece above together.</p>
-      <div class="list"><span>Logo &amp; wordmark</span><span>Color &amp; type</span><span>Voice</span></div>
+  <div class="mk-cover">
+    <div class="ct"><span>Jade Real Estate</span><span>Issue Nº 01</span></div>
+    <h3>The Jade Marketing Playbook</h3>
+    <div class="sub">How we market your business</div>
+    <div class="mk-toc">
+      <div><b>01 · The listing launch</b><span>p.03</span></div>
+      <div><b>02 · Your brand kit</b><span>p.04</span></div>
+      <div><b>03 · Three ways, one team</b><span>p.05</span></div>
+      <div><b>04 · The tools behind it</b><span>p.06</span></div>
     </div>
   </div>
 </div></section>
 
-<section class="band cream"><div class="wrap">
-  <div class="eyebrow">The same piece, three ways</div>
-  <div class="sy-man" style="max-width:62ch"><div class="big" style="font-size:clamp(23px,3.2vw,34px);margin-top:10px">Flexibility you can see.</div><p style="margin-top:14px">One listing cover, built for three different agents. Same team behind it — three completely different brands.</p></div>
-  <div class="moods">
-    <div class="mood"><div class="ml">Modern &amp; minimal</div><div class="mcard m-min"><div class="mk">Seller Presentation</div><div class="mh">412 Lupine Lane</div><div class="mby">Marisol Vega · REALTOR®</div></div></div>
-    <div class="mood"><div class="ml">Warm &amp; local</div><div class="mcard m-warm"><div class="mk">Seller Presentation</div><div class="mh">A home on<br>Lupine Lane.</div><div class="mby">The Whitaker Group</div></div></div>
-    <div class="mood"><div class="ml">High-end editorial</div><div class="mcard m-ed"><div class="mk">Seller Presentation</div><div class="mh">Lupine Lane,<br>Nº 01.</div><div class="mby">Daniel Okafor · Jade Real Estate</div></div></div>
+<section class="band cream" id="capabilities"><div class="wrap">
+  <div class="eyebrow">What we do</div>
+  <h2 class="h-sec">Six ways we market you. Tap a card.</h2>
+  <p class="lead">The full marketing function of a big brokerage, done in-house and built around your brand — not a template with your logo dropped in.</p>
+  <div class="fcs">${cards}</div>
+</div></section>
+
+<section class="band paper"><div class="wrap">
+  <div class="eyebrow">The playbook</div>
+  <h2 class="h-sec">Page through how Jade markets.</h2>
+  <div class="book">
+    <div class="book-stage" id="fb">
+      <div class="fb-page fb-dark on">
+        <div class="fb-eye">Issue Nº 01</div>
+        <div class="fb-h big" style="margin-top:12px">The Jade<br>Marketing Playbook.</div>
+        <div class="fb-lead">How an independent Colorado brokerage markets its agents — done for you, built around you.</div>
+        <div class="fb-cover-foot">Jade Real Estate · Denver · Front Range &amp; mountains</div>
+      </div>
+      <div class="fb-page fb-cream">
+        <div class="fb-eye">The idea</div>
+        <div class="fb-h mid" style="margin-top:8px">Done for you. Built around you.</div>
+        <div class="fb-lead">Most brokerages hand you a template and a login. At Jade, a real in-house designer builds your marketing around your brand, your market, and your voice — and keeps building as your business grows. The marketing gets done; you stay in front of clients.</div>
+        <div class="fb-stats"><div><b>In-house</b><i>Not outsourced</i></div><div><b>Per agent</b><i>Not a template</i></div><div><b>Ongoing</b><i>Not one &amp; done</i></div></div>
+      </div>
+      <div class="fb-page fb-paper">
+        <div class="fb-eye">Chapter 01</div>
+        <div class="fb-h mid" style="margin-top:8px">A listing launch, start to finish.</div>
+        <div class="fb-lead">Every listing gets the same treatment — shaped to the property and the seller.</div>
+        <div class="fb-steps">
+          <div class="fb-step"><b>1</b><span>Brief &amp; brand the listing</span></div>
+          <div class="fb-step"><b>2</b><span>Magazine-style seller presentation</span></div>
+          <div class="fb-step"><b>3</b><span>Just Listed social set</span></div>
+          <div class="fb-step"><b>4</b><span>Signage &amp; open-house kit</span></div>
+          <div class="fb-step"><b>5</b><span>Paid &amp; organic social push</span></div>
+          <div class="fb-step"><b>6</b><span>Nurture the leads it brings in</span></div>
+        </div>
+      </div>
+      <div class="fb-page fb-cream">
+        <div class="fb-eye">Chapter 02</div>
+        <div class="fb-h mid" style="margin-top:8px">Your brand kit.</div>
+        <div class="fb-lead">The identity we build with you, and the pieces it lives on.</div>
+        <div class="fb-grid">
+          <div><b>Identity</b>Logo, color, type, voice</div>
+          <div><b>Print</b>Cards, signs, open-house</div>
+          <div><b>Social</b>Templates &amp; reels</div>
+          <div><b>Presentations</b>Listing &amp; CMA decks</div>
+          <div><b>Swag</b>Totes &amp; closing gifts</div>
+          <div><b>Email</b>Newsletter &amp; nurture</div>
+        </div>
+      </div>
+      <div class="fb-page fb-paper">
+        <div class="fb-eye">Chapter 03</div>
+        <div class="fb-h mid" style="margin-top:8px">Three ways, one team.</div>
+        <div class="fb-lead">The same listing cover, built for three different agents — because no two Jade brands look alike.</div>
+        <div class="fb-three">
+          <div class="fb-mini min"><div class="mk">Seller Presentation</div><div class="mh">412 Lupine Lane</div><div class="ml">Modern &amp; minimal</div></div>
+          <div class="fb-mini warm"><div class="mk">Seller Presentation</div><div class="mh">A home on Lupine Lane.</div><div class="ml">Warm &amp; local</div></div>
+          <div class="fb-mini ed"><div class="mk">Seller Presentation</div><div class="mh">Lupine Lane, Nº 01.</div><div class="ml">High-end editorial</div></div>
+        </div>
+      </div>
+      <div class="fb-page fb-dark">
+        <div class="fb-eye">Chapter 04</div>
+        <div class="fb-h mid" style="margin-top:8px;color:#fff">The tools behind it.</div>
+        <div class="fb-lead">The platform that makes it repeatable — all included in the flat $200/month.</div>
+        <div class="fb-stats" style="flex-wrap:wrap;gap:20px 30px">
+          <div><b>Studio</b><i>Marketing builder</i></div>
+          <div><b>OnlySocial</b><i>Scheduling</i></div>
+          <div><b>Follow Up Boss</b><i>CRM &amp; nurture</i></div>
+          <div><b>HouseCanary</b><i>Market data</i></div>
+          <div><b>Jade AI</b><i>Drafts &amp; content</i></div>
+        </div>
+        <div class="fb-cover-foot" style="color:var(--sage)">Build yours with Emilie →</div>
+      </div>
+    </div>
+    <div class="book-nav">
+      <button type="button" id="fb-prev">&#8249; Prev</button>
+      <div class="fb-dots">
+        <button type="button" class="fb-dot on" aria-label="Page 1"></button>
+        <button type="button" class="fb-dot" aria-label="Page 2"></button>
+        <button type="button" class="fb-dot" aria-label="Page 3"></button>
+        <button type="button" class="fb-dot" aria-label="Page 4"></button>
+        <button type="button" class="fb-dot" aria-label="Page 5"></button>
+        <button type="button" class="fb-dot" aria-label="Page 6"></button>
+      </div>
+      <button type="button" id="fb-next">Next &#8250;</button>
+    </div>
   </div>
 </div></section>
 
-<section class="band sy-cta"><div class="wrap">
-  <div class="eyebrow">Your brand, next</div>
+<section class="band mk-cta"><div class="wrap">
+  <div class="eyebrow">Your marketing, next</div>
   <h2>Let's build the version of this that's yours.</h2>
-  <p>Bring your business and your taste — Emilie will walk you through how Jade would build your marketing around you.</p>
+  <p>Bring your business and your taste — Emilie will walk you through how Jade would market you, specifically.</p>
   <div style="margin-top:26px"><a class="btn p" href="${BOOK}" target="_blank" rel="noopener">Talk with Emilie</a></div>
   <p class="exits" style="color:var(--sage)">Opens our scheduler in a new tab.</p>
-</div></section>`;
-  const jsonld = [{ '@context': 'https://schema.org', '@type': 'WebPage', name: 'See Yourself at Jade — Personalized Agent Marketing', url: SITE + '/studio', description: "The range of personalized marketing Jade Real Estate builds for its agents: listing presentations, social content, print and signage, and brand identity — built around each agent, not a template." }];
-  return layout({ title: 'See Yourself at Jade — Personalized Agent Marketing', desc: "Jade builds your marketing around you, not a template. See the range: magazine-style listing presentations, social content in your voice, branded print, and a brand identity that's genuinely yours.", path: '/studio', body, jsonld });
+</div></section>
+<script>
+(function(){
+  var cards=document.querySelectorAll(".fc");
+  for(var i=0;i<cards.length;i++){(function(c){c.addEventListener("click",function(){c.classList.toggle("flip");});})(cards[i]);}
+  var fb=document.getElementById("fb");
+  if(!fb){return;}
+  var pages=fb.querySelectorAll(".fb-page");
+  var dots=document.querySelectorAll(".fb-dot");
+  var prev=document.getElementById("fb-prev");
+  var next=document.getElementById("fb-next");
+  var idx=0;
+  function show(n){
+    if(n<0){n=0;}
+    if(n>pages.length-1){n=pages.length-1;}
+    idx=n;
+    for(var i=0;i<pages.length;i++){pages[i].className=pages[i].className.replace(" on","");if(i===idx){pages[i].className=pages[i].className+" on";}}
+    for(var j=0;j<dots.length;j++){dots[j].className=(j===idx)?"fb-dot on":"fb-dot";}
+    if(prev){prev.disabled=(idx===0);}
+    if(next){next.disabled=(idx===pages.length-1);}
+  }
+  if(prev){prev.addEventListener("click",function(){show(idx-1);});}
+  if(next){next.addEventListener("click",function(){show(idx+1);});}
+  for(var k=0;k<dots.length;k++){(function(n){dots[n].addEventListener("click",function(){show(n);});})(k);}
+  show(0);
+})();
+</script>`;
+  const jsonld = [{ '@context': 'https://schema.org', '@type': 'WebPage', name: 'Marketing at Jade Real Estate', url: SITE + '/marketing', description: "The marketing Jade Real Estate does for its agents: listing presentations, social content, print and signage, personal branding, email nurture, and community presence — in-house and built around each agent." }];
+  return layout({ title: 'Marketing — Jade Real Estate Careers', desc: "The marketing Jade builds for its agents, done for you and built around your brand: magazine-style listing presentations, social in your voice, branded print, personal branding, and nurture — all in-house.", path: '/marketing', body, jsonld });
 }
 function calculatorPage() {
   const marketOpts = [['Denver Metro', 571000], ['Colorado Springs', 500000], ['Northern CO', 540000], ['Custom', 571000]]
@@ -1179,7 +1208,7 @@ function robots() {
 
 async function sitemap() {
   const posts = await getPosts(200);
-  const base = ['/', '/technology', '/culture', '/studio', '/calculator', '/compare', '/blog', '/faq'];
+  const base = ['/', '/technology', '/culture', '/marketing', '/calculator', '/compare', '/blog', '/faq'];
   const today = new Date().toISOString().slice(0, 10);
   const rows = base.map(u => `  <url><loc>${SITE}${u === '/' ? '' : u}</loc><lastmod>${today}</lastmod><changefreq>weekly</changefreq><priority>${u === '/' ? '1.0' : '0.7'}</priority></url>`)
     .concat(posts.map(p => `  <url><loc>${SITE}/blog/${p.slug}</loc><lastmod>${(p.published_at || today).slice(0, 10)}</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>`));
@@ -1223,7 +1252,7 @@ Jade does not lead with a commission-split number, because a split is not take-h
 - Why Jade: ${SITE}/
 - Technology: ${SITE}/technology
 - Culture: ${SITE}/culture
-- See yourself at Jade (interactive brand studio): ${SITE}/studio
+- Marketing (what Jade builds for agents): ${SITE}/marketing
 - Blog: ${SITE}/blog
 - FAQ (includes the full $200 inclusions list): ${SITE}/faq
 - Take-home calculator: ${SITE}/calculator
@@ -1254,7 +1283,8 @@ export default {
     if (p === '/technology') return html(techPage());
     if (p === '/culture') return html(culturePage());
     if (p === '/faq') return html(faqPage());
-    if (p === '/studio') return html(studioPage());
+    if (p === '/studio') return Response.redirect(SITE + '/marketing', 301);
+    if (p === '/marketing') return html(marketingPage());
     if (p === '/calculator') return html(calculatorPage());
     if (p === '/compare') return html(comparePage());
     if (p === '/blog') return html(await blogIndex());
