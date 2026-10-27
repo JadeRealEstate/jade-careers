@@ -236,6 +236,7 @@ function ctaBand() {
 
 const MARKETS = ['Denver Metro', 'Colorado Springs', 'Winter Park', 'Northern Colorado'];
 const TESTIMONIALS = [
+  ['Joining Jade is the best thing I’ve done in my career. I’ve doubled my transactions in the past year — largely thanks to the marketing support, the managing broker, and the lead systems they provide.', 'Ben Good'],
   ['Good people, a great office environment, and support whenever I need it.', 'Trevor Moylan'],
   ['What stands out most is how available and ready to help everyone is — it’s a flexible team you can actually count on.', 'Charles Phanumphai'],
   ['Friendly agents, real marketing and social media support, and a kind broker who wants to see you succeed — a genuine opportunity to grow your business alongside Jade’s.', 'Stephanie Avozani'],
