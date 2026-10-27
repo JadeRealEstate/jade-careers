@@ -584,11 +584,6 @@ function culturePage() {
   <div class="by">Will Lawrence · Owner &amp; Managing Broker</div>
 </div></section>
 
-<section class="band cream"><div class="wrap">
-  <div class="eyebrow">In their words</div>
-  <h2 class="h-sec" style="margin-bottom:8px">What agents say.</h2>
-  <div class="quotes">${quotes}</div>
-</div></section>
 ${ctaBand()}`;
   return layout({ title: 'Culture — Jade Real Estate Careers', desc: 'Life at Jade Real Estate: freedom to run your business, a team that shows up for each other, real marketing support, community presence like Jade at the Market, and an independent, boutique, Colorado-local culture built around agents.', path: '/culture', body });
 }
