@@ -142,6 +142,16 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.1;margin:0;text-
 .inc li:first-child{border-top:0}
 .inc li::before{content:"✓";position:absolute;left:0;top:8px;color:var(--olive);font-weight:800}
 .inc .not li::before{content:"—";color:var(--jade2);font-weight:700}
+.inc-toggle{margin-top:26px}
+.inc-toggle>summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:10px;background:var(--jade);color:#fff;font-weight:700;font-size:14.5px;padding:12px 22px;border-radius:999px;font-family:var(--sans);user-select:none}
+.inc-toggle>summary::-webkit-details-marker{display:none}
+.inc-toggle>summary::marker{content:""}
+.inc-toggle>summary:hover{background:var(--forest)}
+.inc-toggle .chev{transition:transform .2s;font-size:11px}
+.inc-toggle[open]>summary .chev{transform:rotate(180deg)}
+.inc-toggle[open] .inc-open{display:none}
+.inc-toggle:not([open]) .inc-close{display:none}
+.inc-toggle .inc{margin-top:22px}
 .faqs{margin-top:4px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--line);display:grid;gap:1px}
 .faqs .it{background:var(--paper);padding:24px 26px}
 .faqs h3{font-family:var(--sans);font-size:17px;font-weight:700;color:var(--jade);margin:0}
@@ -536,23 +546,27 @@ ${ctaBand()}`;
 
 // Grouped, verifiable "what's included in $200/month" block, reused on FAQ.
 function includedBlock() {
-  const app = ['Client hubs — a private portal for every buyer and seller', 'Personal booking scheduler with QR code, synced to your CRM', 'Listing presentations &amp; CMAs with pricing adjustments and PDF export', 'Marketing studio — social posts, newsletters, landing pages, custom graphics', 'Forms &amp; lead-capture builder with QR codes, synced to Follow Up Boss', 'A Jade AI assistant (Colorado rules &amp; Fair Housing aware)'];
-  const brokerage = ['Follow Up Boss CRM — set up and ready to go', 'HouseCanary property &amp; market data', 'In-house listing &amp; marketing support and design work', 'Transaction support — pricing, inspection, appraisal, compliance', 'One-on-one coaching tied to your goals', 'Optional accountability groups &amp; check-ins', 'Direct access to the broker', 'Lead sources (referral, relocation, digital) for agents who want them'];
-  const kit = ['Branded Jade tote, signage, and a marketing consultation', 'Business cards and office supplies', 'Follow Up Boss access, already set up for you'];
-  const not = ['Your MLS / REALTOR® association dues', 'Your transaction-platform subscription (e.g. CTMe)', 'Physical printing &amp; production costs'];
+  const app = ['Client hubs \u2014 a private, branded portal for every buyer and seller', 'A shared document vault inside each hub', 'Personal booking scheduler with its own QR code', 'Scheduler synced to your CRM', 'Listing presentations with live pricing adjustments', 'CMAs with one-click PDF export', 'The marketing studio, built in', 'Just-Listed, Coming-Soon, Open-House, Under-Contract &amp; Sold graphic sets', 'Social posts and reels, sized for feed and story', 'Newsletter templates', 'Landing pages for listings and lead capture', 'Forms &amp; lead-capture builder with QR codes', 'Leads routed straight into Follow Up Boss', 'The Jade AI assistant \u2014 Colorado rules &amp; Fair Housing aware', 'AI help drafting listings, emails and captions'];
+  const mkt = ['In-house listing &amp; marketing design work', 'Personal branding \u2014 logo, color, type and voice', 'Custom graphics on request', 'Print design \u2014 cards, signage, open-house kits', 'A matched campaign set for every launch'];
+  const data = ['Follow Up Boss CRM \u2014 set up and ready to go', 'HouseCanary property &amp; market data', 'Transaction support \u2014 pricing and strategy', 'Inspection &amp; appraisal support', 'Compliance review on every deal'];
+  const people = ['One-on-one coaching tied to your goals', 'Classes &amp; workshops', 'Optional accountability groups &amp; check-ins', 'A broker who actually picks up', 'Lead sources \u2014 referral, relocation &amp; digital, for those who want them', 'In-house lending through Versatile Lending', 'Jade at the Market and neighborhood events'];
+  const kit = ['A branded Jade tote', 'Yard signage', 'Business cards', 'Office supplies', 'A kickoff marketing consultation'];
+  const not = ['Your MLS / REALTOR\u00ae association dues', 'Your transaction-platform subscription (e.g. CTMe)', 'Physical printing &amp; production costs'];
   const ul = (arr, cls) => `<ul${cls ? ` class="${cls}"` : ''}>${arr.map(i => `<li>${i}</li>`).join('')}</ul>`;
   return `<div class="inc">
-    <div class="grp"><h4>The Jade agent app</h4><p class="sub">Built in-house. Yours the day you start.</p>${ul(app)}</div>
-    <div class="grp"><h4>Brokerage &amp; support</h4><p class="sub">The people and systems behind your deals.</p>${ul(brokerage)}</div>
+    <div class="grp span"><h4>The Jade app &amp; AI</h4><p class="sub">Included at $200. The $150 plan keeps everything else below \u2014 the people and the support \u2014 just not the app or the AI.</p>${ul(app)}</div>
+    <div class="grp"><h4>Marketing, done for you</h4><p class="sub">An in-house team, not a template.</p>${ul(mkt)}</div>
+    <div class="grp"><h4>CRM, data &amp; transactions</h4><p class="sub">The systems behind every deal.</p>${ul(data)}</div>
+    <div class="grp"><h4>Coaching &amp; people</h4><p class="sub">The part that makes the real difference.</p>${ul(people)}</div>
     <div class="grp"><h4>Your day-one starter kit</h4><p class="sub">Ready before your first appointment.</p>${ul(kit)}</div>
-    <div class="grp"><h4>Billed separately</h4><p class="sub">Standard agent costs, not part of the $200.</p>${ul(not, 'not')}</div>
+    <div class="grp"><h4>Billed separately</h4><p class="sub">Standard agent costs, at any brokerage.</p>${ul(not, 'not')}</div>
   </div>`;
 }
 
 function faqPage() {
   const faqs = [
     ['What makes Jade different from a big franchise?', 'Jade is independent, Colorado-local, and built around the agent: no mandatory meetings, no production minimums. What you get instead is people — a broker who picks up, one-on-ones whenever you want them, classes we actually enjoy teaching, and quick answers to your questions. The brokerage fits how you work, not the other way around.'],
-    ['What is included in the $200/month?', 'A lot — the full Jade agent app (client hubs, booking scheduler, listing presentations and CMAs, the marketing studio, forms and lead capture, and the Jade AI assistant), plus Follow Up Boss CRM set up and ready, HouseCanary data, in-house marketing and design, transaction support, coaching, lead sources for those who want them, and a day-one starter kit. The full list is above. Standard agent costs like your MLS dues and transaction-platform subscription are billed separately.'],
+    ['What is included in the $200/month?', 'A lot — the full Jade agent app (client hubs, booking scheduler, listing presentations and CMAs, the marketing studio, forms and lead capture, and the Jade AI assistant), plus Follow Up Boss CRM set up and ready, HouseCanary data, in-house marketing and design, transaction support, coaching, lead sources for those who want them, and a day-one starter kit. The full list is above. Standard agent costs like your MLS dues and transaction-platform subscription are billed separately. Prefer to bring your own tools? A $150/month option drops the Jade app and AI and keeps the brokerage, people and support exactly the same.'],
     ['How do splits and take-home work?', 'We don’t lead with a split number, because a split isn’t your take-home. The take-home calculator reads your real production and shows where you’d land, and compares it to your current brokerage. Emilie will walk you through the specifics in a conversation.'],
     ['Do you provide leads?', 'Yes, for agents who want them — referral, relocation, and digital lead sources. No one is forced to work them; it’s there if it fits how you want to grow.'],
     ['What marketing help do I get?', 'In-house listing support, personal branding, social content, and custom graphics. You’re never expected to be your own designer — the marketing gets done.'],
@@ -570,8 +584,11 @@ function faqPage() {
 <section class="band cream"><div class="wrap">
   <div class="eyebrow">What the $200/month includes</div>
   <h2 class="h-sec">One flat fee. Here’s everything in it.</h2>
-  <p class="lead">No desk fees, no per-tool add-ons for the Jade platform. The app and the support below are part of the $200 — the only things billed separately are standard agent costs.</p>
-  ${includedBlock()}
+  <p class="lead">$200/month gets you the full Jade platform — the agent app and the AI — plus all the marketing, data and support behind it. Prefer to bring your own tools? There’s a $150/month option without the app and AI; every other part of the brokerage stays exactly the same.</p>
+  <details class="inc-toggle">
+    <summary><span class="inc-open">See everything included</span><span class="inc-close">Hide the full list</span><span class="chev">▾</span></summary>
+    ${includedBlock()}
+  </details>
 </div></section>
 
 <section class="band paper"><div class="wrap">
