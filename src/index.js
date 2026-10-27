@@ -672,9 +672,9 @@ function faqPage() {
     <p class="tierlead">Same brokerage, same people on every tier — you choose how much platform you want.</p>
     <div class="tiertable"><table>
       <thead><tr><th></th><th>$200<span>/mo</span><em>Full platform</em></th><th>$150<span>/mo</span><em>Without the AI</em></th><th>$50<span>/mo</span><em>Hang your license</em></th></tr></thead>
-      <tbody><tr><td>The Jade agent app</td><td class="y">✓</td><td class="y">✓</td><td class="n">—</td></tr><tr><td>The Jade AI assistant</td><td class="y">✓</td><td class="n">—</td><td class="n">—</td></tr><tr><td>Personalized marketing, made for you</td><td class="y">✓</td><td class="y">✓</td><td class="r">On request</td></tr><tr><td>CRM &amp; HouseCanary data</td><td class="y">✓</td><td class="y">✓</td><td class="n">—</td></tr><tr><td>Transaction support</td><td class="y">✓</td><td class="y">✓</td><td class="r">On request</td></tr><tr><td>Coaching, classes &amp; broker access</td><td class="y">✓</td><td class="y">✓</td><td class="r">On request</td></tr><tr><td>Company lead sources</td><td class="y">✓</td><td class="y">✓</td><td class="n">—</td></tr><tr><td>E&amp;O coverage</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td></tr><tr><td>Jade email &amp; office access</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td></tr></tbody>
+      <tbody><tr><td>The agent app — hubs, scheduler, CMAs &amp; forms</td><td class="y">✓</td><td class="y">✓</td><td class="n">—</td></tr><tr><td>AI: listing &amp; description drafting</td><td class="y">✓</td><td class="n">—</td><td class="n">—</td></tr><tr><td>AI: emails, captions &amp; client replies</td><td class="y">✓</td><td class="n">—</td><td class="n">—</td></tr><tr><td>AI: Colorado-rules &amp; Fair-Housing checks</td><td class="y">✓</td><td class="n">—</td><td class="n">—</td></tr><tr><td>Personalized marketing, made for you</td><td class="y">✓</td><td class="y">✓</td><td class="r">On request</td></tr><tr><td>CRM &amp; HouseCanary data</td><td class="y">✓</td><td class="y">✓</td><td class="n">—</td></tr><tr><td>Transaction support</td><td class="y">✓</td><td class="y">✓</td><td class="r">On request</td></tr><tr><td>Coaching, classes &amp; broker access</td><td class="y">✓</td><td class="y">✓</td><td class="r">On request</td></tr><tr><td>Company lead sources</td><td class="y">✓</td><td class="y">✓</td><td class="n">—</td></tr><tr><td>E&amp;O coverage</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td></tr><tr><td>Jade email &amp; office access</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td></tr></tbody>
     </table></div>
-    <p class="tiernote">No one checks up on you on any tier — the support is simply there when you want it. The $50 tier is for agents who mainly want a professional home for their license, with transaction and marketing help on request.</p>
+    <p class="tiernote">The AI is the real difference between $150 and $200: at $150 you get the full app to work in; at $200 the app also drafts your listings, emails and content and checks them against Colorado rules — most of the day-to-day time saved. No one checks up on you on any tier; the support is simply there when you want it, and the $50 tier is for agents who mainly want a professional home for their license.</p>
   </div>
   <script>
   (function(){
@@ -1114,7 +1114,7 @@ function calculatorPage() {
           <div class="cx-f"><label>Starting split (agent %) — pre-cap</label><div class="cx-in"><input type="number" id="c-split" value="80"><span style="padding:0 12px 0 0">%</span></div></div>
           <div class="cx-f"><label>Company-lead split (agent %)</label><div class="cx-in"><input type="number" id="c-cosplit" value="60"><span style="padding:0 12px 0 0">%</span></div></div>
           <div class="cx-f"><label>Company-lead deals / year</label><div class="cx-in"><input type="number" id="c-codeals" value="4"></div><span class="hint">Agents who work the leads typically close 3–5 extra a year.</span></div>
-          <div class="cx-f"><label>Company dollar cap</label><div class="cx-in"><span>$</span><input type="number" id="c-cap" value="17500"></div><span class="hint">Caps total brokerage split — personal and company. After it, you keep 100%.</span></div>
+          <div class="cx-f"><label>Company dollar cap</label><div class="cx-in"><span>$</span><input type="number" id="c-cap" value="17500"></div><span class="hint">Company-lead splits are always owed, but they count toward your cap. Once you reach it, your personal deals are 100%.</span></div>
           <div class="cx-f"><label>Split after cap (agent %)</label><div class="cx-in"><input type="number" id="c-aftercap" value="100"><span style="padding:0 12px 0 0">%</span></div></div>
           <div class="cx-f"><label>Monthly fee</label><div class="cx-in"><span>$</span><input type="number" id="c-fee" value="200"></div><span class="hint">Month-to-month. Covers the app, marketing and support — full list below.</span></div>
           <div class="cx-f"><label>Transaction / desk fee per deal</label><div class="cx-in"><span>$</span><input type="number" id="c-txn" value="0"></div><span class="hint">Jade charges none.</span></div>
@@ -1188,20 +1188,27 @@ function calculatorPage() {
     var gpd=p.price*p.rate/100;
     var tot=p.pd+p.cd;
     var gci=tot*gpd;
-    var brokP=p.pd*(1-p.ps/100)*gpd;
-    var brokC=p.cd*(1-p.cs/100)*gpd;
-    var totalSplit=brokP+brokC;
-    var brokTake;
-    if(p.cap===null){brokTake=totalSplit;}
-    else if(totalSplit<=p.cap){brokTake=totalSplit;}
-    else{var blend=gci>0?totalSplit/gci:0;var capGci=blend>0?p.cap/blend:0;var postGci=Math.max(0,gci-capGci);brokTake=p.cap+postGci*(1-p.acs/100);}
+    var personalGci=p.pd*gpd;
+    var companySplit=p.cd*(1-p.cs/100)*gpd;
+    var personalFull=p.pd*(1-p.ps/100)*gpd;
+    var personalPaid;
+    if(p.cap===null){
+      personalPaid=personalFull;
+    }else{
+      var capRoom=Math.max(0,p.cap-companySplit);
+      var preRate=(1-p.ps/100);
+      var gciPre=preRate>0?Math.min(personalGci,capRoom/preRate):personalGci;
+      var gciPost=Math.max(0,personalGci-gciPre);
+      personalPaid=gciPre*preRate+gciPost*(1-p.acs/100);
+    }
+    var brokTake=companySplit+personalPaid;
     var agentComm=gci-brokTake;
     var txnFees=p.txn*tot;
     var costs=p.monthly*12+p.annual+txnFees+p.mkt*12;
     var take=agentComm-costs;
     var eff=gci>0?take/gci*100:0;
-    var perDeal=tot>0?totalSplit/tot:0;
-    var toCap=(p.cap!==null&&perDeal>0&&p.cap>0)?Math.ceil(p.cap/perDeal):null;
+    var avg=tot>0?(companySplit+personalFull)/tot:0;
+    var toCap=(p.cap!==null&&avg>0&&p.cap>0)?Math.min(tot,Math.ceil(p.cap/avg)):null;
     return {gpd:gpd,gci:gci,brokTake:brokTake,agentComm:agentComm,costs:costs,take:take,eff:eff,toCap:toCap,txnFees:txnFees};
   }
   function jadeParams(){return {price:num("c-price"),rate:num("c-rate"),pd:num("c-deals"),cd:num("c-codeals"),ps:num("c-split"),cs:num("c-cosplit"),cap:capvId("c-cap"),acs:num("c-aftercap"),monthly:num("c-fee"),txn:num("c-txn"),annual:num("c-extra"),mkt:num("c-ad")};}
@@ -1225,7 +1232,7 @@ function calculatorPage() {
     var parts=[];
     var coKeep=jp.cd*(jp.cs/100)*jade.gpd;
     if(jp.cd>0){parts.push(money(coKeep)+" in your pocket from "+jp.cd+" company-lead deal"+(jp.cd===1?"":"s"));}
-    if(jade.toCap!==null){parts.push("you reach Jade's cap around deal "+jade.toCap+", then keep 100%");}
+    if(jade.toCap!==null){parts.push("you reach your cap around deal "+jade.toCap+", then your personal deals are 100%");}
     g("o-story").textContent=parts.length?("Why Jade adds up: "+parts.join("; and ")+"."):"Enter your numbers to see your estimate.";
     renderBroks(jade.take);
   }
