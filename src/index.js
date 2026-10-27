@@ -166,6 +166,21 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.1;margin:0;text-
 .tiers .tp span{font-size:.4em;color:var(--jade2);font-style:italic;margin-left:3px}
 .tiers .tier h4{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--jade);margin:10px 0 6px}
 .tiers .tier p{font-size:13px;color:var(--jade2);line-height:1.55;margin:0}
+#tiersPanel{display:none;margin-top:22px}
+#tiersPanel.show{display:block}
+.tierlead{font-size:15px;color:var(--jade2);max-width:62ch}
+.tiertable{overflow-x:auto;margin-top:16px;border:1px solid var(--line);border-radius:16px;background:var(--paper)}
+.tiertable table{border-collapse:collapse;width:100%;min-width:580px}
+.tiertable th,.tiertable td{text-align:left;padding:12px 15px;border-bottom:1px solid var(--line);font-size:13.5px}
+.tiertable thead th{background:var(--cream);font-family:var(--serif);color:var(--jade);font-size:21px;font-style:italic;vertical-align:top;line-height:1.05}
+.tiertable thead th span{font-size:12px;color:var(--jade2);font-style:italic}
+.tiertable thead th em{display:block;font-family:var(--sans);font-style:normal;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--jade2);font-weight:700;margin-top:5px}
+.tiertable tbody td:first-child{font-weight:600;color:var(--ink)}
+.tiertable td.y{color:var(--olive);font-weight:800;text-align:center}
+.tiertable td.n{color:var(--jade2);text-align:center}
+.tiertable td.r{color:var(--jade2);text-align:center;font-size:11.5px;font-style:italic}
+.tiertable tbody tr:last-child td{border-bottom:0}
+.tiernote{font-size:12.5px;color:var(--jade2);margin-top:14px;line-height:1.55;max-width:72ch}
 @media(max-width:760px){.tiers{grid-template-columns:1fr}}
 .faqs{margin-top:4px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--line);display:grid;gap:1px}
 .faqs .it{background:var(--paper);padding:24px 26px}
@@ -227,7 +242,7 @@ const TESTIMONIALS = [
 async function homePage() {
   const posts = await getPosts(3);
   const jsonld = [
-    { '@context': 'https://schema.org', '@type': 'Organization', name: 'Jade Real Estate', url: SITE, logo: OG, image: OG, sameAs: [MAIN], areaServed: MARKETS, description: 'Independent Colorado real estate brokerage built around the agent — the Jade agent app, marketing done for you, and real support, across the Front Range and mountains.' },
+    { '@context': 'https://schema.org', '@type': 'Organization', name: 'Jade Real Estate', url: SITE, logo: OG, image: OG, sameAs: [MAIN], areaServed: MARKETS, description: 'Independent Colorado real estate brokerage built around the agent — the Jade agent app, marketing support when you need it, and real support, across the Front Range and mountains.' },
     { '@context': 'https://schema.org', '@type': 'RealEstateAgent', name: 'Jade Real Estate', url: SITE, areaServed: MARKETS, address: { '@type': 'PostalAddress', streetAddress: '2570 Lawrence St Unit 104', addressLocality: 'Denver', addressRegion: 'CO', postalCode: '80205' }, knowsAbout: ['real estate agent technology', 'agent marketing', 'brokerage support', 'real estate careers Colorado'] },
   ];
   const quotes = TESTIMONIALS.map(([q, by]) => `<div class="q"><p>&ldquo;${esc(q)}&rdquo;</p><div class="by">${esc(by)}</div></div>`).join('');
@@ -242,7 +257,7 @@ async function homePage() {
 <section class="hero"><div class="m1"></div><div class="wrap">
   <div class="eyebrow">Careers at Jade Real Estate</div>
   <h1>You built the business. We make it lighter to run.</h1>
-  <p>Jade is an independent Colorado brokerage with its own agent app, marketing done for you, and a broker who actually picks up. No mandatory meetings or production minimums — just real people who love a one-on-one, teach the classes, and answer your questions, because person-to-person is what makes us better.</p>
+  <p>Jade is an independent Colorado brokerage with its own agent app, marketing support when you need it, and a broker who actually picks up. No mandatory meetings or production minimums — just real people who love a one-on-one, teach the classes, and answer your questions, because person-to-person is what makes us better.</p>
   <div class="btns"><a class="btn p" href="${BOOK}" target="_blank" rel="noopener">Talk with Emilie</a><a class="btn s" href="/marketing">See our marketing →</a></div>
 </div></section>
 
@@ -261,7 +276,7 @@ async function homePage() {
   <h2 class="h-sec">Three things, done properly.</h2>
   <div class="rows">
     <div class="r"><div class="lbl"><small>01 — Tools</small>Software that pulls its weight</div><p>The Jade agent app is built in-house and included in your fee: client hubs, a booking scheduler, listing presentations, forms with QR codes, and a marketing studio — wired into Follow Up Boss and HouseCanary data so your pipeline stays current without double entry. <a href="/technology">See the tools →</a></p></div>
-    <div class="r"><div class="lbl"><small>02 — Marketing</small>You’re not your own designer</div><p>In-house listing support, personal branding, social content, and custom graphics. The posts go out, the listing looks sharp, and the newsletter ships — without you opening a design app at 11pm.</p></div>
+    <div class="r"><div class="lbl"><small>02 — Marketing</small>You’re not your own designer</div><p>In-house listing support, personal branding, and custom, on-brand content made for you — ready to post, with a marketing team to call on whenever you need it. You never start from a blank page.</p></div>
     <div class="r"><div class="lbl"><small>03 — Support</small>Help, not homework</div><p>One-on-one coaching tied to your goals, optional accountability (momentum, not guilt), and transaction help when a deal goes sideways — pricing, inspection, appraisal, compliance. A broker whose door is open, who measures you by your success, not your attendance.</p></div>
   </div>
 </div></section>
@@ -327,7 +342,7 @@ async function homePage() {
 </div></section>
 ${latest}
 ${ctaBand()}`;
-  return layout({ title: 'Jade Real Estate — Careers for Colorado Agents', desc: 'Join Jade Real Estate, an independent Colorado brokerage built around the agent: the Jade agent app, marketing done for you, and real support. No mandatory meetings or production minimums. Explore it with Emilie.', path: '/', body, jsonld });
+  return layout({ title: 'Jade Real Estate — Careers for Colorado Agents', desc: 'Join Jade Real Estate, an independent Colorado brokerage built around the agent: the Jade agent app, marketing support when you need it, and real support. No mandatory meetings or production minimums. Explore it with Emilie.', path: '/', body, jsonld });
 }
 
 function techPage() {
@@ -454,7 +469,7 @@ function techPage() {
           <div class="tx-tool"><b>Marketing studio</b><span>Branded social posts, newsletters, landing pages, and a weekly content pack — on brand, in minutes.</span></div>
           <div class="tx-tool"><b>Listing presentations &amp; CMAs</b><span>Build a sharp presentation and market analysis with pricing adjustments; export a clean PDF.</span></div>
           <div class="tx-tool"><b>Custom branding &amp; design</b><span>In-house design shapes your brand and market — not a forced house template.</span></div>
-          <div class="tx-tool"><b>Done for you</b><span>The posts go out and the listing looks sharp without you opening a design app at 11pm.</span></div>
+          <div class="tx-tool"><b>Made for you</b><span>Custom, on-brand pieces built for you to post, with the marketing team a message away when you need more.</span></div>
         </div>
       </div>
       <div class="tx-arts">
@@ -523,6 +538,7 @@ ${ctaBand()}
 }
 
 function culturePage() {
+  const quotes = TESTIMONIALS.map(([q, by]) => `<div class="q"><p>&ldquo;${esc(q)}&rdquo;</p><div class="by">${esc(by)}</div></div>`).join('');
   const body = `
 <section class="band forest"><div class="wrap">
   <div class="eyebrow">Culture</div>
@@ -555,6 +571,17 @@ function culturePage() {
     <div class="feat"><h3>Boutique &amp; invested</h3><p>As an independent, owner-operated brokerage, Jade is genuinely invested in helping each agent grow — not running you through a national playbook.</p></div>
   </div>
 </div></section>
+
+<section class="band pull"><div class="wrap">
+  <p>A brokerage should be a brokerage, not a tech company. Our focus is your business, your relationships, and you as a person — the technology is simply there, working quietly in the background, to support all of it.</p>
+  <div class="by">Will Lawrence · Owner &amp; Managing Broker</div>
+</div></section>
+
+<section class="band cream"><div class="wrap">
+  <div class="eyebrow">In their words</div>
+  <h2 class="h-sec" style="margin-bottom:8px">What agents say.</h2>
+  <div class="quotes">${quotes}</div>
+</div></section>
 ${ctaBand()}`;
   return layout({ title: 'Culture — Jade Real Estate Careers', desc: 'Life at Jade Real Estate: freedom to run your business, a team that shows up for each other, real marketing support, community presence like Jade at the Market, and an independent, boutique, Colorado-local culture built around agents.', path: '/culture', body });
 }
@@ -575,7 +602,7 @@ function includedBlock() {
        'Landing pages for listings and lead capture',
        'Forms &amp; lead-capture builder with QR codes, routed into Follow Up Boss',
        'AI help drafting listings, emails and captions']],
-    ['Personalized marketing, done for you', 'An in-house team, built around you — never a template.',
+    ['Personalized marketing, made for you', 'An in-house team, built around you — never a template.',
       ['Personalized listing &amp; marketing design, made for you',
        'Personal branding — your logo, color, type and voice',
        'Custom, personalized graphics on request'],
@@ -620,7 +647,7 @@ function faqPage() {
     ['What is included in the $200/month?', 'A lot — the full Jade agent app (client hubs, booking scheduler, listing presentations and CMAs, the marketing studio, forms and lead capture, and the Jade AI assistant), plus Follow Up Boss CRM set up and ready, HouseCanary data, in-house marketing and design, transaction support, coaching, lead sources for those who want them, and a day-one starter kit. The full list is above. Standard agent costs like your MLS dues and transaction-platform subscription are billed separately. There are other tiers too: $150/month keeps the full platform without the AI features, and $50/month lets you hang your license — E&amp;O, your Jade email and office access, with transaction and marketing help whenever you ask.'],
     ['How do splits and take-home work?', 'We don’t lead with a split number, because a split isn’t your take-home. The take-home calculator reads your real production and shows where you’d land, and compares it to your current brokerage. Emilie will walk you through the specifics in a conversation.'],
     ['Do you provide leads?', 'Yes, for agents who want them — referral, relocation, and digital lead sources. No one is forced to work them; it’s there if it fits how you want to grow.'],
-    ['What marketing help do I get?', 'In-house listing support, personal branding, social content, and custom graphics. You’re never expected to be your own designer — the marketing gets done.'],
+    ['What marketing help do I get?', 'Custom, on-brand content made for you — listing pieces, branding, social and graphics — plus a marketing team to call on when you need it. You’re never expected to be your own designer, and you never start from a blank page.'],
     ['Will I have support, or am I on my own?', 'One-on-one coaching tied to your goals, optional accountability, transaction help when a deal gets complicated, and a broker whose door is open. You’re measured by your success, not your attendance.'],
     ['Where does Jade work?', 'Across Colorado’s Front Range and mountains: Denver Metro, Colorado Springs, Winter Park, and Northern Colorado. The office is at ' + OFFICE + '.'],
     ['How hard is it to make the move?', 'More straightforward than most agents expect. Book a conversation with Emilie and she’ll walk you through the steps and timing for a clean transition.'],
@@ -641,16 +668,19 @@ function faqPage() {
     <button type="button" class="inc-morebtn" id="incMore">See more</button>
     <button type="button" class="inc-tierbtn" id="tierBtn">See the other tiers</button>
   </div>
-  <div class="tiers" id="tiersPanel" hidden>
-    <div class="tier"><div class="tp">$200<span>/mo</span></div><h4>The full platform</h4><p>The Jade app, the AI, and everything personalized — marketing, data and support. Everything on the list above.</p></div>
-    <div class="tier"><div class="tp">$150<span>/mo</span></div><h4>Without the AI</h4><p>The full app and everything above — just without the AI features. Same brokerage, same people, same personalized support.</p></div>
-    <div class="tier"><div class="tp">$50<span>/mo</span></div><h4>Hang your license</h4><p>For agents who mainly want a home for their license. Covers your E&amp;O, your Jade email and office access — plus transaction and marketing help whenever you ask. No one checks up on you; the support is simply there if you want it.</p></div>
+  <div class="tierwrap" id="tiersPanel">
+    <p class="tierlead">Same brokerage, same people on every tier — you choose how much platform you want.</p>
+    <div class="tiertable"><table>
+      <thead><tr><th></th><th>$200<span>/mo</span><em>Full platform</em></th><th>$150<span>/mo</span><em>Without the AI</em></th><th>$50<span>/mo</span><em>Hang your license</em></th></tr></thead>
+      <tbody><tr><td>The Jade agent app</td><td class="y">✓</td><td class="y">✓</td><td class="n">—</td></tr><tr><td>The Jade AI assistant</td><td class="y">✓</td><td class="n">—</td><td class="n">—</td></tr><tr><td>Personalized marketing, made for you</td><td class="y">✓</td><td class="y">✓</td><td class="r">On request</td></tr><tr><td>CRM &amp; HouseCanary data</td><td class="y">✓</td><td class="y">✓</td><td class="n">—</td></tr><tr><td>Transaction support</td><td class="y">✓</td><td class="y">✓</td><td class="r">On request</td></tr><tr><td>Coaching, classes &amp; broker access</td><td class="y">✓</td><td class="y">✓</td><td class="r">On request</td></tr><tr><td>Company lead sources</td><td class="y">✓</td><td class="y">✓</td><td class="n">—</td></tr><tr><td>E&amp;O coverage</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td></tr><tr><td>Jade email &amp; office access</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td></tr></tbody>
+    </table></div>
+    <p class="tiernote">No one checks up on you on any tier — the support is simply there when you want it. The $50 tier is for agents who mainly want a professional home for their license, with transaction and marketing help on request.</p>
   </div>
   <script>
   (function(){
     var m=document.getElementById("incMore"),inc=document.querySelector(".inc"),tb=document.getElementById("tierBtn"),tp=document.getElementById("tiersPanel");
     if(m&&inc){m.addEventListener("click",function(){var open=inc.classList.toggle("open");m.textContent=open?"See less":"See more";});}
-    if(tb&&tp){tb.addEventListener("click",function(){if(tp.hasAttribute("hidden")){tp.removeAttribute("hidden");tb.textContent="Hide tiers";}else{tp.setAttribute("hidden","");tb.textContent="See the other tiers";}});}
+    if(tb&&tp){tb.addEventListener("click",function(){var sh=tp.classList.toggle("show");tb.textContent=sh?"Hide tiers":"See the other tiers";});}
   })();
   </script>
 </div></section>
@@ -718,7 +748,7 @@ function marketingPage() {
       + '<p class="jlb-p">Jade end to end — who we are, what you get, and how we work with the people who hang their license here. Read it like a magazine, and when something lands, come have a coffee.</p>'
       + '<div class="jlb-toc">'
       + TOCROW('01','Why we’re called Jade') + TOCROW('02','Built for the agent')
-      + TOCROW('03','The app, included') + TOCROW('04','Marketing, done for you')
+      + TOCROW('03','The app, included') + TOCROW('04','Marketing, made for you')
       + TOCROW('05','What it costs') + TOCROW('06','People, not portals')
       + TOCROW('07','Off the clock') + TOCROW('08','Who you’d be working with')
       + '</div>'
@@ -751,15 +781,15 @@ function marketingPage() {
       + FOLIO('The app, included','05')],
     ['jlb-page', 'soft',
       '<div class="jlb-k">04 · Marketing</div>'
-      + '<h2 class="jlb-h">Marketing, <i>done for you.</i></h2>'
-      + '<p class="jlb-p">You’re not your own designer. An in-house team and the marketing studio make your listings and your brand look like you already won — without you opening a design app at 11pm.</p>'
+      + '<h2 class="jlb-h">Marketing, <i>made for you.</i></h2>'
+      + '<p class="jlb-p">You’re not your own designer. An in-house team and the marketing studio give you custom, on-brand pieces — and they’re a message away whenever you need more.</p>'
       + '<div class="jlb-grid2">'
       + CELL('Personal branding','A real identity shaped around you — logo, color, type, voice. Not a house template.')
       + CELL('Listings','Presentations, social sets and print pieces, on your brand, launch day ready.')
-      + CELL('Social &amp; email','Posts, newsletters and nurture that go out without the manual work.')
+      + CELL('Social &amp; email','Posts, newsletters and nurture, written for you and ready when you are.')
       + CELL('Print &amp; signage','Cards, yard signs, open-house kits and closing gifts, in your hands day one.')
       + '</div>'
-      + FOLIO('Marketing, done for you','06')],
+      + FOLIO('Marketing, made for you','06')],
     ['jlb-page jlb-dark', 'soft',
       '<div class="jlb-k light">05 · The money</div>'
       + '<h2 class="jlb-h light">Simple, and <i>honest about it.</i></h2>'
@@ -886,7 +916,7 @@ function marketingPage() {
 <section class="hero"><div class="m1"></div><div class="wrap">
   <div class="eyebrow">Marketing</div>
   <h1>You built the business. We make it lighter to run.</h1>
-  <p>Jade is an independent Colorado brokerage with its own agent app, marketing done for you, and a broker who actually picks up. No mandatory meetings or production minimums &mdash; just real people who love a one-on-one, teach the classes, and answer your questions, because person-to-person is what makes us better.</p>
+  <p>Jade is an independent Colorado brokerage with its own agent app, marketing support when you need it, and a broker who actually picks up. No mandatory meetings or production minimums &mdash; just real people who love a one-on-one, teach the classes, and answer your questions, because person-to-person is what makes us better.</p>
   <div class="btns"><a class="btn p" href="${BOOK}" target="_blank" rel="noopener">Talk with Emilie</a><a class="btn s" href="#jlb">Flip the lookbook &#8595;</a></div>
 </div></section>
 
@@ -897,12 +927,12 @@ function marketingPage() {
 
 <section class="band cream"><div class="wrap">
   <div class="eyebrow">What we can do for you</div>
-  <h2 class="h-sec">Marketing that looks like you, done start to finish.</h2>
+  <h2 class="h-sec">Marketing that looks like you, made for you.</h2>
   <p class="lead">You stay in front of clients; we make sure everything with your name on it looks like you already won. No design apps at 11pm, no blank canvas.</p>
   <div class="rows">
     <div class="r"><div class="lbl"><small>Brand</small>An identity that's actually yours</div><p>Logo, color, type and voice, shaped around who you are and who you serve &mdash; a real brand, not a house template with your headshot dropped in.</p></div>
     <div class="r"><div class="lbl"><small>Listings</small>Launched like they matter</div><p>Presentations, Just-Listed sets, print and signage &mdash; on brand and out the door day one, so every listing reads like a feature, not a flyer.</p></div>
-    <div class="r"><div class="lbl"><small>Social &amp; content</small>In your voice, handled</div><p>Posts, reels, newsletters and a steady content pack, made for you and scheduled &mdash; so you show up consistently without living in your phone.</p></div>
+    <div class="r"><div class="lbl"><small>Social &amp; content</small>On your brand, ready to post</div><p>Custom posts, reels and newsletters built on your brand and ready to publish &mdash; with the marketing team a message away when you want more.</p></div>
     <div class="r"><div class="lbl"><small>Presence</small>Out where your clients are</div><p>Jade at the Market, events and neighborhood campaigns &mdash; real local presence people remember, not just another feed to post into.</p></div>
   </div>
 </div></section>
@@ -990,7 +1020,7 @@ function marketingPage() {
 
   return layout({
     title: 'The Jade Lookbook — Jade Real Estate Careers',
-    desc: "Flip through Jade Real Estate: why we're called Jade, the in-house agent app included in your $200/month, marketing done for you, honest numbers, and the one-on-one, person-to-person support behind an independent Colorado brokerage built for the agent.",
+    desc: "Flip through Jade Real Estate: why we're called Jade, the in-house agent app included in your $200/month, marketing support when you need it, honest numbers, and the one-on-one, person-to-person support behind an independent Colorado brokerage built for the agent.",
     path: '/marketing',
     body: body
   });
@@ -1082,7 +1112,7 @@ function calculatorPage() {
           <div class="cx-f"><label>Avg sale price / deal</label><div class="cx-in"><span>$</span><input type="number" id="c-price" value="571000"></div></div>
           <div class="cx-f"><label>Personal deals / year</label><div class="cx-in"><input type="number" id="c-deals" value="12"></div></div>
           <div class="cx-f"><label>Avg commission rate</label><div class="cx-in"><input type="number" id="c-rate" value="2.8" step="0.1"><span style="padding:0 12px 0 0">%</span></div></div>
-          <div class="cx-f full"><label>Personal marketing spend you cover now</label><div class="cx-in"><span>$</span><input type="number" id="c-ad" value="0"></div><span class="hint">Monthly out-of-pocket for ads, portals or lead gen. Starts at $0 — most of this is done for you at Jade. Add what you spend if you want to see the difference.</span></div>
+          <div class="cx-f full"><label>Personal marketing spend you cover now</label><div class="cx-in"><span>$</span><input type="number" id="c-ad" value="0"></div><span class="hint">Monthly out-of-pocket for ads, portals or lead gen. Starts at $0 — most of this you won’t need at Jade — the content is made for you. Add what you spend if you want to see the difference.</span></div>
         </div>
       </div>
 
@@ -1136,7 +1166,7 @@ function calculatorPage() {
     <div class="cx-get" style="margin-top:22px">
       <div class="g"><b>The Jade agent app</b> — client hubs, booking scheduler, listing presentations &amp; CMAs, forms and lead capture, and the Jade AI assistant.</div>
       <div class="g"><b>The marketing studio</b> — branded social posts, newsletters, landing pages and custom graphics.</div>
-      <div class="g"><b>In-house marketing &amp; design</b> — done-for-you listing and brand work from a real team.</div>
+      <div class="g"><b>In-house marketing &amp; design</b> — custom listing and brand work from a real team.</div>
       <div class="g"><b>Follow Up Boss CRM</b> — set up and ready to go.</div>
       <div class="g"><b>HouseCanary data</b> — property and market data built in.</div>
       <div class="g"><b>Transaction support</b> — pricing, inspection, appraisal and compliance help on every deal.</div>
