@@ -1050,9 +1050,6 @@ function calculatorPage() {
 .cx-in input,.cx-in select{width:100%;border:0;background:transparent;font-family:var(--sans);font-size:15px;padding:10px 12px;color:var(--ink)}
 .cx-in input:focus,.cx-in select:focus,.cx-in:focus-within{outline:none}
 .cx-in:focus-within{outline:2px solid var(--jade);outline-offset:1px}
-.cx-tog{display:flex;align-items:flex-start;gap:10px;margin-top:12px;font-size:13.5px;color:var(--ink)}
-.cx-tog input{margin-top:3px}
-.cx-tog .t2{font-size:11.5px;color:var(--jade2);display:block;margin-top:2px}
 .cx-res{position:sticky;top:78px;background:var(--forest);color:#eef1ec;border-radius:18px;padding:clamp(22px,2.6vw,30px)}
 .cx-res .lab{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--sage);font-weight:700}
 .cx-big{font-family:var(--serif);font-style:italic;font-size:clamp(40px,6vw,56px);line-height:1;margin:8px 0 4px}
@@ -1064,11 +1061,6 @@ function calculatorPage() {
 .cx-story{margin-top:18px;background:rgba(255,255,255,.07);border-radius:12px;padding:16px}
 .cx-story .h{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--sage);font-weight:700}
 .cx-story p{margin:9px 0 0;font-size:13.5px;color:#dbe2d7;line-height:1.5}
-.cx-cur{margin-top:18px;border-top:1px solid rgba(255,255,255,.18);padding-top:16px;display:none}
-.cx-cur.on{display:block}
-.cx-cur .row{display:flex;justify-content:space-between;align-items:baseline;margin-top:8px;font-size:14px}
-.cx-cur .row b{font-family:var(--serif);font-style:italic;font-size:18px}
-.cx-delta{font-family:var(--serif);font-style:italic;font-size:22px;margin-top:4px}
 .cx-print{margin-top:18px}
 .cx-print button{width:100%;background:var(--cream);color:var(--forest);border:0;border-radius:999px;padding:11px;font-weight:700;font-size:14px;cursor:pointer;font-family:var(--sans)}
 .cx-get{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:30px}
@@ -1098,7 +1090,7 @@ function calculatorPage() {
 <section class="cx-hero"><div class="wrap">
   <div class="eyebrow" style="color:var(--sage)">The numbers</div>
   <h1>What would you actually take home at Jade?</h1>
-  <p>Enter your real production. The calculator is preloaded with Jade's actual terms — adjust anything, add your current brokerage, and see where you'd land. Nothing is sent anywhere; the math runs in your browser.</p>
+  <p>Enter your real production once, then add any brokerage with its full terms — split, company-lead split, cap, fees — and we run your exact book through each. Nothing is sent anywhere; the math runs in your browser.</p>
 </div></section>
 
 <section class="band cream"><div class="wrap">
@@ -1106,13 +1098,12 @@ function calculatorPage() {
     <form class="cx-card" onsubmit="return false">
       <div class="cx-sec">
         <h3>Your production</h3>
-        <p class="sub">The real numbers from your last 12 months.</p>
+        <p class="sub">Your real book — this stays the same across every brokerage you compare.</p>
         <div class="cx-grid">
           <div class="cx-f"><label>Market</label><div class="cx-in"><select id="c-market">${marketOpts}</select></div></div>
           <div class="cx-f"><label>Avg sale price / deal</label><div class="cx-in"><span>$</span><input type="number" id="c-price" value="571000"></div></div>
-          <div class="cx-f"><label>Personal deals / year</label><div class="cx-in"><input type="number" id="c-deals" value="12"></div></div>
+          <div class="cx-f"><label>Personal deals / year</label><div class="cx-in"><input type="number" id="c-deals" value="8"></div></div>
           <div class="cx-f"><label>Avg commission rate</label><div class="cx-in"><input type="number" id="c-rate" value="2.8" step="0.1"><span style="padding:0 12px 0 0">%</span></div></div>
-          <div class="cx-f full"><label>Personal marketing spend you cover now</label><div class="cx-in"><span>$</span><input type="number" id="c-ad" value="0"></div><span class="hint">Monthly out-of-pocket for ads, portals or lead gen. Starts at $0 — most of this you won’t need at Jade — the content is made for you. Add what you spend if you want to see the difference.</span></div>
         </div>
       </div>
 
@@ -1121,20 +1112,20 @@ function calculatorPage() {
         <p class="sub">Preloaded with Jade's real terms — adjust only if your offer differs.</p>
         <div class="cx-grid">
           <div class="cx-f"><label>Starting split (agent %) — pre-cap</label><div class="cx-in"><input type="number" id="c-split" value="80"><span style="padding:0 12px 0 0">%</span></div></div>
-          <div class="cx-f"><label>Company dollar cap</label><div class="cx-in"><span>$</span><input type="number" id="c-cap" value="17500"></div></div>
-          <div class="cx-f"><label>Split after cap (agent %)</label><div class="cx-in"><input type="number" id="c-aftercap" value="100"><span style="padding:0 12px 0 0">%</span></div></div>
           <div class="cx-f"><label>Company-lead split (agent %)</label><div class="cx-in"><input type="number" id="c-cosplit" value="60"><span style="padding:0 12px 0 0">%</span></div></div>
-          <div class="cx-f"><label>Company-lead deals / year</label><div class="cx-in"><input type="number" id="c-codeals" value="3"></div><span class="hint">Jade agents who work the leads typically close 3–5 extra deals a year.</span></div>
+          <div class="cx-f"><label>Company-lead deals / year</label><div class="cx-in"><input type="number" id="c-codeals" value="4"></div><span class="hint">Agents who work the leads typically close 3–5 extra a year.</span></div>
+          <div class="cx-f"><label>Company dollar cap</label><div class="cx-in"><span>$</span><input type="number" id="c-cap" value="17500"></div><span class="hint">Caps total brokerage split — personal and company. After it, you keep 100%.</span></div>
+          <div class="cx-f"><label>Split after cap (agent %)</label><div class="cx-in"><input type="number" id="c-aftercap" value="100"><span style="padding:0 12px 0 0">%</span></div></div>
           <div class="cx-f"><label>Monthly fee</label><div class="cx-in"><span>$</span><input type="number" id="c-fee" value="200"></div><span class="hint">Month-to-month. Covers the app, marketing and support — full list below.</span></div>
-          <div class="cx-f full"><label>Other annual fees (E&amp;O, tech, onboarding)</label><div class="cx-in"><span>$</span><input type="number" id="c-extra" value="250"></div></div>
+          <div class="cx-f"><label>Transaction / desk fee per deal</label><div class="cx-in"><span>$</span><input type="number" id="c-txn" value="0"></div><span class="hint">Jade charges none.</span></div>
+          <div class="cx-f"><label>Your marketing spend / mo</label><div class="cx-in"><span>$</span><input type="number" id="c-ad" value="0"></div><span class="hint">Starts at $0 — content is made for you.</span></div>
+          <div class="cx-f full"><label>Other annual fees (E&amp;O, onboarding)</label><div class="cx-in"><span>$</span><input type="number" id="c-extra" value="250"></div></div>
         </div>
-        <label class="cx-tog"><input type="checkbox" id="c-leadsreplace" checked><span>Jade's leads replace your ad spend<span class="t2">On: your ad spend at Jade is $0 because company leads do the work.</span></span></label>
-        <label class="cx-tog"><input type="checkbox" id="c-cocap" checked><span>Company-lead deals count toward cap progress</span></label>
       </div>
 
       <div class="cx-sec">
         <h3>Compare a brokerage</h3>
-        <p class="sub">Add your current brokerage — or any you’re weighing — and see the take-home side by side. You work your personal deals there; Jade’s company leads are extra.</p>
+        <p class="sub">Add your current brokerage — or any you're weighing — with all its terms. We run your exact book (personal + company deals) through each one, so the comparison is apples to apples.</p>
         <div id="cx-broks"></div>
         <button type="button" id="cx-addbrok" class="cx-addbtn">+ Add a brokerage</button>
       </div>
@@ -1165,16 +1156,16 @@ function calculatorPage() {
     <p class="lead" style="margin-top:10px">Month-to-month, this is everything included — the tools, the marketing, and the people. Nothing basic is locked behind an add-on.</p>
     <div class="cx-get" style="margin-top:22px">
       <div class="g"><b>The Jade agent app</b> — client hubs, booking scheduler, listing presentations &amp; CMAs, forms and lead capture, and the Jade AI assistant.</div>
-      <div class="g"><b>The marketing studio</b> — branded social posts, newsletters, landing pages and custom graphics.</div>
-      <div class="g"><b>In-house marketing &amp; design</b> — custom listing and brand work from a real team.</div>
+      <div class="g"><b>The marketing studio</b> — custom, on-brand social posts, newsletters, landing pages and graphics, made for you.</div>
+      <div class="g"><b>In-house marketing &amp; design</b> — custom listing and brand work from a real team, there when you need it.</div>
       <div class="g"><b>Follow Up Boss CRM</b> — set up and ready to go.</div>
       <div class="g"><b>HouseCanary data</b> — property and market data built in.</div>
       <div class="g"><b>Transaction support</b> — pricing, inspection, appraisal and compliance help on every deal.</div>
       <div class="g"><b>One-on-one coaching</b> — tied to your goals, plus classes and workshops.</div>
       <div class="g"><b>Company-generated leads</b> — referral, relocation and digital, for agents who want them.</div>
-      <div class="g"><b>A hands-on broker</b> — real mentorship, and a door that’s actually open.</div>
+      <div class="g"><b>A hands-on broker</b> — real mentorship, and a door that's actually open.</div>
       <div class="g"><b>In-house lending</b> — through Versatile Lending, our mortgage partner.</div>
-      <div class="g"><b>A day-one starter kit</b> — so you’re live and looking sharp from the start.</div>
+      <div class="g"><b>A day-one starter kit</b> — so you're live and looking sharp from the start.</div>
       <div class="g"><b>A competitive split</b> — with a low company cap, then you keep 100%.</div>
     </div>
     <p class="cx-sep">Billed separately — the standard agent costs at any brokerage: your MLS dues and your transaction-platform subscription. Your one-time onboarding and annual E&amp;O are modeled in the calculator above.</p>
@@ -1186,59 +1177,88 @@ function calculatorPage() {
 <script>
 (function(){
   function g(id){return document.getElementById(id);}
-  function num(id){var v=parseFloat(g(id).value);return isNaN(v)?0:v;}
-  function money(n){var s=Math.round(n).toLocaleString("en-US");return "$"+s;}
-  function compute(){
-    var price=num("c-price"),deals=num("c-deals"),rate=num("c-rate"),ad=num("c-ad");
-    var split=num("c-split"),cap=num("c-cap"),cosplit=num("c-cosplit"),codeals=num("c-codeals"),fee=num("c-fee"),extra=num("c-extra");
-    var leadsReplace=g("c-leadsreplace").checked,coCap=g("c-cocap").checked;
-    var gpd=price*rate/100;
-    var gci=(deals+codeals)*gpd;
-    var personalBroker=deals*(1-split/100)*gpd;
-    var capped=Math.min(cap,personalBroker);
-    var coShare=codeals*(1-cosplit/100)*gpd;
-    var paid=capped+coShare;
-    var agentTake=gci-paid;
-    var adAtJade=leadsReplace?0:ad*12;
-    var fees=fee*12+extra;
-    var costs=fees+adAtJade;
-    var take=agentTake-costs;
-    var eff=gci>0?(take/gci*100):0;
-    var perDeal=(coCap&&(deals+codeals)>0)?((deals*(1-split/100)+codeals*(1-cosplit/100))*gpd)/(deals+codeals):(1-split/100)*gpd;
-    var toCap=perDeal>0?Math.ceil(cap/perDeal):0;
-    var coContribution=codeals*(cosplit/100)*gpd;
-    var adSave=leadsReplace?ad*12:0;
-    g("o-take").textContent=money(take);
-    g("o-agentsub").textContent="Agent take "+money(agentTake)+" • costs "+money(costs);
-    g("o-gci").textContent=money(gci);
-    g("o-eff").textContent=(Math.round(eff*10)/10)+"%";
-    g("o-tocap").textContent=toCap;
-    g("o-paid").textContent=money(paid);
-    var story=[];
-    if(codeals>0){story.push("+"+money(coContribution)+" from "+codeals+" company-provided deal"+(codeals===1?"":"s"));}
-    if(adSave>0){story.push("+"+money(adSave)+"/yr you no longer spend on ads");}
-    g("o-story").textContent=story.length?("What's padding your take-home: "+story.join("  •  ")):"Adjust the inputs to see your estimate.";
-    renderBroks(take, deals, gpd);
+  function num(id){var e=g(id);var v=e?parseFloat(e.value):0;return isNaN(v)?0:v;}
+  function money(n){return "$"+Math.round(n).toLocaleString("en-US");}
+  function esc2(x){return String(x).replace(/[&<>"]/g,function(c){return({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[c];});}
+  function capvId(id){var e=g(id);if(!e||e.value.trim()==="")return null;var v=parseFloat(e.value);return isNaN(v)?null:Math.max(0,v);}
+  function bval(b,k){var e=b.querySelector('[data-k="'+k+'"]');var v=e?parseFloat(e.value):0;return isNaN(v)?0:Math.max(0,v);}
+  function bcap(b){var e=b.querySelector('[data-k="cap"]');if(!e||e.value.trim()==="")return null;var v=parseFloat(e.value);return isNaN(v)?null:Math.max(0,v);}
+  function bacs(b){var e=b.querySelector('[data-k="acs"]');if(!e||e.value.trim()==="")return 100;var v=parseFloat(e.value);return isNaN(v)?100:v;}
+  function compute(p){
+    var gpd=p.price*p.rate/100;
+    var tot=p.pd+p.cd;
+    var gci=tot*gpd;
+    var brokP=p.pd*(1-p.ps/100)*gpd;
+    var brokC=p.cd*(1-p.cs/100)*gpd;
+    var totalSplit=brokP+brokC;
+    var brokTake;
+    if(p.cap===null){brokTake=totalSplit;}
+    else if(totalSplit<=p.cap){brokTake=totalSplit;}
+    else{var blend=gci>0?totalSplit/gci:0;var capGci=blend>0?p.cap/blend:0;var postGci=Math.max(0,gci-capGci);brokTake=p.cap+postGci*(1-p.acs/100);}
+    var agentComm=gci-brokTake;
+    var txnFees=p.txn*tot;
+    var costs=p.monthly*12+p.annual+txnFees+p.mkt*12;
+    var take=agentComm-costs;
+    var eff=gci>0?take/gci*100:0;
+    var perDeal=tot>0?totalSplit/tot:0;
+    var toCap=(p.cap!==null&&perDeal>0&&p.cap>0)?Math.ceil(p.cap/perDeal):null;
+    return {gpd:gpd,gci:gci,brokTake:brokTake,agentComm:agentComm,costs:costs,take:take,eff:eff,toCap:toCap,txnFees:txnFees};
+  }
+  function jadeParams(){return {price:num("c-price"),rate:num("c-rate"),pd:num("c-deals"),cd:num("c-codeals"),ps:num("c-split"),cs:num("c-cosplit"),cap:capvId("c-cap"),acs:num("c-aftercap"),monthly:num("c-fee"),txn:num("c-txn"),annual:num("c-extra"),mkt:num("c-ad")};}
+  function brokParams(b){return {price:num("c-price"),rate:num("c-rate"),pd:num("c-deals"),cd:bval(b,"cd"),ps:bval(b,"ps"),cs:bval(b,"cs"),cap:bcap(b),acs:bacs(b),monthly:bval(b,"monthly"),txn:bval(b,"txn"),annual:0,mkt:bval(b,"mkt")};}
+  function renderBroks(jadeTake){
+    var wrap=g("o-comp");if(!wrap)return;
+    var blocks=document.querySelectorAll("#cx-broks .cx-brok");
+    if(!blocks.length){wrap.innerHTML="";return;}
+    var html='<div class="lab" style="color:var(--sage)">You at Jade vs. elsewhere</div>';
+    for(var i=0;i<blocks.length;i++){var b=blocks[i];var ne=b.querySelector('[data-k="name"]');var name=(ne&&ne.value.trim())?ne.value.trim():("Brokerage "+(i+1));var r=compute(brokParams(b));var d=jadeTake-r.take;var cls=d>=0?"cx-up":"cx-down";html+='<div class="cx-crow"><div class="cx-cn">'+esc2(name)+' · net before taxes</div><div class="cx-ct">'+money(r.take)+'</div><div class="'+cls+'">'+(d>=0?"+"+money(d)+" more at Jade":money(Math.abs(d))+" more there")+'</div></div>';}
+    wrap.innerHTML=html;
+  }
+  function recalc(){
+    var jp=jadeParams();var jade=compute(jp);
+    g("o-take").textContent=money(jade.take);
+    g("o-agentsub").textContent="Agent take "+money(jade.agentComm)+" • costs "+money(jade.costs);
+    g("o-gci").textContent=money(jade.gci);
+    g("o-eff").textContent=(Math.round(jade.eff*10)/10)+"%";
+    g("o-tocap").textContent=jade.toCap===null?"—":jade.toCap;
+    g("o-paid").textContent=money(jade.brokTake);
+    var parts=[];
+    var coKeep=jp.cd*(jp.cs/100)*jade.gpd;
+    if(jp.cd>0){parts.push(money(coKeep)+" in your pocket from "+jp.cd+" company-lead deal"+(jp.cd===1?"":"s"));}
+    if(jade.toCap!==null){parts.push("you reach Jade's cap around deal "+jade.toCap+", then keep 100%");}
+    g("o-story").textContent=parts.length?("Why Jade adds up: "+parts.join("; and ")+"."):"Enter your numbers to see your estimate.";
+    renderBroks(jade.take);
+  }
+  var brokN=0;
+  function addBrok(){
+    brokN++;var wrap=g("cx-broks");var div=document.createElement("div");div.className="cx-brok";
+    div.innerHTML='<div class="cx-brokhead"><span>Brokerage '+brokN+'</span><button type="button" class="cx-rm">Remove</button></div><div class="cx-grid">'+
+    '<div class="cx-f full"><label>Name</label><div class="cx-in"><input type="text" data-k="name" placeholder="e.g., my current brokerage"></div></div>'+
+    '<div class="cx-f"><label>Personal split (agent %)</label><div class="cx-in"><input type="number" data-k="ps" value="70"><span style="padding:0 12px 0 0">%</span></div></div>'+
+    '<div class="cx-f"><label>Company-lead split (agent %)</label><div class="cx-in"><input type="number" data-k="cs" value="50"><span style="padding:0 12px 0 0">%</span></div></div>'+
+    '<div class="cx-f"><label>Company-lead deals / yr</label><div class="cx-in"><input type="number" data-k="cd" value="0"></div></div>'+
+    '<div class="cx-f"><label>Company cap ($, blank = none)</label><div class="cx-in"><span>$</span><input type="number" data-k="cap" placeholder="none"></div></div>'+
+    '<div class="cx-f"><label>Split after cap (agent %)</label><div class="cx-in"><input type="number" data-k="acs" value="100"><span style="padding:0 12px 0 0">%</span></div></div>'+
+    '<div class="cx-f"><label>Monthly fee ($)</label><div class="cx-in"><span>$</span><input type="number" data-k="monthly" value="0"></div></div>'+
+    '<div class="cx-f"><label>Transaction / desk fee / deal ($)</label><div class="cx-in"><span>$</span><input type="number" data-k="txn" value="0"></div></div>'+
+    '<div class="cx-f"><label>Marketing spend / mo ($)</label><div class="cx-in"><span>$</span><input type="number" data-k="mkt" value="0"></div></div>'+
+    '</div>';
+    wrap.appendChild(div);
+    div.querySelector(".cx-rm").addEventListener("click",function(){div.parentNode.removeChild(div);recalc();});
+    var ins=div.querySelectorAll("input");for(var k=0;k<ins.length;k++){ins[k].addEventListener("input",recalc);}
+    recalc();
   }
   var mk=g("c-market");
-  if(mk){mk.addEventListener("change",function(){var v=parseFloat(mk.value);if(!isNaN(v)){g("c-price").value=v;}compute();});}
-  var ids=["c-price","c-deals","c-rate","c-ad","c-split","c-cap","c-aftercap","c-cosplit","c-codeals","c-fee","c-extra"];
-  for(var i=0;i<ids.length;i++){var e=g(ids[i]);if(e){e.addEventListener("input",compute);}}
-  var toggles=["c-leadsreplace","c-cocap"];
-  for(var j=0;j<toggles.length;j++){g(toggles[j]).addEventListener("change",compute);}
-  var brokN=0;
-  function bval(b,k,allowBlank){var e=b.querySelector('[data-k="'+k+'"]');if(!e)return allowBlank?null:0;var raw=e.value.trim();if(raw==="")return allowBlank?null:0;var v=parseFloat(raw);return isNaN(v)?(allowBlank?null:0):v;}
-  function esc2(x){return String(x).replace(/[&<>"]/g,function(c){return({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[c];});}
-  function brokTake(b,deals,gpd){var split=bval(b,"split"),fee=bval(b,"fee"),cap=bval(b,"cap",true),mkt=bval(b,"mkt");var gci=deals*gpd;var brokerRaw=deals*(1-split/100)*gpd;var brokerPaid=(cap!==null)?Math.min(cap,brokerRaw):brokerRaw;var agent=gci-brokerPaid;var costs=fee*12+mkt*12;return agent-costs;}
-  function renderBroks(jadeTake,deals,gpd){var wrap=g("o-comp");if(!wrap)return;var blocks=document.querySelectorAll("#cx-broks .cx-brok");if(!blocks.length){wrap.innerHTML="";return;}var html='<div class="lab" style="color:var(--sage)">You at Jade vs. elsewhere</div>';for(var i=0;i<blocks.length;i++){var b=blocks[i];var ne=b.querySelector('[data-k="name"]');var name=(ne&&ne.value.trim())?ne.value.trim():("Brokerage "+(i+1));var t=brokTake(b,deals,gpd);var d=jadeTake-t;var cls=d>=0?"cx-up":"cx-down";html+='<div class="cx-crow"><div class="cx-cn">'+esc2(name)+'</div><div class="cx-ct">'+money(t)+'</div><div class="'+cls+'">'+(d>=0?"+"+money(d)+" more at Jade":money(Math.abs(d))+" more there")+'</div></div>';}wrap.innerHTML=html;}
-  function addBrok(){brokN++;var wrap=g("cx-broks");var div=document.createElement("div");div.className="cx-brok";div.innerHTML='<div class="cx-brokhead"><span>Brokerage '+brokN+'</span><button type="button" class="cx-rm">Remove</button></div><div class="cx-grid"><div class="cx-f full"><label>Name</label><div class="cx-in"><input type="text" data-k="name" placeholder="e.g., my current brokerage"></div></div><div class="cx-f"><label>Your split there (agent %)</label><div class="cx-in"><input type="number" data-k="split" value="70"><span style="padding:0 12px 0 0">%</span></div></div><div class="cx-f"><label>Their monthly fee</label><div class="cx-in"><span>$</span><input type="number" data-k="fee" value="0"></div></div><div class="cx-f"><label>Their cap (blank = none)</label><div class="cx-in"><span>$</span><input type="number" data-k="cap" placeholder="none"></div></div><div class="cx-f"><label>Your marketing spend there</label><div class="cx-in"><span>$</span><input type="number" data-k="mkt" value="0"></div></div></div>';wrap.appendChild(div);div.querySelector(".cx-rm").addEventListener("click",function(){div.parentNode.removeChild(div);compute();});var ins=div.querySelectorAll("input");for(var k=0;k<ins.length;k++){ins[k].addEventListener("input",compute);}compute();}
+  if(mk){mk.addEventListener("change",function(){var v=parseFloat(mk.value);if(!isNaN(v)){g("c-price").value=v;}recalc();});}
+  var ids=["c-price","c-deals","c-rate","c-split","c-cosplit","c-codeals","c-cap","c-aftercap","c-fee","c-txn","c-ad","c-extra"];
+  for(var i=0;i<ids.length;i++){var e=g(ids[i]);if(e){e.addEventListener("input",recalc);}}
   var ab=g("cx-addbrok");if(ab){ab.addEventListener("click",addBrok);}
   addBrok();
-  compute();
+  recalc();
 })();
 </script>`;
-  const jsonld = [{ '@context': 'https://schema.org', '@type': 'WebApplication', name: 'Jade Real Estate Take-Home Calculator', applicationCategory: 'FinanceApplication', operatingSystem: 'Web', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }, url: SITE + '/calculator', description: 'Estimate your real annual take-home as a Jade Real Estate agent and compare it to your current brokerage.' }];
-  return layout({ title: 'Take-Home Calculator — Jade Real Estate Careers', desc: "Estimate what you'd actually take home at Jade Real Estate using your real production, and compare it to your current brokerage. Preloaded with Jade's real terms; runs entirely in your browser.", path: '/calculator', body, jsonld });
+  const jsonld = [{ '@context': 'https://schema.org', '@type': 'WebApplication', name: 'Jade Real Estate Take-Home Calculator', applicationCategory: 'FinanceApplication', operatingSystem: 'Web', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }, url: SITE + '/calculator', description: 'Estimate your real annual take-home as a Jade Real Estate agent and compare it, in full detail, to any other brokerage.' }];
+  return layout({ title: 'Take-Home Calculator — Jade Real Estate Careers', desc: "Estimate what you'd actually take home at Jade Real Estate using your real production, and compare it in full detail to any brokerage — split, company-lead split, cap, transaction and desk fees. Runs entirely in your browser.", path: '/calculator', body, jsonld });
 }
 
 function comparePage() {
