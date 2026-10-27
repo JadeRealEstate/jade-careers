@@ -1109,10 +1109,10 @@ function calculatorPage() {
 
       <div class="cx-sec">
         <h3>Jade terms</h3>
-        <p class="sub">Preloaded with Jade's real terms — adjust only if your offer differs.</p>
+        <p class="sub">Preloaded with where most conversations start. Your split and terms are a conversation, not one-size-fits-all — adjust these to model your own offer.</p>
         <div class="cx-grid">
-          <div class="cx-f"><label>Starting split (agent %) — pre-cap</label><div class="cx-in"><input type="number" id="c-split" value="80"><span style="padding:0 12px 0 0">%</span></div></div>
-          <div class="cx-f"><label>Company-lead split (agent %)</label><div class="cx-in"><input type="number" id="c-cosplit" value="60"><span style="padding:0 12px 0 0">%</span></div></div>
+          <div class="cx-f"><label>Starting split (agent %) — pre-cap</label><div class="cx-in"><input type="number" id="c-split" value="80"><span style="padding:0 12px 0 0">%</span></div><span class="hint">Most conversations start near 80/20 — it’s negotiable, not one-size-fits-all.</span></div>
+          <div class="cx-f"><label>Company-lead split (agent %)</label><div class="cx-in"><input type="number" id="c-cosplit" value="60"><span style="padding:0 12px 0 0">%</span></div><span class="hint">Generally around 60% to the agent on company-provided leads.</span></div>
           <div class="cx-f"><label>Company-lead deals / year</label><div class="cx-in"><input type="number" id="c-codeals" value="4"></div><span class="hint">Agents who work the leads typically close 3–5 extra a year.</span></div>
           <div class="cx-f"><label>Company dollar cap</label><div class="cx-in"><span>$</span><input type="number" id="c-cap" value="17500"></div><span class="hint">Company-lead splits are always owed, but they count toward your cap. Once you reach it, your personal deals are 100%.</span></div>
           <div class="cx-f"><label>Split after cap (agent %)</label><div class="cx-in"><input type="number" id="c-aftercap" value="100"><span style="padding:0 12px 0 0">%</span></div></div>
