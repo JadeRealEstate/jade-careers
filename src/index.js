@@ -315,7 +315,7 @@ async function homePage() {
   </div>
 </div></section>
 
-<section class="band cream"><div class="wrap">
+<section class="band paper"><div class="wrap">
   <div class="ed">
     <div>
       <div class="eyebrow">Local &amp; independent</div>
@@ -342,11 +342,6 @@ async function homePage() {
   <p class="exits">The calculator and comparison open right here; the app tour opens in a new tab.</p>
 </div></section>
 
-<section class="band cream"><div class="wrap">
-  <div class="eyebrow">In their words</div>
-  <h2 class="h-sec">From Jade agents.</h2>
-  <div class="quotes">${quotes}</div>
-</div></section>
 ${latest}
 ${ctaBand()}`;
   return layout({ title: 'Jade Real Estate — Careers for Colorado Agents', desc: 'Join Jade Real Estate, an independent Colorado brokerage built around the agent: the Jade agent app, marketing support when you need it, and real support. No mandatory meetings or production minimums. Explore it with Emilie.', path: '/', body, jsonld });
@@ -552,8 +547,13 @@ function culturePage() {
   <h1 class="h-sec" style="font-style:italic;font-size:clamp(32px,5vw,52px)">A team that shows up for each other.</h1>
   <p class="lead">Jade is a boutique brokerage — small enough to know your name, serious enough to grow your business. Here’s what that feels like day to day.</p>
 </div></section>
-
 <section class="band cream"><div class="wrap">
+  <div class="eyebrow">In their words</div>
+  <h2 class="h-sec">From Jade agents.</h2>
+  <div class="quotes">${quotes}</div>
+</div></section>
+
+<section class="band paper"><div class="wrap">
   <div class="ed">
     <figure class="figure">
       <img src="/img/team.jpg" width="1040" height="1386" alt="Two members of the Jade Real Estate team playing shuffleboard on a team night at a Colorado brewery, with a wall of whiskey barrels behind them." loading="lazy">
@@ -570,7 +570,7 @@ function culturePage() {
   </div>
 </div></section>
 
-<section class="band paper"><div class="wrap">
+<section class="band cream"><div class="wrap">
   <div class="two">
     <div class="feat"><h3>Freedom to run your business</h3><p>No mandatory meetings, no production minimums. The team is involved without micromanaging — we show up for one-on-ones, run classes when they help, and answer questions fast, then leave you free to work your way.</p></div>
     <div class="feat"><h3>Available when you need it</h3><p>What agents mention most is how available and ready to help everyone is — a flexible team you can actually count on, and a broker who wants to see you win.</p></div>
