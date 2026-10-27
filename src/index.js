@@ -226,18 +226,19 @@ ${body}
 </div></footer>
 <style>
 @media (prefers-reduced-motion: no-preference){
-.btn{transition:transform .18s cubic-bezier(.2,.7,.3,1),box-shadow .18s ease,background .2s ease,color .2s ease}
-.btn:hover{transform:translateY(-2px)}
+.btn,.cx-addbtn,.inc-morebtn,.inc-tierbtn,.mbk-btn{transition:transform .18s cubic-bezier(.2,.7,.3,1),box-shadow .18s ease,background .2s ease,color .2s ease,border-color .2s ease}
+.btn:hover,.cx-addbtn:hover,.inc-morebtn:hover,.inc-tierbtn:hover,.mbk-btn:hover{transform:translateY(-2px)}
 .btn.p:hover,.btn.j:hover{box-shadow:0 10px 24px rgba(21,32,26,.20)}
 .btn.s:hover{box-shadow:0 10px 24px rgba(0,0,0,.18)}
-.btn:active{transform:translateY(0)}
-.pcard{transition:border-color .18s ease,transform .2s cubic-bezier(.2,.7,.3,1),box-shadow .2s ease}
-.pcard:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(21,32,26,.09)}
-.tx-tool,.tx-art{transition:transform .2s cubic-bezier(.2,.7,.3,1),box-shadow .2s ease}
-.tx-tool:hover,.tx-art:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(21,32,26,.08)}
+.cx-addbtn:hover,.inc-morebtn:hover,.inc-tierbtn:hover,.mbk-btn:hover{box-shadow:0 9px 20px rgba(21,32,26,.16)}
+.btn:active,.cx-addbtn:active,.inc-morebtn:active,.inc-tierbtn:active,.mbk-btn:active{transform:translateY(0)}
+.pcard,.tx-tool,.tx-art,.cx-card,.cp-tile,.mini-card,.chip{transition:border-color .18s ease,transform .2s cubic-bezier(.2,.7,.3,1),box-shadow .2s ease}
+.pcard:hover,.tx-tool:hover,.tx-art:hover,.cx-card:hover,.cp-tile:hover,.mini-card:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(21,32,26,.09)}
+.chip:hover{transform:translateY(-1px)}
 .nav .links a{transition:color .15s ease}
 .foot .row a{transition:opacity .15s ease}.foot .row a:hover{opacity:.72}
 .jlb-nav{transition:background .2s,color .2s,transform .15s ease}.jlb-nav:hover{transform:scale(1.06)}
+summary{transition:background .18s ease}
 }
 </style>
 </body></html>`;
