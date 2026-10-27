@@ -804,14 +804,19 @@ function marketingPage() {
   const body = `${css}
 <section class="hero"><div class="m1"></div><div class="wrap">
   <div class="eyebrow">Marketing</div>
-  <h1>Marketing that looks like you &mdash; and actually works.</h1>
-  <p>This is the part most agents light up about: real, done-for-you marketing built around <i>your</i> brand, and a team that genuinely loves this work. Here's what we can do for you.</p>
+  <h1>You built the business. We make it lighter to run.</h1>
+  <p>Jade is an independent Colorado brokerage with its own agent app, marketing done for you, and a broker who actually picks up. No mandatory meetings or production minimums &mdash; just real people who love a one-on-one, teach the classes, and answer your questions, because person-to-person is what makes us better.</p>
   <div class="btns"><a class="btn p" href="${BOOK}" target="_blank" rel="noopener">Talk with Emilie</a><a class="btn s" href="#jlb">Flip the lookbook &#8595;</a></div>
+</div></section>
+
+<section class="band pull"><div class="wrap">
+  <p>A brokerage should be a brokerage, not a tech company. Our focus is your business, your relationships, and you as a person &mdash; the technology is simply there, working quietly in the background, to support all of it.</p>
+  <div class="by">Will Lawrence &middot; Owner &amp; Managing Broker</div>
 </div></section>
 
 <section class="band cream"><div class="wrap">
   <div class="eyebrow">What we can do for you</div>
-  <h2 class="h-sec">Done for you, start to finish.</h2>
+  <h2 class="h-sec">Marketing that looks like you, done start to finish.</h2>
   <p class="lead">You stay in front of clients; we make sure everything with your name on it looks like you already won. No design apps at 11pm, no blank canvas.</p>
   <div class="rows">
     <div class="r"><div class="lbl"><small>Brand</small>An identity that's actually yours</div><p>Logo, color, type and voice, shaped around who you are and who you serve &mdash; a real brand, not a house template with your headshot dropped in.</p></div>
