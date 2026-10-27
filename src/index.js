@@ -224,6 +224,22 @@ ${body}
   <p class="disc">Jade Real Estate is an independent brokerage serving Colorado's Front Range and mountains. This site is for licensed real estate agents exploring a move; it is not a solicitation of agents under an existing exclusive agreement. Equal Housing Opportunity. Nothing here is a guarantee of income or results.</p>
   <p class="disc">© ${new Date().getFullYear()} Jade Real Estate</p>
 </div></footer>
+<style>
+@media (prefers-reduced-motion: no-preference){
+.btn{transition:transform .18s cubic-bezier(.2,.7,.3,1),box-shadow .18s ease,background .2s ease,color .2s ease}
+.btn:hover{transform:translateY(-2px)}
+.btn.p:hover,.btn.j:hover{box-shadow:0 10px 24px rgba(21,32,26,.20)}
+.btn.s:hover{box-shadow:0 10px 24px rgba(0,0,0,.18)}
+.btn:active{transform:translateY(0)}
+.pcard{transition:border-color .18s ease,transform .2s cubic-bezier(.2,.7,.3,1),box-shadow .2s ease}
+.pcard:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(21,32,26,.09)}
+.tx-tool,.tx-art{transition:transform .2s cubic-bezier(.2,.7,.3,1),box-shadow .2s ease}
+.tx-tool:hover,.tx-art:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(21,32,26,.08)}
+.nav .links a{transition:color .15s ease}
+.foot .row a{transition:opacity .15s ease}.foot .row a:hover{opacity:.72}
+.jlb-nav{transition:background .2s,color .2s,transform .15s ease}.jlb-nav:hover{transform:scale(1.06)}
+}
+</style>
 </body></html>`;
 }
 
@@ -918,8 +934,8 @@ function marketingPage() {
   const body = `${css}
 <section class="hero"><div class="m1"></div><div class="wrap">
   <div class="eyebrow">Marketing</div>
-  <h1>You built the business. We make it lighter to run.</h1>
-  <p>Jade is an independent Colorado brokerage with its own agent app, marketing support when you need it, and a broker who actually picks up. No mandatory meetings or production minimums &mdash; just real people who love a one-on-one, teach the classes, and answer your questions, because person-to-person is what makes us better.</p>
+  <h1>Marketing muscle, whenever you need it.</h1>
+  <p>Listing lookbooks, social content, print pieces and full campaigns &mdash; Jade&rsquo;s in-house marketing is here when you want a hand, and out of your way when you don&rsquo;t. Flip through a few real pieces below to see what that looks like.</p>
   <div class="btns"><a class="btn p" href="${BOOK}" target="_blank" rel="noopener">Talk with Emilie</a><a class="btn s" href="#jlb">Flip the lookbook &#8595;</a></div>
 </div></section>
 
