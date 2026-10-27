@@ -1212,14 +1212,15 @@ function calculatorPage() {
     return {gpd:gpd,gci:gci,brokTake:brokTake,agentComm:agentComm,costs:costs,take:take,eff:eff,toCap:toCap,txnFees:txnFees};
   }
   function jadeParams(){return {price:num("c-price"),rate:num("c-rate"),pd:num("c-deals"),cd:num("c-codeals"),ps:num("c-split"),cs:num("c-cosplit"),cap:capvId("c-cap"),acs:num("c-aftercap"),monthly:num("c-fee"),txn:num("c-txn"),annual:num("c-extra"),mkt:num("c-ad")};}
-  function brokParams(b){return {price:num("c-price"),rate:num("c-rate"),pd:num("c-deals"),cd:bval(b,"cd"),ps:bval(b,"ps"),cs:bval(b,"cs"),cap:bcap(b),acs:bacs(b),monthly:bval(b,"monthly"),txn:bval(b,"txn"),annual:0,mkt:bval(b,"mkt")};}
+  function bhas(b,k){var e=b.querySelector('[data-k="'+k+'"]');return !!(e&&e.value.trim()!=="");}
+  function brokParams(b){var ps=bval(b,"ps");var cs=bhas(b,"cs")?bval(b,"cs"):ps;return {price:num("c-price"),rate:num("c-rate"),pd:num("c-deals"),cd:bval(b,"cd"),ps:ps,cs:cs,cap:bcap(b),acs:bacs(b),monthly:bval(b,"monthly"),txn:bval(b,"txn"),annual:0,mkt:bval(b,"mkt")};}
   function renderBroks(jadeTake){
     var wrap=g("o-comp");if(!wrap)return;
     var blocks=document.querySelectorAll("#cx-broks .cx-brok");
     if(!blocks.length){wrap.innerHTML="";return;}
-    var html='<div class="lab" style="color:var(--sage)">You at Jade vs. elsewhere</div>';
-    for(var i=0;i<blocks.length;i++){var b=blocks[i];var ne=b.querySelector('[data-k="name"]');var name=(ne&&ne.value.trim())?ne.value.trim():("Brokerage "+(i+1));var r=compute(brokParams(b));var d=jadeTake-r.take;var cls=d>=0?"cx-up":"cx-down";html+='<div class="cx-crow"><div class="cx-cn">'+esc2(name)+' · net before taxes</div><div class="cx-ct">'+money(r.take)+'</div><div class="'+cls+'">'+(d>=0?"+"+money(d)+" more at Jade":money(Math.abs(d))+" more there")+'</div></div>';}
-    wrap.innerHTML=html;
+    var rows="";var any=false;
+    for(var i=0;i<blocks.length;i++){var b=blocks[i];if(!bhas(b,"ps"))continue;any=true;var ne=b.querySelector('[data-k="name"]');var name=(ne&&ne.value.trim())?ne.value.trim():("Brokerage "+(i+1));var r=compute(brokParams(b));var d=jadeTake-r.take;var cls=d>=0?"cx-up":"cx-down";rows+='<div class="cx-crow"><div class="cx-cn">'+esc2(name)+' · net before taxes</div><div class="cx-ct">'+money(r.take)+'</div><div class="'+cls+'">'+(d>=0?"+"+money(d)+" more at Jade":money(Math.abs(d))+" more there")+'</div></div>';}
+    wrap.innerHTML='<div class="lab" style="color:var(--sage)">You at Jade vs. elsewhere</div>'+(any?rows:'<div class="cx-crow" style="color:#aab6a7;font-size:12.5px">Enter a brokerage’s split to see the side-by-side.</div>');
   }
   function recalc(){
     var jp=jadeParams();var jade=compute(jp);
@@ -1241,14 +1242,14 @@ function calculatorPage() {
     brokN++;var wrap=g("cx-broks");var div=document.createElement("div");div.className="cx-brok";
     div.innerHTML='<div class="cx-brokhead"><span>Brokerage '+brokN+'</span><button type="button" class="cx-rm">Remove</button></div><div class="cx-grid">'+
     '<div class="cx-f full"><label>Name</label><div class="cx-in"><input type="text" data-k="name" placeholder="e.g., my current brokerage"></div></div>'+
-    '<div class="cx-f"><label>Personal split (agent %)</label><div class="cx-in"><input type="number" data-k="ps" value="70"><span style="padding:0 12px 0 0">%</span></div></div>'+
-    '<div class="cx-f"><label>Company-lead split (agent %)</label><div class="cx-in"><input type="number" data-k="cs" value="50"><span style="padding:0 12px 0 0">%</span></div></div>'+
-    '<div class="cx-f"><label>Company-lead deals / yr</label><div class="cx-in"><input type="number" data-k="cd" value="0"></div></div>'+
+    '<div class="cx-f"><label>Personal split (agent %)</label><div class="cx-in"><input type="number" data-k="ps" placeholder="your split"><span style="padding:0 12px 0 0">%</span></div></div>'+
+    '<div class="cx-f"><label>Company-lead split (agent %)</label><div class="cx-in"><input type="number" data-k="cs" placeholder="if any"><span style="padding:0 12px 0 0">%</span></div></div>'+
+    '<div class="cx-f"><label>Company-lead deals / yr</label><div class="cx-in"><input type="number" data-k="cd" placeholder="0"></div></div>'+
     '<div class="cx-f"><label>Company cap ($, blank = none)</label><div class="cx-in"><span>$</span><input type="number" data-k="cap" placeholder="none"></div></div>'+
-    '<div class="cx-f"><label>Split after cap (agent %)</label><div class="cx-in"><input type="number" data-k="acs" value="100"><span style="padding:0 12px 0 0">%</span></div></div>'+
-    '<div class="cx-f"><label>Monthly fee ($)</label><div class="cx-in"><span>$</span><input type="number" data-k="monthly" value="0"></div></div>'+
-    '<div class="cx-f"><label>Transaction / desk fee / deal ($)</label><div class="cx-in"><span>$</span><input type="number" data-k="txn" value="0"></div></div>'+
-    '<div class="cx-f"><label>Marketing spend / mo ($)</label><div class="cx-in"><span>$</span><input type="number" data-k="mkt" value="0"></div></div>'+
+    '<div class="cx-f"><label>Split after cap (agent %)</label><div class="cx-in"><input type="number" data-k="acs" placeholder="100"><span style="padding:0 12px 0 0">%</span></div></div>'+
+    '<div class="cx-f"><label>Monthly fee ($)</label><div class="cx-in"><span>$</span><input type="number" data-k="monthly" placeholder="0"></div></div>'+
+    '<div class="cx-f"><label>Transaction / desk fee / deal ($)</label><div class="cx-in"><span>$</span><input type="number" data-k="txn" placeholder="0"></div></div>'+
+    '<div class="cx-f"><label>Marketing spend / mo ($)</label><div class="cx-in"><span>$</span><input type="number" data-k="mkt" placeholder="0"></div></div>'+
     '</div>';
     wrap.appendChild(div);
     div.querySelector(".cx-rm").addEventListener("click",function(){div.parentNode.removeChild(div);recalc();});
