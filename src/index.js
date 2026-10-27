@@ -271,7 +271,7 @@ async function homePage() {
         <div class="mini-logo">Jade<span>REAL ESTATE</span></div>
         <div class="mini-photo">YOU</div>
         <div class="mini-name">Your Name</div>
-        <div class="mini-meta">REALTOR® · Denver Metro</div>
+        <div class="mini-meta">REALTOR® · Colorado Springs</div>
       </div>
       <figcaption style="color:#aab6a7">A look at the range we build for agents.</figcaption>
     </figure>
@@ -416,7 +416,7 @@ function techPage() {
       </div>
       <div class="tx-arts">
         <div class="tx-art"><div class="tag">Your booking page</div>
-          <div class="mbk"><div class="mbk-top"></div><div class="mbk-av">AJ</div><div class="mbk-nm">Avery Jordan</div><div class="mbk-mt">REALTOR® · Denver Metro</div>
+          <div class="mbk"><div class="mbk-top"></div><div class="mbk-av">AJ</div><div class="mbk-nm">Avery Jordan</div><div class="mbk-mt">REALTOR® · Northern Colorado</div>
             <div class="mbk-slots"><span>Tue 9:00</span><span>Tue 2:30</span><span>Wed 11:00</span></div><div class="mbk-btn">Book with Avery</div></div>
           <div class="cap">Clients pick a time; it lands on your calendar and in your CRM.</div>
         </div>
@@ -518,8 +518,8 @@ function culturePage() {
 <section class="band cream"><div class="wrap">
   <div class="ed">
     <figure class="figure">
-      <img src="/img/team.jpg" width="1040" height="1386" alt="Two members of the Jade Real Estate team playing shuffleboard on a team night at a Denver brewery, with a wall of whiskey barrels behind them." loading="lazy">
-      <figcaption>A team night in Denver — shuffleboard, barrels, and no agenda.</figcaption>
+      <img src="/img/team.jpg" width="1040" height="1386" alt="Two members of the Jade Real Estate team playing shuffleboard on a team night at a Colorado brewery, with a wall of whiskey barrels behind them." loading="lazy">
+      <figcaption>A team night — shuffleboard, barrels, and no agenda.</figcaption>
     </figure>
     <div>
       <div class="eyebrow">Off the clock, too</div>
@@ -645,8 +645,8 @@ function marketingPage() {
       '<div class="jlb-cv">'
       + '<div class="jlb-cv-k">The Agent’s Lookbook</div>'
       + '<div class="jlb-cv-word">Jade</div>'
-      + '<div class="jlb-cv-sub">An independent Denver brokerage,<br>in a few pages you can flip through.</div>'
-      + '<div class="jlb-cv-foot"><span>Issue 01</span><span>Denver, Colorado</span></div>'
+      + '<div class="jlb-cv-sub">An independent Colorado brokerage,<br>in a few pages you can flip through.</div>'
+      + '<div class="jlb-cv-foot"><span>Issue 01</span><span>Colorado</span></div>'
       + '</div>'],
     ['jlb-page', 'soft',
       '<div class="jlb-k">Before you flip</div>'
@@ -736,7 +736,7 @@ function marketingPage() {
       + '<p class="jlb-p light">No pitch, no pressure — just a conversation about your business and whether Jade fits how you want to work.</p>'
       + '<a class="jlb-cta solid" href="' + BOOK + '" target="_blank" rel="noopener">Grab a time with Emilie →</a>'
       + '<div class="jlb-contact">emilie@jaderealestate.com</div>'
-      + FOLIO('Jade Real Estate · Denver','11', true)],
+      + FOLIO('Jade Real Estate · Colorado','11', true)],
     ['jlb-page jlb-back', 'hard',
       '<div class="jlb-cv">'
       + '<div class="jlb-cv-mark">Jade</div>'
@@ -926,7 +926,7 @@ function marketingPage() {
 
   return layout({
     title: 'The Jade Lookbook — Jade Real Estate Careers',
-    desc: "Flip through Jade Real Estate: why we're called Jade, the in-house agent app included in your $200/month, marketing done for you, honest numbers, and the one-on-one, person-to-person support behind an independent Denver brokerage built for the agent.",
+    desc: "Flip through Jade Real Estate: why we're called Jade, the in-house agent app included in your $200/month, marketing done for you, honest numbers, and the one-on-one, person-to-person support behind an independent Colorado brokerage built for the agent.",
     path: '/marketing',
     body: body
   });
@@ -1311,7 +1311,7 @@ function llms() {
 Jade Real Estate is an independent real estate brokerage serving Colorado's Front Range and mountains: Denver Metro, Colorado Springs, Winter Park, and Northern Colorado. This site is for licensed real estate agents considering a move to Jade. Owner-operated; office at ${OFFICE}.
 
 ## What Jade is
-A boutique, independent, owner-operated Colorado brokerage built around the agent — not the franchise. No mandatory meetings, no production minimums. Known for person-to-person support — one-on-one coaching, classes and workshops, and a broker who picks up — and real community presence (for example "Jade at the Market," a booth at a Denver farmers market).
+A boutique, independent, owner-operated Colorado brokerage built around the agent — not the franchise. No mandatory meetings, no production minimums. Known for person-to-person support — one-on-one coaching, classes and workshops, and a broker who picks up — and real community presence (for example "Jade at the Market," a booth at a Colorado farmers market).
 
 ## What the flat $200/month includes
 The Jade agent app, built in-house and included:
