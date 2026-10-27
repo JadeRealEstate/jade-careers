@@ -119,6 +119,9 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.1;margin:0;text-
 .q{background:var(--paper);border-left:3px solid var(--olive);border-radius:0 14px 14px 0;padding:24px;box-shadow:0 10px 30px rgba(21,32,26,.05)}
 .q p{font-family:var(--serif);font-size:18.5px;font-style:italic;color:var(--jade);margin:0;line-height:1.34}
 .q .by{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--jade2);font-weight:600;margin-top:14px}
+.q.feat{grid-column:1/-1;background:var(--jade);border-left:0;border-radius:16px;padding:clamp(28px,4vw,40px)}
+.q.feat p{font-size:clamp(22px,2.9vw,32px);color:#fff;line-height:1.3}
+.q.feat .by{color:var(--sage);margin-top:18px}
 .posts{display:grid;gap:16px;margin-top:30px}
 .pcard{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:24px;text-decoration:none;display:block;transition:border-color .15s}
 .pcard:hover{border-color:var(--jade)}
@@ -249,7 +252,7 @@ async function homePage() {
     { '@context': 'https://schema.org', '@type': 'Organization', name: 'Jade Real Estate', url: SITE, logo: OG, image: OG, sameAs: [MAIN], areaServed: MARKETS, description: 'Independent Colorado real estate brokerage built around the agent — the Jade agent app, marketing support when you need it, and real support, across the Front Range and mountains.' },
     { '@context': 'https://schema.org', '@type': 'RealEstateAgent', name: 'Jade Real Estate', url: SITE, areaServed: MARKETS, address: { '@type': 'PostalAddress', streetAddress: '2570 Lawrence St Unit 104', addressLocality: 'Denver', addressRegion: 'CO', postalCode: '80205' }, knowsAbout: ['real estate agent technology', 'agent marketing', 'brokerage support', 'real estate careers Colorado'] },
   ];
-  const quotes = TESTIMONIALS.map(([q, by]) => `<div class="q"><p>&ldquo;${esc(q)}&rdquo;</p><div class="by">${esc(by)}</div></div>`).join('');
+  const quotes = TESTIMONIALS.map(([q, by], i) => `<div class="q${i === 0 ? ' feat' : ''}"><p>&ldquo;${esc(q)}&rdquo;</p><div class="by">${esc(by)}</div></div>`).join('');
   const latest = posts.length ? `
 <section class="band paper"><div class="wrap">
   <div class="eyebrow">From the blog</div>
@@ -542,7 +545,7 @@ ${ctaBand()}
 }
 
 function culturePage() {
-  const quotes = TESTIMONIALS.map(([q, by]) => `<div class="q"><p>&ldquo;${esc(q)}&rdquo;</p><div class="by">${esc(by)}</div></div>`).join('');
+  const quotes = TESTIMONIALS.map(([q, by], i) => `<div class="q${i === 0 ? ' feat' : ''}"><p>&ldquo;${esc(q)}&rdquo;</p><div class="by">${esc(by)}</div></div>`).join('');
   const body = `
 <section class="band forest"><div class="wrap">
   <div class="eyebrow">Culture</div>
