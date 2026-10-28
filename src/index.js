@@ -119,6 +119,9 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.1;margin:0;text-
 .q{background:var(--paper);border-left:3px solid var(--olive);border-radius:0 14px 14px 0;padding:24px;box-shadow:0 10px 30px rgba(21,32,26,.05)}
 .q p{font-family:var(--serif);font-size:18.5px;font-style:italic;color:var(--jade);margin:0;line-height:1.34}
 .q .by{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--jade2);font-weight:600;margin-top:14px}
+.q.feat{grid-column:1/-1;background:var(--jade);border-left:0;border-radius:16px;padding:clamp(28px,4vw,40px)}
+.q.feat p{font-size:clamp(22px,2.9vw,32px);color:#fff;line-height:1.3}
+.q.feat .by{color:var(--sage);margin-top:18px}
 .posts{display:grid;gap:16px;margin-top:30px}
 .pcard{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:24px;text-decoration:none;display:block;transition:border-color .15s}
 .pcard:hover{border-color:var(--jade)}
@@ -142,6 +145,49 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.1;margin:0;text-
 .inc li:first-child{border-top:0}
 .inc li::before{content:"✓";position:absolute;left:0;top:8px;color:var(--olive);font-weight:800}
 .inc .not li::before{content:"—";color:var(--jade2);font-weight:700}
+.inc-toggle{margin-top:26px}
+.inc-toggle>summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:10px;background:var(--jade);color:#fff;font-weight:700;font-size:14.5px;padding:12px 22px;border-radius:999px;font-family:var(--sans);user-select:none}
+.inc-toggle>summary::-webkit-details-marker{display:none}
+.inc-toggle>summary::marker{content:""}
+.inc-toggle>summary:hover{background:var(--forest)}
+.inc-toggle .chev{transition:transform .2s;font-size:11px}
+.inc-toggle[open]>summary .chev{transform:rotate(180deg)}
+.inc-toggle[open] .inc-open{display:none}
+.inc-toggle:not([open]) .inc-close{display:none}
+.inc-toggle .inc{margin-top:22px}
+.inc li.x{display:none}
+.inc.open li.x{display:list-item}
+.inc-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.inc-morebtn,.inc-tierbtn{cursor:pointer;font-family:var(--sans);font-weight:700;font-size:14px;padding:11px 20px;border-radius:999px;border:1px solid var(--jade)}
+.inc-morebtn{background:var(--jade);color:#fff}
+.inc-morebtn:hover{background:var(--forest);border-color:var(--forest)}
+.inc-tierbtn{background:transparent;color:var(--jade)}
+.inc-tierbtn:hover{background:var(--jade);color:#fff}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
+.tiers .tier{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px}
+.tiers .tp{font-family:var(--serif);font-size:34px;color:var(--jade);line-height:1}
+.tiers .tp span{font-size:.4em;color:var(--jade2);font-style:italic;margin-left:3px}
+.tiers .tier h4{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--jade);margin:10px 0 6px}
+.tiers .tier p{font-size:13px;color:var(--jade2);line-height:1.55;margin:0}
+#tiersPanel{display:none;margin-top:22px}
+#tiersPanel.show{display:block}
+.tierlead{font-size:15px;color:var(--jade2);max-width:62ch}
+.tiertable{overflow-x:auto;margin-top:16px;border:1px solid var(--line);border-radius:16px;background:var(--paper)}
+.tiertable table{border-collapse:collapse;width:100%;min-width:580px}
+.tiertable th,.tiertable td{text-align:left;padding:12px 15px;border-bottom:1px solid var(--line);font-size:13.5px}
+.tiertable thead th{background:var(--cream);font-family:var(--serif);color:var(--jade);font-size:21px;font-style:italic;vertical-align:top;line-height:1.05}
+.tiertable thead th span{font-size:12px;color:var(--jade2);font-style:italic}
+.tiertable thead th em{display:block;font-family:var(--sans);font-style:normal;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--jade2);font-weight:700;margin-top:5px}
+.tiertable tbody td:first-child{font-weight:600;color:var(--ink)}
+.tiertable td.y{color:var(--olive);font-weight:800;text-align:center}
+.tiertable td.n{color:var(--jade2);text-align:center}
+.tiertable td.r{color:var(--jade2);text-align:center;font-size:11.5px;font-style:italic}
+.tiertable tbody tr:last-child td{border-bottom:0}
+.tiertable tr.grp td{background:var(--cream);font-family:var(--serif);font-style:italic;color:var(--jade);font-size:14px;padding-top:15px;letter-spacing:.01em}
+.tiernote{font-size:12.5px;color:var(--jade2);margin-top:14px;line-height:1.55;max-width:72ch}
+.aimk{color:var(--olive);font-size:10px;margin-right:8px;vertical-align:1.5px}
+.tierkey{font-size:12.5px;color:var(--jade2);margin-top:14px;font-weight:600}
+@media(max-width:760px){.tiers{grid-template-columns:1fr}}
 .faqs{margin-top:4px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--line);display:grid;gap:1px}
 .faqs .it{background:var(--paper);padding:24px 26px}
 .faqs h3{font-family:var(--sans);font-size:17px;font-weight:700;color:var(--jade);margin:0}
@@ -171,13 +217,30 @@ ${body}
 <footer class="foot"><div class="wrap">
   <div class="row">
     <a class="brand" style="color:#eef1ec" href="/">Jade<small>REAL ESTATE</small></a>
-    <a href="/">Why Jade</a><a href="/technology">Technology</a><a href="/culture">Culture</a><a href="/marketing">Marketing</a><a href="/calculator">Calculator</a><a href="/compare">Compare</a><a href="/blog">Blog</a><a href="/faq">FAQ</a>
+    <a href="/">Why Jade</a><a href="/technology">Technology</a><a href="/culture">Culture</a><a href="/marketing">Marketing</a><a href="/calculator">Calculator</a><a href="/compare">Compare</a><a href="/switching-brokerages">Switching Brokerages</a><a href="/blog">Blog</a><a href="/faq">FAQ</a>
     <a href="${BOOK}" target="_blank" rel="noopener" style="margin-left:auto;font-weight:700;color:#fff">Book a conversation →</a>
   </div>
   <p class="disc">Jade Real Estate · ${OFFICE} · Emilie Smith, emilie@jaderealestate.com · <a href="${MAIN}" target="_blank" rel="noopener">jaderealestate.com</a></p>
   <p class="disc">Jade Real Estate is an independent brokerage serving Colorado's Front Range and mountains. This site is for licensed real estate agents exploring a move; it is not a solicitation of agents under an existing exclusive agreement. Equal Housing Opportunity. Nothing here is a guarantee of income or results.</p>
   <p class="disc">© ${new Date().getFullYear()} Jade Real Estate</p>
 </div></footer>
+<style>
+@media (prefers-reduced-motion: no-preference){
+.btn,.cx-addbtn,.inc-morebtn,.inc-tierbtn,.mbk-btn{transition:transform .18s cubic-bezier(.2,.7,.3,1),box-shadow .18s ease,background .2s ease,color .2s ease,border-color .2s ease}
+.btn:hover,.cx-addbtn:hover,.inc-morebtn:hover,.inc-tierbtn:hover,.mbk-btn:hover{transform:translateY(-2px)}
+.btn.p:hover,.btn.j:hover{box-shadow:0 10px 24px rgba(21,32,26,.20)}
+.btn.s:hover{box-shadow:0 10px 24px rgba(0,0,0,.18)}
+.cx-addbtn:hover,.inc-morebtn:hover,.inc-tierbtn:hover,.mbk-btn:hover{box-shadow:0 9px 20px rgba(21,32,26,.16)}
+.btn:active,.cx-addbtn:active,.inc-morebtn:active,.inc-tierbtn:active,.mbk-btn:active{transform:translateY(0)}
+.pcard,.tx-tool,.tx-art,.cx-card,.cp-tile,.mini-card,.chip{transition:border-color .18s ease,transform .2s cubic-bezier(.2,.7,.3,1),box-shadow .2s ease}
+.pcard:hover,.tx-tool:hover,.tx-art:hover,.cx-card:hover,.cp-tile:hover,.mini-card:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(21,32,26,.09)}
+.chip:hover{transform:translateY(-1px)}
+.nav .links a{transition:color .15s ease}
+.foot .row a{transition:opacity .15s ease}.foot .row a:hover{opacity:.72}
+.jlb-nav{transition:background .2s,color .2s,transform .15s ease}.jlb-nav:hover{transform:scale(1.06)}
+summary{transition:background .18s ease}
+}
+</style>
 </body></html>`;
 }
 
@@ -193,6 +256,7 @@ function ctaBand() {
 
 const MARKETS = ['Denver Metro', 'Colorado Springs', 'Winter Park', 'Northern Colorado'];
 const TESTIMONIALS = [
+  ['Joining Jade is the best thing I’ve done in my career. I’ve doubled my transactions in the past year — largely thanks to the marketing support, the managing broker, and the lead systems they provide.', 'Ben Good'],
   ['Good people, a great office environment, and support whenever I need it.', 'Trevor Moylan'],
   ['What stands out most is how available and ready to help everyone is — it’s a flexible team you can actually count on.', 'Charles Phanumphai'],
   ['Friendly agents, real marketing and social media support, and a kind broker who wants to see you succeed — a genuine opportunity to grow your business alongside Jade’s.', 'Stephanie Avozani'],
@@ -202,10 +266,10 @@ const TESTIMONIALS = [
 async function homePage() {
   const posts = await getPosts(3);
   const jsonld = [
-    { '@context': 'https://schema.org', '@type': 'Organization', name: 'Jade Real Estate', url: SITE, logo: OG, image: OG, sameAs: [MAIN], areaServed: MARKETS, description: 'Independent Colorado real estate brokerage built around the agent — the Jade agent app, marketing done for you, and real support, across the Front Range and mountains.' },
+    { '@context': 'https://schema.org', '@type': 'Organization', name: 'Jade Real Estate', url: SITE, logo: OG, image: OG, sameAs: [MAIN], areaServed: MARKETS, description: 'Independent Colorado real estate brokerage built around the agent — the Jade agent app, marketing support when you need it, and real support, across the Front Range and mountains.' },
     { '@context': 'https://schema.org', '@type': 'RealEstateAgent', name: 'Jade Real Estate', url: SITE, areaServed: MARKETS, address: { '@type': 'PostalAddress', streetAddress: '2570 Lawrence St Unit 104', addressLocality: 'Denver', addressRegion: 'CO', postalCode: '80205' }, knowsAbout: ['real estate agent technology', 'agent marketing', 'brokerage support', 'real estate careers Colorado'] },
   ];
-  const quotes = TESTIMONIALS.map(([q, by]) => `<div class="q"><p>&ldquo;${esc(q)}&rdquo;</p><div class="by">${esc(by)}</div></div>`).join('');
+  const quotes = TESTIMONIALS.map(([q, by], i) => `<div class="q${i === 0 ? ' feat' : ''}"><p>&ldquo;${esc(q)}&rdquo;</p><div class="by">${esc(by)}</div></div>`).join('');
   const latest = posts.length ? `
 <section class="band paper"><div class="wrap">
   <div class="eyebrow">From the blog</div>
@@ -217,7 +281,7 @@ async function homePage() {
 <section class="hero"><div class="m1"></div><div class="wrap">
   <div class="eyebrow">Careers at Jade Real Estate</div>
   <h1>You built the business. We make it lighter to run.</h1>
-  <p>Jade is an independent Colorado brokerage with its own agent app, marketing done for you, and a broker who actually picks up. No mandatory meetings. No production minimums. No prescribed path.</p>
+  <p>Jade is an independent Colorado brokerage with its own agent app, marketing support when you need it, and a broker who actually picks up. No mandatory meetings or production minimums — just real people who love a one-on-one, teach the classes, and answer your questions, because person-to-person is what makes us better.</p>
   <div class="btns"><a class="btn p" href="${BOOK}" target="_blank" rel="noopener">Talk with Emilie</a><a class="btn s" href="/marketing">See our marketing →</a></div>
 </div></section>
 
@@ -236,7 +300,7 @@ async function homePage() {
   <h2 class="h-sec">Three things, done properly.</h2>
   <div class="rows">
     <div class="r"><div class="lbl"><small>01 — Tools</small>Software that pulls its weight</div><p>The Jade agent app is built in-house and included in your fee: client hubs, a booking scheduler, listing presentations, forms with QR codes, and a marketing studio — wired into Follow Up Boss and HouseCanary data so your pipeline stays current without double entry. <a href="/technology">See the tools →</a></p></div>
-    <div class="r"><div class="lbl"><small>02 — Marketing</small>You’re not your own designer</div><p>In-house listing support, personal branding, social content, and custom graphics. The posts go out, the listing looks sharp, and the newsletter ships — without you opening a design app at 11pm.</p></div>
+    <div class="r"><div class="lbl"><small>02 — Marketing</small>You’re not your own designer</div><p>In-house listing support, personal branding, and custom, on-brand content made for you — ready to post, with a marketing team to call on whenever you need it. You never start from a blank page.</p></div>
     <div class="r"><div class="lbl"><small>03 — Support</small>Help, not homework</div><p>One-on-one coaching tied to your goals, optional accountability (momentum, not guilt), and transaction help when a deal goes sideways — pricing, inspection, appraisal, compliance. A broker whose door is open, who measures you by your success, not your attendance.</p></div>
   </div>
 </div></section>
@@ -261,14 +325,14 @@ async function homePage() {
         <div class="mini-logo">Jade<span>REAL ESTATE</span></div>
         <div class="mini-photo">YOU</div>
         <div class="mini-name">Your Name</div>
-        <div class="mini-meta">REALTOR® · Denver Metro</div>
+        <div class="mini-meta">REALTOR® · Colorado Springs</div>
       </div>
       <figcaption style="color:#aab6a7">A look at the range we build for agents.</figcaption>
     </figure>
   </div>
 </div></section>
 
-<section class="band cream"><div class="wrap">
+<section class="band paper"><div class="wrap">
   <div class="ed">
     <div>
       <div class="eyebrow">Local &amp; independent</div>
@@ -295,14 +359,9 @@ async function homePage() {
   <p class="exits">The calculator and comparison open right here; the app tour opens in a new tab.</p>
 </div></section>
 
-<section class="band cream"><div class="wrap">
-  <div class="eyebrow">In their words</div>
-  <h2 class="h-sec">From Jade agents.</h2>
-  <div class="quotes">${quotes}</div>
-</div></section>
 ${latest}
 ${ctaBand()}`;
-  return layout({ title: 'Jade Real Estate — Careers for Colorado Agents', desc: 'Join Jade Real Estate, an independent Colorado brokerage built around the agent: the Jade agent app, marketing done for you, and real support. No mandatory meetings or production minimums. Explore it with Emilie.', path: '/', body, jsonld });
+  return layout({ title: 'Best Real Estate Brokerage to Join in Denver — Jade Real Estate', desc: 'Thinking about a move? Jade Real Estate is an independent Denver-metro brokerage built around the agent — the Jade agent app, done-for-you marketing, real support, a flat $200/month, and no mandatory meetings or production minimums. Compare your take-home and talk with Emilie.', path: '/', body, jsonld });
 }
 
 function techPage() {
@@ -406,7 +465,7 @@ function techPage() {
       </div>
       <div class="tx-arts">
         <div class="tx-art"><div class="tag">Your booking page</div>
-          <div class="mbk"><div class="mbk-top"></div><div class="mbk-av">AJ</div><div class="mbk-nm">Avery Jordan</div><div class="mbk-mt">REALTOR® · Denver Metro</div>
+          <div class="mbk"><div class="mbk-top"></div><div class="mbk-av">AJ</div><div class="mbk-nm">Avery Jordan</div><div class="mbk-mt">REALTOR® · Northern Colorado</div>
             <div class="mbk-slots"><span>Tue 9:00</span><span>Tue 2:30</span><span>Wed 11:00</span></div><div class="mbk-btn">Book with Avery</div></div>
           <div class="cap">Clients pick a time; it lands on your calendar and in your CRM.</div>
         </div>
@@ -429,7 +488,7 @@ function techPage() {
           <div class="tx-tool"><b>Marketing studio</b><span>Branded social posts, newsletters, landing pages, and a weekly content pack — on brand, in minutes.</span></div>
           <div class="tx-tool"><b>Listing presentations &amp; CMAs</b><span>Build a sharp presentation and market analysis with pricing adjustments; export a clean PDF.</span></div>
           <div class="tx-tool"><b>Custom branding &amp; design</b><span>In-house design shapes your brand and market — not a forced house template.</span></div>
-          <div class="tx-tool"><b>Done for you</b><span>The posts go out and the listing looks sharp without you opening a design app at 11pm.</span></div>
+          <div class="tx-tool"><b>Made for you</b><span>Custom, on-brand pieces built for you to post, with the marketing team a message away when you need more.</span></div>
         </div>
       </div>
       <div class="tx-arts">
@@ -494,22 +553,28 @@ ${ctaBand()}
   for(var i=0;i<tabs.length;i++){(function(b){b.addEventListener("click",function(){show(b.getAttribute("data-t"));});})(tabs[i]);}
 })();
 </script>`;
-  return layout({ title: 'The Technology — Jade Real Estate Careers', desc: "Jade Real Estate's in-house agent platform, included in your fee: client hubs, a booking scheduler, a marketing studio, listing presentations, forms, Follow Up Boss + HouseCanary, and a Jade AI assistant — grouped by your business, your marketing, and working your leads.", path: '/technology', body });
+  return layout({ title: 'Real Estate Agent Technology & Tools — Jade (Denver, CO)', desc: "Jade Real Estate's in-house agent platform, included in your fee: client hubs, a booking scheduler, a marketing studio, listing presentations, forms, Follow Up Boss + HouseCanary, and a Jade AI assistant — grouped by your business, your marketing, and working your leads.", path: '/technology', body });
 }
 
 function culturePage() {
+  const quotes = TESTIMONIALS.map(([q, by], i) => `<div class="q${i === 0 ? ' feat' : ''}"><p>&ldquo;${esc(q)}&rdquo;</p><div class="by">${esc(by)}</div></div>`).join('');
   const body = `
 <section class="band forest"><div class="wrap">
   <div class="eyebrow">Culture</div>
   <h1 class="h-sec" style="font-style:italic;font-size:clamp(32px,5vw,52px)">A team that shows up for each other.</h1>
   <p class="lead">Jade is a boutique brokerage — small enough to know your name, serious enough to grow your business. Here’s what that feels like day to day.</p>
 </div></section>
-
 <section class="band cream"><div class="wrap">
+  <div class="eyebrow">In their words</div>
+  <h2 class="h-sec">From Jade agents.</h2>
+  <div class="quotes">${quotes}</div>
+</div></section>
+
+<section class="band paper"><div class="wrap">
   <div class="ed">
     <figure class="figure">
-      <img src="/img/team.jpg" width="1040" height="1386" alt="Two members of the Jade Real Estate team playing shuffleboard on a team night at a Denver brewery, with a wall of whiskey barrels behind them." loading="lazy">
-      <figcaption>A team night in Denver — shuffleboard, barrels, and no agenda.</figcaption>
+      <img src="/img/team.jpg" width="1040" height="1386" alt="Two members of the Jade Real Estate team playing shuffleboard on a team night at a Colorado brewery, with a wall of whiskey barrels behind them." loading="lazy">
+      <figcaption>A team night — shuffleboard, barrels, and no agenda.</figcaption>
     </figure>
     <div>
       <div class="eyebrow">Off the clock, too</div>
@@ -522,40 +587,86 @@ function culturePage() {
   </div>
 </div></section>
 
-<section class="band paper"><div class="wrap">
+<section class="band cream"><div class="wrap">
   <div class="two">
-    <div class="feat"><h3>Freedom to run your business</h3><p>No mandatory meetings, no production minimums, no prescribed path. The team is involved without micromanaging — a balance of support and freedom to work your way.</p></div>
+    <div class="feat"><h3>Freedom to run your business</h3><p>No mandatory meetings, no production minimums. The team is involved without micromanaging — we show up for one-on-ones, run classes when they help, and answer questions fast, then leave you free to work your way.</p></div>
     <div class="feat"><h3>Available when you need it</h3><p>What agents mention most is how available and ready to help everyone is — a flexible team you can actually count on, and a broker who wants to see you win.</p></div>
     <div class="feat"><h3>Out in the community</h3><p>Jade at the Market, local events, and real neighborhood presence. We’d rather meet people on a Saturday morning than buy another billboard.</p></div>
     <div class="feat"><h3>Boutique &amp; invested</h3><p>As an independent, owner-operated brokerage, Jade is genuinely invested in helping each agent grow — not running you through a national playbook.</p></div>
   </div>
 </div></section>
+
+<section class="band pull"><div class="wrap">
+  <p>A brokerage should be a brokerage, not a tech company. Our focus is your business, your relationships, and you as a person — the technology is simply there, working quietly in the background, to support all of it.</p>
+  <div class="by">Will Lawrence · Owner &amp; Managing Broker</div>
+</div></section>
+
 ${ctaBand()}`;
-  return layout({ title: 'Culture — Jade Real Estate Careers', desc: 'Life at Jade Real Estate: freedom to run your business, a team that shows up for each other, real marketing support, community presence like Jade at the Market, and an independent, boutique, Colorado-local culture built around agents.', path: '/culture', body });
+  return layout({ title: 'Independent Boutique Real Estate Brokerage in Denver — Jade', desc: 'Life at Jade Real Estate: freedom to run your business, a team that shows up for each other, real marketing support, community presence like Jade at the Market, and an independent, boutique, Colorado-local culture built around agents.', path: '/culture', body });
 }
 
 // Grouped, verifiable "what's included in $200/month" block, reused on FAQ.
 function includedBlock() {
-  const app = ['Client hubs — a private portal for every buyer and seller', 'Personal booking scheduler with QR code, synced to your CRM', 'Listing presentations &amp; CMAs with pricing adjustments and PDF export', 'Marketing studio — social posts, newsletters, landing pages, custom graphics', 'Forms &amp; lead-capture builder with QR codes, synced to Follow Up Boss', 'A Jade AI assistant (Colorado rules &amp; Fair Housing aware)'];
-  const brokerage = ['Follow Up Boss CRM — set up and ready to go', 'HouseCanary property &amp; market data', 'In-house listing &amp; marketing support and design work', 'Transaction support — pricing, inspection, appraisal, compliance', 'One-on-one coaching tied to your goals', 'Optional accountability groups &amp; check-ins', 'Direct access to the broker', 'Lead sources (referral, relocation, digital) for agents who want them'];
-  const kit = ['Branded Jade tote, signage, and a marketing consultation', 'Business cards and office supplies', 'Follow Up Boss access, already set up for you'];
-  const not = ['Your MLS / REALTOR® association dues', 'Your transaction-platform subscription (e.g. CTMe)', 'Physical printing &amp; production costs'];
-  const ul = (arr, cls) => `<ul${cls ? ` class="${cls}"` : ''}>${arr.map(i => `<li>${i}</li>`).join('')}</ul>`;
-  return `<div class="inc">
-    <div class="grp"><h4>The Jade agent app</h4><p class="sub">Built in-house. Yours the day you start.</p>${ul(app)}</div>
-    <div class="grp"><h4>Brokerage &amp; support</h4><p class="sub">The people and systems behind your deals.</p>${ul(brokerage)}</div>
-    <div class="grp"><h4>Your day-one starter kit</h4><p class="sub">Ready before your first appointment.</p>${ul(kit)}</div>
-    <div class="grp"><h4>Billed separately</h4><p class="sub">Standard agent costs, not part of the $200.</p>${ul(not, 'not')}</div>
-  </div>`;
+  const groups = [
+    ['The Jade app &amp; AI', 'Included at $200 — the $150 plan keeps everything else, just without the AI.',
+      ['Client hubs — a private, branded portal for every buyer and seller',
+       'Personal booking scheduler with its own QR code, synced to your CRM',
+       'Listing presentations with live pricing adjustments, and CMAs with PDF export',
+       'The personalized marketing studio, built in',
+       'The Jade AI assistant — Colorado rules &amp; Fair Housing aware'],
+      ['A shared document vault inside each hub',
+       'Personalized Just-Listed, Coming-Soon, Open-House, Under-Contract &amp; Sold graphic sets',
+       'Personalized social posts and reels, sized for feed and story',
+       'Newsletter templates in your branding',
+       'Landing pages for listings and lead capture',
+       'Forms &amp; lead-capture builder with QR codes, routed into Follow Up Boss',
+       'AI help drafting listings, emails and captions']],
+    ['Personalized marketing, made for you', 'An in-house team, built around you — never a template.',
+      ['Personalized listing &amp; marketing design, made for you',
+       'Personal branding — your logo, color, type and voice',
+       'Custom, personalized graphics on request'],
+      ['Print design — cards, signage, open-house kits',
+       'A matched, personalized campaign set for every launch']],
+    ['CRM, data &amp; transactions', 'The systems behind every deal.',
+      ['Follow Up Boss CRM — set up and ready to go',
+       'HouseCanary property &amp; market data',
+       'Transaction support — pricing and strategy'],
+      ['Inspection &amp; appraisal support',
+       'Compliance review on every deal']],
+    ['Coaching &amp; people', 'The part that makes the real difference.',
+      ['One-on-one coaching tied to your goals',
+       'A broker who actually picks up',
+       'Lead sources — referral, relocation &amp; digital, for those who want them',
+       'In-house lending through Versatile Lending'],
+      ['Classes &amp; workshops',
+       'Optional accountability groups &amp; check-ins',
+       'Jade at the Market and neighborhood events']],
+    ['Your day-one starter kit', 'Ready before your first appointment.',
+      ['A branded Jade tote',
+       'Business cards',
+       'A kickoff marketing consultation'],
+      ['Yard signage',
+       'Office supplies']],
+    ['Billed separately', 'Standard agent costs, at any brokerage.',
+      ['Your MLS / REALTOR® association dues',
+       'Your transaction-platform subscription (e.g. CTMe)',
+       'Physical printing &amp; production costs'], []],
+  ];
+  const li = (arr, extra) => arr.map(i => `<li${extra ? ' class="x"' : ''}>${i}</li>`).join('');
+  return `<div class="inc">` + groups.map((g, i) => {
+    const notcls = (g[0] === 'Billed separately') ? 'not' : '';
+    const span = (i === 0) ? ' span' : '';
+    return `<div class="grp${span}"><h4>${g[0]}</h4><p class="sub">${g[1]}</p><ul class="${notcls}">${li(g[2], false)}${li(g[3], true)}</ul></div>`;
+  }).join('') + `</div>`;
 }
 
 function faqPage() {
   const faqs = [
-    ['What makes Jade different from a big franchise?', 'Jade is independent, Colorado-local, and built around the agent: no mandatory meetings, no production minimums, no prescribed path. The brokerage fits how you work, not the other way around.'],
-    ['What is included in the $200/month?', 'A lot — the full Jade agent app (client hubs, booking scheduler, listing presentations and CMAs, the marketing studio, forms and lead capture, and the Jade AI assistant), plus Follow Up Boss CRM set up and ready, HouseCanary data, in-house marketing and design, transaction support, coaching, lead sources for those who want them, and a day-one starter kit. The full list is above. Standard agent costs like your MLS dues and transaction-platform subscription are billed separately.'],
+    ['What makes Jade different from a big franchise?', 'Jade is independent, Colorado-local, and built around the agent: no mandatory meetings, no production minimums. What you get instead is people — a broker who picks up, one-on-ones whenever you want them, classes we actually enjoy teaching, and quick answers to your questions. The brokerage fits how you work, not the other way around.'],
+    ['What is included in the $200/month?', 'A lot — the full Jade agent app (client hubs, booking scheduler, listing presentations and CMAs, the marketing studio, forms and lead capture, and the Jade AI assistant), plus Follow Up Boss CRM set up and ready, HouseCanary data, in-house marketing and design, transaction support, coaching, lead sources for those who want them, and a day-one starter kit. The full list is above. Standard agent costs like your MLS dues and transaction-platform subscription are billed separately. There are other tiers too: $150/month keeps the full platform without the AI features, and $50/month lets you hang your license — E&amp;O, your Jade email and office access, with transaction and marketing help whenever you ask.'],
     ['How do splits and take-home work?', 'We don’t lead with a split number, because a split isn’t your take-home. The take-home calculator reads your real production and shows where you’d land, and compares it to your current brokerage. Emilie will walk you through the specifics in a conversation.'],
     ['Do you provide leads?', 'Yes, for agents who want them — referral, relocation, and digital lead sources. No one is forced to work them; it’s there if it fits how you want to grow.'],
-    ['What marketing help do I get?', 'In-house listing support, personal branding, social content, and custom graphics. You’re never expected to be your own designer — the marketing gets done.'],
+    ['What marketing help do I get?', 'Custom, on-brand content made for you — listing pieces, branding, social and graphics — plus a marketing team to call on when you need it. You’re never expected to be your own designer, and you never start from a blank page.'],
     ['Will I have support, or am I on my own?', 'One-on-one coaching tied to your goals, optional accountability, transaction help when a deal gets complicated, and a broker whose door is open. You’re measured by your success, not your attendance.'],
     ['Where does Jade work?', 'Across Colorado’s Front Range and mountains: Denver Metro, Colorado Springs, Winter Park, and Northern Colorado. The office is at ' + OFFICE + '.'],
     ['How hard is it to make the move?', 'More straightforward than most agents expect. Book a conversation with Emilie and she’ll walk you through the steps and timing for a clean transition.'],
@@ -570,18 +681,38 @@ function faqPage() {
 <section class="band cream"><div class="wrap">
   <div class="eyebrow">What the $200/month includes</div>
   <h2 class="h-sec">One flat fee. Here’s everything in it.</h2>
-  <p class="lead">No desk fees, no per-tool add-ons for the Jade platform. The app and the support below are part of the $200 — the only things billed separately are standard agent costs.</p>
+  <p class="lead">$200/month gets you the full Jade platform — the agent app, the AI, and all the personalized marketing, data and support behind it.</p>
   ${includedBlock()}
+  <div class="inc-actions">
+    <button type="button" class="inc-morebtn" id="incMore">See more</button>
+    <button type="button" class="inc-tierbtn" id="tierBtn">See the other tiers</button>
+  </div>
+  <div class="tierwrap" id="tiersPanel">
+    <p class="tierlead">Same brokerage, same people on every tier — you choose how much platform you want.</p>
+    <div class="tiertable"><table>
+      <thead><tr><th></th><th>$200<span>/mo</span><em>Full platform</em></th><th>$150<span>/mo</span><em>Without the AI</em></th><th>$50<span>/mo</span><em>Hang your license</em></th></tr></thead>
+      <tbody><tr><td>The agent app — client hubs, scheduler, CMAs &amp; forms</td><td class="y">✓</td><td class="y">✓</td><td class="n">—</td></tr><tr><td><span class="aimk" aria-hidden="true">✦</span>Build your full brand, in-app</td><td class="y">✓</td><td class="n">—</td><td class="n">—</td></tr><tr><td><span class="aimk" aria-hidden="true">✦</span>Custom, AI-built client hubs</td><td class="y">✓</td><td class="n">—</td><td class="n">—</td></tr><tr><td><span class="aimk" aria-hidden="true">✦</span>Your own branded client sites</td><td class="y">✓</td><td class="n">—</td><td class="n">—</td></tr><tr><td><span class="aimk" aria-hidden="true">✦</span>One-click listing consults</td><td class="y">✓</td><td class="n">—</td><td class="n">—</td></tr><tr><td><span class="aimk" aria-hidden="true">✦</span>One-click buyer consults</td><td class="y">✓</td><td class="n">—</td><td class="n">—</td></tr><tr><td><span class="aimk" aria-hidden="true">✦</span>Pipeline auditing &amp; next-step nudges</td><td class="y">✓</td><td class="n">—</td><td class="n">—</td></tr><tr><td><span class="aimk" aria-hidden="true">✦</span>AI listing copy &amp; descriptions</td><td class="y">✓</td><td class="n">—</td><td class="n">—</td></tr><tr><td><span class="aimk" aria-hidden="true">✦</span>AI emails, captions &amp; client replies</td><td class="y">✓</td><td class="n">—</td><td class="n">—</td></tr><tr><td><span class="aimk" aria-hidden="true">✦</span>Colorado-rules &amp; Fair-Housing checks</td><td class="y">✓</td><td class="n">—</td><td class="n">—</td></tr><tr><td>Personalized marketing, made for you</td><td class="y">✓</td><td class="y">✓</td><td class="r">On request</td></tr><tr><td>CRM &amp; HouseCanary data</td><td class="y">✓</td><td class="y">✓</td><td class="n">—</td></tr><tr><td>Transaction support</td><td class="y">✓</td><td class="y">✓</td><td class="r">On request</td></tr><tr><td>Coaching, classes &amp; broker access</td><td class="y">✓</td><td class="y">✓</td><td class="r">On request</td></tr><tr><td>Company lead sources</td><td class="y">✓</td><td class="y">✓</td><td class="n">—</td></tr><tr><td>E&amp;O coverage</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td></tr><tr><td>Jade email &amp; office access</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td></tr></tbody>
+    </table></div>
+    <p class="tierkey"><span class="aimk" aria-hidden="true">✦</span> Powered by the Jade AI — included only at the $200 tier.</p>
+    <p class="tiernote">That $50 between $150 and $200 is the entire AI layer — and it does a lot. At $150 you get the toolkit; at $200 the app actively builds your brand, spins up custom client hubs and your own client sites, runs listing and buyer consults in one click, audits your pipeline and tells you what to do next, and drafts and compliance-checks everything you send. Less a tool, more a teammate. No one checks up on you on any tier; the support is simply there when you want it, and the $50 tier is for agents who mainly want a professional home for their license.</p>
+  </div>
+  <script>
+  (function(){
+    var m=document.getElementById("incMore"),inc=document.querySelector(".inc"),tb=document.getElementById("tierBtn"),tp=document.getElementById("tiersPanel");
+    if(m&&inc){m.addEventListener("click",function(){var open=inc.classList.toggle("open");m.textContent=open?"See less":"See more";});}
+    if(tb&&tp){tb.addEventListener("click",function(){var sh=tp.classList.toggle("show");tb.textContent=sh?"Hide tiers":"See the other tiers";});}
+  })();
+  </script>
 </div></section>
 
 <section class="band paper"><div class="wrap">
   <div class="eyebrow">More questions</div>
   <h2 class="h-sec" style="margin-bottom:22px">Everything else.</h2>
   <div class="faqs">${faqs.map(([q, a]) => `<div class="it"><h3>${esc(q)}</h3><p>${a.replace(/</g, '&lt;').replace(/&lt;a /g, '<a ').replace(/&lt;\/a>/g, '</a>')}</p></div>`).join('')}</div>
-  <p class="lead" style="margin-top:22px">Serving ${MARKETS.join(', ')}. Want the numbers? Try the <a href="/calculator" style="color:var(--jade);font-weight:600">take-home calculator</a> or <a href="/compare" style="color:var(--jade);font-weight:600">compare brokerages</a>.</p>
+  <p class="lead" style="margin-top:22px">Serving ${MARKETS.join(', ')}. Want the numbers? Try the <a href="/calculator" style="color:var(--jade);font-weight:600">take-home calculator</a> or <a href="/compare" style="color:var(--jade);font-weight:600">compare brokerages</a> — or read the guide on <a href="/switching-brokerages" style="color:var(--jade);font-weight:600">how to switch brokerages in Colorado</a>.</p>
 </div></section>
 ${ctaBand()}`;
-  return layout({ title: 'FAQ — Jade Real Estate Careers', desc: 'Answers for agents considering Jade Real Estate: what makes Jade different, exactly what the $200/month includes (the full agent app, CRM, marketing, support, and starter kit), how take-home works, leads, and making the move.', path: '/faq', body, jsonld });
+  return layout({ title: 'Switching Brokerages in Colorado: Agent FAQ — Jade Real Estate', desc: 'Answers for agents considering Jade Real Estate: what makes Jade different, exactly what the $200/month includes (the full agent app, CRM, marketing, support, and starter kit), how take-home works, leads, and making the move.', path: '/faq', body, jsonld });
 }
 
 async function blogIndex() {
@@ -598,7 +729,7 @@ async function blogIndex() {
 <section class="band cream"><div class="wrap">${list}</div></section>
 ${ctaBand()}`;
   const jsonld = [{ '@context': 'https://schema.org', '@type': 'Blog', name: 'Jade Real Estate Blog', url: SITE + '/blog', publisher: { '@type': 'Organization', name: 'Jade Real Estate' } }];
-  return layout({ title: 'Blog — Jade Real Estate Careers', desc: 'Honest, useful reading for Colorado real estate agents: choosing a brokerage, take-home vs. splits, marketing, tools, and growing your business.', path: '/blog', body, jsonld });
+  return layout({ title: 'Blog for Colorado Real Estate Agents — Jade Real Estate', desc: 'Honest, useful reading for Colorado real estate agents: choosing a brokerage, take-home vs. splits, marketing, tools, and growing your business.', path: '/blog', body, jsonld });
 }
 
 function postPage(p) {
@@ -617,336 +748,304 @@ function postPage(p) {
 }
 
 function marketingPage() {
-  const CARDS = [
-    ['01', 'Listing presentations', 'Magazine-grade, built per property.', 'Built around the property and the seller — your comps, your pricing story, your market — and delivered as a print-ready PDF that looks like a design studio spent a week on it.'],
-    ['02', 'Social &amp; content', 'In your voice, scheduled and ready.', 'Just Listed sets, open-house posts, reels, and market notes — made on your brand and scheduled through OnlySocial. You connect your accounts; our team makes the content.'],
-    ['03', 'Print &amp; signage', 'The pieces people hold onto.', 'Business cards, yard signs, open-house kits, closing gifts, and branded swag — designed to match your identity and in your hands day one.'],
-    ['04', 'Personal branding', 'A brand that is genuinely yours.', 'Logo and wordmark, color, type, and voice — a real identity shaped around who you are and who you serve, not a forced house template.'],
-    ['05', 'Email &amp; nurture', 'Your database, warmed up.', 'Newsletters and follow-up campaigns wired into Follow Up Boss, so your past clients and leads hear from you without the manual work.'],
-    ['06', 'Community &amp; events', 'Out where your clients are.', 'Jade at the Market, sponsorships, and neighborhood campaigns — real local presence, not just another feed to post to.'],
+  function TOCROW(n, t) { return '<div class="row"><span class="n">' + n + '</span><span class="t">' + t + '</span></div>'; }
+  function FOLIO(l, num, light) { return '<div class="jlb-folio' + (light ? ' light' : '') + '"><span>' + l + '</span><span>' + num + '</span></div>'; }
+  function LI(b, s) { return '<div class="it"><b>' + b + '</b><span>' + s + '</span></div>'; }
+  function CELL(b, s) { return '<div class="c"><b>' + b + '</b><span>' + s + '</span></div>'; }
+  function PERSON(n, r, s) { return '<div class="pp"><b>' + n + '</b><em>' + r + '</em><span>' + s + '</span></div>'; }
+  const PAGES = [
+    // [class, innerHTML]
+    ['jlb-page jlb-cover', 'hard',
+      '<div class="jlb-cv">'
+      + '<div class="jlb-cv-k">The Agent’s Lookbook</div>'
+      + '<div class="jlb-cv-word">Jade</div>'
+      + '<div class="jlb-cv-sub">An independent Colorado brokerage,<br>in a few pages you can flip through.</div>'
+      + '<div class="jlb-cv-foot"><span>Issue 01</span><span>Colorado</span></div>'
+      + '</div>'],
+    ['jlb-page', 'soft',
+      '<div class="jlb-k">Before you flip</div>'
+      + '<h2 class="jlb-h">A quick hello.</h2>'
+      + '<p class="jlb-p">Jade end to end — who we are, what you get, and how we work with the people who hang their license here. Read it like a magazine, and when something lands, come have a coffee.</p>'
+      + '<div class="jlb-toc">'
+      + TOCROW('01','Why we’re called Jade') + TOCROW('02','Built for the agent')
+      + TOCROW('03','The app, included') + TOCROW('04','Marketing, made for you')
+      + TOCROW('05','What it costs') + TOCROW('06','People, not portals')
+      + TOCROW('07','Off the clock') + TOCROW('08','Who you’d be working with')
+      + '</div>'
+      + FOLIO('Jade · The Agent’s Lookbook','02')],
+    ['jlb-page', 'soft',
+      '<div class="jlb-k">01 · The name</div>'
+      + '<h2 class="jlb-h">Why we’re called <i>Jade</i>.</h2>'
+      + '<p class="jlb-p">Jade is a stone people have trusted for a very long time — a byword for clarity, steadiness and quiet value. That’s the feeling we want your business to carry: composed, considered, built to last.</p>'
+      + '<p class="jlb-p">But we picked it for a plainer reason too. One syllable. Easy to spell, easy to say, hard to mangle. When you’re reading your email to a seller across an open-house kitchen — <b>yourname@jaderealestate.com</b> — it lands the first time.</p>'
+      + '<div class="jlb-pull">Beautiful should also be practical. That’s the whole idea.</div>'
+      + FOLIO('Why we’re called Jade','03')],
+    ['jlb-page jlb-dark', 'soft',
+      '<div class="jlb-k light">02 · Independent</div>'
+      + '<h2 class="jlb-h light">Built for the agent, <i>not the brokerage.</i></h2>'
+      + '<p class="jlb-p light">Jade is independent and owner-operated, right here in Colorado. Decisions get made down the hall by people who know this market — not handed down from a franchise playbook written in another state.</p>'
+      + '<p class="jlb-p light">No mandatory meetings. No production minimums. We stay small on purpose: boutique enough to know your name and what you’re working toward, serious enough to grow your business alongside ours.</p>'
+      + '<div class="jlb-sig light">Will Lawrence — Owner &amp; Managing Broker</div>'
+      + FOLIO('Built for the agent','04', true)],
+    ['jlb-page', 'soft',
+      '<div class="jlb-k">03 · The tools</div>'
+      + '<h2 class="jlb-h">The app, <i>built in-house and included.</i></h2>'
+      + '<p class="jlb-p">One login that actually does the work, wired into Follow Up Boss and HouseCanary so your pipeline stays current without double entry.</p>'
+      + '<div class="jlb-list">'
+      + LI('Client hubs','A private portal for every buyer and seller.')
+      + LI('Booking scheduler','Your own QR-coded calendar, synced to your CRM.')
+      + LI('Presentations &amp; CMAs','Pricing adjustments and polished PDF export.')
+      + LI('Forms &amp; lead capture','QR codes in, straight to Follow Up Boss.')
+      + LI('Jade AI assistant','Colorado-rules and Fair-Housing aware.')
+      + '</div>'
+      + FOLIO('The app, included','05')],
+    ['jlb-page', 'soft',
+      '<div class="jlb-k">04 · Marketing</div>'
+      + '<h2 class="jlb-h">Marketing, <i>made for you.</i></h2>'
+      + '<p class="jlb-p">You’re not your own designer. An in-house team and the marketing studio give you custom, on-brand pieces — and they’re a message away whenever you need more.</p>'
+      + '<div class="jlb-grid2">'
+      + CELL('Personal branding','A real identity shaped around you — logo, color, type, voice. Not a house template.')
+      + CELL('Listings','Presentations, social sets and print pieces, on your brand, launch day ready.')
+      + CELL('Social &amp; email','Posts, newsletters and nurture, written for you and ready when you are.')
+      + CELL('Print &amp; signage','Cards, yard signs, open-house kits and closing gifts, in your hands day one.')
+      + '</div>'
+      + FOLIO('Marketing, made for you','06')],
+    ['jlb-page jlb-dark', 'soft',
+      '<div class="jlb-k light">05 · The money</div>'
+      + '<h2 class="jlb-h light">Simple, and <i>honest about it.</i></h2>'
+      + '<div class="jlb-big">$200<span>/mo</span></div>'
+      + '<p class="jlb-p light">A flat monthly fee that includes the full agent app. No surprise line items.</p>'
+      + '<p class="jlb-p light">We don’t lead with a commission split, because a split isn’t take-home. Run your real numbers through our calculator and compare it to where you are now — it’s usually the honest surprise of the conversation.</p>'
+      + '<a class="jlb-cta" href="/calculator">Open the take-home calculator →</a>'
+      + FOLIO('What it costs','07', true)],
+    ['jlb-page', 'soft',
+      '<div class="jlb-k">06 · Support</div>'
+      + '<h2 class="jlb-h">People, <i>not portals.</i></h2>'
+      + '<p class="jlb-p">The part that actually makes us better is the human part. Person to person is how real estate gets done, and it’s how we’d rather work with you.</p>'
+      + '<div class="jlb-list">'
+      + LI('We love a one-on-one','Sit down with the broker whenever you want to — goals, a live deal, a second opinion.')
+      + LI('We put on classes','Workshops and marketing days, taught by people who enjoy teaching them.')
+      + LI('We answer the questions','A broker who actually picks up, and fast answers when a deal gets complicated.')
+      + '</div>'
+      + FOLIO('People, not portals','08')],
+    ['jlb-page', 'soft',
+      '<div class="jlb-k">07 · Culture</div>'
+      + '<h2 class="jlb-h">Off the clock, <i>too.</i></h2>'
+      + '<p class="jlb-p">Some of it is work — classes, marketing days, a booth at the farmers market. Some of it is just a team night out: a brewery, a shuffleboard table, people who are glad to see each other.</p>'
+      + '<p class="jlb-p">Either way the thread is the same. At Jade you’re known, not processed — and the people around you are genuinely rooting for your deals to close.</p>'
+      + '<div class="jlb-pull">“Jade at the Market” isn’t a campaign. It’s a Saturday we actually like.</div>'
+      + FOLIO('Off the clock','09')],
+    ['jlb-page', 'soft',
+      '<div class="jlb-k">08 · The people</div>'
+      + '<h2 class="jlb-h">Who you’d be <i>working with.</i></h2>'
+      + '<div class="jlb-people">'
+      + PERSON('Will Lawrence','Owner &amp; Managing Broker','Runs the brokerage and has your back on every deal.')
+      + PERSON('Kelvin Caiati','Co-owner','Also runs Versatile Lending, our in-house mortgage partner.')
+      + PERSON('Emilie Smith','Marketing &amp; Recruiting','The one who’ll get you set up and your brand looking sharp.')
+      + '</div>'
+      + FOLIO('Who you’d be working with','10')],
+    ['jlb-page jlb-dark jlb-last', 'soft',
+      '<div class="jlb-k light">Come say hi</div>'
+      + '<h2 class="jlb-h light">Let’s talk it <i>through.</i></h2>'
+      + '<p class="jlb-p light">No pitch, no pressure — just a conversation about your business and whether Jade fits how you want to work.</p>'
+      + '<a class="jlb-cta solid" href="' + BOOK + '" target="_blank" rel="noopener">Grab a time with Emilie →</a>'
+      + '<div class="jlb-contact">emilie@jaderealestate.com</div>'
+      + FOLIO('Jade Real Estate · Colorado','11', true)],
+    ['jlb-page jlb-back', 'hard',
+      '<div class="jlb-cv">'
+      + '<div class="jlb-cv-mark">Jade</div>'
+      + '<div class="jlb-cv-sub">Independent. Colorado. Built for the agent.</div>'
+      + '<div class="jlb-cv-fine">Jade Real Estate (KCWL Holdings LLC). Equal Housing Opportunity.</div>'
+      + '</div>'],
   ];
-  const cards = CARDS.map(function (c) {
-    return '<div class="fc"><div class="fc-in">'
-      + '<div class="fc-face fc-front"><div class="fc-n">' + c[0] + '</div><div class="fc-t">' + c[1] + '</div><div class="fc-s">' + c[2] + '</div><div class="fc-flip">Flip &#8635;</div></div>'
-      + '<div class="fc-face fc-back"><div class="fc-bt">' + c[1] + '</div><p>' + c[3] + '</p></div>'
-      + '</div></div>';
+  const pagesHTML = PAGES.map(function (p) {
+    return '<div class="' + p[0] + '" data-density="' + p[1] + '">' + p[2] + '</div>';
   }).join('');
-  const leaf = '<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#3e5725" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21C12 14 13 7 20 3c0 8-3 15-8 17-4 0-8-3-8-8 0-5 4-7 8-7"/><path d="M12 21c0-5 2-9 6-12"/></svg>';
+
   const css = `
 <style>
-.mk-hero{background:var(--ink);color:#eef1ec;padding:clamp(58px,8vw,108px) 0;overflow:hidden}
-.mk-hg{display:grid;grid-template-columns:1.05fr 0.95fr;gap:clamp(28px,4vw,56px);align-items:center}
-.mk-hero .eyebrow{color:var(--sage)}
-.mk-hero h1{font-family:var(--serif);font-style:italic;font-size:clamp(38px,6.2vw,66px);line-height:1.05;margin:14px 0 0}
-.mk-hero p{color:#c3ccbf;font-size:clamp(16px,1.7vw,19.5px);line-height:1.7;margin-top:22px;max-width:48ch}
-.mk-hbtns{margin-top:30px;display:flex;gap:13px;flex-wrap:wrap}
-.mk-btn{display:inline-block;text-decoration:none;font-weight:700;font-size:14.5px;padding:12px 22px;border-radius:999px;background:var(--cream);color:var(--ink)}
-.mk-btn.ghost{background:transparent;color:#eef1ec;border:1px solid rgba(255,255,255,.26)}
-.mk-cover{background:linear-gradient(158deg,#243a2e,var(--jade));border-radius:16px;box-shadow:0 34px 70px rgba(0,0,0,.5);padding:clamp(22px,2.6vw,32px);color:#eef1ec;transform:rotate(-2deg)}
-.mk-cover .ct{display:flex;justify-content:space-between;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.72);font-weight:600;border-bottom:1px solid rgba(255,255,255,.2);padding-bottom:12px}
-.mk-cover h3{font-family:var(--serif);font-style:italic;font-size:clamp(22px,2.6vw,30px);margin:16px 0 4px}
-.mk-cover .sub{font-size:12.5px;color:var(--sage);letter-spacing:.04em}
-.mk-toc{margin-top:16px;display:grid;gap:1px;background:rgba(255,255,255,.14);border-radius:10px;overflow:hidden}
-.mk-toc div{background:#223527;display:flex;justify-content:space-between;padding:10px 14px;font-size:12.5px}
-.mk-toc div b{font-family:var(--serif);font-style:italic;color:#fff;font-weight:400}
-.mk-toc div span{color:rgba(255,255,255,.6)}
-.fcs{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
-.fc{height:248px;perspective:1300px;cursor:pointer}
-.fc-in{position:relative;width:100%;height:100%;transition:transform .6s cubic-bezier(.2,.7,.2,1);transform-style:preserve-3d}
-.fc.flip .fc-in{transform:rotateY(180deg)}
-.fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:16px;padding:24px;display:flex;flex-direction:column;box-shadow:0 16px 40px rgba(21,32,26,.1)}
-.fc-front{background:var(--jade);color:#eef1ec}
-.fc-back{background:var(--cream);color:var(--ink);transform:rotateY(180deg);border:1px solid var(--line)}
-.fc-n{font-family:var(--serif);font-style:italic;font-size:26px;color:var(--sage)}
-.fc-t{font-family:var(--serif);font-style:italic;font-size:23px;margin-top:auto}
-.fc-s{font-size:13px;color:#cdd6c9;margin-top:7px;line-height:1.5}
-.fc-flip{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--sage);font-weight:700;margin-top:14px}
-.fc-bt{font-family:var(--serif);font-style:italic;font-size:20px;color:var(--jade)}
-.fc-back p{font-size:14px;color:var(--jade2);line-height:1.6;margin-top:10px}
-/* magazine */
-.mz-wrap{margin-top:34px;max-width:1000px;margin-left:auto;margin-right:auto}
-.mz-head{background:var(--ink);color:#eef1ec;border-radius:14px 14px 0 0;padding:15px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
-.mz-head .ti{font-family:var(--serif);font-style:italic;font-size:17px}
-.mz-head .ti small{display:block;font-family:var(--sans);font-style:normal;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--sage);margin-top:3px;font-weight:600}
-.mz-toggle{display:flex;border:1px solid rgba(255,255,255,.22);border-radius:999px;overflow:hidden}
-.mz-toggle button{font-family:var(--sans);font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;padding:7px 14px;background:transparent;color:rgba(255,255,255,.65);border:0;cursor:pointer}
-.mz-toggle button.on{background:var(--cream);color:var(--ink)}
-.mz-book{background:#0e1712;padding:clamp(16px,2.4vw,30px);border-radius:0 0 14px 14px;box-shadow:0 40px 82px rgba(0,0,0,.4)}
-.mz-sheet{background:var(--cream);border-radius:4px;display:flex;min-height:clamp(440px,46vw,560px);box-shadow:0 12px 34px rgba(0,0,0,.34);overflow:hidden}
-.mz-sheet.one{max-width:580px;margin:0 auto}
-.mz-page{flex:1;padding:clamp(22px,2.7vw,40px);display:none;flex-direction:column;position:relative;min-width:0}
-.mz-page.show{display:flex}
-.mz-sheet.two .mz-page.show + .mz-page.show{border-left:1px solid rgba(21,32,26,.13)}
-.mz-cover{background:linear-gradient(162deg,var(--ink),var(--forest));color:#eef1ec}
-.mz-cover2{background:linear-gradient(162deg,var(--forest),var(--jade));color:#eef1ec}
-.mz-eye{font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--olive)}
-.mz-cover .mz-eye,.mz-cover2 .mz-eye{color:var(--sage)}
-.mz-h{font-family:var(--serif);font-style:italic;color:var(--jade);line-height:1.06;margin-top:8px;font-size:clamp(23px,2.7vw,32px)}
-.mz-deck{font-family:var(--serif);font-style:italic;font-size:14.5px;color:var(--jade2);margin-top:12px;line-height:1.42}
-.mz-body{margin-top:14px}
-.mz-body p{font-size:12.8px;line-height:1.62;color:var(--ink);margin:0 0 10px}
-.mz-body p.lead::first-letter{float:left;font-family:var(--serif);font-style:italic;font-size:3.3em;line-height:.74;padding:5px 9px 0 0;color:var(--jade)}
-.mz-sign{display:flex;align-items:center;gap:10px;margin-top:12px}
-.mz-sign .mo{width:34px;height:34px;border-radius:50%;background:var(--jade);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-style:italic;font-size:15px;flex:none}
-.mz-sign .nm{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--jade)}
-.mz-sign .nm small{display:block;font-family:var(--sans);font-style:normal;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--jade2);font-weight:600}
-.mz-toc{margin-top:auto;border-top:1px solid rgba(21,32,26,.13);padding-top:10px}
-.mz-toc div{display:flex;gap:12px;padding:5px 0;font-size:12.5px;color:var(--ink);align-items:baseline}
-.mz-toc div b{font-size:9px;color:var(--jade2);min-width:16px;font-weight:700;letter-spacing:.05em}
-.mz-toc div span{font-family:var(--serif);font-style:italic}
-.mz-cap{margin-top:16px;background:rgba(62,87,37,.08);border:1px solid rgba(21,32,26,.1);border-radius:8px;padding:12px 14px;display:flex;gap:12px;align-items:center}
-.mz-cap svg{flex:none}
-.mz-cap p{font-family:var(--serif);font-style:italic;font-size:11.5px;color:var(--jade2);margin:0;line-height:1.42}
-.mz-foot{margin-top:auto;padding-top:14px;display:flex;justify-content:space-between;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--jade2)}
-.mz-cover .mz-foot,.mz-cover2 .mz-foot{color:rgba(255,255,255,.55)}
-.mz-big{font-family:var(--serif);font-style:italic;font-size:clamp(44px,6vw,70px);color:#fff;line-height:.98;margin-top:auto}
-.mz-subt{font-family:var(--serif);font-style:italic;font-size:clamp(17px,2.2vw,24px);color:#eef1ec;margin-top:4px}
-.mz-steps{margin-top:12px}
-.mz-steps .s{display:flex;gap:12px;align-items:baseline;padding:8px 0;border-bottom:1px solid rgba(21,32,26,.09);font-size:13px;color:var(--ink)}
-.mz-steps .s b{font-family:var(--serif);font-style:italic;color:var(--jade);font-size:18px;min-width:22px}
-.mz-list{margin-top:10px}
-.mz-list div{padding:8px 0;border-bottom:1px solid rgba(21,32,26,.09);font-size:12.6px;color:var(--jade2);line-height:1.45}
-.mz-list div b{font-family:var(--serif);font-style:italic;color:var(--jade);font-size:15px;margin-right:7px}
-.mz-stats{display:flex;gap:22px;margin-top:14px;flex-wrap:wrap}
-.mz-stats div b{font-family:var(--serif);font-style:italic;color:var(--jade);font-size:21px;display:block}
-.mz-stats div i{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;font-style:normal;color:var(--jade2)}
-.mz-nav{display:flex;align-items:center;justify-content:center;gap:20px;margin-top:20px}
-.mz-nav button.arrow{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--paper);color:var(--jade);font-size:17px;cursor:pointer;line-height:1}
-.mz-nav button.arrow:disabled{opacity:.3;cursor:default}
-.mz-label{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--jade2);font-weight:700;min-width:160px;text-align:center}
-.mk-cta{background:var(--jade);color:#eef1ec}
-.mk-cta h2{font-family:var(--serif);font-style:italic;font-size:clamp(28px,4.2vw,44px);max-width:20ch}
-.mk-cta p{color:#cdd6c9;font-size:16px;margin-top:14px;max-width:52ch}
-@media(max-width:860px){.mk-hg{grid-template-columns:1fr}.fcs{grid-template-columns:1fr}.fc{height:210px}}
-@media(max-width:760px){.mz-sheet.two{flex-direction:column}.mz-sheet.two .mz-page.show + .mz-page.show{border-left:0;border-top:1px solid rgba(21,32,26,.13)}}
+.jlb-sec{background:var(--cream);padding:clamp(34px,5vw,56px) 0 clamp(48px,7vw,86px)}
+.jlb-intro{text-align:center;max-width:640px;margin:0 auto clamp(26px,4vw,44px)}
+.jlb-intro .eyebrow{justify-content:center}
+.jlb-intro h2{font-family:var(--serif);font-style:italic;font-size:clamp(28px,4.4vw,44px);color:var(--jade);line-height:1.08;margin:12px 0 0;font-weight:400}
+.jlb-intro p{color:var(--jade2);font-size:clamp(15px,1.7vw,18px);margin:16px auto 0;max-width:52ch;line-height:1.6}
+.jlb-shell{display:flex;flex-direction:column;align-items:center}
+.jlb-book-wrap{width:100%;max-width:1120px;display:flex;justify-content:center;touch-action:pan-y}
+#jlb-book{margin:0 auto}
+#jlb-book .jlb-page{background:#f6f3ef;color:var(--ink);padding:clamp(26px,3.4vw,42px);display:flex;flex-direction:column;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(21,32,26,.06)}
+#jlb-book .jlb-page.--left{box-shadow:inset -22px 0 38px -30px rgba(21,32,26,.5),inset 0 0 0 1px rgba(21,32,26,.06)}
+#jlb-book .jlb-page.--right{box-shadow:inset 22px 0 38px -30px rgba(21,32,26,.5),inset 0 0 0 1px rgba(21,32,26,.06)}
+.jlb-dark{background:var(--forest)!important;color:#eef1ec!important}
+.jlb-k{font-family:var(--sans);font-size:11px;letter-spacing:.26em;text-transform:uppercase;font-weight:600;color:var(--jade2)}
+.jlb-k.light{color:var(--sage)}
+.jlb-h{font-family:var(--serif);font-weight:400;font-size:clamp(23px,2.4vw,32px);line-height:1.1;color:var(--jade);margin:12px 0 0;text-wrap:balance}
+.jlb-h.light{color:#fff}
+.jlb-h i{font-style:italic;color:var(--olive)}
+.jlb-h.light i{color:var(--sage)}
+.jlb-p{font-size:clamp(13px,1.15vw,15px);line-height:1.62;color:#3b4a40;margin:14px 0 0;max-width:42ch}
+.jlb-p.light{color:#cdd6ca}
+.jlb-p b{color:var(--jade);font-weight:600}.jlb-p.light b{color:#fff}
+.jlb-pull{font-family:var(--serif);font-style:italic;font-size:clamp(17px,1.9vw,22px);line-height:1.3;color:var(--jade);border-top:1px solid rgba(21,32,26,.14);border-bottom:1px solid rgba(21,32,26,.14);padding:16px 0;margin:22px 0 0}
+.jlb-toc{margin-top:16px}
+.jlb-toc .row{display:flex;gap:12px;align-items:baseline;padding:6px 0;border-bottom:1px solid rgba(21,32,26,.1)}
+.jlb-toc .n{font-family:var(--serif);font-style:italic;color:var(--olive);font-size:14px;width:24px;flex:none}
+.jlb-toc .t{font-family:var(--serif);font-size:15px;color:var(--jade);line-height:1.2}
+.jlb-list{margin-top:18px}
+.jlb-list .it{padding:11px 0;border-top:1px solid rgba(21,32,26,.12)}
+.jlb-dark .jlb-list .it{border-color:rgba(255,255,255,.16)}
+.jlb-list .it b{font-family:var(--serif);font-weight:400;font-size:16px;color:var(--jade);display:block}
+.jlb-dark .jlb-list .it b{color:#fff}
+.jlb-list .it span{font-size:12.5px;color:#55655a;line-height:1.5}
+.jlb-dark .jlb-list .it span{color:#c0cabd}
+.jlb-grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px 18px;margin-top:20px}
+.jlb-grid2 .c b{font-family:var(--serif);font-weight:400;font-size:15.5px;color:var(--jade);display:block}
+.jlb-grid2 .c span{font-size:12px;color:#55655a;line-height:1.5;display:block;margin-top:3px}
+.jlb-big{font-family:var(--serif);font-size:clamp(52px,8vw,78px);color:#fff;line-height:1;margin:20px 0 0}
+.jlb-big span{font-size:.32em;color:var(--sage);font-style:italic;margin-left:6px}
+.jlb-sig,.jlb-contact{margin-top:auto}
+.jlb-sig{font-family:var(--serif);font-style:italic;font-size:16px;color:var(--jade)}
+.jlb-sig.light{color:#fff}
+.jlb-contact{font-family:var(--sans);font-weight:600;letter-spacing:.04em;color:var(--sage);font-size:13.5px;padding-top:14px}
+.jlb-people .pp{padding:12px 0;border-top:1px solid rgba(21,32,26,.12)}
+.jlb-people .pp b{font-family:var(--serif);font-weight:400;font-size:18px;color:var(--jade);display:block}
+.jlb-people .pp em{font-style:normal;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--olive);font-weight:600}
+.jlb-people .pp span{display:block;font-size:12.5px;color:#55655a;margin-top:4px;line-height:1.5}
+.jlb-cta{display:inline-block;margin-top:22px;font-family:var(--sans);font-weight:700;font-size:13px;letter-spacing:.02em;color:var(--jade);text-decoration:none;border-bottom:2px solid var(--sage);padding-bottom:3px}
+.jlb-dark .jlb-cta{color:#fff;border-color:var(--sage)}
+.jlb-cta.solid{background:var(--sage);color:var(--forest);border:0;border-radius:999px;padding:12px 22px}
+.jlb-folio{margin-top:auto;display:flex;justify-content:space-between;align-items:center;padding-top:16px;font-family:var(--sans);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--jade2)}
+.jlb-folio.light{color:var(--sage)}
+.jlb-cover,.jlb-back{background:var(--forest)!important;color:#eef1ec!important;justify-content:center;align-items:center;text-align:center}
+.jlb-cv{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;flex:1}
+.jlb-cv-k{font-family:var(--sans);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--sage);font-weight:600;margin-bottom:22px}
+.jlb-cv-word{font-family:var(--serif);font-style:italic;font-size:clamp(58px,9vw,96px);line-height:.9;color:#fff}
+.jlb-cv-mark{font-family:var(--serif);font-style:italic;font-size:clamp(40px,7vw,64px);color:#fff;margin-top:6px}
+.jlb-cv-sub{font-family:var(--serif);font-style:italic;font-size:clamp(15px,1.7vw,19px);color:#cdd6ca;margin-top:20px;line-height:1.4}
+.jlb-cv-foot{display:flex;gap:30px;margin-top:30px;font-family:var(--sans);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--sage)}
+.jlb-cv-fine{font-size:10px;color:#8fa08c;margin-top:26px;letter-spacing:.02em;max-width:30ch;line-height:1.5}
+.jlb-ctrls{display:flex;align-items:center;gap:22px;margin-top:26px}
+.jlb-nav{width:52px;height:52px;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--jade);font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,color .2s}
+.jlb-nav:hover{background:var(--jade);color:#fff;border-color:var(--jade)}
+.jlb-nav:disabled{opacity:.32;cursor:default;background:var(--paper);color:var(--jade);border-color:var(--line)}
+.jlb-count{font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--jade2);min-width:120px;text-align:center}
+.jlb-hint{margin-top:14px;font-size:12.5px;color:var(--jade2)}
+@media(max-width:560px){.jlb-grid2{grid-template-columns:1fr}}
 </style>`;
+
   const body = `${css}
-<section class="mk-hero"><div class="wrap mk-hg">
-  <div>
-    <div class="eyebrow">Marketing at Jade</div>
-    <h1>Marketing, done for you — and built around you.</h1>
-    <p>An in-house team that makes your listings look sharp, your brand feel like <em>you</em>, and your follow-up actually happen. It should look good — and it should work for you.</p>
-    <div class="mk-hbtns"><a class="mk-btn" href="#capabilities">See the capabilities</a><a class="mk-btn ghost" href="${BOOK}" target="_blank" rel="noopener">Talk with Emilie</a></div>
-  </div>
-  <div class="mk-cover">
-    <div class="ct"><span>Jade Real Estate</span><span>Issue Nº 01</span></div>
-    <h3>The Jade Marketing Playbook</h3>
-    <div class="sub">How we market your business</div>
-    <div class="mk-toc">
-      <div><b>Why Jade</b><span>p.02</span></div>
-      <div><b>The name &amp; the stone</b><span>p.03</span></div>
-      <div><b>A listing launch</b><span>p.05</span></div>
-      <div><b>Three ways, one team</b><span>p.08</span></div>
-    </div>
-  </div>
+<section class="hero"><div class="m1"></div><div class="wrap">
+  <div class="eyebrow">Marketing</div>
+  <h1>Marketing muscle, whenever you need it.</h1>
+  <p>Listing lookbooks, social content, print pieces and full campaigns &mdash; Jade&rsquo;s in-house marketing is here when you want a hand, and out of your way when you don&rsquo;t. Flip through a few real pieces below to see what that looks like.</p>
+  <div class="btns"><a class="btn p" href="${BOOK}" target="_blank" rel="noopener">Talk with Emilie</a><a class="btn s" href="#jlb">Flip the lookbook &#8595;</a></div>
 </div></section>
 
-<section class="band cream" id="capabilities"><div class="wrap">
-  <div class="eyebrow">What we do</div>
-  <h2 class="h-sec">Six ways we market you. Tap a card.</h2>
-  <p class="lead">The full marketing function of a big brokerage, done in-house and built around your brand — not a template with your logo dropped in.</p>
-  <div class="fcs">${cards}</div>
+<section class="band pull"><div class="wrap">
+  <p>A brokerage should be a brokerage, not a tech company. Our focus is your business, your relationships, and you as a person &mdash; the technology is simply there, working quietly in the background, to support all of it.</p>
+  <div class="by">Will Lawrence &middot; Owner &amp; Managing Broker</div>
+</div></section>
+
+<section class="band cream"><div class="wrap">
+  <div class="eyebrow">What we can do for you</div>
+  <h2 class="h-sec">Marketing that looks like you, made for you.</h2>
+  <p class="lead">You stay in front of clients; we make sure everything with your name on it looks like you already won. No design apps at 11pm, no blank canvas.</p>
+  <div class="rows">
+    <div class="r"><div class="lbl"><small>Brand</small>An identity that's actually yours</div><p>Logo, color, type and voice, shaped around who you are and who you serve &mdash; a real brand, not a house template with your headshot dropped in.</p></div>
+    <div class="r"><div class="lbl"><small>Listings</small>Launched like they matter</div><p>Presentations, Just-Listed sets, print and signage &mdash; on brand and out the door day one, so every listing reads like a feature, not a flyer.</p></div>
+    <div class="r"><div class="lbl"><small>Social &amp; content</small>On your brand, ready to post</div><p>Custom posts, reels and newsletters built on your brand and ready to publish &mdash; with the marketing team a message away when you want more.</p></div>
+    <div class="r"><div class="lbl"><small>Presence</small>Out where your clients are</div><p>Jade at the Market, events and neighborhood campaigns &mdash; real local presence people remember, not just another feed to post into.</p></div>
+  </div>
 </div></section>
 
 <section class="band paper"><div class="wrap">
-  <div class="eyebrow">The playbook</div>
-  <h2 class="h-sec">Page through how Jade markets.</h2>
-  <div class="mz-wrap">
-    <div class="mz-head">
-      <div class="ti">Jade &middot; Nº 01<small>A brand, by design</small></div>
-      <div class="mz-toggle"><button type="button" id="mz-two" class="on">Two pages</button><button type="button" id="mz-one">One page</button></div>
-    </div>
-    <div class="mz-book">
-      <div class="mz-sheet two" id="mz-sheet">
-
-        <div class="mz-page mz-cover">
-          <div class="mz-eye">Jade Real Estate &middot; Denver</div>
-          <div class="mz-big">Jade</div>
-          <div class="mz-subt">A brand, by design.</div>
-          <div class="mz-foot"><span>Issue Nº 01</span><span>The marketing playbook</span></div>
-        </div>
-
-        <div class="mz-page">
-          <div class="mz-eye">From Emilie</div>
-          <div class="mz-h">Why Jade.</div>
-          <div class="mz-body">
-            <p class="lead">Good marketing does two things at once. It should look like something — considered, consistent, the kind of piece a client screenshots and keeps. And it should work: show up on time, say the right thing, and make your life easier instead of becoming a second job.</p>
-            <p>Most brokerages pick one. They hand you a polished template you can't change, or a pile of tools and a cheerful "good luck." We built Jade to do both — an in-house team that makes the work beautiful, and a system that keeps it practical.</p>
-            <p>This issue is a short look at how that works. And, since people always ask, where the name came from.</p>
-          </div>
-          <div class="mz-sign"><div class="mo">E</div><div class="nm">Emilie Smith<small>Marketing &amp; Recruiting</small></div></div>
-          <div class="mz-toc">
-            <div><b>03</b><span>The name &amp; the stone</span></div>
-            <div><b>04</b><span>Done for you, built around you</span></div>
-            <div><b>05</b><span>A listing launch, start to finish</span></div>
-            <div><b>06</b><span>Your brand kit</span></div>
-            <div><b>07</b><span>The tools behind it</span></div>
-            <div><b>08</b><span>Three ways, one team</span></div>
-          </div>
-          <div class="mz-foot"><span>Jade &middot; A brand, by design</span><span>02</span></div>
-        </div>
-
-        <div class="mz-page">
-          <div class="mz-eye">The name</div>
-          <div class="mz-h">Why we're called Jade.</div>
-          <div class="mz-deck">A stone chosen as carefully as a wordmark — for what it means, and for how it sounds.</div>
-          <div class="mz-body">
-            <p class="lead">Jade has meant something for a long time. Across cultures it's been a stone of harmony and steadiness — valued less for flash than for endurance, calm, and quiet worth. Green for growth; tough enough to last. For a brokerage that wants to be the steady hand in the biggest transaction of someone's life, it fit.</p>
-            <p>But there was a plainer reason, too. "Jade" is one syllable. It's easy to say, easy to spell, and — the test that actually matters — easy to give over the phone. When you're reading your email to a new lead from a parking lot, "jade real estate dot com" lands the first time. No spelling it twice.</p>
-            <p>That's the whole idea in a single word: something that looks and feels good, and also just works for you.</p>
-          </div>
-          <div class="mz-cap">${leaf}<p>Jade — tough, enduring, and prized for its depth of color, not its sparkle.</p></div>
-          <div class="mz-foot"><span>Jade &middot; A brand, by design</span><span>03</span></div>
-        </div>
-
-        <div class="mz-page">
-          <div class="mz-eye">How we work</div>
-          <div class="mz-h">Done for you, built around you.</div>
-          <div class="mz-body">
-            <p class="lead">A real in-house designer builds your marketing around your brand, your market, and your voice — and keeps building as your business grows. The work gets done; you stay in front of clients.</p>
-            <p>No two Jade agents look alike, and that's on purpose. Some are sleek and modern, some warm and local, some high-end and editorial. We flex to you — you don't flex to a house template.</p>
-          </div>
-          <div class="mz-stats"><div><b>In-house</b><i>Not outsourced</i></div><div><b>Per agent</b><i>Not a template</i></div><div><b>Ongoing</b><i>Not one &amp; done</i></div></div>
-          <div class="mz-foot"><span>Jade &middot; A brand, by design</span><span>04</span></div>
-        </div>
-
-        <div class="mz-page">
-          <div class="mz-eye">Chapter 01</div>
-          <div class="mz-h">A listing launch, start to finish.</div>
-          <div class="mz-deck">Every listing gets the same treatment — shaped to the property and the seller.</div>
-          <div class="mz-steps">
-            <div class="s"><b>1</b><span>Brief &amp; brand the listing</span></div>
-            <div class="s"><b>2</b><span>A magazine-style seller presentation</span></div>
-            <div class="s"><b>3</b><span>A branded Just Listed social set</span></div>
-            <div class="s"><b>4</b><span>Signage &amp; the open-house kit</span></div>
-            <div class="s"><b>5</b><span>A paid &amp; organic social push</span></div>
-            <div class="s"><b>6</b><span>Nurture the leads it brings in</span></div>
-          </div>
-          <div class="mz-foot"><span>Jade &middot; A brand, by design</span><span>05</span></div>
-        </div>
-
-        <div class="mz-page">
-          <div class="mz-eye">Chapter 02</div>
-          <div class="mz-h">Your brand kit.</div>
-          <div class="mz-deck">The identity we build with you, and the pieces it lives on.</div>
-          <div class="mz-list">
-            <div><b>Identity</b> logo, wordmark, color, type, and voice</div>
-            <div><b>Print</b> cards, yard signs, open-house collateral</div>
-            <div><b>Social</b> templates, Just Listed sets, reels</div>
-            <div><b>Presentations</b> listing &amp; CMA decks, print-ready</div>
-            <div><b>Swag</b> totes, closing gifts, the little things</div>
-            <div><b>Email</b> newsletters &amp; follow-up that goes out</div>
-          </div>
-          <div class="mz-foot"><span>Jade &middot; A brand, by design</span><span>06</span></div>
-        </div>
-
-        <div class="mz-page">
-          <div class="mz-eye">Chapter 03</div>
-          <div class="mz-h">The tools behind it.</div>
-          <div class="mz-deck">The platform that makes it repeatable — included in the flat $200/month.</div>
-          <div class="mz-list">
-            <div><b>The Studio</b> your marketing builder inside the Jade app</div>
-            <div><b>OnlySocial</b> scheduling &amp; publishing to your accounts</div>
-            <div><b>Follow Up Boss</b> the CRM that runs your nurture</div>
-            <div><b>HouseCanary</b> property &amp; market data, wired in</div>
-            <div><b>Jade AI</b> drafts and client content, Colorado-aware</div>
-          </div>
-          <div class="mz-foot"><span>Jade &middot; A brand, by design</span><span>07</span></div>
-        </div>
-
-        <div class="mz-page">
-          <div class="mz-eye">Chapter 04</div>
-          <div class="mz-h">Three ways, one team.</div>
-          <div class="mz-deck">The same listing cover, built for three different agents — because no two Jade brands look alike.</div>
-          <div class="mz-body">
-            <p><b style="font-family:var(--serif);font-style:italic;color:var(--jade)">Modern &amp; minimal.</b> Clean sans type, a lot of white space, one confident line: <em>412 Lupine Lane</em>. For the agent whose brand is restraint.</p>
-            <p><b style="font-family:var(--serif);font-style:italic;color:var(--jade)">Warm &amp; local.</b> Earthy greens and a serif that feels like a handwritten note: <em>A home on Lupine Lane.</em> For the neighborhood expert.</p>
-            <p><b style="font-family:var(--serif);font-style:italic;color:var(--jade)">High-end editorial.</b> Near-black, high contrast, issue numbers: <em>Lupine Lane, Nº 01.</em> For the luxury listing that should feel like a magazine.</p>
-          </div>
-          <div class="mz-foot"><span>Jade &middot; A brand, by design</span><span>08</span></div>
-        </div>
-
-        <div class="mz-page">
-          <div class="mz-eye">The economics</div>
-          <div class="mz-h">All part of $200 a month.</div>
-          <div class="mz-body">
-            <p class="lead">The marketing in this issue isn't an add-on or an à-la-carte menu. The in-house design, the templates, the tools, and the brand work are included in Jade's flat monthly fee — alongside the rest of the agent app.</p>
-            <p>The only things billed separately are standard agent costs: your MLS dues, your transaction-platform subscription, and physical printing.</p>
-          </div>
-          <div class="mz-stats"><div><b>$200/mo</b><i>Flat, includes the app</i></div><div><b>In-house</b><i>Design included</i></div></div>
-          <div class="mz-foot"><span>Jade &middot; A brand, by design</span><span>09</span></div>
-        </div>
-
-        <div class="mz-page mz-cover2">
-          <div class="mz-eye">The back cover</div>
-          <div class="mz-big" style="font-size:clamp(30px,4vw,46px)">Let's build<br>yours.</div>
-          <div class="mz-body" style="margin-top:14px"><p style="color:#dbe2d7">Bring your business and your taste. Emilie will walk you through how Jade would market you — specifically.</p></div>
-          <div class="mz-foot"><span>Jade Real Estate &middot; Denver</span><span>10</span></div>
-        </div>
-
+  <div class="ed">
+    <div>
+      <div class="eyebrow">The flexibility</div>
+      <div class="big">Your brand, <span style="color:var(--olive)">your way.</span></div>
+      <div class="prose">
+        <p>Some agents hand us the whole thing &mdash; brand, listings, social, print &mdash; and never think about it again. Others want a hand on the wheel, down to the last caption. Both are right.</p>
+        <p>We build around how you actually want to show up, and we flex as you grow. You're never squeezed into a house look, and never left alone with a blank page either.</p>
       </div>
     </div>
-    <div class="mz-nav">
-      <button type="button" class="arrow" id="mz-prev" aria-label="Previous">&#8249;</button>
-      <div class="mz-label" id="mz-label">Page 1 of 10</div>
-      <button type="button" class="arrow" id="mz-next" aria-label="Next">&#8250;</button>
-    </div>
+    <div><div class="markets" style="margin-top:4px">
+      <span class="chip">Hands-off or hands-on</span><span class="chip">Your logo &amp; colors</span><span class="chip">Your voice</span><span class="chip">On your timeline</span><span class="chip">No house template</span><span class="chip">Grows with you</span>
+    </div></div>
   </div>
 </div></section>
 
-<section class="band mk-cta"><div class="wrap">
-  <div class="eyebrow">Your marketing, next</div>
-  <h2>Let's build the version of this that's yours.</h2>
-  <p>Bring your business and your taste — Emilie will walk you through how Jade would market you, specifically.</p>
-  <div style="margin-top:26px"><a class="btn p" href="${BOOK}" target="_blank" rel="noopener">Talk with Emilie</a></div>
-  <p class="exits" style="color:var(--sage)">Opens our scheduler in a new tab.</p>
+<section class="band forest"><div class="wrap narrow">
+  <div class="eyebrow">A note from Emilie</div>
+  <h2 class="h-sec" style="color:#fff;margin-top:10px">What sets you apart is the whole point.</h2>
+  <div style="margin-top:20px">
+    <p style="color:#d6ded2;font-size:clamp(16px,1.9vw,19px);line-height:1.75;max-width:60ch">I've spent five years doing this &mdash; building agent brands and running the social &mdash; and the one constant is that it never holds still. So I treat social as a tool, not a vanity project, and I watch how the platforms change so you don't have to.</p>
+    <p style="color:#d6ded2;font-size:clamp(16px,1.9vw,19px);line-height:1.75;max-width:60ch;margin-top:16px">I've also watched AI reshape this business up close, which is exactly why I know what it can't replace: a real person, marketed well. My job is to put that front and center &mdash; to make the brand behind your name as sharp as you are, and keep it there as everything keeps moving.</p>
+  </div>
+  <div style="margin-top:24px;font-family:var(--serif);font-style:italic;font-size:21px;color:#fff">Emilie Smith</div>
+  <div style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--sage);font-weight:600;margin-top:5px">Marketing &amp; Recruiting &middot; Jade Real Estate</div>
 </div></section>
+
+<section class="jlb-sec" id="jlb"><div class="wrap jlb-shell">
+  <div class="jlb-intro">
+    <div class="eyebrow">The Jade Lookbook</div>
+    <h2>And here's the whole picture.</h2>
+    <p>Flip through Jade end to end &mdash; the name, the tools, the money, the people. Then let's talk it through.</p>
+  </div>
+  <div class="jlb-book-wrap"><div id="jlb-book">${pagesHTML}</div></div>
+  <div class="jlb-ctrls">
+    <button class="jlb-nav" id="jlb-prev" aria-label="Previous page">&#8249;</button>
+    <div class="jlb-count" id="jlb-count">Cover</div>
+    <button class="jlb-nav" id="jlb-next" aria-label="Next page">&#8250;</button>
+  </div>
+  <div class="jlb-hint">Drag a corner, or use the arrows.</div>
+</div></section>
+<script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
 <script>
 (function(){
-  var cards=document.querySelectorAll(".fc");
-  for(var i=0;i<cards.length;i++){(function(c){c.addEventListener("click",function(){c.classList.toggle("flip");});})(cards[i]);}
-  var sheet=document.getElementById("mz-sheet");
-  if(!sheet){return;}
-  var pages=sheet.querySelectorAll(".mz-page");
-  var N=pages.length;
-  var mode=(window.innerWidth<760)?"one":"two";
-  var view=0;
-  function buildViews(){
-    var v=[];
-    if(mode==="one"){for(var i=0;i<N;i++){v.push([i]);}return v;}
-    v.push([0]);
-    var j=1;
-    for(;j<N-1;j+=2){v.push([j,j+1]);}
-    if(j===N-1){v.push([j]);}
-    return v;
+  function boot(){
+    if(!(window.St && window.St.PageFlip)){ return setTimeout(boot,60); }
+    var el=document.getElementById('jlb-book');
+    if(!el) return;
+    var pages=el.querySelectorAll('.jlb-page');
+    var total=pages.length;
+    var pf=new window.St.PageFlip(el,{
+      width:540,height:710,size:'stretch',
+      minWidth:300,maxWidth:560,minHeight:420,maxHeight:740,
+      maxShadowOpacity:0.5,showCover:true,usePortrait:true,
+      mobileScrollSupport:true,drawShadow:true,flippingTime:700
+    });
+    pf.loadFromHTML(pages);
+    var prev=document.getElementById('jlb-prev');
+    var next=document.getElementById('jlb-next');
+    var cnt=document.getElementById('jlb-count');
+    function label(i){
+      if(i<=0) return 'Cover';
+      if(i>=total-1) return 'Back';
+      return 'Page '+i+' of '+(total-2);
+    }
+    function sync(){
+      var i=pf.getCurrentPageIndex();
+      cnt.textContent=label(i);
+      prev.disabled=(i<=0);
+      next.disabled=(i>=total-1);
+    }
+    pf.on('flip',sync);
+    pf.on('changeState',sync);
+    prev.addEventListener('click',function(){ pf.flipPrev(); });
+    next.addEventListener('click',function(){ pf.flipNext(); });
+    setTimeout(sync,120);
   }
-  var views=buildViews();
-  function render(){
-    if(view<0){view=0;}
-    if(view>views.length-1){view=views.length-1;}
-    var cur=views[view];
-    for(var i=0;i<N;i++){pages[i].className=pages[i].className.replace(" show","");}
-    for(var k=0;k<cur.length;k++){pages[cur[k]].className=pages[cur[k]].className+" show";}
-    sheet.className="mz-sheet "+((cur.length===2)?"two":"one");
-    var lbl=document.getElementById("mz-label");
-    if(cur.length===2){lbl.textContent="Pages "+(cur[0]+1)+"–"+(cur[1]+1)+" of "+N;}
-    else{lbl.textContent="Page "+(cur[0]+1)+" of "+N;}
-    var pv=document.getElementById("mz-prev"),nx=document.getElementById("mz-next");
-    if(pv){pv.disabled=(view===0);}
-    if(nx){nx.disabled=(view===views.length-1);}
-  }
-  document.getElementById("mz-prev").addEventListener("click",function(){view=view-1;render();});
-  document.getElementById("mz-next").addEventListener("click",function(){view=view+1;render();});
-  var tTwo=document.getElementById("mz-two"),tOne=document.getElementById("mz-one");
-  function setMode(m){mode=m;views=buildViews();view=0;render();if(tTwo){tTwo.className=(m==="two")?"on":"";}if(tOne){tOne.className=(m==="one")?"on":"";}}
-  if(tTwo){tTwo.addEventListener("click",function(){setMode("two");});}
-  if(tOne){tOne.addEventListener("click",function(){setMode("one");});}
-  setMode(mode);
+  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded',boot); } else { boot(); }
 })();
 </script>`;
-  const jsonld = [{ '@context': 'https://schema.org', '@type': 'WebPage', name: 'Marketing at Jade Real Estate', url: SITE + '/marketing', description: "The marketing Jade Real Estate does for its agents: listing presentations, social content, print and signage, personal branding, email nurture, and community presence — in-house and built around each agent." }];
-  return layout({ title: 'Marketing — Jade Real Estate Careers', desc: "The marketing Jade builds for its agents, done for you and built around your brand: magazine-style listing presentations, social in your voice, branded print, and a brand identity that's genuinely yours.", path: '/marketing', body, jsonld });
+
+  return layout({
+    title: 'Real Estate Agent Marketing & Branding — Jade Real Estate',
+    desc: "Flip through Jade Real Estate: why we're called Jade, the in-house agent app included in your $200/month, marketing support when you need it, honest numbers, and the one-on-one, person-to-person support behind an independent Colorado brokerage built for the agent.",
+    path: '/marketing',
+    body: body
+  });
 }
+
 function calculatorPage() {
   const marketOpts = [['Denver Metro', 571000], ['Colorado Springs', 500000], ['Northern CO', 540000], ['Custom', 571000]]
     .map(function (m) { return '<option value="' + m[1] + '">' + esc(m[0]) + '</option>'; }).join('');
@@ -971,9 +1070,6 @@ function calculatorPage() {
 .cx-in input,.cx-in select{width:100%;border:0;background:transparent;font-family:var(--sans);font-size:15px;padding:10px 12px;color:var(--ink)}
 .cx-in input:focus,.cx-in select:focus,.cx-in:focus-within{outline:none}
 .cx-in:focus-within{outline:2px solid var(--jade);outline-offset:1px}
-.cx-tog{display:flex;align-items:flex-start;gap:10px;margin-top:12px;font-size:13.5px;color:var(--ink)}
-.cx-tog input{margin-top:3px}
-.cx-tog .t2{font-size:11.5px;color:var(--jade2);display:block;margin-top:2px}
 .cx-res{position:sticky;top:78px;background:var(--forest);color:#eef1ec;border-radius:18px;padding:clamp(22px,2.6vw,30px)}
 .cx-res .lab{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--sage);font-weight:700}
 .cx-big{font-family:var(--serif);font-style:italic;font-size:clamp(40px,6vw,56px);line-height:1;margin:8px 0 4px}
@@ -985,11 +1081,6 @@ function calculatorPage() {
 .cx-story{margin-top:18px;background:rgba(255,255,255,.07);border-radius:12px;padding:16px}
 .cx-story .h{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--sage);font-weight:700}
 .cx-story p{margin:9px 0 0;font-size:13.5px;color:#dbe2d7;line-height:1.5}
-.cx-cur{margin-top:18px;border-top:1px solid rgba(255,255,255,.18);padding-top:16px;display:none}
-.cx-cur.on{display:block}
-.cx-cur .row{display:flex;justify-content:space-between;align-items:baseline;margin-top:8px;font-size:14px}
-.cx-cur .row b{font-family:var(--serif);font-style:italic;font-size:18px}
-.cx-delta{font-family:var(--serif);font-style:italic;font-size:22px;margin-top:4px}
 .cx-print{margin-top:18px}
 .cx-print button{width:100%;background:var(--cream);color:var(--forest);border:0;border-radius:999px;padding:11px;font-weight:700;font-size:14px;cursor:pointer;font-family:var(--sans)}
 .cx-get{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:30px}
@@ -997,15 +1088,29 @@ function calculatorPage() {
 .cx-get .g::before{content:"✓";position:absolute;left:18px;top:18px;color:var(--olive);font-weight:800}
 .cx-get .g b{color:var(--jade);font-weight:700}
 .cx-disc{font-size:11.5px;color:var(--jade2);margin-top:24px;line-height:1.6;max-width:90ch}
+.cx-incl{margin-top:34px;border-top:1px solid var(--line);padding-top:30px}
+.cx-sep{font-size:12.5px;color:var(--jade2);margin-top:18px;line-height:1.6;max-width:92ch}
 @media(max-width:900px){.cx-wrap{grid-template-columns:1fr}.cx-res{position:static}}
 @media(max-width:520px){.cx-grid,.cx-get{grid-template-columns:1fr}}
+.cx-addbtn{margin-top:14px;background:var(--cream);color:var(--jade);border:1px dashed var(--jade2);border-radius:999px;padding:10px 18px;font-weight:700;font-size:13.5px;cursor:pointer;font-family:var(--sans)}
+.cx-addbtn:hover{background:var(--jade);color:#fff;border-style:solid}
+.cx-brok{border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:14px;background:var(--cream)}
+.cx-brokhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.cx-brokhead span{font-family:var(--serif);font-style:italic;color:var(--jade);font-size:16px}
+.cx-rm{background:transparent;border:0;color:var(--jade2);font-size:12px;font-weight:700;cursor:pointer;text-decoration:underline;font-family:var(--sans)}
+.cx-comp{margin-top:18px}
+.cx-crow{border-top:1px solid rgba(255,255,255,.18);padding-top:12px;margin-top:12px}
+.cx-cn{font-size:12.5px;color:#c9d2c6}
+.cx-ct{font-family:var(--serif);font-style:italic;font-size:22px;margin-top:2px}
+.cx-up{font-size:12.5px;color:var(--sage);font-weight:700;margin-top:3px}
+.cx-down{font-size:12.5px;color:#e6b9a6;font-weight:700;margin-top:3px}
 @media print{.nav,.cx-hero .btns,.cx-print,.foot{display:none}}
 </style>`;
   const body = `${css}
 <section class="cx-hero"><div class="wrap">
   <div class="eyebrow" style="color:var(--sage)">The numbers</div>
   <h1>What would you actually take home at Jade?</h1>
-  <p>Enter your real production. The calculator is preloaded with Jade's actual terms — adjust anything, add your current brokerage, and see where you'd land. Nothing is sent anywhere; the math runs in your browser.</p>
+  <p>Enter your real production once, then add any brokerage with its full terms — split, company-lead split, cap, fees — and we run your exact book through each. Nothing is sent anywhere; the math runs in your browser.</p>
 </div></section>
 
 <section class="band cream"><div class="wrap">
@@ -1013,41 +1118,36 @@ function calculatorPage() {
     <form class="cx-card" onsubmit="return false">
       <div class="cx-sec">
         <h3>Your production</h3>
-        <p class="sub">The real numbers from your last 12 months.</p>
+        <p class="sub">Your real book — this stays the same across every brokerage you compare.</p>
         <div class="cx-grid">
           <div class="cx-f"><label>Market</label><div class="cx-in"><select id="c-market">${marketOpts}</select></div></div>
           <div class="cx-f"><label>Avg sale price / deal</label><div class="cx-in"><span>$</span><input type="number" id="c-price" value="571000"></div></div>
-          <div class="cx-f"><label>Personal deals / year</label><div class="cx-in"><input type="number" id="c-deals" value="12"></div></div>
+          <div class="cx-f"><label>Personal deals / year</label><div class="cx-in"><input type="number" id="c-deals" value="8"></div></div>
           <div class="cx-f"><label>Avg commission rate</label><div class="cx-in"><input type="number" id="c-rate" value="2.8" step="0.1"><span style="padding:0 12px 0 0">%</span></div></div>
-          <div class="cx-f full"><label>Monthly ad / lead spend you cover now</label><div class="cx-in"><span>$</span><input type="number" id="c-ad" value="500"></div><span class="hint">What you pay out of pocket for ads, portals, or lead gen today.</span></div>
         </div>
       </div>
 
       <div class="cx-sec">
         <h3>Jade terms</h3>
-        <p class="sub">Preloaded with Jade's real terms — adjust only if your offer differs.</p>
+        <p class="sub">Preloaded with where most conversations start. Your split and terms are a conversation, not one-size-fits-all — adjust these to model your own offer.</p>
         <div class="cx-grid">
-          <div class="cx-f"><label>Starting split (agent %) — pre-cap</label><div class="cx-in"><input type="number" id="c-split" value="80"><span style="padding:0 12px 0 0">%</span></div></div>
-          <div class="cx-f"><label>Company dollar cap</label><div class="cx-in"><span>$</span><input type="number" id="c-cap" value="17500"></div></div>
+          <div class="cx-f"><label>Starting split (agent %) — pre-cap</label><div class="cx-in"><input type="number" id="c-split" value="80"><span style="padding:0 12px 0 0">%</span></div><span class="hint">Most conversations start near 80/20 — it’s negotiable, not one-size-fits-all.</span></div>
+          <div class="cx-f"><label>Company-lead split (agent %)</label><div class="cx-in"><input type="number" id="c-cosplit" value="60"><span style="padding:0 12px 0 0">%</span></div><span class="hint">Generally around 60% to the agent on company-provided leads.</span></div>
+          <div class="cx-f"><label>Company-lead deals / year</label><div class="cx-in"><input type="number" id="c-codeals" value="4"></div><span class="hint">Agents who work the leads typically close 3–5 extra a year.</span></div>
+          <div class="cx-f"><label>Company dollar cap</label><div class="cx-in"><span>$</span><input type="number" id="c-cap" value="17500"></div><span class="hint">Company-lead splits are always owed, but they count toward your cap. Once you reach it, your personal deals are 100%.</span></div>
           <div class="cx-f"><label>Split after cap (agent %)</label><div class="cx-in"><input type="number" id="c-aftercap" value="100"><span style="padding:0 12px 0 0">%</span></div></div>
-          <div class="cx-f"><label>Company-lead split (agent %)</label><div class="cx-in"><input type="number" id="c-cosplit" value="60"><span style="padding:0 12px 0 0">%</span></div></div>
-          <div class="cx-f"><label>Company-lead deals / year</label><div class="cx-in"><input type="number" id="c-codeals" value="3"></div><span class="hint">Jade agents who work the leads typically close 3–5 extra deals a year.</span></div>
-          <div class="cx-f"><label>Monthly fee</label><div class="cx-in"><span>$</span><input type="number" id="c-fee" value="200"></div><span class="hint">Includes the Jade agent app.</span></div>
-          <div class="cx-f full"><label>Other annual fees (E&amp;O, tech, onboarding)</label><div class="cx-in"><span>$</span><input type="number" id="c-extra" value="250"></div></div>
+          <div class="cx-f"><label>Monthly fee</label><div class="cx-in"><span>$</span><input type="number" id="c-fee" value="200"></div><span class="hint">Month-to-month. Covers the app, marketing and support — full list below.</span></div>
+          <div class="cx-f"><label>Transaction / desk fee per deal</label><div class="cx-in"><span>$</span><input type="number" id="c-txn" value="0"></div><span class="hint">Jade charges none.</span></div>
+          <div class="cx-f"><label>Your marketing spend / mo</label><div class="cx-in"><span>$</span><input type="number" id="c-ad" value="0"></div><span class="hint">Starts at $0 — content is made for you.</span></div>
+          <div class="cx-f full"><label>Other annual fees (E&amp;O, onboarding)</label><div class="cx-in"><span>$</span><input type="number" id="c-extra" value="250"></div></div>
         </div>
-        <label class="cx-tog"><input type="checkbox" id="c-leadsreplace" checked><span>Jade's leads replace your ad spend<span class="t2">On: your ad spend at Jade is $0 because company leads do the work.</span></span></label>
-        <label class="cx-tog"><input type="checkbox" id="c-cocap" checked><span>Company-lead deals count toward cap progress</span></label>
       </div>
 
       <div class="cx-sec">
-        <h3>Compare your current brokerage</h3>
-        <p class="sub">Optional — personalizes the side-by-side.</p>
-        <label class="cx-tog"><input type="checkbox" id="cur-on"><span>Add my current brokerage</span></label>
-        <div class="cx-grid" style="margin-top:14px">
-          <div class="cx-f"><label>Your current split (agent %)</label><div class="cx-in"><input type="number" id="cur-split" value="70"><span style="padding:0 12px 0 0">%</span></div></div>
-          <div class="cx-f"><label>Current monthly fee</label><div class="cx-in"><span>$</span><input type="number" id="cur-fee" value="0"></div></div>
-          <div class="cx-f full"><label>Current monthly ad / lead spend</label><div class="cx-in"><span>$</span><input type="number" id="cur-ad" value="500"></div><span class="hint">At your current brokerage you work your personal deals only — Jade's company leads are additional.</span></div>
-        </div>
+        <h3>Compare a brokerage</h3>
+        <p class="sub">Add your current brokerage — or any you're weighing — with all its terms. We run your exact book (personal + company deals) through each one, so the comparison is apples to apples.</p>
+        <div id="cx-broks"></div>
+        <button type="button" id="cx-addbrok" class="cx-addbtn">+ Add a brokerage</button>
       </div>
     </form>
 
@@ -1065,22 +1165,30 @@ function calculatorPage() {
         <div class="h">The real story</div>
         <p id="o-story">—</p>
       </div>
-      <div class="cx-cur" id="o-cur">
-        <div class="lab" style="color:var(--sage)">Vs. your current brokerage</div>
-        <div class="row"><span>Current take-home</span><b id="o-curtake">$0</b></div>
-        <div class="cx-delta" id="o-delta">—</div>
-      </div>
+      <div class="cx-comp" id="o-comp"></div>
       <div class="cx-print"><button type="button" onclick="window.print()">Print this estimate</button></div>
     </div>
   </div>
 
-  <div class="cx-get">
-    <div class="g"><b>Company-generated leads</b> — typically 3–5 extra closings a year for agents who work them.</div>
-    <div class="g"><b>Done-for-you marketing</b> — in-house design, branding, and listing support.</div>
-    <div class="g"><b>A hands-on broker</b> — real mentorship and transaction support on every deal.</div>
-    <div class="g"><b>The Jade agent app</b> — client hubs, booking, forms, and presentations, included.</div>
-    <div class="g"><b>In-house lending</b> — through Versatile Lending.</div>
-    <div class="g"><b>A competitive split</b> — with a low company cap, then you keep 100%.</div>
+  <div class="cx-incl">
+    <div class="eyebrow">What your monthly fee covers</div>
+    <h2 class="h-sec" style="margin:8px 0 0">Your $200/month, itemized.</h2>
+    <p class="lead" style="margin-top:10px">Month-to-month, this is everything included — the tools, the marketing, and the people. Nothing basic is locked behind an add-on.</p>
+    <div class="cx-get" style="margin-top:22px">
+      <div class="g"><b>The Jade agent app</b> — client hubs, booking scheduler, listing presentations &amp; CMAs, forms and lead capture, and the Jade AI assistant.</div>
+      <div class="g"><b>The marketing studio</b> — custom, on-brand social posts, newsletters, landing pages and graphics, made for you.</div>
+      <div class="g"><b>In-house marketing &amp; design</b> — custom listing and brand work from a real team, there when you need it.</div>
+      <div class="g"><b>Follow Up Boss CRM</b> — set up and ready to go.</div>
+      <div class="g"><b>HouseCanary data</b> — property and market data built in.</div>
+      <div class="g"><b>Transaction support</b> — pricing, inspection, appraisal and compliance help on every deal.</div>
+      <div class="g"><b>One-on-one coaching</b> — tied to your goals, plus classes and workshops.</div>
+      <div class="g"><b>Company-generated leads</b> — referral, relocation and digital, for agents who want them.</div>
+      <div class="g"><b>A hands-on broker</b> — real mentorship, and a door that's actually open.</div>
+      <div class="g"><b>In-house lending</b> — through Versatile Lending, our mortgage partner.</div>
+      <div class="g"><b>A day-one starter kit</b> — so you're live and looking sharp from the start.</div>
+      <div class="g"><b>A competitive split</b> — with a low company cap, then you keep 100%.</div>
+    </div>
+    <p class="cx-sep">Billed separately — the standard agent costs at any brokerage: your MLS dues and your transaction-platform subscription. Your one-time onboarding and annual E&amp;O are modeled in the calculator above.</p>
   </div>
 
   <p class="cx-disc">Estimates only, for illustration. Your real net depends on your actual commission rates, referral fees, concessions, tax strategy, and brokerage-specific rules, and the "3–5 extra deals" figure reflects agents who actively work company leads — it is not a guarantee of income or results. Final terms are confirmed in writing. Equal Housing Opportunity.</p>
@@ -1089,62 +1197,96 @@ function calculatorPage() {
 <script>
 (function(){
   function g(id){return document.getElementById(id);}
-  function num(id){var v=parseFloat(g(id).value);return isNaN(v)?0:v;}
-  function money(n){var s=Math.round(n).toLocaleString("en-US");return "$"+s;}
-  function compute(){
-    var price=num("c-price"),deals=num("c-deals"),rate=num("c-rate"),ad=num("c-ad");
-    var split=num("c-split"),cap=num("c-cap"),cosplit=num("c-cosplit"),codeals=num("c-codeals"),fee=num("c-fee"),extra=num("c-extra");
-    var leadsReplace=g("c-leadsreplace").checked,coCap=g("c-cocap").checked;
-    var gpd=price*rate/100;
-    var gci=(deals+codeals)*gpd;
-    var personalBroker=deals*(1-split/100)*gpd;
-    var capped=Math.min(cap,personalBroker);
-    var coShare=codeals*(1-cosplit/100)*gpd;
-    var paid=capped+coShare;
-    var agentTake=gci-paid;
-    var adAtJade=leadsReplace?0:ad*12;
-    var fees=fee*12+extra;
-    var costs=fees+adAtJade;
-    var take=agentTake-costs;
-    var eff=gci>0?(take/gci*100):0;
-    var perDeal=(coCap&&(deals+codeals)>0)?((deals*(1-split/100)+codeals*(1-cosplit/100))*gpd)/(deals+codeals):(1-split/100)*gpd;
-    var toCap=perDeal>0?Math.ceil(cap/perDeal):0;
-    var coContribution=codeals*(cosplit/100)*gpd;
-    var adSave=leadsReplace?ad*12:0;
-    g("o-take").textContent=money(take);
-    g("o-agentsub").textContent="Agent take "+money(agentTake)+" • costs "+money(costs);
-    g("o-gci").textContent=money(gci);
-    g("o-eff").textContent=(Math.round(eff*10)/10)+"%";
-    g("o-tocap").textContent=toCap;
-    g("o-paid").textContent=money(paid);
-    var story=[];
-    if(codeals>0){story.push("+"+money(coContribution)+" from "+codeals+" company-provided deal"+(codeals===1?"":"s"));}
-    if(adSave>0){story.push("+"+money(adSave)+"/yr you no longer spend on ads");}
-    g("o-story").textContent=story.length?("What's padding your take-home: "+story.join("  •  ")):"Adjust the inputs to see your estimate.";
-    var curOn=g("cur-on").checked;
-    g("o-cur").className=curOn?"cx-cur on":"cx-cur";
-    if(curOn){
-      var cs=num("cur-split"),cf=num("cur-fee"),ca=num("cur-ad");
-      var curGci=deals*gpd;
-      var curAgent=curGci*cs/100;
-      var curCosts=cf*12+ca*12;
-      var curTake=curAgent-curCosts;
-      g("o-curtake").textContent=money(curTake);
-      var d=take-curTake;
-      g("o-delta").textContent=(d>=0?"+"+money(d)+" more at Jade":money(d)+" — your current setup wins");
+  function num(id){var e=g(id);var v=e?parseFloat(e.value):0;return isNaN(v)?0:v;}
+  function money(n){return "$"+Math.round(n).toLocaleString("en-US");}
+  function esc2(x){return String(x).replace(/[&<>"]/g,function(c){return({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[c];});}
+  function capvId(id){var e=g(id);if(!e||e.value.trim()==="")return null;var v=parseFloat(e.value);return isNaN(v)?null:Math.max(0,v);}
+  function bval(b,k){var e=b.querySelector('[data-k="'+k+'"]');var v=e?parseFloat(e.value):0;return isNaN(v)?0:Math.max(0,v);}
+  function bcap(b){var e=b.querySelector('[data-k="cap"]');if(!e||e.value.trim()==="")return null;var v=parseFloat(e.value);return isNaN(v)?null:Math.max(0,v);}
+  function bacs(b){var e=b.querySelector('[data-k="acs"]');if(!e||e.value.trim()==="")return 100;var v=parseFloat(e.value);return isNaN(v)?100:v;}
+  function compute(p){
+    var gpd=p.price*p.rate/100;
+    var tot=p.pd+p.cd;
+    var gci=tot*gpd;
+    var personalGci=p.pd*gpd;
+    var companySplit=p.cd*(1-p.cs/100)*gpd;
+    var personalFull=p.pd*(1-p.ps/100)*gpd;
+    var personalPaid;
+    if(p.cap===null){
+      personalPaid=personalFull;
+    }else{
+      var capRoom=Math.max(0,p.cap-companySplit);
+      var preRate=(1-p.ps/100);
+      var gciPre=preRate>0?Math.min(personalGci,capRoom/preRate):personalGci;
+      var gciPost=Math.max(0,personalGci-gciPre);
+      personalPaid=gciPre*preRate+gciPost*(1-p.acs/100);
     }
+    var brokTake=companySplit+personalPaid;
+    var agentComm=gci-brokTake;
+    var txnFees=p.txn*tot;
+    var costs=p.monthly*12+p.annual+txnFees+p.mkt*12;
+    var take=agentComm-costs;
+    var eff=gci>0?take/gci*100:0;
+    var avg=tot>0?(companySplit+personalFull)/tot:0;
+    var toCap=(p.cap!==null&&avg>0&&p.cap>0)?Math.min(tot,Math.ceil(p.cap/avg)):null;
+    return {gpd:gpd,gci:gci,brokTake:brokTake,agentComm:agentComm,costs:costs,take:take,eff:eff,toCap:toCap,txnFees:txnFees};
+  }
+  function jadeParams(){return {price:num("c-price"),rate:num("c-rate"),pd:num("c-deals"),cd:num("c-codeals"),ps:num("c-split"),cs:num("c-cosplit"),cap:capvId("c-cap"),acs:num("c-aftercap"),monthly:num("c-fee"),txn:num("c-txn"),annual:num("c-extra"),mkt:num("c-ad")};}
+  function bhas(b,k){var e=b.querySelector('[data-k="'+k+'"]');return !!(e&&e.value.trim()!=="");}
+  function brokParams(b){var ps=bval(b,"ps");var cs=bhas(b,"cs")?bval(b,"cs"):ps;return {price:num("c-price"),rate:num("c-rate"),pd:num("c-deals"),cd:bval(b,"cd"),ps:ps,cs:cs,cap:bcap(b),acs:bacs(b),monthly:bval(b,"monthly"),txn:bval(b,"txn"),annual:0,mkt:bval(b,"mkt")};}
+  function renderBroks(jadeTake){
+    var wrap=g("o-comp");if(!wrap)return;
+    var blocks=document.querySelectorAll("#cx-broks .cx-brok");
+    if(!blocks.length){wrap.innerHTML="";return;}
+    var rows="";var any=false;
+    for(var i=0;i<blocks.length;i++){var b=blocks[i];if(!bhas(b,"ps"))continue;any=true;var ne=b.querySelector('[data-k="name"]');var name=(ne&&ne.value.trim())?ne.value.trim():("Brokerage "+(i+1));var r=compute(brokParams(b));var d=jadeTake-r.take;var cls=d>=0?"cx-up":"cx-down";rows+='<div class="cx-crow"><div class="cx-cn">'+esc2(name)+' · net before taxes</div><div class="cx-ct">'+money(r.take)+'</div><div class="'+cls+'">'+(d>=0?"+"+money(d)+" more at Jade":money(Math.abs(d))+" more there")+'</div></div>';}
+    wrap.innerHTML='<div class="lab" style="color:var(--sage)">You at Jade vs. elsewhere</div>'+(any?rows:'<div class="cx-crow" style="color:#aab6a7;font-size:12.5px">Enter a brokerage’s split to see the side-by-side.</div>');
+  }
+  function recalc(){
+    var jp=jadeParams();var jade=compute(jp);
+    g("o-take").textContent=money(jade.take);
+    g("o-agentsub").textContent="Agent take "+money(jade.agentComm)+" • costs "+money(jade.costs);
+    g("o-gci").textContent=money(jade.gci);
+    g("o-eff").textContent=(Math.round(jade.eff*10)/10)+"%";
+    g("o-tocap").textContent=jade.toCap===null?"—":jade.toCap;
+    g("o-paid").textContent=money(jade.brokTake);
+    var parts=[];
+    var coKeep=jp.cd*(jp.cs/100)*jade.gpd;
+    if(jp.cd>0){parts.push(money(coKeep)+" in your pocket from "+jp.cd+" company-lead deal"+(jp.cd===1?"":"s"));}
+    if(jade.toCap!==null){parts.push("you reach your cap around deal "+jade.toCap+", then your personal deals are 100%");}
+    g("o-story").textContent=parts.length?("Why Jade adds up: "+parts.join("; and ")+"."):"Enter your numbers to see your estimate.";
+    renderBroks(jade.take);
+  }
+  var brokN=0;
+  function addBrok(){
+    brokN++;var wrap=g("cx-broks");var div=document.createElement("div");div.className="cx-brok";
+    div.innerHTML='<div class="cx-brokhead"><span>Brokerage '+brokN+'</span><button type="button" class="cx-rm">Remove</button></div><div class="cx-grid">'+
+    '<div class="cx-f full"><label>Name</label><div class="cx-in"><input type="text" data-k="name" placeholder="e.g., my current brokerage"></div></div>'+
+    '<div class="cx-f"><label>Personal split (agent %)</label><div class="cx-in"><input type="number" data-k="ps" placeholder="your split"><span style="padding:0 12px 0 0">%</span></div></div>'+
+    '<div class="cx-f"><label>Company-lead split (agent %)</label><div class="cx-in"><input type="number" data-k="cs" placeholder="if any"><span style="padding:0 12px 0 0">%</span></div></div>'+
+    '<div class="cx-f"><label>Company-lead deals / yr</label><div class="cx-in"><input type="number" data-k="cd" placeholder="0"></div></div>'+
+    '<div class="cx-f"><label>Company cap ($, blank = none)</label><div class="cx-in"><span>$</span><input type="number" data-k="cap" placeholder="none"></div></div>'+
+    '<div class="cx-f"><label>Split after cap (agent %)</label><div class="cx-in"><input type="number" data-k="acs" placeholder="100"><span style="padding:0 12px 0 0">%</span></div></div>'+
+    '<div class="cx-f"><label>Monthly fee ($)</label><div class="cx-in"><span>$</span><input type="number" data-k="monthly" placeholder="0"></div></div>'+
+    '<div class="cx-f"><label>Transaction / desk fee / deal ($)</label><div class="cx-in"><span>$</span><input type="number" data-k="txn" placeholder="0"></div></div>'+
+    '<div class="cx-f"><label>Marketing spend / mo ($)</label><div class="cx-in"><span>$</span><input type="number" data-k="mkt" placeholder="0"></div></div>'+
+    '</div>';
+    wrap.appendChild(div);
+    div.querySelector(".cx-rm").addEventListener("click",function(){div.parentNode.removeChild(div);recalc();});
+    var ins=div.querySelectorAll("input");for(var k=0;k<ins.length;k++){ins[k].addEventListener("input",recalc);}
+    recalc();
   }
   var mk=g("c-market");
-  if(mk){mk.addEventListener("change",function(){var v=parseFloat(mk.value);if(!isNaN(v)){g("c-price").value=v;}compute();});}
-  var ids=["c-price","c-deals","c-rate","c-ad","c-split","c-cap","c-aftercap","c-cosplit","c-codeals","c-fee","c-extra","cur-split","cur-fee","cur-ad"];
-  for(var i=0;i<ids.length;i++){var e=g(ids[i]);if(e){e.addEventListener("input",compute);}}
-  var toggles=["c-leadsreplace","c-cocap","cur-on"];
-  for(var j=0;j<toggles.length;j++){g(toggles[j]).addEventListener("change",compute);}
-  compute();
+  if(mk){mk.addEventListener("change",function(){var v=parseFloat(mk.value);if(!isNaN(v)){g("c-price").value=v;}recalc();});}
+  var ids=["c-price","c-deals","c-rate","c-split","c-cosplit","c-codeals","c-cap","c-aftercap","c-fee","c-txn","c-ad","c-extra"];
+  for(var i=0;i<ids.length;i++){var e=g(ids[i]);if(e){e.addEventListener("input",recalc);}}
+  var ab=g("cx-addbrok");if(ab){ab.addEventListener("click",addBrok);}
+  addBrok();
+  recalc();
 })();
 </script>`;
-  const jsonld = [{ '@context': 'https://schema.org', '@type': 'WebApplication', name: 'Jade Real Estate Take-Home Calculator', applicationCategory: 'FinanceApplication', operatingSystem: 'Web', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }, url: SITE + '/calculator', description: 'Estimate your real annual take-home as a Jade Real Estate agent and compare it to your current brokerage.' }];
-  return layout({ title: 'Take-Home Calculator — Jade Real Estate Careers', desc: "Estimate what you'd actually take home at Jade Real Estate using your real production, and compare it to your current brokerage. Preloaded with Jade's real terms; runs entirely in your browser.", path: '/calculator', body, jsonld });
+  const jsonld = [{ '@context': 'https://schema.org', '@type': 'WebApplication', name: 'Jade Real Estate Take-Home Calculator', applicationCategory: 'FinanceApplication', operatingSystem: 'Web', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }, url: SITE + '/calculator', description: 'Estimate your real annual take-home as a Jade Real Estate agent and compare it, in full detail, to any other brokerage.' }];
+  return layout({ title: 'Real Estate Commission Split & Take-Home Calculator — Jade', desc: "Estimate what you'd actually take home at Jade Real Estate using your real production, and compare it in full detail to any brokerage — split, company-lead split, cap, transaction and desk fees. Runs entirely in your browser.", path: '/calculator', body, jsonld });
 }
 
 function comparePage() {
@@ -1274,7 +1416,79 @@ function comparePage() {
 })();
 </script>`;
   const jsonld = [{ '@context': 'https://schema.org', '@type': 'WebApplication', name: 'Jade Real Estate Brokerage Comparison', applicationCategory: 'BusinessApplication', operatingSystem: 'Web', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }, url: SITE + '/compare', description: 'Compare the support, marketing and lead systems at your current brokerage with what Jade Real Estate includes.' }];
-  return layout({ title: 'Compare Brokerages — Jade Real Estate Careers', desc: "A side-by-side look at the support, marketing, and lead systems you use today versus what Jade Real Estate includes in its $200/month fee. Mark what you have; it saves on your device.", path: '/compare', body, jsonld });
+  return layout({ title: 'Compare Denver Real Estate Brokerages for Agents — Jade', desc: "A side-by-side look at the support, marketing, and lead systems you use today versus what Jade Real Estate includes in its $200/month fee. Mark what you have; it saves on your device.", path: '/compare', body, jsonld });
+}
+
+function switchGuidePage() {
+  const jsonld = [
+    { '@context': 'https://schema.org', '@type': 'Article', headline: 'How to Switch Real Estate Brokerages in Colorado', description: 'A practical, honest guide for Colorado real estate agents considering a brokerage move: when to switch, what to compare, how to transfer your license, and how to move without losing momentum.', author: { '@type': 'Organization', name: 'Jade Real Estate' }, publisher: { '@type': 'Organization', name: 'Jade Real Estate', url: SITE, logo: OG }, datePublished: '2026-10-01', dateModified: new Date().toISOString().slice(0, 10), mainEntityOfPage: SITE + '/switching-brokerages', about: 'Changing real estate brokerages in Colorado' },
+    { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [
+      { '@type': 'Question', name: 'How do I switch real estate brokerages in Colorado?', acceptedAnswer: { '@type': 'Answer', text: 'Give your current broker notice per your agreement, then change your employing broker through the Colorado Division of Real Estate (DORA) online portal; your new brokerage confirms the association. Your license stays active and you do not re-test. Settle pending transactions and listings (which belong to the brokerage) before you move, and take your contacts and database with you.' } },
+      { '@type': 'Question', name: 'Will I lose my listings or pending deals if I change brokerages?', acceptedAnswer: { '@type': 'Answer', text: 'Listings and active transactions generally belong to the brokerage, not the agent, so how they transfer depends on your listing and independent-contractor agreements. Read those first and agree on a plan for in-progress deals with both brokers.' } },
+      { '@type': 'Question', name: 'What should I compare when choosing a new brokerage?', acceptedAnswer: { '@type': 'Answer', text: 'Look past the headline split at your real take-home: commission split and cap, monthly and transaction fees, the technology and CRM included, marketing support, lead sources, and the quality of broker support and culture.' } }
+    ] }
+  ];
+  const body = `
+<section class="hero"><div class="m1"></div><div class="wrap">
+  <div class="eyebrow">For Colorado agents weighing a move</div>
+  <h1>How to switch real estate brokerages in Colorado.</h1>
+  <p>Changing brokerages feels like a big move — and it should. Here's a clear, no-spin guide: the signs it's time, what actually matters when you compare, how the license transfer works in Colorado, and how to make the move without losing your momentum.</p>
+  <div class="btns"><a class="btn p" href="/calculator">Compare your take-home →</a><a class="btn s" href="${BOOK}" target="_blank" rel="noopener">Talk it through with Emilie</a></div>
+</div></section>
+
+<section class="band paper"><div class="wrap narrow">
+  <div class="eyebrow">Signs it might be time</div>
+  <h2 class="h-sec">Five signs agents start looking.</h2>
+  <div class="prose"><p>Most agents don't leave over one thing — it's a slow build. A few of the most common:</p></div>
+  <div class="rows">
+    <div class="r"><div class="lbl"><small>Sign 01</small>The math stopped working</div><p>Your split, cap, desk and transaction fees add up to more than you're getting back. A bigger split somewhere else isn't the answer — your real take-home is. <a href="/calculator">Run the numbers →</a></p></div>
+    <div class="r"><div class="lbl"><small>Sign 02</small>You're on your own</div><p>Marketing, tech, and transaction help are "figure it out yourself." You're paying for a brand, not support.</p></div>
+    <div class="r"><div class="lbl"><small>Sign 03</small>The tools are dated</div><p>No real CRM, no client experience, nothing that makes you look as good as you are. <a href="/technology">See what modern tools look like →</a></p></div>
+    <div class="r"><div class="lbl"><small>Sign 04</small>You can't reach a broker</div><p>Questions sit in a queue. When a deal is on the line, you need someone who picks up.</p></div>
+    <div class="r"><div class="lbl"><small>Sign 05</small>Mandatory everything</div><p>Required meetings and production minimums that have nothing to do with your clients or your goals.</p></div>
+  </div>
+</div></section>
+
+<section class="band cream"><div class="wrap narrow">
+  <div class="eyebrow">What to actually compare</div>
+  <h2 class="h-sec">Look past the split.</h2>
+  <div class="prose">
+    <p>A commission split is the number everyone leads with, and it's the one that tells you the least. What you keep at the end of the year depends on a stack of things:</p>
+    <p><b>Your real take-home</b> — split and cap together, plus monthly, desk, and per-transaction fees. The same split can mean very different money. <a href="/calculator">Use the take-home calculator →</a></p>
+    <p><b>Technology, included or extra</b> — a real CRM, a client portal, marketing tools, listing presentations. Count what you'd otherwise pay for separately. <a href="/technology">What's included at Jade →</a></p>
+    <p><b>Marketing support</b> — done-for-you or do-it-yourself? Design help, social, landing pages, and listing marketing.</p>
+    <p><b>Leads</b> — does the brokerage provide any, and on what terms?</p>
+    <p><b>Broker access and culture</b> — can you reach a decision-maker, and do you actually want to show up? This is the part no calculator captures.</p>
+    <p>Want it side by side? <a href="/compare">Compare your current brokerage to Jade →</a></p>
+  </div>
+</div></section>
+
+<section class="band paper"><div class="wrap narrow">
+  <div class="eyebrow">The license transfer</div>
+  <h2 class="h-sec">How the move works in Colorado.</h2>
+  <div class="prose">
+    <p>The logistics are simpler than most agents expect. The general path:</p>
+    <p><b>1. Read your agreements.</b> Your independent-contractor and listing agreements spell out notice, fees, and what happens to pending transactions and listings — which belong to the brokerage, not to you.</p>
+    <p><b>2. Give notice.</b> Tell your current managing broker. A clean, professional exit protects your reputation in a small market.</p>
+    <p><b>3. Transfer your license.</b> In Colorado, you change your employing broker through the Colorado Division of Real Estate (DORA) online portal; your new brokerage confirms the association. Your license stays active — there's no new exam. Confirm the current steps and any fee on the ${ext('https://dre.colorado.gov', 'Colorado Division of Real Estate')} site.</p>
+    <p><b>4. Hand off in-progress deals.</b> Agree with both brokers on how pending contracts and active listings are handled, in line with your agreements.</p>
+    <p><b>5. Take your database.</b> Your contacts and relationships are yours. Export them and bring them with you.</p>
+    <p><b>6. Update your marketing.</b> New brokerage name on your profiles, signatures, signs, and the MLS. This is where a brokerage that sets it up <em>with</em> you saves weeks.</p>
+    <p class="disc" style="color:var(--jade2);font-size:13px;max-width:62ch">This is general information for Colorado agents, not legal advice. Verify current requirements with the Colorado Division of Real Estate and your own agreements.</p>
+  </div>
+</div></section>
+
+<section class="band cream"><div class="wrap narrow">
+  <div class="eyebrow">Making the move easy</div>
+  <h2 class="h-sec">At Jade, you don't do it alone.</h2>
+  <div class="prose">
+    <p>The reason most agents dread switching isn't the license — it's the thought of rebuilding their marketing, tools, and systems from scratch. At Jade, that's the part we do with you.</p>
+    <p>Emilie sits down with new agents and sets up their branded landing page, a week of content, their client hubs, and their CRM — often live and sending within the first week. The Jade agent app is included in a flat $200/month, so the tools are ready on day one, and a starter kit — signage, cards, a branded tote, a marketing consult — means you look established the moment you make the move.</p>
+    <p>No mandatory meetings. No production minimums. An independent, Colorado-local brokerage built around the agent.</p>
+  </div>
+</div></section>
+${ctaBand()}`;
+  return layout({ title: 'How to Switch Real Estate Brokerages in Colorado — Jade', desc: "A practical, honest guide for Colorado real estate agents thinking about changing brokerages: the signs it's time, what to compare (splits, caps, fees, tech, marketing, leads, support), how to transfer your license with the Division of Real Estate, and how to move without losing momentum.", path: '/switching-brokerages', body, jsonld });
 }
 
 function robots() {
@@ -1297,7 +1511,7 @@ function robots() {
 
 async function sitemap() {
   const posts = await getPosts(200);
-  const base = ['/', '/technology', '/culture', '/marketing', '/calculator', '/compare', '/blog', '/faq'];
+  const base = ['/', '/technology', '/culture', '/marketing', '/calculator', '/compare', '/switching-brokerages', '/blog', '/faq'];
   const today = new Date().toISOString().slice(0, 10);
   const rows = base.map(u => `  <url><loc>${SITE}${u === '/' ? '' : u}</loc><lastmod>${today}</lastmod><changefreq>weekly</changefreq><priority>${u === '/' ? '1.0' : '0.7'}</priority></url>`)
     .concat(posts.map(p => `  <url><loc>${SITE}/blog/${p.slug}</loc><lastmod>${(p.published_at || today).slice(0, 10)}</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>`));
@@ -1311,7 +1525,7 @@ function llms() {
 Jade Real Estate is an independent real estate brokerage serving Colorado's Front Range and mountains: Denver Metro, Colorado Springs, Winter Park, and Northern Colorado. This site is for licensed real estate agents considering a move to Jade. Owner-operated; office at ${OFFICE}.
 
 ## What Jade is
-A boutique, independent, owner-operated Colorado brokerage built around the agent — not the franchise. No mandatory meetings, no production minimums, no prescribed path. Known for being available and supportive, with real community presence (for example "Jade at the Market," a booth at a Denver farmers market).
+A boutique, independent, owner-operated Colorado brokerage built around the agent — not the franchise. No mandatory meetings, no production minimums. Known for person-to-person support — one-on-one coaching, classes and workshops, and a broker who picks up — and real community presence (for example "Jade at the Market," a booth at a Colorado farmers market).
 
 ## What the flat $200/month includes
 The Jade agent app, built in-house and included:
@@ -1346,6 +1560,7 @@ Jade does not lead with a commission-split number, because a split is not take-h
 - FAQ (includes the full $200 inclusions list): ${SITE}/faq
 - Take-home calculator: ${SITE}/calculator
 - Compare brokerages: ${SITE}/compare
+- How to switch brokerages in Colorado (guide): ${SITE}/switching-brokerages
 - Book a conversation with Emilie: ${BOOK}
 
 ## Contact
@@ -1376,6 +1591,8 @@ export default {
     if (p === '/marketing') return html(marketingPage());
     if (p === '/calculator') return html(calculatorPage());
     if (p === '/compare') return html(comparePage());
+    if (p === '/switching-brokerages') return html(switchGuidePage());
+    if (p === '/switch' || p === '/how-to-switch-brokerages') return Response.redirect(SITE + '/switching-brokerages', 301);
     if (p === '/blog') return html(await blogIndex());
     if (p.startsWith('/blog/')) { const slug = decodeURIComponent(p.slice(6)); const post = await getPost(slug); return post ? html(postPage(post)) : notFound(); }
     return notFound();
