@@ -1166,7 +1166,7 @@ function calculatorPage() {
         <p id="o-story">—</p>
       </div>
       <div class="cx-comp" id="o-comp"></div>
-      <div class="cx-print"><button type="button" onclick="window.print()">Print this estimate</button></div>
+      <div class="cx-print"><button type="button" id="cx-printbtn">Print a clean estimate</button></div>
     </div>
   </div>
 
@@ -1186,7 +1186,7 @@ function calculatorPage() {
       <div class="g"><b>A hands-on broker</b> — real mentorship, and a door that's actually open.</div>
       <div class="g"><b>In-house lending</b> — through Versatile Lending, our mortgage partner.</div>
       <div class="g"><b>A day-one starter kit</b> — so you're live and looking sharp from the start.</div>
-      <div class="g"><b>A competitive split</b> — with a low company cap, then you keep 100%.</div>
+      <div class="g"><b>Your Jade email &amp; office access</b> — a professional home for your license, with workspace when you need it.</div>
     </div>
     <p class="cx-sep">Billed separately — the standard agent costs at any brokerage: your MLS dues and your transaction-platform subscription. Your one-time onboarding and annual E&amp;O are modeled in the calculator above.</p>
   </div>
@@ -1242,6 +1242,51 @@ function calculatorPage() {
     for(var i=0;i<blocks.length;i++){var b=blocks[i];if(!bhas(b,"ps"))continue;any=true;var ne=b.querySelector('[data-k="name"]');var name=(ne&&ne.value.trim())?ne.value.trim():("Brokerage "+(i+1));var r=compute(brokParams(b));var d=jadeTake-r.take;var cls=d>=0?"cx-up":"cx-down";rows+='<div class="cx-crow"><div class="cx-cn">'+esc2(name)+' · net before taxes</div><div class="cx-ct">'+money(r.take)+'</div><div class="'+cls+'">'+(d>=0?"+"+money(d)+" more at Jade":money(Math.abs(d))+" more there")+'</div></div>';}
     wrap.innerHTML='<div class="lab" style="color:var(--sage)">You at Jade vs. elsewhere</div>'+(any?rows:'<div class="cx-crow" style="color:#aab6a7;font-size:12.5px">Enter a brokerage’s split to see the side-by-side.</div>');
   }
+  function gatherBroks(jadeTake){
+    var out=[];var blocks=document.querySelectorAll("#cx-broks .cx-brok");
+    for(var i=0;i<blocks.length;i++){var b=blocks[i];if(!bhas(b,"ps"))continue;var ne=b.querySelector('[data-k="name"]');var name=(ne&&ne.value.trim())?ne.value.trim():("Brokerage "+(i+1));var r=compute(brokParams(b));out.push({name:name,take:r.take,diff:jadeTake-r.take});}
+    return out;
+  }
+  function buildPrint(jp,j){
+    var tot=jp.pd+jp.cd;var broks=gatherBroks(j.take);
+    var when=new Date().toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"});
+    function row(l,v){return '<tr><td>'+l+'</td><td class="num">'+v+'</td></tr>';}
+    var cost='';
+    if(jp.monthly>0)cost+=row('Monthly fee &mdash; '+money(jp.monthly)+' &times; 12',money(jp.monthly*12));
+    if(jp.annual>0)cost+=row('Onboarding &amp; annual E&amp;O',money(jp.annual));
+    if(j.txnFees>0)cost+=row('Transaction / desk fees',money(j.txnFees));
+    if(jp.mkt>0)cost+=row('Your marketing spend &mdash; '+money(jp.mkt)+'/mo',money(jp.mkt*12));
+    if(!cost)cost=row('Costs','$0');
+    var cap=(j.toCap!==null)?('You reach your company cap around deal '+j.toCap+', after which your personal deals are 100%.'):'';
+    var comp='';
+    if(broks.length){var cr='';for(var i=0;i<broks.length;i++){var bk=broks[i];var d=bk.diff;cr+='<tr><td>'+esc2(bk.name)+'</td><td class="num">'+money(bk.take)+'</td><td class="num '+(d>=0?'up':'down')+'">'+(d>=0?'+'+money(d)+' at Jade':money(Math.abs(d))+' there')+'</td></tr>';}comp='<h2>How it compares</h2><table><thead><tr><th>Brokerage</th><th class="num">Their net</th><th class="num">Difference</th></tr></thead><tbody>'+cr+'</tbody></table>';}
+    var st=g("o-story")?g("o-story").textContent:'';if(st.indexOf('Enter your numbers')===0)st='';
+    return '<!doctype html><html><head><meta charset="utf-8"><title>Your Jade take-home estimate</title><style>'
+      +'*{box-sizing:border-box}body{font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;color:#15201a;margin:0;padding:32px;line-height:1.5}'
+      +'.hd{background:#335143;color:#fff;border-radius:12px;padding:20px 24px}.hd h1{font-family:Georgia,serif;font-weight:400;font-size:24px;margin:0}.hd p{margin:6px 0 0;color:#cfdacb;font-size:13px}'
+      +'.big{font-size:40px;font-weight:800;color:#335143;margin:4px 0}'
+      +'h2{font-size:14px;text-transform:uppercase;letter-spacing:.08em;color:#546751;margin:24px 0 8px;border-bottom:1px solid #e3e6e1;padding-bottom:5px}'
+      +'table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:7px 0;text-align:left;border-bottom:1px solid #eef0ec}.num{text-align:right;font-variant-numeric:tabular-nums}th{font-size:12px;color:#7a857a;text-transform:uppercase;letter-spacing:.05em}'
+      +'.tot td{border-top:2px solid #335143;border-bottom:0;font-weight:700;padding-top:10px}.up{color:#335143}.down{color:#9a4b2f}'
+      +'.note{font-size:12px;color:#6a756d;margin-top:8px}.disc{font-size:11px;color:#8a948a;margin-top:26px;border-top:1px solid #e3e6e1;padding-top:12px}@media print{body{padding:0}}'
+      +'</style></head><body>'
+      +'<div class="hd"><h1>Your take-home estimate</h1><p>Jade Real Estate &middot; '+when+' &middot; estimate only, before taxes</p></div>'
+      +'<h2>Your production</h2><table>'+row('Average sale price',money(jp.price))+row('Deals per year',tot+' ('+jp.pd+' your own, '+jp.cd+' company-lead)')+row('Commission rate',(Math.round(jp.rate*100)/100)+'%')+'<tr class="tot"><td>Gross commission (GCI)</td><td class="num">'+money(j.gci)+'</td></tr></table>'
+      +'<h2>What the brokerage keeps</h2><table>'+row('Broker take',money(j.brokTake))+'</table>'+(cap?'<p class="note">'+cap+'</p>':'')
+      +'<h2>Your costs</h2><table>'+cost+'<tr class="tot"><td>Total costs</td><td class="num">'+money(j.costs)+'</td></tr></table>'
+      +'<h2>Your estimated take-home</h2><div class="big">'+money(j.take)+'</div><p class="note">That is '+(Math.round(j.eff*10)/10)+'% of your gross commission, after the broker share and your costs &mdash; before taxes.</p>'
+      +(st?'<p class="note">'+esc2(st)+'</p>':'')
+      +comp
+      +'<p class="disc">Estimates only, for illustration. Your real net depends on your actual commission rates, referral fees, concessions, tax strategy, and brokerage-specific rules. A flat $200/month covers the Jade agent app, marketing, data and support; standard costs like MLS dues and your transaction platform are billed separately. Final terms are confirmed in writing. Equal Housing Opportunity.</p>'
+      +'</body></html>';
+  }
+  function printEstimate(){
+    var jp=jadeParams();var j=compute(jp);var html=buildPrint(jp,j);
+    var ifr=document.getElementById("cx-prframe");
+    if(!ifr){ifr=document.createElement("iframe");ifr.id="cx-prframe";ifr.setAttribute("aria-hidden","true");ifr.style.position="fixed";ifr.style.right="0";ifr.style.bottom="0";ifr.style.width="0";ifr.style.height="0";ifr.style.border="0";document.body.appendChild(ifr);}
+    var d=ifr.contentWindow.document;d.open();d.write(html);d.close();
+    setTimeout(function(){try{ifr.contentWindow.focus();ifr.contentWindow.print();}catch(e){window.print();}},250);
+  }
   function recalc(){
     var jp=jadeParams();var jade=compute(jp);
     g("o-take").textContent=money(jade.take);
@@ -1281,6 +1326,7 @@ function calculatorPage() {
   var ids=["c-price","c-deals","c-rate","c-split","c-cosplit","c-codeals","c-cap","c-aftercap","c-fee","c-txn","c-ad","c-extra"];
   for(var i=0;i<ids.length;i++){var e=g(ids[i]);if(e){e.addEventListener("input",recalc);}}
   var ab=g("cx-addbrok");if(ab){ab.addEventListener("click",addBrok);}
+  var pbn=g("cx-printbtn");if(pbn){pbn.addEventListener("click",printEstimate);}
   addBrok();
   recalc();
 })();
