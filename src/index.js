@@ -1244,40 +1244,59 @@ function calculatorPage() {
   }
   function gatherBroks(jadeTake){
     var out=[];var blocks=document.querySelectorAll("#cx-broks .cx-brok");
-    for(var i=0;i<blocks.length;i++){var b=blocks[i];if(!bhas(b,"ps"))continue;var ne=b.querySelector('[data-k="name"]');var name=(ne&&ne.value.trim())?ne.value.trim():("Brokerage "+(i+1));var r=compute(brokParams(b));out.push({name:name,take:r.take,diff:jadeTake-r.take});}
+    for(var i=0;i<blocks.length;i++){var b=blocks[i];if(!bhas(b,"ps"))continue;var ne=b.querySelector('[data-k="name"]');var name=(ne&&ne.value.trim())?ne.value.trim():("Brokerage "+(i+1));var r=compute(brokParams(b));out.push({name:name,take:r.take,brokTake:r.brokTake,costs:r.costs,diff:jadeTake-r.take});}
     return out;
   }
   function buildPrint(jp,j){
     var tot=jp.pd+jp.cd;var broks=gatherBroks(j.take);
     var when=new Date().toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"});
     function row(l,v){return '<tr><td>'+l+'</td><td class="num">'+v+'</td></tr>';}
+    var opts=[{name:"Jade",take:j.take,brokTake:j.brokTake,costs:j.costs,jade:true}];
+    for(var i=0;i<broks.length;i++){opts.push({name:broks[i].name,take:broks[i].take,brokTake:broks[i].brokTake,costs:broks[i].costs,jade:false});}
+    opts.sort(function(a,b){return b.take-a.take;});
+    var head,why;
+    if(opts.length<2){
+      head='Your estimated take-home at Jade is <b>'+money(j.take)+'</b> a year.';
+      why='Add your current brokerage in the calculator and print again to see, side by side, where you would keep more — and why.';
+    }else{
+      var win=opts[0],run=opts[1];var gap=win.take-run.take;
+      head='You would take home the most at <b>'+esc2(win.name)+'</b> — about <b>'+money(gap)+' more a year</b> than at '+esc2(run.name)+'.';
+      var wCut=win.brokTake+win.costs,rCut=run.brokTake+run.costs;var bits=[];
+      bits.push('At '+esc2(run.name)+', the brokerage keeps about '+money(rCut)+' a year between the split and fees. At '+esc2(win.name)+' it is about '+money(wCut)+'. Keeping more of your own commission is the whole difference.');
+      if(win.jade||run.jade){if(j.toCap!==null){bits.push('Jade does not lead with a split, because a split is not take-home: you reach the low company cap around deal '+j.toCap+', after which your personal deals are 100% yours, and the flat '+money(jp.monthly)+'/month replaces a percentage cut.');}else{bits.push('Jade charges a flat '+money(jp.monthly)+'/month instead of an ongoing percentage split, so your higher-producing deals are not taxed by the brokerage.');}}
+      if(jp.txn===0){bits.push('There are no per-deal transaction or desk fees at Jade.');}
+      why=bits.join(' ');
+    }
+    var cmp='';
+    if(broks.length){var cr='';for(var k=0;k<opts.length;k++){var o=opts[k];var vs;if(o.jade){vs='<span class="base">baseline</span>';}else if(o.take>=j.take){vs='<span class="up">+'+money(o.take-j.take)+' vs Jade</span>';}else{vs='<span class="down">−'+money(j.take-o.take)+' vs Jade</span>';}cr+='<tr class="'+(o.jade?'me':'')+'"><td>'+esc2(o.name)+(o.jade?' <span class="tag">you</span>':'')+'</td><td class="num">'+money(o.take)+'</td><td class="num">'+vs+'</td></tr>';}cmp='<h2>Side by side &mdash; net take-home per year</h2><table class="cmp"><tbody>'+cr+'</tbody></table>';}
     var cost='';
     if(jp.monthly>0)cost+=row('Monthly fee &mdash; '+money(jp.monthly)+' &times; 12',money(jp.monthly*12));
     if(jp.annual>0)cost+=row('Onboarding &amp; annual E&amp;O',money(jp.annual));
     if(j.txnFees>0)cost+=row('Transaction / desk fees',money(j.txnFees));
     if(jp.mkt>0)cost+=row('Your marketing spend &mdash; '+money(jp.mkt)+'/mo',money(jp.mkt*12));
     if(!cost)cost=row('Costs','$0');
-    var cap=(j.toCap!==null)?('You reach your company cap around deal '+j.toCap+', after which your personal deals are 100%.'):'';
-    var comp='';
-    if(broks.length){var cr='';for(var i=0;i<broks.length;i++){var bk=broks[i];var d=bk.diff;cr+='<tr><td>'+esc2(bk.name)+'</td><td class="num">'+money(bk.take)+'</td><td class="num '+(d>=0?'up':'down')+'">'+(d>=0?'+'+money(d)+' at Jade':money(Math.abs(d))+' there')+'</td></tr>';}comp='<h2>How it compares</h2><table><thead><tr><th>Brokerage</th><th class="num">Their net</th><th class="num">Difference</th></tr></thead><tbody>'+cr+'</tbody></table>';}
-    var st=g("o-story")?g("o-story").textContent:'';if(st.indexOf('Enter your numbers')===0)st='';
     return '<!doctype html><html><head><meta charset="utf-8"><title>Your Jade take-home estimate</title><style>'
-      +'*{box-sizing:border-box}body{font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;color:#15201a;margin:0;padding:32px;line-height:1.5}'
-      +'.hd{background:#335143;color:#fff;border-radius:12px;padding:20px 24px}.hd h1{font-family:Georgia,serif;font-weight:400;font-size:24px;margin:0}.hd p{margin:6px 0 0;color:#cfdacb;font-size:13px}'
-      +'.big{font-size:40px;font-weight:800;color:#335143;margin:4px 0}'
-      +'h2{font-size:14px;text-transform:uppercase;letter-spacing:.08em;color:#546751;margin:24px 0 8px;border-bottom:1px solid #e3e6e1;padding-bottom:5px}'
-      +'table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:7px 0;text-align:left;border-bottom:1px solid #eef0ec}.num{text-align:right;font-variant-numeric:tabular-nums}th{font-size:12px;color:#7a857a;text-transform:uppercase;letter-spacing:.05em}'
-      +'.tot td{border-top:2px solid #335143;border-bottom:0;font-weight:700;padding-top:10px}.up{color:#335143}.down{color:#9a4b2f}'
-      +'.note{font-size:12px;color:#6a756d;margin-top:8px}.disc{font-size:11px;color:#8a948a;margin-top:26px;border-top:1px solid #e3e6e1;padding-top:12px}@media print{body{padding:0}}'
+      +'*{box-sizing:border-box}body{font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;color:#15201a;margin:0;padding:36px;line-height:1.55;max-width:720px}'
+      +'.eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#7a857a;font-weight:700}'
+      +'.verdict{font-family:Georgia,serif;font-weight:400;font-size:25px;line-height:1.25;margin:8px 0 0}.verdict b{color:#335143}'
+      +'.why{background:#f2efeb;border-left:3px solid #335143;border-radius:8px;padding:14px 16px;margin:18px 0 4px;font-size:13.5px;color:#3a463b}'
+      +'h2{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:#546751;margin:24px 0 8px;font-weight:700}'
+      +'table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:8px 10px;text-align:left;border-bottom:1px solid #eef0ec}.num{text-align:right;font-variant-numeric:tabular-nums}'
+      +'.tot td{border-top:2px solid #335143;border-bottom:0;font-weight:700;padding-top:10px}'
+      +'.cmp td{font-size:15px}.cmp .me{background:#eef3ee}.cmp .me td{font-weight:700}'
+      +'.tag{display:inline-block;background:#335143;color:#fff;font-size:9px;font-weight:700;letter-spacing:.06em;border-radius:5px;padding:1px 5px;vertical-align:middle;margin-left:4px}'
+      +'.up{color:#335143;font-weight:700;font-size:12.5px}.down{color:#9a4b2f;font-weight:700;font-size:12.5px}.base{color:#9aa69a;font-size:12px}'
+      +'.talk{font-size:13.5px;color:#335143;font-weight:600;line-height:1.5;margin:24px 0 2px}'
+      +'.foot{font-size:11px;color:#8a948a;margin-top:26px;border-top:1px solid #e3e6e1;padding-top:12px}@media print{body{padding:6px 2px}}'
       +'</style></head><body>'
-      +'<div class="hd"><h1>Your take-home estimate</h1><p>Jade Real Estate &middot; '+when+' &middot; estimate only, before taxes</p></div>'
+      +'<div class="eyebrow">Jade Real Estate &middot; Take-home estimate &middot; '+when+'</div>'
+      +'<div class="verdict">'+head+'</div>'
+      +'<div class="why">'+why+'</div>'
+      +cmp
       +'<h2>Your production</h2><table>'+row('Average sale price',money(jp.price))+row('Deals per year',tot+' ('+jp.pd+' your own, '+jp.cd+' company-lead)')+row('Commission rate',(Math.round(jp.rate*100)/100)+'%')+'<tr class="tot"><td>Gross commission (GCI)</td><td class="num">'+money(j.gci)+'</td></tr></table>'
-      +'<h2>What the brokerage keeps</h2><table>'+row('Broker take',money(j.brokTake))+'</table>'+(cap?'<p class="note">'+cap+'</p>':'')
-      +'<h2>Your costs</h2><table>'+cost+'<tr class="tot"><td>Total costs</td><td class="num">'+money(j.costs)+'</td></tr></table>'
-      +'<h2>Your estimated take-home</h2><div class="big">'+money(j.take)+'</div><p class="note">That is '+(Math.round(j.eff*10)/10)+'% of your gross commission, after the broker share and your costs &mdash; before taxes.</p>'
-      +(st?'<p class="note">'+esc2(st)+'</p>':'')
-      +comp
-      +'<p class="disc">Estimates only, for illustration. Your real net depends on your actual commission rates, referral fees, concessions, tax strategy, and brokerage-specific rules. A flat $200/month covers the Jade agent app, marketing, data and support; standard costs like MLS dues and your transaction platform are billed separately. Final terms are confirmed in writing. Equal Housing Opportunity.</p>'
+      +'<h2>At Jade &mdash; where it goes</h2><table>'+row('Brokerage keeps (split to cap)',money(j.brokTake))+cost+'<tr class="tot"><td>Your net take-home (before taxes)</td><td class="num">'+money(j.take)+'</td></tr></table>'
+      +'<p class="talk">A split is always a conversation \u2014 we\'ll help you find one that works for you and makes sense for your business, because we care about keeping this equitable. Let\'s talk it through.</p>'
+      +'<p class="foot">Estimates only, for illustration. Your real net depends on your actual commission rates, referral fees, concessions, tax strategy, and brokerage-specific rules. A flat '+money(jp.monthly)+'/month covers the Jade agent app, marketing, data and support; standard costs like MLS dues and your transaction platform are billed separately. Final terms are confirmed in writing. Equal Housing Opportunity.</p>'
       +'</body></html>';
   }
   function printEstimate(){
