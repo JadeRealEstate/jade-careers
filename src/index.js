@@ -207,6 +207,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.1;margin:0;text-
 @media(max-width:860px){.ed,.two,.quotes,.inc,.rows .r{grid-template-columns:1fr}.ed .figure{order:-1}.nav .links{display:none}}
 </style>
 ${ld}
+<script>(function(){try{var v=(self.crypto&&crypto.randomUUID)?crypto.randomUUID():(Date.now()+'-'+Math.random().toString(36).slice(2));var p=location.pathname||'/';var r=document.referrer||'';var d=matchMedia('(max-width:768px)').matches?'mobile':'desktop';var acc=0,seg=performance.now();function flush(){acc+=Math.max(0,performance.now()-seg);seg=performance.now();try{navigator.sendBeacon('https://agentapp.jaderealestate.com/api/careers-ingest',JSON.stringify({visit_id:v,path:p,referrer:r.slice(0,300),device:d,duration_ms:Math.round(acc)}));}catch(e){}}document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden'){flush();}else{seg=performance.now();}});window.addEventListener('pagehide',flush);}catch(e){}})();</script>
 </head><body>
 <header class="nav"><div class="wrap">
   <a class="brand" href="/">Jade<small>REAL ESTATE</small></a>
