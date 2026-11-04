@@ -44,6 +44,8 @@ async function getPrivatePage(slug) {
   } catch (e) { return null; }
 }
 function privateHtml(body) {
+  // add the analytics beacon so admin can see if/when the page was opened (path + time only; no form inputs)
+  body = /<\/body>/i.test(body) ? body.replace(/<\/body>(?![\s\S]*<\/body>)/i, BEACON + '</body>') : body + BEACON;
   return new Response(body, { headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'private, no-store', 'x-robots-tag': 'noindex, nofollow, noarchive', 'referrer-policy': 'no-referrer' } });
 }
 async function getPost(slug) {
@@ -53,6 +55,12 @@ async function getPost(slug) {
     const rows = await r.json(); return Array.isArray(rows) ? rows[0] : null;
   } catch (e) { return null; }
 }
+
+// First-party analytics beacon (→ agentapp /api/careers-ingest). Shared by layout() and private pages. DO NOT remove.
+const BEACON = '<script>(function(){try{var v=(self.crypto&&crypto.randomUUID)?crypto.randomUUID():(Date.now()+\'-\'+Math.random().toString(36).slice(2));var p=location.pathname||\'/\';var r=document.referrer||\'\';var d=matchMedia(\'(max-width:768px)\').matches?\'mobile\':\'desktop\';var q=new URLSearchParams(location.search);var us=(q.get(\'utm_source\')||\'\').slice(0,60);var umd=(q.get(\'utm_medium\')||\'\').slice(0,60);var uc=(q.get(\'utm_campaign\')||\'\').slice(0,80);var acc=0,seg=performance.now();function flush(){acc+=Math.max(0,performance.now()-seg);seg=performance.now();try{navigator.sendBeacon(\'https://agentapp.jaderealestate.com/api/careers-ingest\',JSON.stringify({visit_id:v,path:p,referrer:r.slice(0,300),device:d,utm_source:us,utm_medium:umd,utm_campaign:uc,duration_ms:Math.round(acc)}));}catch(e){}}document.addEventListener(\'visibilitychange\',function(){if(document.visibilityState===\'hidden\'){flush();}else{seg=performance.now();}});window.addEventListener(\'pagehide\',flush);}catch(e){}})();</script>';
+// Admin shortcut: on a device recognized via #jd-enroll (localStorage flag), triple-clicking the footer © opens the
+// Jade app admin (Careers private pages). Does nothing elsewhere; the admin page itself requires an admin login.
+const ADMIN_TRIGGER = "<script>(function(){try{var K='jd_admin_device',h=location.hash;if(h==='#jd-enroll'||h==='#jd-forget'){if(h==='#jd-enroll')localStorage.setItem(K,'1');else localStorage.removeItem(K);history.replaceState(null,'',location.pathname+location.search);}var c=document.getElementById('jd-c');if(!c||localStorage.getItem(K)!=='1')return;var n=0,t=0;c.addEventListener('click',function(){var now=Date.now();n=(now-t<600)?n+1:1;t=now;if(n>=3){n=0;location.href='https://agentapp.jaderealestate.com/admin?sys=careerpages';}});}catch(e){}})();</script>";
 
 function layout({ title, desc, path, body, jsonld }) {
   const canonical = SITE + (path === '/' ? '' : path);
@@ -222,7 +230,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.1;margin:0;text-
 @media(max-width:860px){.ed,.two,.quotes,.inc,.rows .r{grid-template-columns:1fr}.ed .figure{order:-1}.nav .links{display:none}}
 </style>
 ${ld}
-<script>(function(){try{var v=(self.crypto&&crypto.randomUUID)?crypto.randomUUID():(Date.now()+'-'+Math.random().toString(36).slice(2));var p=location.pathname||'/';var r=document.referrer||'';var d=matchMedia('(max-width:768px)').matches?'mobile':'desktop';var q=new URLSearchParams(location.search);var us=(q.get('utm_source')||'').slice(0,60);var umd=(q.get('utm_medium')||'').slice(0,60);var uc=(q.get('utm_campaign')||'').slice(0,80);var acc=0,seg=performance.now();function flush(){acc+=Math.max(0,performance.now()-seg);seg=performance.now();try{navigator.sendBeacon('https://agentapp.jaderealestate.com/api/careers-ingest',JSON.stringify({visit_id:v,path:p,referrer:r.slice(0,300),device:d,utm_source:us,utm_medium:umd,utm_campaign:uc,duration_ms:Math.round(acc)}));}catch(e){}}document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden'){flush();}else{seg=performance.now();}});window.addEventListener('pagehide',flush);}catch(e){}})();</script>
+${BEACON}
 </head><body>
 <header class="nav"><div class="wrap">
   <a class="brand" href="/">Jade<small>REAL ESTATE</small></a>
@@ -238,7 +246,8 @@ ${body}
   </div>
   <p class="disc">Jade Real Estate · ${OFFICE} · Emilie Smith, emilie@jaderealestate.com · <a href="${MAIN}" target="_blank" rel="noopener">jaderealestate.com</a></p>
   <p class="disc">Jade Real Estate is an independent brokerage serving Colorado's Front Range and mountains. This site is for licensed real estate agents exploring a move; it is not a solicitation of agents under an existing exclusive agreement. Equal Housing Opportunity. Nothing here is a guarantee of income or results.</p>
-  <p class="disc">© ${new Date().getFullYear()} Jade Real Estate</p>
+  <p class="disc"><span id="jd-c">©</span> ${new Date().getFullYear()} Jade Real Estate</p>
+${ADMIN_TRIGGER}
 </div></footer>
 <style>
 @media (prefers-reduced-motion: no-preference){
