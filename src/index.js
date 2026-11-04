@@ -31,6 +31,21 @@ async function getPosts(limit) {
     const rows = await r.json(); return Array.isArray(rows) ? rows : [];
   } catch (e) { return []; }
 }
+// Private one-off pages (e.g. a personalized numbers page for one agent).
+// Content + slugs live in Supabase table careers_private_pages (admin-only RLS),
+// NOT in this public repo. Fetched by exact slug via a SECURITY DEFINER RPC,
+// so pages can't be listed or enumerated. Never linked, never in sitemap/llms.
+async function getPrivatePage(slug) {
+  try {
+    const r = await fetch(`${SB}/rest/v1/rpc/get_careers_private_page`, { method: 'POST', headers: { apikey: ANON, Authorization: 'Bearer ' + ANON, 'Content-Type': 'application/json' }, body: JSON.stringify({ p_slug: slug }) });
+    if (!r.ok) return null;
+    const h = await r.json();
+    return typeof h === 'string' && h.length ? h : null;
+  } catch (e) { return null; }
+}
+function privateHtml(body) {
+  return new Response(body, { headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'private, no-store', 'x-robots-tag': 'noindex, nofollow, noarchive', 'referrer-policy': 'no-referrer' } });
+}
 async function getPost(slug) {
   try {
     const u = `${SB}/rest/v1/careers_posts?status=eq.published&slug=eq.${encodeURIComponent(slug)}&select=*&limit=1`;
@@ -1661,6 +1676,7 @@ export default {
     if (p === '/switch' || p === '/how-to-switch-brokerages') return Response.redirect(SITE + '/switching-brokerages', 301);
     if (p === '/blog') return html(await blogIndex());
     if (p.startsWith('/blog/')) { const slug = decodeURIComponent(p.slice(6)); const post = await getPost(slug); return post ? html(postPage(post)) : notFound(); }
+    if (/^\/[a-z0-9]+(?:-[a-z0-9]+)+$/.test(p) && p.length <= 81) { const pg = await getPrivatePage(p.slice(1)); if (pg) return privateHtml(pg); }
     return notFound();
   },
 };
